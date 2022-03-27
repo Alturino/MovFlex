@@ -1,5 +1,6 @@
-package com.onirutla.movflex.data.remote.response.tv
+package com.onirutla.movflex.data.source.remote.response.tv
 
+import com.onirutla.movflex.data.source.local.entities.TvEntity
 import com.squareup.moshi.Json
 
 data class TvResponse(
@@ -29,4 +30,20 @@ data class TvResponse(
     val voteAverage: Double = 0.0,
     @Json(name = "vote_count")
     val voteCount: Int = 0
+)
+
+fun TvResponse.toEntity() = TvEntity(
+    backdropPath,
+    firstAirDate,
+    genreIds,
+    id,
+    name,
+    originCountry,
+    originalLanguage,
+    originalName,
+    overview,
+    popularity,
+    posterPath,
+    voteAverage,
+    voteCount
 )

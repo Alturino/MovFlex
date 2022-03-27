@@ -1,5 +1,6 @@
-package com.onirutla.movflex.data.remote.response.movie
+package com.onirutla.movflex.data.source.remote.response.movie
 
+import com.onirutla.movflex.data.source.local.entities.MovieEntity
 import com.squareup.moshi.Json
 
 data class MovieResponse(
@@ -31,4 +32,21 @@ data class MovieResponse(
     val voteAverage: Double = 0.0,
     @Json(name = "vote_count")
     val voteCount: Int = 0
+)
+
+fun MovieResponse.toEntity() = MovieEntity(
+    adult,
+    backdropPath,
+    genreIds,
+    id,
+    originalLanguage,
+    originalTitle,
+    overview,
+    popularity,
+    posterPath,
+    releaseDate,
+    title,
+    video,
+    voteAverage,
+    voteCount
 )
