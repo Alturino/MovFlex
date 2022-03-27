@@ -1,7 +1,8 @@
-package com.onirutla.movflex.data.remote
+package com.onirutla.movflex.data.remote.service
 
-import com.onirutla.movflex.data.MovieResponse
-import com.onirutla.movflex.data.PageResponse
+import com.onirutla.movflex.data.remote.response.detail.PageResponse
+import com.onirutla.movflex.data.remote.response.movie.MovieResponse
+import com.onirutla.movflex.data.remote.response.movie.MovieResponseDetail
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,7 +20,7 @@ interface MovieApiService {
     suspend fun getMovieTopRated(@Query(value = "page") page: Int = 1): Response<PageResponse<MovieResponse>>
 
     @GET(value = "movie/{movie_id}")
-    suspend fun getMovieDetail(@Path(value = "movie_id") movieId: Int): Response<PageResponse<MovieResponse>>
+    suspend fun getMovieDetail(@Path(value = "movie_id") movieId: Int): Response<MovieResponseDetail>
 
     @GET(value = "movie/upcoming")
     suspend fun getMovieUpcoming(@Query(value = "page") page: Int = 1): Response<PageResponse<MovieResponse>>
