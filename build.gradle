@@ -1,4 +1,18 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext {
+        glide_version = '4.13.1'
+        nav_version = "2.4.1"
+        retrofit_version = "2.9.0"
+        okhttp_version = "4.9.3"
+        moshi_version = '1.13.0'
+    }
+
+    dependencies {
+        classpath 'androidx.navigation.safeargs.kotlin:androidx.navigation.safeargs.kotlin.gradle.plugin:2.4.1'
+    }
+}
+
 plugins {
     id 'com.android.application' version '7.1.2' apply false
     id 'com.android.library' version '7.1.2' apply false
