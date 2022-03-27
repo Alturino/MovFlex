@@ -1,5 +1,4 @@
-package com.onirutla.movflex.data
-
+package com.onirutla.movflex.data.remote.response.detail
 
 import com.squareup.moshi.Json
 
