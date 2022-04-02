@@ -1,4 +1,4 @@
-package com.onirutla.movflex
+package com.onirutla.movflex.ui.favorite
 
 import android.os.Bundle
 import android.view.LayoutInflater
