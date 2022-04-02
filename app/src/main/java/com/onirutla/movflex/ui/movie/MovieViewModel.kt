@@ -2,7 +2,6 @@ package com.onirutla.movflex.ui.movie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
 import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.ui.Category
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -40,6 +39,6 @@ class MovieViewModel @Inject constructor(
             nowPlayingCategory
         )
 
-    }.stateIn(viewModelScope, SharingStarted.Eagerly, emptyList())
+    }.stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList())
 
 }
