@@ -1,8 +1,8 @@
-package com.onirutla.movflex.data.remote.service
+package com.onirutla.movflex.data.source.remote.service
 
-import com.onirutla.movflex.data.remote.response.detail.PageResponse
-import com.onirutla.movflex.data.remote.response.movie.MovieResponse
-import com.onirutla.movflex.data.remote.response.movie.MovieResponseDetail
+import com.onirutla.movflex.data.source.remote.response.detail.PageResponse
+import com.onirutla.movflex.data.source.remote.response.movie.MovieResponse
+import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
