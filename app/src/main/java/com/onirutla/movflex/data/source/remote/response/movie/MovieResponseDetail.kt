@@ -1,9 +1,9 @@
-package com.onirutla.movflex.data.remote.response.movie
+package com.onirutla.movflex.data.source.remote.response.movie
 
-import com.onirutla.movflex.data.remote.response.detail.Genre
-import com.onirutla.movflex.data.remote.response.detail.ProductionCompany
-import com.onirutla.movflex.data.remote.response.detail.ProductionCountry
-import com.onirutla.movflex.data.remote.response.detail.SpokenLanguage
+import com.onirutla.movflex.data.source.remote.response.detail.Genre
+import com.onirutla.movflex.data.source.remote.response.detail.ProductionCompany
+import com.onirutla.movflex.data.source.remote.response.detail.ProductionCountry
+import com.onirutla.movflex.data.source.remote.response.detail.SpokenLanguage
 import com.squareup.moshi.Json
 
 data class MovieResponseDetail(

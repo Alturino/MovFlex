@@ -1,13 +1,13 @@
-package com.onirutla.movflex.data.remote.response.tv
+package com.onirutla.movflex.data.source.remote.response.tv
 
-import com.onirutla.movflex.data.remote.response.detail.Genre
-import com.onirutla.movflex.data.remote.response.detail.ProductionCompany
-import com.onirutla.movflex.data.remote.response.detail.ProductionCountry
-import com.onirutla.movflex.data.remote.response.detail.SpokenLanguage
-import com.onirutla.movflex.data.remote.response.detail.CreatedBy
-import com.onirutla.movflex.data.remote.response.detail.LastEpisodeToAir
-import com.onirutla.movflex.data.remote.response.detail.Network
-import com.onirutla.movflex.data.remote.response.detail.Season
+import com.onirutla.movflex.data.source.remote.response.detail.Genre
+import com.onirutla.movflex.data.source.remote.response.detail.ProductionCompany
+import com.onirutla.movflex.data.source.remote.response.detail.ProductionCountry
+import com.onirutla.movflex.data.source.remote.response.detail.SpokenLanguage
+import com.onirutla.movflex.data.source.remote.response.detail.CreatedBy
+import com.onirutla.movflex.data.source.remote.response.detail.LastEpisodeToAir
+import com.onirutla.movflex.data.source.remote.response.detail.Network
+import com.onirutla.movflex.data.source.remote.response.detail.Season
 import com.squareup.moshi.Json
 
 data class TvResponseDetail(

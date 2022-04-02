@@ -1,8 +1,8 @@
-package com.onirutla.movflex.data.remote.response.detail
+package com.onirutla.movflex.data.source.remote.response.detail
 
 import com.squareup.moshi.Json
 
-data class Network(
+data class ProductionCompany(
     @Json(name = "id")
     val id: Int = 0,
     @Json(name = "logo_path")
