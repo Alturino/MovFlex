@@ -103,7 +103,19 @@ class TvRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTvDetail(): Flow<TvResponseDetail> {
-        TODO("Not yet implemented")
+    override fun getTvDetail(id: Int): Flow<TvResponseDetail> = flow {
+        try {
+            val response = tvApiService.getTvDetail(id)
+            if (response.isSuccessful)
+                emit(response.body()!!)
+            else
+                emit(TvResponseDetail())
+        } catch (ioException: IOException) {
+            Log.d("MovieRepo", "$ioException")
+            emit(TvResponseDetail())
+        } catch (httpException: HttpException) {
+            Log.d("MovieRepo", "$httpException")
+            emit(TvResponseDetail())
+        }
     }
 }

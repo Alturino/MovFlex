@@ -19,5 +19,5 @@ interface TvRepository {
     fun getTvAiringTodayPaging(): Flow<PagingData<ItemResponse>>
     fun getTvAiringTodayHome(): Flow<List<ItemResponse>>
 
-    fun getTvDetail(): Flow<TvResponseDetail>
+    fun getTvDetail(id: Int): Flow<TvResponseDetail>
 }
