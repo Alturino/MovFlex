@@ -8,5 +8,5 @@ data class ItemResponse(
     @Json(name = "id")
     val id: Int = 0,
     @Json(name = "poster_path")
-    val posterPath: String = "",
+    val posterPath: String? = "",
 )
