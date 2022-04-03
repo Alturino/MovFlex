@@ -19,7 +19,7 @@ class MovieDetailViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    private val _movieId = MutableSharedFlow<Int>()
+    private val _movieId = MutableSharedFlow<Int>(1)
 
     val movieDetail = _movieId.flatMapLatest {
         movieRepository.getMovieDetail(it)
