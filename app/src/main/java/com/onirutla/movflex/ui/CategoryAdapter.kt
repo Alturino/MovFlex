@@ -45,11 +45,6 @@ class CategoryAdapter(
         private val binding: CategoryContainerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        init {
-            val category = getItem(absoluteAdapterPosition)
-            binding.seeAll.setOnClickListener { seeAllClickListener(category) }
-        }
-
         private val itemAdapter: ItemAdapter by lazy {
             ItemAdapter { view, movie -> itemClickListener(view, movie) }
         }
@@ -57,6 +52,7 @@ class CategoryAdapter(
         fun bind(category: Category<List<ItemResponse>>) {
             binding.apply {
                 movieGroupingText.text = category.title
+                seeAll.setOnClickListener { seeAllClickListener(category) }
                 movieGroupingList.apply {
                     adapter = itemAdapter
                     layoutManager = LinearLayoutManager(
