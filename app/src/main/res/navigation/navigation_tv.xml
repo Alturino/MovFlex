@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigationTv"
+    app:startDestination="@id/tvFragment">
+
+    <fragment
+        android:id="@+id/tvFragment"
+        android:name="com.onirutla.movflex.ui.tv.TvFragment"
+        android:label="fragment_tv"
+        tools:layout="@layout/fragment_tv">
+        <action
+            android:id="@+id/action_tvFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvDetailFragment"
+        android:name="com.onirutla.movflex.ui.tv.detail.TvDetailFragment"
+        android:label="fragment_tv_detail"
+        tools:layout="@layout/fragment_tv_detail">
+        <argument
+            android:name="tv_id"
+            android:defaultValue="1"
+            app:argType="integer" />
+    </fragment>
+
+
+</navigation>
