@@ -19,8 +19,8 @@ interface MovieApiService {
     @GET(value = "movie/top_rated")
     suspend fun getMovieTopRated(@Query(value = "page") page: Int = 1): Response<PageResponse<ItemResponse>>
 
-    @GET(value = "movie/{movie_id}")
-    suspend fun getMovieDetail(@Path(value = "movie_id") movieId: Int): Response<MovieResponseDetail>
+    @GET(value = "movie/{movieId}")
+    suspend fun getMovieDetail(@Path(value = "movieId") movieId: Int): Response<MovieResponseDetail>
 
     @GET(value = "movie/upcoming")
     suspend fun getMovieUpcoming(@Query(value = "page") page: Int = 1): Response<PageResponse<ItemResponse>>
