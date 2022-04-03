@@ -19,5 +19,5 @@ interface MovieRepository {
     fun getMovieUpcomingPaging(): Flow<PagingData<ItemResponse>>
     fun getMovieUpcomingHome(): Flow<List<ItemResponse>>
 
-    fun getMovieDetail(): Flow<MovieResponseDetail>
+    fun getMovieDetail(id: Int): Flow<MovieResponseDetail>
 }

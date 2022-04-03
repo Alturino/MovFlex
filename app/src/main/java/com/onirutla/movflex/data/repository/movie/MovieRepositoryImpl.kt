@@ -111,7 +111,19 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieDetail(): Flow<MovieResponseDetail> {
-        TODO("Not yet implemented")
+    override fun getMovieDetail(id: Int): Flow<MovieResponseDetail> = flow {
+        try {
+            val response = movieApiService.getMovieDetail(id)
+            if (response.isSuccessful)
+                emit(response.body()!!)
+            else
+                emit(MovieResponseDetail())
+        } catch (ioException: IOException) {
+            Log.d("MovieRepo", "$ioException")
+            emit(MovieResponseDetail())
+        } catch (httpException: HttpException) {
+            Log.d("MovieRepo", "$httpException")
+            emit(MovieResponseDetail())
+        }
     }
 }
