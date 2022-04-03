@@ -11,6 +11,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
+import com.onirutla.movflex.ui.CategoryAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,8 +24,8 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private val categoryAdapter: TvCategoryAdapter by lazy {
-        TvCategoryAdapter(itemClickListener = { view, movie -> }) { category ->
+    private val categoryAdapter: CategoryAdapter by lazy {
+        CategoryAdapter(itemClickListener = { view, movie -> }) { category ->
 
         }
     }
