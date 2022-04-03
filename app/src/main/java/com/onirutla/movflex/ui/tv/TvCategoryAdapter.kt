@@ -16,6 +16,8 @@ class TvCategoryAdapter(
     private inline val seeAllClickListener: (category: Category<List<TvResponse>>) -> Unit
 ) : ListAdapter<Category<List<TvResponse>>, TvCategoryAdapter.ViewHolder>(Comparator) {
 
+    private val rvViewPool = RecyclerView.RecycledViewPool()
+
     object Comparator : DiffUtil.ItemCallback<Category<List<TvResponse>>>() {
         override fun areItemsTheSame(
             oldItem: Category<List<TvResponse>>,
@@ -44,25 +46,29 @@ class TvCategoryAdapter(
         private val binding: CategoryContainerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            val category = getItem(absoluteAdapterPosition)
+            binding.seeAll.setOnClickListener { seeAllClickListener(category) }
+        }
+
         private val tvItemAdapter: TvItemAdapter by lazy {
             TvItemAdapter { view, movie -> itemClickListener(view, movie) }
         }
 
-        private val rvViewPool = RecyclerView.RecycledViewPool()
-
         fun bind(category: Category<List<TvResponse>>) {
-            binding.category = category
-            binding.seeAll.setOnClickListener { seeAllClickListener(category) }
-            tvItemAdapter.submitList(category.items)
-            binding.movieGroupingList.apply {
-                adapter = tvItemAdapter
-                layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-                setHasFixedSize(true)
-                setRecycledViewPool(rvViewPool)
+            binding.apply {
+                movieGroupingText.text = category.title
+                movieGroupingList.apply {
+                    adapter = tvItemAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    setHasFixedSize(true)
+                    setRecycledViewPool(rvViewPool)
+                }
+                tvItemAdapter.submitList(category.items)
             }
         }
     }

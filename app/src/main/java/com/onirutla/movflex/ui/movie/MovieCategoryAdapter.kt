@@ -16,6 +16,8 @@ class MovieCategoryAdapter(
     private inline val seeAllClickListener: (category: Category<List<MovieResponse>>) -> Unit
 ) : ListAdapter<Category<List<MovieResponse>>, MovieCategoryAdapter.ViewHolder>(Comparator) {
 
+    private val rvViewPool = RecyclerView.RecycledViewPool()
+
     object Comparator : DiffUtil.ItemCallback<Category<List<MovieResponse>>>() {
         override fun areItemsTheSame(
             oldItem: Category<List<MovieResponse>>,
@@ -44,26 +46,30 @@ class MovieCategoryAdapter(
         private val binding: CategoryContainerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        init {
+            val category = getItem(absoluteAdapterPosition)
+            binding.seeAll.setOnClickListener { seeAllClickListener(category) }
+        }
+
         private val movieItemAdapter: MovieItemAdapter by lazy {
             MovieItemAdapter { view, movie -> itemClickListener(view, movie) }
         }
 
-        private val rvViewPool = RecyclerView.RecycledViewPool()
-
         fun bind(category: Category<List<MovieResponse>>) {
-            binding.category = category
-            binding.seeAll.setOnClickListener { seeAllClickListener(category) }
-            movieItemAdapter.submitList(category.items)
-            binding.movieGroupingList.apply {
-                adapter = movieItemAdapter
-                layoutManager = LinearLayoutManager(
-                    context,
-                    LinearLayoutManager.HORIZONTAL,
-                    false
-                )
-                setHasFixedSize(true)
-                setRecycledViewPool(rvViewPool)
+            binding.apply {
+                movieGroupingText.text = category.title
+                movieGroupingList.apply {
+                    adapter = movieItemAdapter
+                    layoutManager = LinearLayoutManager(
+                        context,
+                        LinearLayoutManager.HORIZONTAL,
+                        false
+                    )
+                    setHasFixedSize(true)
+                    setRecycledViewPool(rvViewPool)
+                }
             }
+            movieItemAdapter.submitList(category.items)
         }
     }
 }
