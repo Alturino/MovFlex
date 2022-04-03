@@ -5,7 +5,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.onirutla.movflex.data.source.remote.PagingDataSource
-import com.onirutla.movflex.data.source.remote.response.tv.TvResponse
+import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import com.onirutla.movflex.data.source.remote.service.TvApiService
 import com.onirutla.movflex.util.Constants.NETWORK_LOAD_SIZE
@@ -19,12 +19,12 @@ class TvRepositoryImpl @Inject constructor(
     private val tvApiService: TvApiService
 ) : TvRepository {
 
-    override fun getTvPopularPaging(): Flow<PagingData<TvResponse>> = Pager(
+    override fun getTvPopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvPopular(position) } },
     ).flow
 
-    override fun getTvPopularHome(): Flow<List<TvResponse>> = flow {
+    override fun getTvPopularHome(): Flow<List<ItemResponse>> = flow {
         try {
             val response = tvApiService.getTvPopular()
             if (response.isSuccessful)
@@ -40,12 +40,12 @@ class TvRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTvOnTheAirPaging(): Flow<PagingData<TvResponse>> = Pager(
+    override fun getTvOnTheAirPaging(): Flow<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvOnTheAir(position) } },
     ).flow
 
-    override fun getTvOnTheAirHome(): Flow<List<TvResponse>> = flow {
+    override fun getTvOnTheAirHome(): Flow<List<ItemResponse>> = flow {
         try {
             val response = tvApiService.getTvOnTheAir()
             if (response.isSuccessful)
@@ -61,12 +61,12 @@ class TvRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTvTopRatedPaging(): Flow<PagingData<TvResponse>> = Pager(
+    override fun getTvTopRatedPaging(): Flow<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvTopRated(position) } }
     ).flow
 
-    override fun getTvTopRatedHome(): Flow<List<TvResponse>> = flow {
+    override fun getTvTopRatedHome(): Flow<List<ItemResponse>> = flow {
         try {
             val response = tvApiService.getTvTopRated()
             if (response.isSuccessful)
@@ -82,12 +82,12 @@ class TvRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTvAiringTodayPaging(): Flow<PagingData<TvResponse>> = Pager(
+    override fun getTvAiringTodayPaging(): Flow<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvAiringToday(position) } }
     ).flow
 
-    override fun getTvAiringTodayHome(): Flow<List<TvResponse>> = flow {
+    override fun getTvAiringTodayHome(): Flow<List<ItemResponse>> = flow {
         try {
             val response = tvApiService.getTvAiringToday()
             if (response.isSuccessful)
