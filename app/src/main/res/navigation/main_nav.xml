@@ -5,31 +5,13 @@
     android:id="@+id/bottom_nav"
     app:startDestination="@id/navigationMovie">
 
-    <navigation
-        android:id="@+id/navigationMovie"
-        app:startDestination="@id/movieFragment">
-        <fragment
-            android:id="@+id/movieFragment"
-            android:name="com.onirutla.movflex.ui.movie.MovieFragment"
-            android:label="fragment_movie"
-            tools:layout="@layout/fragment_movie" />
-    </navigation>
-    <navigation
-        android:id="@+id/navigationFavorite"
-        app:startDestination="@id/favoriteFragment">
-        <fragment
-            android:id="@+id/favoriteFragment"
-            android:name="com.onirutla.movflex.ui.favorite.FavoriteFragment"
-            android:label="fragment_favorite"
-            tools:layout="@layout/fragment_favorite" />
-    </navigation>
-    <navigation
-        android:id="@+id/navigationTv"
-        app:startDestination="@id/tvFragment">
-        <fragment
-            android:id="@+id/tvFragment"
-            android:name="com.onirutla.movflex.ui.tv.TvFragment"
-            android:label="fragment_tv"
-            tools:layout="@layout/fragment_tv" />
-    </navigation>
+    <include app:graph="@navigation/navigation_movie" />
+    <include app:graph="@navigation/navigation_tv" />
+
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.onirutla.movflex.ui.favorite.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+
 </navigation>
