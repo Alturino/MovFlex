@@ -50,8 +50,8 @@ class CategoryAdapter(
         }
 
         fun bind(category: Category<List<ItemResponse>>) {
+            binding.category = category
             binding.apply {
-                movieGroupingText.text = category.title
                 seeAll.setOnClickListener { seeAllClickListener(category) }
                 movieGroupingList.apply {
                     adapter = itemAdapter
