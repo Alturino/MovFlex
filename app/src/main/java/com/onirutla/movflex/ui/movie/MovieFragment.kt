@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieBinding
 import com.onirutla.movflex.ui.CategoryAdapter
@@ -22,7 +23,12 @@ class MovieFragment : Fragment() {
     private val viewModel: MovieViewModel by viewModels()
 
     private val categoryAdapter: CategoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, movie -> }) { category ->
+        CategoryAdapter(itemClickListener = { view, movie ->
+            view.findNavController()
+                .navigate(
+                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movie.id)
+                )
+        }) { category ->
 
         }
     }
