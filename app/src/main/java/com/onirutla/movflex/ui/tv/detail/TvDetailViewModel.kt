@@ -3,7 +3,7 @@ package com.onirutla.movflex.ui.tv.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.data.repository.tv.TvRepository
-import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
+import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -19,14 +19,14 @@ class TvDetailViewModel @Inject constructor(
     private val tvRepository: TvRepository
 ) : ViewModel() {
 
-    private val _tvId = MutableSharedFlow<Int>()
+    private val _tvId = MutableSharedFlow<Int>(1)
 
     val tvDetail = _tvId.flatMapLatest {
         tvRepository.getTvDetail(it)
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        MovieResponseDetail()
+        TvResponseDetail()
     )
 
     fun getTvDetail(id: Int) {
