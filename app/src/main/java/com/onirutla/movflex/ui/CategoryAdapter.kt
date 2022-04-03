@@ -1,4 +1,4 @@
-package com.onirutla.movflex.ui.tv
+package com.onirutla.movflex.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,26 +7,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.data.source.remote.response.tv.TvResponse
+import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.databinding.CategoryContainerBinding
-import com.onirutla.movflex.ui.Category
 
-class TvCategoryAdapter(
-    private inline val itemClickListener: (view: View, tv: TvResponse) -> Unit,
-    private inline val seeAllClickListener: (category: Category<List<TvResponse>>) -> Unit
-) : ListAdapter<Category<List<TvResponse>>, TvCategoryAdapter.ViewHolder>(Comparator) {
+class CategoryAdapter(
+    private inline val itemClickListener: (view: View, movie: ItemResponse) -> Unit,
+    private inline val seeAllClickListener: (category: Category<List<ItemResponse>>) -> Unit
+) : ListAdapter<Category<List<ItemResponse>>, CategoryAdapter.ViewHolder>(Comparator) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
 
-    object Comparator : DiffUtil.ItemCallback<Category<List<TvResponse>>>() {
+    object Comparator : DiffUtil.ItemCallback<Category<List<ItemResponse>>>() {
         override fun areItemsTheSame(
-            oldItem: Category<List<TvResponse>>,
-            newItem: Category<List<TvResponse>>
+            oldItem: Category<List<ItemResponse>>,
+            newItem: Category<List<ItemResponse>>
         ): Boolean = oldItem.items == newItem.items
 
         override fun areContentsTheSame(
-            oldItem: Category<List<TvResponse>>,
-            newItem: Category<List<TvResponse>>
+            oldItem: Category<List<ItemResponse>>,
+            newItem: Category<List<ItemResponse>>
         ): Boolean = oldItem == newItem
     }
 
@@ -51,15 +50,15 @@ class TvCategoryAdapter(
             binding.seeAll.setOnClickListener { seeAllClickListener(category) }
         }
 
-        private val tvItemAdapter: TvItemAdapter by lazy {
-            TvItemAdapter { view, movie -> itemClickListener(view, movie) }
+        private val itemAdapter: ItemAdapter by lazy {
+            ItemAdapter { view, movie -> itemClickListener(view, movie) }
         }
 
-        fun bind(category: Category<List<TvResponse>>) {
+        fun bind(category: Category<List<ItemResponse>>) {
             binding.apply {
                 movieGroupingText.text = category.title
                 movieGroupingList.apply {
-                    adapter = tvItemAdapter
+                    adapter = itemAdapter
                     layoutManager = LinearLayoutManager(
                         context,
                         LinearLayoutManager.HORIZONTAL,
@@ -68,8 +67,8 @@ class TvCategoryAdapter(
                     setHasFixedSize(true)
                     setRecycledViewPool(rvViewPool)
                 }
-                tvItemAdapter.submitList(category.items)
             }
+            itemAdapter.submitList(category.items)
         }
     }
 }

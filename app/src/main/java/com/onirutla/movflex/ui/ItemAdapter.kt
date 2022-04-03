@@ -1,4 +1,4 @@
-package com.onirutla.movflex.ui.tv
+package com.onirutla.movflex.ui
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,32 +6,32 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.data.source.remote.response.tv.TvResponse
-import com.onirutla.movflex.databinding.TvItemContainerBinding
+import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.databinding.ItemContainerBinding
 
-class TvItemAdapter(
-    private inline val onClickListener: (view: View, movie: TvResponse) -> Unit
-) : ListAdapter<TvResponse, TvItemAdapter.ViewHolder>(Comparator) {
+class ItemAdapter(
+    private inline val onClickListener: (view: View, item: ItemResponse) -> Unit
+) : ListAdapter<ItemResponse, ItemAdapter.ViewHolder>(Comparator) {
 
-    object Comparator : DiffUtil.ItemCallback<TvResponse>() {
+    object Comparator : DiffUtil.ItemCallback<ItemResponse>() {
         override fun areItemsTheSame(
-            oldItem: TvResponse,
-            newItem: TvResponse
+            oldItem: ItemResponse,
+            newItem: ItemResponse
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: TvResponse,
-            newItem: TvResponse
+            oldItem: ItemResponse,
+            newItem: ItemResponse
         ): Boolean = oldItem == newItem
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position) ?: TvResponse())
+        holder.bind(getItem(position) ?: ItemResponse())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
-            TvItemContainerBinding.inflate(
+            ItemContainerBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -39,17 +39,17 @@ class TvItemAdapter(
         )
 
     inner class ViewHolder(
-        private val binding: TvItemContainerBinding
+        private val binding: ItemContainerBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
             binding.root.setOnClickListener {
-                onClickListener(it, getItem(bindingAdapterPosition) ?: TvResponse())
+                onClickListener(it, getItem(bindingAdapterPosition) ?: ItemResponse())
             }
         }
 
-        fun bind(tvResponse: TvResponse) {
-            binding.tv = tvResponse
+        fun bind(item: ItemResponse) {
+            binding.item = item
         }
     }
 }
