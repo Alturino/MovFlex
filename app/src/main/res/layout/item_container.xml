@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="movie"
-            type="com.onirutla.movflex.data.source.remote.response.movie.MovieResponse" />
+            name="item"
+            type="com.onirutla.movflex.data.source.remote.response.ItemResponse" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -17,7 +17,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/movie_image"
-            load_image="@{movie.posterPath}"
+            load_image="@{item.posterPath}"
             android:layout_width="100dp"
             android:layout_height="150dp"
             app:layout_constraintBottom_toBottomOf="parent"
