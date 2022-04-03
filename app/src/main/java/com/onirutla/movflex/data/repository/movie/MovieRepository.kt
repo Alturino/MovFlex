@@ -1,24 +1,23 @@
 package com.onirutla.movflex.data.repository.movie
 
 import androidx.paging.PagingData
-import com.onirutla.movflex.data.source.remote.response.movie.MovieResponse
+import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.SharedFlow
 
 interface MovieRepository {
 
-    fun getMoviePopularPaging(): Flow<PagingData<MovieResponse>>
-    fun getMoviePopularHome(): Flow<List<MovieResponse>>
+    fun getMoviePopularPaging(): Flow<PagingData<ItemResponse>>
+    fun getMoviePopularHome(): Flow<List<ItemResponse>>
 
-    fun getMovieNowPlayingPaging(): Flow<PagingData<MovieResponse>>
-    fun getMovieNowPlayingHome(): Flow<List<MovieResponse>>
+    fun getMovieNowPlayingPaging(): Flow<PagingData<ItemResponse>>
+    fun getMovieNowPlayingHome(): Flow<List<ItemResponse>>
 
-    fun getMovieTopRatedPaging(): Flow<PagingData<MovieResponse>>
-    fun getMovieTopRatedHome(): Flow<List<MovieResponse>>
+    fun getMovieTopRatedPaging(): Flow<PagingData<ItemResponse>>
+    fun getMovieTopRatedHome(): Flow<List<ItemResponse>>
 
-    fun getMovieUpcomingPaging(): Flow<PagingData<MovieResponse>>
-    fun getMovieUpcomingHome(): Flow<List<MovieResponse>>
+    fun getMovieUpcomingPaging(): Flow<PagingData<ItemResponse>>
+    fun getMovieUpcomingHome(): Flow<List<ItemResponse>>
 
     fun getMovieDetail(): Flow<MovieResponseDetail>
 }
