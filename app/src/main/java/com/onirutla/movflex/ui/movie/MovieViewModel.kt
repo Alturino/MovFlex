@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MovieViewModel @Inject constructor(
-    private val movieUseCase: MovieUseCase
+    movieUseCase: MovieUseCase
 ) : ViewModel() {
 
-    val movie = movieUseCase.combinedCategory.stateIn(
+    val movie = movieUseCase.invoke().stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
         emptyList()
