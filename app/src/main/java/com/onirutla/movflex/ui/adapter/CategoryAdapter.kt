@@ -1,4 +1,4 @@
-package com.onirutla.movflex.ui
+package com.onirutla.movflex.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.databinding.CategoryContainerBinding
+import com.onirutla.movflex.ui.Category
 
 class CategoryAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,

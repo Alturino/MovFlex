@@ -1,4 +1,4 @@
-package com.onirutla.movflex.ui
+package com.onirutla.movflex.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.View
