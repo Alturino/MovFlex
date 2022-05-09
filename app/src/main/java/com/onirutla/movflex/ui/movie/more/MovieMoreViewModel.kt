@@ -6,10 +6,10 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.util.Constants.TITLE_NOW_PLAYING
+import com.onirutla.movflex.util.Constants.TITLE_MOVIE_NOW_PLAYING
 import com.onirutla.movflex.util.Constants.TITLE_POPULAR
-import com.onirutla.movflex.util.Constants.TITLE_TOP_RATED
-import com.onirutla.movflex.util.Constants.TITLE_UPCOMING
+import com.onirutla.movflex.util.Constants.TITLE_MOVIE_TOP_RATED
+import com.onirutla.movflex.util.Constants.TITLE_MOVIE_UPCOMING
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,12 +30,12 @@ class MovieMoreViewModel @Inject constructor(
     fun getMovieByCategory(category: String) {
         viewModelScope.launch {
             when (category) {
-                TITLE_TOP_RATED -> {
+                TITLE_MOVIE_TOP_RATED -> {
                     movieRepository.getMovieTopRatedPaging().cachedIn(viewModelScope).collect {
                         _movie.value = it
                     }
                 }
-                TITLE_NOW_PLAYING -> {
+                TITLE_MOVIE_NOW_PLAYING -> {
                     movieRepository.getMovieNowPlayingPaging().cachedIn(viewModelScope).collect {
                         _movie.value = it
                     }
@@ -45,7 +45,7 @@ class MovieMoreViewModel @Inject constructor(
                         _movie.value = it
                     }
                 }
-                TITLE_UPCOMING -> {
+                TITLE_MOVIE_UPCOMING -> {
                     movieRepository.getMovieUpcomingPaging().cachedIn(viewModelScope).collect {
                         _movie.value = it
                     }
