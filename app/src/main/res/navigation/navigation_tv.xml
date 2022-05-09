@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_tvFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
+        <action
+            android:id="@+id/action_tvFragment_to_tvMoreFragment"
+            app:destination="@id/tvMoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/tvDetailFragment"
@@ -23,6 +26,18 @@
             android:name="tv_id"
             android:defaultValue="1"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvMoreFragment"
+        android:name="com.onirutla.movflex.ui.tv.more.TvMoreFragment"
+        android:label="fragment_tv_more"
+        tools:layout="@layout/fragment_tv_more">
+        <action
+            android:id="@+id/action_tvMoreFragment_to_tvDetailFragment"
+            app:destination="@id/tvDetailFragment" />
+        <argument
+            android:name="category"
+            app:argType="string" />
     </fragment>
 
 
