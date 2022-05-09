@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
 import com.onirutla.movflex.ui.adapter.CategoryAdapter
@@ -25,10 +26,14 @@ class TvFragment : Fragment() {
     private val viewModel: TvViewModel by viewModels()
 
     private val categoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, movie ->
-
+        CategoryAdapter(itemClickListener = { view, itemId ->
+            view.findNavController().navigate(
+                TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
+            )
         }) { view, category ->
-
+            view.findNavController().navigate(
+                TvFragmentDirections.actionTvFragmentToTvMoreFragment(category)
+            )
         }
     }
 
