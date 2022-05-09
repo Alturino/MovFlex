@@ -24,8 +24,10 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private val categoryAdapter: CategoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, movie -> }) { category ->
+    private val categoryAdapter by lazy {
+        CategoryAdapter(itemClickListener = { view, movie ->
+
+        }) { view, category ->
 
         }
     }
