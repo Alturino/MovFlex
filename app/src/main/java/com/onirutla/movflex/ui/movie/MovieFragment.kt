@@ -23,10 +23,10 @@ class MovieFragment : Fragment() {
     private val viewModel: MovieViewModel by viewModels()
 
     private val categoryAdapter: CategoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, movie ->
+        CategoryAdapter(itemClickListener = { view, itemId ->
             view.findNavController()
                 .navigate(
-                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movie)
+                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
                 )
         }) { view, category ->
             view.findNavController()
