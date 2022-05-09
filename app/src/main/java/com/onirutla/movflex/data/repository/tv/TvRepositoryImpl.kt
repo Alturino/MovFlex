@@ -9,12 +9,14 @@ import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import com.onirutla.movflex.data.source.remote.service.TvApiService
 import com.onirutla.movflex.util.Constants.NETWORK_LOAD_SIZE
+import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import okio.IOException
 import retrofit2.HttpException
 import javax.inject.Inject
 
+@ViewModelScoped
 class TvRepositoryImpl @Inject constructor(
     private val tvApiService: TvApiService
 ) : TvRepository {
