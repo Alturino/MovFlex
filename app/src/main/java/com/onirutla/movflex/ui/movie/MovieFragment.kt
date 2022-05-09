@@ -28,7 +28,7 @@ class MovieFragment : Fragment() {
                 .navigate(
                     MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movie.id)
                 )
-        }) { category ->
+        }) { view, category ->
 
         }
     }

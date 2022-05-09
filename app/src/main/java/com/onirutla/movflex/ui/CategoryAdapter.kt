@@ -12,7 +12,7 @@ import com.onirutla.movflex.databinding.CategoryContainerBinding
 
 class CategoryAdapter(
     private inline val itemClickListener: (view: View, movie: ItemResponse) -> Unit,
-    private inline val seeAllClickListener: (category: Category<List<ItemResponse>>) -> Unit
+    private inline val seeAllClickListener: (view: View, category: Category<List<ItemResponse>>) -> Unit
 ) : ListAdapter<Category<List<ItemResponse>>, CategoryAdapter.ViewHolder>(Comparator) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
@@ -49,10 +49,18 @@ class CategoryAdapter(
             ItemAdapter { view, movie -> itemClickListener(view, movie) }
         }
 
+        init {
+            binding.seeAll.setOnClickListener {
+                seeAllClickListener(
+                    it,
+                    getItem(absoluteAdapterPosition)
+                )
+            }
+        }
+
         fun bind(category: Category<List<ItemResponse>>) {
             binding.category = category
             binding.apply {
-                seeAll.setOnClickListener { seeAllClickListener(category) }
                 movieGroupingList.apply {
                     adapter = itemAdapter
                     layoutManager = LinearLayoutManager(
