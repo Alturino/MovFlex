@@ -26,10 +26,13 @@ class MovieFragment : Fragment() {
         CategoryAdapter(itemClickListener = { view, movie ->
             view.findNavController()
                 .navigate(
-                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movie.id)
+                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(movie)
                 )
         }) { view, category ->
-
+            view.findNavController()
+                .navigate(
+                    MovieFragmentDirections.actionMovieFragmentToMovieMoreFragment(category)
+                )
         }
     }
 
