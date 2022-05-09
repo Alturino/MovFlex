@@ -9,4 +9,8 @@ data class ItemResponse(
     val id: Int = 0,
     @Json(name = "poster_path")
     val posterPath: String? = "",
+    @Json(name = "title")
+    val title: String? = "",
+    @Json(name = "vote_average")
+    val voteAverage: Float? = 0f,
 )
