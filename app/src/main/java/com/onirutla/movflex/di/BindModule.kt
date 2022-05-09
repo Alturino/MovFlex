@@ -7,18 +7,18 @@ import com.onirutla.movflex.data.repository.tv.TvRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.scopes.ViewModelScoped
 
 @Module
-@InstallIn(SingletonComponent::class)
+@InstallIn(ViewModelComponent::class)
 abstract class BindModule {
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindMovieRepository(repositoryImpl: MovieRepositoryImpl): MovieRepository
 
     @Binds
-    @Singleton
+    @ViewModelScoped
     abstract fun bindTvRepository(repositoryImpl: TvRepositoryImpl): TvRepository
 }
