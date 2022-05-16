@@ -64,6 +64,11 @@ class MovieMoreFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+        binding.toolbar.apply {
+            title = args.category
+            setOnClickListener { it.findNavController().navigateUp() }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movie.collect {
