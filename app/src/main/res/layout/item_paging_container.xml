@@ -37,6 +37,16 @@
             app:layout_constraintTop_toTopOf="@+id/item_image"
             tools:text="Turning Red" />
 
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_star_24"
+            app:layout_constraintBottom_toBottomOf="@+id/vote_average"
+            app:layout_constraintStart_toEndOf="@+id/vote_average"
+            app:layout_constraintTop_toTopOf="@+id/vote_average" />
+
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/vote_average"
             android:layout_width="wrap_content"
