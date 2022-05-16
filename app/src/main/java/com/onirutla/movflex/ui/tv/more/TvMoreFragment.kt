@@ -62,6 +62,11 @@ class TvMoreFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
         }
 
+        binding.toolbar.apply {
+            title = args.category
+            setNavigationOnClickListener { it.findNavController().navigateUp() }
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.tv.collect {
