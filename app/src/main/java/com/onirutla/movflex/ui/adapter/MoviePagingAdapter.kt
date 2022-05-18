@@ -6,15 +6,15 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.databinding.ItemPagingContainerBinding
+import com.onirutla.movflex.databinding.MoviePagingContainerBinding
 import com.onirutla.movflex.util.Constants.ItemComparator
 
-class ItemPagingAdapter(
+class MoviePagingAdapter(
     private inline val onClickListener: (view: View, itemId: Int) -> Unit
-) : PagingDataAdapter<ItemResponse, ItemPagingAdapter.ViewHolder>(ItemComparator) {
+) : PagingDataAdapter<ItemResponse, MoviePagingAdapter.ViewHolder>(ItemComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemPagingContainerBinding.inflate(
+        val binding = MoviePagingContainerBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -27,7 +27,7 @@ class ItemPagingAdapter(
     }
 
     inner class ViewHolder(
-        private val binding: ItemPagingContainerBinding
+        private val binding: MoviePagingContainerBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         init {
