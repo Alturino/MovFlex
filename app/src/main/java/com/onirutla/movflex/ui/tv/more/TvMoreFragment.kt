@@ -69,7 +69,7 @@ class TvMoreFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.tv.collect {
+                viewModel.tvMore.collect {
                     tvPagingAdapter.submitData(it)
                 }
             }

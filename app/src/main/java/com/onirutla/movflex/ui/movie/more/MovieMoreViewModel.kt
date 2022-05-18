@@ -2,56 +2,28 @@ package com.onirutla.movflex.ui.movie.more
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.onirutla.movflex.data.repository.movie.MovieRepository
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.util.Constants.TITLE_MOVIE_NOW_PLAYING
-import com.onirutla.movflex.util.Constants.TITLE_POPULAR
-import com.onirutla.movflex.util.Constants.TITLE_MOVIE_TOP_RATED
-import com.onirutla.movflex.util.Constants.TITLE_MOVIE_UPCOMING
+import com.onirutla.movflex.usecase.movie.MovieMoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @HiltViewModel
 class MovieMoreViewModel @Inject constructor(
-    private val movieRepository: MovieRepository
+    private val movieMoreUseCase: MovieMoreUseCase
 ) : ViewModel() {
 
-    private val _movie = MutableStateFlow<PagingData<ItemResponse>>(PagingData.empty())
-    val movie get() = _movie.asStateFlow()
+    private val _category = MutableStateFlow("")
+
+    val movieMore = _category.flatMapLatest {
+        movieMoreUseCase.invoke(it).cachedIn(viewModelScope)
+    }
 
     fun getMovieByCategory(category: String) {
-        viewModelScope.launch {
-            when (category) {
-                TITLE_MOVIE_TOP_RATED -> {
-                    movieRepository.getMovieTopRatedPaging().cachedIn(viewModelScope).collect {
-                        _movie.value = it
-                    }
-                }
-                TITLE_MOVIE_NOW_PLAYING -> {
-                    movieRepository.getMovieNowPlayingPaging().cachedIn(viewModelScope).collect {
-                        _movie.value = it
-                    }
-                }
-                TITLE_POPULAR -> {
-                    movieRepository.getMoviePopularPaging().cachedIn(viewModelScope).collect {
-                        _movie.value = it
-                    }
-                }
-                TITLE_MOVIE_UPCOMING -> {
-                    movieRepository.getMovieUpcomingPaging().cachedIn(viewModelScope).collect {
-                        _movie.value = it
-                    }
-                }
-            }
-        }
+        _category.value = category
     }
 
 

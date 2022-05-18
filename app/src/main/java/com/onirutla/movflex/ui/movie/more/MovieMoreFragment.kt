@@ -71,7 +71,7 @@ class MovieMoreFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movie.collect {
+                viewModel.movieMore.collect {
                     movieMoreAdapter.submitData(it)
                 }
             }

@@ -1,4 +1,4 @@
-package com.onirutla.movflex.usecase
+package com.onirutla.movflex.usecase.tv
 
 import com.onirutla.movflex.data.repository.tv.TvRepository
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
@@ -23,9 +23,9 @@ class TvUseCase @Inject constructor(
     ) { popular, airingToday, onTheAir, topRated ->
 
         val popularCategory = Category("Popular", popular)
-        val upcomingCategory = Category("Upcoming", airingToday)
-        val topRatedCategory = Category("Top Rated", onTheAir)
-        val nowPlayingCategory = Category("Now Playing", topRated)
+        val upcomingCategory = Category("Airing Today", airingToday)
+        val topRatedCategory = Category("On The Air", onTheAir)
+        val nowPlayingCategory = Category("Top Rated", topRated)
 
         listOf(
             popularCategory,

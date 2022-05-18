@@ -1,4 +1,4 @@
-package com.onirutla.movflex.usecase
+package com.onirutla.movflex.usecase.movie
 
 import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.data.source.remote.response.ItemResponse

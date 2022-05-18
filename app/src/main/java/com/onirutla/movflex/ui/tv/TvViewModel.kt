@@ -2,7 +2,7 @@ package com.onirutla.movflex.ui.tv
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.onirutla.movflex.usecase.TvUseCase
+import com.onirutla.movflex.usecase.tv.TvUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
