@@ -10,6 +10,9 @@
         android:id="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        style="?attr/appBarLayoutStyle"
+        app:elevation="8dp"
+        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$Behavior"
         app:liftOnScroll="true">
 
         <com.google.android.material.appbar.MaterialToolbar

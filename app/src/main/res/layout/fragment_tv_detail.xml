@@ -34,7 +34,6 @@
                 style="?attr/collapsingToolbarLayoutLargeStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/collapsingToolbarLayoutLargeSize"
-                app:expandedTitleTextAppearance="?attr/textAppearanceHeadline3"
                 app:expandedTitleTextColor="@color/md_theme_light_surface"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
                 app:toolbarId="@id/toolbar">
@@ -44,7 +43,8 @@
                     load_image="@{tv.backdropPath}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
