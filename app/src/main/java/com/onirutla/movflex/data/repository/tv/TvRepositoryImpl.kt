@@ -8,7 +8,7 @@ import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import com.onirutla.movflex.data.source.remote.service.TvApiService
-import com.onirutla.movflex.util.Constants.NETWORK_LOAD_SIZE
+import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,7 +22,7 @@ class TvRepositoryImpl @Inject constructor(
 ) : TvRepository {
 
     override fun getTvPopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvPopular(position) } },
     ).flow
 
@@ -43,7 +43,7 @@ class TvRepositoryImpl @Inject constructor(
     }
 
     override fun getTvOnTheAirPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvOnTheAir(position) } },
     ).flow
 
@@ -64,7 +64,7 @@ class TvRepositoryImpl @Inject constructor(
     }
 
     override fun getTvTopRatedPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvTopRated(position) } }
     ).flow
 
@@ -85,7 +85,7 @@ class TvRepositoryImpl @Inject constructor(
     }
 
     override fun getTvAiringTodayPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvAiringToday(position) } }
     ).flow
 

@@ -8,7 +8,7 @@ import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import com.onirutla.movflex.data.source.remote.service.MovieApiService
-import com.onirutla.movflex.util.Constants.NETWORK_LOAD_SIZE
+import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -22,7 +22,7 @@ class MovieRepositoryImpl @Inject constructor(
 ) : MovieRepository {
 
     override fun getMoviePopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMoviePopular(position) }
         },
@@ -45,7 +45,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getMovieNowPlayingPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieNowPlaying(position) }
         },
@@ -68,7 +68,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getMovieTopRatedPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieTopRated(position) }
         }
@@ -91,7 +91,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override fun getMovieUpcomingPaging(): Flow<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = NETWORK_LOAD_SIZE, enablePlaceholders = false),
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieUpcoming(position) }
         }

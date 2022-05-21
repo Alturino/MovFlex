@@ -1,8 +1,11 @@
 package com.onirutla.movflex.data.source.local.db
 
-/*
-@Database(entities = [MovieEntity::class, TvEntity::class], version = 1, exportSchema = false)
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import com.onirutla.movflex.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
+
+@Database(entities = [FavoriteEntity::class], version = 1, exportSchema = false)
 abstract class MovFlexDatabase : RoomDatabase() {
-    abstract val tvDao: TvDao
-    abstract val movieDao: MovieDao
-}*/
+    abstract val favoriteDao: FavoriteDao
+}

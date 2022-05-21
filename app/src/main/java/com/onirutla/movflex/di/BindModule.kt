@@ -1,5 +1,7 @@
 package com.onirutla.movflex.di
 
+import com.onirutla.movflex.data.repository.favorite.FavoriteRepository
+import com.onirutla.movflex.data.repository.favorite.FavoriteRepositoryImpl
 import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.data.repository.movie.MovieRepositoryImpl
 import com.onirutla.movflex.data.repository.tv.TvRepository
@@ -21,4 +23,8 @@ abstract class BindModule {
     @Binds
     @ViewModelScoped
     abstract fun bindTvRepository(repositoryImpl: TvRepositoryImpl): TvRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindFavoriteRepository(repositoryImpl: FavoriteRepositoryImpl): FavoriteRepository
 }
