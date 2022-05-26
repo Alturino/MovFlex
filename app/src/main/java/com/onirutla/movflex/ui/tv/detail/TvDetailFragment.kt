@@ -50,6 +50,10 @@ class TvDetailFragment : Fragment() {
                 }
             }
         }
+
+        binding.fab.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {
