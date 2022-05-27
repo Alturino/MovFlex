@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.onirutla.movflex.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
+import com.onirutla.movflex.data.source.local.entities.ItemType
 import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
+import com.onirutla.movflex.data.source.remote.response.tv.toEntity
 import com.onirutla.movflex.data.source.remote.service.TvApiService
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -18,7 +21,8 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class TvRepositoryImpl @Inject constructor(
-    private val tvApiService: TvApiService
+    private val tvApiService: TvApiService,
+    private val favoriteDao: FavoriteDao
 ) : TvRepository {
 
     override fun getTvPopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
@@ -105,19 +109,32 @@ class TvRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getTvDetail(id: Int): Flow<TvResponseDetail> = flow {
+    override fun getTvDetail(id: Int): Flow<FavoriteEntity> = flow {
         try {
-            val response = tvApiService.getTvDetail(id)
-            if (response.isSuccessful)
-                emit(response.body()!!)
-            else
-                emit(TvResponseDetail())
+            val fromDb = favoriteDao.isFavorite(id)
+            if (fromDb != null) {
+                emit(fromDb)
+            } else {
+                val response = tvApiService.getTvDetail(id)
+                if (response.isSuccessful)
+                    emit(response.body()!!.toEntity())
+                else
+                    emit(FavoriteEntity(type = ItemType.Tv))
+            }
         } catch (ioException: IOException) {
             Log.d("MovieRepo", "$ioException")
-            emit(TvResponseDetail())
+            emit(FavoriteEntity())
         } catch (httpException: HttpException) {
             Log.d("MovieRepo", "$httpException")
-            emit(TvResponseDetail())
+            emit(FavoriteEntity())
         }
+    }
+
+    override suspend fun setFavorite(tv: FavoriteEntity) {
+        val fromDb = tv.id.let { favoriteDao.isFavorite(it) }
+        if (fromDb != null && fromDb.isFavorite)
+            favoriteDao.insertFavorite(tv.copy(isFavorite = false))
+        else
+            favoriteDao.insertFavorite(tv.copy(isFavorite = true))
     }
 }

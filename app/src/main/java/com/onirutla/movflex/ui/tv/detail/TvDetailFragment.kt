@@ -11,10 +11,10 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.onirutla.movflex.R
 import com.onirutla.movflex.databinding.FragmentTvDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -46,9 +46,16 @@ class TvDetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.tvDetail.collectLatest {
-                    binding.tv = it
+                viewModel.tvDetail.collectLatest { tv ->
+                    binding.tv = tv
                     binding.format = "%.2f"
+                    var status = tv.isFavorite
+                    setFabState(status)
+                    binding.fab.setOnClickListener {
+                        status = !status
+                        viewModel.setFavorite(tv)
+                        setFabState(status)
+                    }
                 }
             }
         }
@@ -56,9 +63,13 @@ class TvDetailFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             it.findNavController().navigateUp()
         }
+    }
 
-        binding.fab.setOnClickListener {
-
+    private fun setFabState(state: Boolean) {
+        if (state) {
+            binding.fab.setImageResource(R.drawable.ic_favorite_24)
+        } else {
+            binding.fab.setImageResource(R.drawable.ic_favorite_border_24)
         }
     }
 

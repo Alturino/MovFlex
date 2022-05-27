@@ -22,7 +22,7 @@ data class FavoriteEntity(
     @ColumnInfo(name = "type")
     val type: ItemType = ItemType.Movie,
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = true
+    val isFavorite: Boolean = false
 )
 
 enum class ItemType(val type: String) {

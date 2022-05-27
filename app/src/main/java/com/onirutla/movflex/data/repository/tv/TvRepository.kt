@@ -1,6 +1,7 @@
 package com.onirutla.movflex.data.repository.tv
 
 import androidx.paging.PagingData
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import kotlinx.coroutines.flow.Flow
@@ -19,5 +20,7 @@ interface TvRepository {
     fun getTvAiringTodayPaging(): Flow<PagingData<ItemResponse>>
     fun getTvAiringTodayHome(): Flow<List<ItemResponse>>
 
-    fun getTvDetail(id: Int): Flow<TvResponseDetail>
+    fun getTvDetail(id: Int): Flow<FavoriteEntity>
+
+    suspend fun setFavorite(tv: FavoriteEntity)
 }

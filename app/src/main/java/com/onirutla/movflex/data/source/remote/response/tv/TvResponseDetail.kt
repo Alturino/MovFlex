@@ -26,5 +26,6 @@ fun TvResponseDetail.toEntity(): FavoriteEntity = FavoriteEntity(
     description = overview.orEmpty(),
     posterPath = posterPath.orEmpty(),
     voteAverage = voteAverage ?: 0.0,
-    type = ItemType.Tv
+    type = ItemType.Tv,
+    isFavorite = false
 )

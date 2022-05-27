@@ -8,7 +8,7 @@
 
         <variable
             name="tv"
-            type="com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail" />
+            type="com.onirutla.movflex.data.source.local.entities.FavoriteEntity" />
 
         <variable
             name="format"
@@ -60,7 +60,7 @@
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_arrow_back_24"
                     app:navigationIconTint="?attr/colorOnPrimaryContainer"
-                    app:title="@{tv.name}"
+                    app:title="@{tv.title}"
                     tools:title="Halo" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -104,7 +104,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{tv.overview}"
+                    android:text="@{tv.description}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

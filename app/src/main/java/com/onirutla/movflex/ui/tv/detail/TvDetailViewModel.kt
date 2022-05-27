@@ -3,6 +3,7 @@ package com.onirutla.movflex.ui.tv.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.data.repository.tv.TvRepository
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,8 +27,14 @@ class TvDetailViewModel @Inject constructor(
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        TvResponseDetail()
+        FavoriteEntity()
     )
+
+    fun setFavorite(tv: FavoriteEntity) {
+        viewModelScope.launch {
+            tvRepository.setFavorite(tv)
+        }
+    }
 
     fun getTvDetail(id: Int) {
         viewModelScope.launch {
