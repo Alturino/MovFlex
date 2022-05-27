@@ -3,6 +3,7 @@ package com.onirutla.movflex.ui.movie.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.data.repository.movie.MovieRepository
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,12 +27,18 @@ class MovieDetailViewModel @Inject constructor(
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
-        MovieResponseDetail()
+        FavoriteEntity()
     )
 
     fun getMovieDetail(id: Int) {
         viewModelScope.launch {
             _movieId.emit(id)
+        }
+    }
+
+    fun setFavorite(movie: FavoriteEntity) {
+        viewModelScope.launch {
+            movieRepository.setFavorite(movie)
         }
     }
 

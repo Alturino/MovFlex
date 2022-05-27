@@ -4,9 +4,12 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import com.onirutla.movflex.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
+import com.onirutla.movflex.data.source.local.entities.ItemType
 import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
+import com.onirutla.movflex.data.source.remote.response.movie.toEntity
 import com.onirutla.movflex.data.source.remote.service.MovieApiService
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
@@ -18,7 +21,8 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class MovieRepositoryImpl @Inject constructor(
-    private val movieApiService: MovieApiService
+    private val movieApiService: MovieApiService,
+    private val favoriteDao: FavoriteDao
 ) : MovieRepository {
 
     override fun getMoviePopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
@@ -113,19 +117,32 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieDetail(id: Int): Flow<MovieResponseDetail> = flow {
+    override fun getMovieDetail(id: Int): Flow<FavoriteEntity> = flow {
         try {
-            val response = movieApiService.getMovieDetail(id)
-            if (response.isSuccessful)
-                emit(response.body()!!)
-            else
-                emit(MovieResponseDetail())
+            val fromDb = favoriteDao.isFavorite(id)
+            if (fromDb != null) {
+                emit(fromDb)
+            } else {
+                val response = movieApiService.getMovieDetail(id)
+                if (response.isSuccessful)
+                    emit(response.body()!!.toEntity())
+                else
+                    emit(FavoriteEntity(type = ItemType.Movie))
+            }
         } catch (ioException: IOException) {
             Log.d("MovieRepo", "$ioException")
-            emit(MovieResponseDetail())
+            emit(FavoriteEntity())
         } catch (httpException: HttpException) {
             Log.d("MovieRepo", "$httpException")
-            emit(MovieResponseDetail())
+            emit(FavoriteEntity())
         }
+    }
+
+    override suspend fun setFavorite(movie: FavoriteEntity) {
+        val fromDb = movie.id.let { favoriteDao.isFavorite(it) }
+        if (fromDb != null && fromDb.isFavorite)
+            favoriteDao.insertFavorite(movie.copy(isFavorite = false))
+        else
+            favoriteDao.insertFavorite(movie.copy(isFavorite = true))
     }
 }

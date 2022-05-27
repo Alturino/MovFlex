@@ -8,7 +8,7 @@
 
         <variable
             name="movie"
-            type="com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail" />
+            type="com.onirutla.movflex.data.source.local.entities.FavoriteEntity" />
 
         <variable
             name="format"
@@ -58,7 +58,7 @@
                     app:layout_collapseMode="pin"
                     app:navigationIcon="@drawable/ic_arrow_back_24"
                     app:navigationIconTint="?attr/colorOnPrimaryContainer"
-                    app:title="@{movie.originalTitle}"
+                    app:title="@{movie.title}"
                     tools:title="Halo" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -102,7 +102,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:text="@{movie.overview}"
+                    android:text="@{movie.description}"
                     android:textAppearance="?attr/textAppearanceBody1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +114,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

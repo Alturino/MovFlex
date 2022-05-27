@@ -20,7 +20,9 @@ data class FavoriteEntity(
     @ColumnInfo(name = "vote_average")
     val voteAverage: Double = 0.0,
     @ColumnInfo(name = "type")
-    val type: ItemType = ItemType.Movie
+    val type: ItemType = ItemType.Movie,
+    @ColumnInfo(name = "is_favorite")
+    val isFavorite: Boolean = true
 )
 
 enum class ItemType(val type: String) {

@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.onirutla.movflex.databinding.FragmentTvDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @ExperimentalCoroutinesApi
@@ -44,11 +46,15 @@ class TvDetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.tvDetail.collect {
+                viewModel.tvDetail.collectLatest {
                     binding.tv = it
                     binding.format = "%.2f"
                 }
             }
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
         }
 
         binding.fab.setOnClickListener {

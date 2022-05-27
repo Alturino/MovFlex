@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
+import com.onirutla.movflex.R
 import com.onirutla.movflex.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -45,11 +47,30 @@ class MovieDetailFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.lifecycle.repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.movieDetail.collect {
-                    binding.movie = it
+                viewModel.movieDetail.collect { movie ->
+                    binding.movie = movie
                     binding.format = "%.2f"
+                    var status = movie.isFavorite
+                    setFabState(status)
+                    binding.fab.setOnClickListener {
+                        status = !status
+                        viewModel.setFavorite(movie)
+                        setFabState(status)
+                    }
                 }
             }
+        }
+
+        binding.toolbar.setNavigationOnClickListener {
+            it.findNavController().navigateUp()
+        }
+    }
+
+    private fun setFabState(state: Boolean) {
+        if (state) {
+            binding.fab.setImageResource(R.drawable.ic_favorite_24)
+        } else {
+            binding.fab.setImageResource(R.drawable.ic_favorite_border_24)
         }
     }
 

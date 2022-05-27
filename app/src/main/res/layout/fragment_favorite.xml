@@ -16,9 +16,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:contentInsetStartWithNavigation="0dp"
             app:layout_scrollFlags="scroll|enterAlways|snap"
-            app:navigationIcon="@drawable/ic_arrow_back_24"
             app:title="@string/favorite"
             app:titleCentered="true">
 
