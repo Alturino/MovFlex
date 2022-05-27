@@ -19,10 +19,4 @@ class FavoriteRepositoryImpl @Inject constructor(
         config = PagingConfig(PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { favoriteDao.getFavorite() }
     ).flow
-
-    override suspend fun deleteFavorite(favoriteEntity: FavoriteEntity) =
-        favoriteDao.deleteFavorite(favoriteEntity)
-
-    override suspend fun insertFavorite(favoriteEntity: FavoriteEntity) =
-        favoriteDao.insertFavorite(favoriteEntity)
 }

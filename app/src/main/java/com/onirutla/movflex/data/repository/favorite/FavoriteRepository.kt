@@ -6,6 +6,4 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
     fun getFavorite(): Flow<PagingData<FavoriteEntity>>
-    suspend fun deleteFavorite(favoriteEntity: FavoriteEntity)
-    suspend fun insertFavorite(favoriteEntity: FavoriteEntity)
 }
