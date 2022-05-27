@@ -27,5 +27,5 @@ fun MovieResponseDetail.toEntity(): FavoriteEntity = FavoriteEntity(
     posterPath = posterPath.orEmpty(),
     voteAverage = voteAverage ?: 0.0,
     type = ItemType.Movie,
-    isFavorite = true,
+    isFavorite = false,
 )
