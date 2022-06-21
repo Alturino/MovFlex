@@ -13,7 +13,7 @@ import com.onirutla.movflex.ui.Category
 
 class CategoryAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,
-    private inline val seeAllClickListener: (view: View, category: String) -> Unit
+    private inline val seeMoreClickListener: (view: View, category: String) -> Unit
 ) : ListAdapter<Category<List<ItemResponse>>, CategoryAdapter.ViewHolder>(Comparator) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
@@ -48,20 +48,14 @@ class CategoryAdapter(
 
         private val itemAdapter by lazy {
             ItemAdapter { view, movie ->
-                itemClickListener(
-                    view,
-                    movie.id
-                )
+                itemClickListener(view, movie.id)
             }
         }
 
         init {
             binding.seeAll.setOnClickListener {
                 val category = getItem(absoluteAdapterPosition)
-                seeAllClickListener(
-                    it,
-                    category.title
-                )
+                seeMoreClickListener(it, category.title)
             }
         }
 
