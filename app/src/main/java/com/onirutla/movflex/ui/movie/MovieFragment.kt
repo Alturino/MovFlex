@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieBinding
 import com.onirutla.movflex.ui.adapter.CategoryAdapter
+import com.onirutla.movflex.util.MovieType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -29,11 +30,26 @@ class MovieFragment : Fragment() {
                     MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
                 )
         }) { view, category ->
-            view.findNavController()
-                .navigate(
-                    MovieFragmentDirections.actionMovieFragmentToMovieMoreFragment(category)
-                )
+            when (category) {
+                MovieType.MOVIE_NOW_PLAYING.value -> {
+                    navigator(view, MovieType.MOVIE_NOW_PLAYING)
+                }
+                MovieType.MOVIE_POPULAR.value -> {
+                    navigator(view, MovieType.MOVIE_POPULAR)
+                }
+                MovieType.MOVIE_TOP_RATED.value -> {
+                    navigator(view, MovieType.MOVIE_TOP_RATED)
+                }
+                MovieType.MOVIE_UPCOMING.value -> {
+                    navigator(view, MovieType.MOVIE_UPCOMING)
+                }
+            }
         }
+    }
+
+    private fun navigator(view: View, movieType: MovieType) {
+        view.findNavController()
+            .navigate(MovieFragmentDirections.actionMovieFragmentToMovieMoreFragment(movieType))
     }
 
     private var _binding: FragmentMovieBinding? = null
