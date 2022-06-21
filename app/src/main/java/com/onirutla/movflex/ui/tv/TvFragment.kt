@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
-import com.onirutla.movflex.ui.adapter.CategoryAdapter
+import com.onirutla.movflex.ui.adapter.SeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,8 +25,8 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private val categoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, itemId ->
+    private val seeMoreAdapter by lazy {
+        SeeMoreAdapter(itemClickListener = { view, itemId ->
             view.findNavController().navigate(
                 TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
             )
@@ -51,13 +51,13 @@ class TvFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.tvHome.collect {
-                    categoryAdapter.submitList(it)
+                    seeMoreAdapter.submitList(it)
                 }
             }
         }
 
         binding.tvHomeList.apply {
-            adapter = categoryAdapter
+            adapter = seeMoreAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }

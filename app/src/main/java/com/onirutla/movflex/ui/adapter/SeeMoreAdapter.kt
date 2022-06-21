@@ -8,30 +8,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.databinding.CategoryContainerBinding
-import com.onirutla.movflex.ui.Category
+import com.onirutla.movflex.databinding.SeeMoreContainerBinding
+import com.onirutla.movflex.ui.SeeMore
 
-class CategoryAdapter(
+class SeeMoreAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,
     private inline val seeMoreClickListener: (view: View, category: String) -> Unit
-) : ListAdapter<Category<List<ItemResponse>>, CategoryAdapter.ViewHolder>(Comparator) {
+) : ListAdapter<SeeMore<List<ItemResponse>>, SeeMoreAdapter.ViewHolder>(Comparator) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
 
-    object Comparator : DiffUtil.ItemCallback<Category<List<ItemResponse>>>() {
+    object Comparator : DiffUtil.ItemCallback<SeeMore<List<ItemResponse>>>() {
         override fun areItemsTheSame(
-            oldItem: Category<List<ItemResponse>>,
-            newItem: Category<List<ItemResponse>>
+            oldItem: SeeMore<List<ItemResponse>>,
+            newItem: SeeMore<List<ItemResponse>>
         ): Boolean = oldItem.items == newItem.items
 
         override fun areContentsTheSame(
-            oldItem: Category<List<ItemResponse>>,
-            newItem: Category<List<ItemResponse>>
+            oldItem: SeeMore<List<ItemResponse>>,
+            newItem: SeeMore<List<ItemResponse>>
         ): Boolean = oldItem == newItem
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
-        CategoryContainerBinding.inflate(
+        SeeMoreContainerBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -43,7 +43,7 @@ class CategoryAdapter(
     }
 
     inner class ViewHolder(
-        private val binding: CategoryContainerBinding,
+        private val binding: SeeMoreContainerBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private val itemAdapter by lazy {
@@ -59,8 +59,8 @@ class CategoryAdapter(
             }
         }
 
-        fun bind(category: Category<List<ItemResponse>>) {
-            binding.category = category
+        fun bind(seeMore: SeeMore<List<ItemResponse>>) {
+            binding.seeMore = seeMore
             binding.apply {
                 movieGroupingList.apply {
                     adapter = itemAdapter
@@ -73,7 +73,7 @@ class CategoryAdapter(
                     setRecycledViewPool(rvViewPool)
                 }
             }
-            itemAdapter.submitList(category.items)
+            itemAdapter.submitList(seeMore.items)
         }
     }
 }

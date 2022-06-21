@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieBinding
-import com.onirutla.movflex.ui.adapter.CategoryAdapter
+import com.onirutla.movflex.ui.adapter.SeeMoreAdapter
 import com.onirutla.movflex.util.MovieType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -23,8 +23,8 @@ class MovieFragment : Fragment() {
 
     private val viewModel: MovieViewModel by viewModels()
 
-    private val categoryAdapter: CategoryAdapter by lazy {
-        CategoryAdapter(itemClickListener = { view, itemId ->
+    private val seeMoreAdapter: SeeMoreAdapter by lazy {
+        SeeMoreAdapter(itemClickListener = { view, itemId ->
             view.findNavController()
                 .navigate(
                     MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
@@ -69,7 +69,7 @@ class MovieFragment : Fragment() {
         observeData()
 
         binding.movieHomeList.apply {
-            adapter = categoryAdapter
+            adapter = seeMoreAdapter
             layoutManager = LinearLayoutManager(requireContext())
             setHasFixedSize(true)
         }
@@ -79,7 +79,7 @@ class MovieFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movie.collect {
-                    categoryAdapter.submitList(it.toMutableList())
+                    seeMoreAdapter.submitList(it.toMutableList())
                 }
             }
         }
