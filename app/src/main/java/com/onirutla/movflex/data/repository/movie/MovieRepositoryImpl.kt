@@ -1,9 +1,11 @@
 package com.onirutla.movflex.data.repository.movie
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.data.source.local.entities.ItemType
@@ -25,12 +27,12 @@ class MovieRepositoryImpl @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : MovieRepository {
 
-    override fun getMoviePopularPaging(): Flow<PagingData<ItemResponse>> = Pager(
+    override fun getMoviePopularPaging(): LiveData<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMoviePopular(position) }
         },
-    ).flow
+    ).liveData
 
     override fun getMoviePopularHome(): Flow<List<ItemResponse>> = flow {
         try {
@@ -48,12 +50,12 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieNowPlayingPaging(): Flow<PagingData<ItemResponse>> = Pager(
+    override fun getMovieNowPlayingPaging(): LiveData<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieNowPlaying(position) }
         },
-    ).flow
+    ).liveData
 
     override fun getMovieNowPlayingHome(): Flow<List<ItemResponse>> = flow {
         try {
@@ -71,12 +73,12 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieTopRatedPaging(): Flow<PagingData<ItemResponse>> = Pager(
+    override fun getMovieTopRatedPaging(): LiveData<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieTopRated(position) }
         }
-    ).flow
+    ).liveData
 
     override fun getMovieTopRatedHome(): Flow<List<ItemResponse>> = flow {
         try {
@@ -94,12 +96,12 @@ class MovieRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getMovieUpcomingPaging(): Flow<PagingData<ItemResponse>> = Pager(
+    override fun getMovieUpcomingPaging(): LiveData<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position -> movieApiService.getMovieUpcoming(position) }
         }
-    ).flow
+    ).liveData
 
     override fun getMovieUpcomingHome(): Flow<List<ItemResponse>> = flow {
         try {
