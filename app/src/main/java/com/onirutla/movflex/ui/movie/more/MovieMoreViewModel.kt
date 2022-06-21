@@ -1,29 +1,28 @@
 package com.onirutla.movflex.ui.movie.more
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.onirutla.movflex.usecase.movie.MovieMoreUseCase
+import com.onirutla.movflex.util.MovieType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class MovieMoreViewModel @Inject constructor(
     private val movieMoreUseCase: MovieMoreUseCase
 ) : ViewModel() {
 
-    private val _category = MutableStateFlow("")
+    private val _movieType = MutableLiveData<MovieType>()
 
-    val movieMore = _category.flatMapLatest {
+    val movieMore = _movieType.switchMap {
         movieMoreUseCase.invoke(it).cachedIn(viewModelScope)
     }
 
-    fun getMovieByCategory(category: String) {
-        _category.value = category
+    fun getMovieByCategory(movieType: MovieType) {
+        _movieType.value = movieType
     }
 
 
