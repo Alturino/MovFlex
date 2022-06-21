@@ -33,7 +33,7 @@
         android:label="fragment_movie_more"
         tools:layout="@layout/fragment_movie_more">
         <argument
-            android:name="category"
+            android:name="movieType"
             app:argType="com.onirutla.movflex.util.MovieType" />
         <action
             android:id="@+id/action_movieMoreFragment_to_movieDetailFragment"

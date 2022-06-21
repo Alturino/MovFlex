@@ -6,22 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieMoreBinding
 import com.onirutla.movflex.ui.adapter.MoviePagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-@InternalCoroutinesApi
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MovieMoreFragment : Fragment() {
 
@@ -34,16 +25,15 @@ class MovieMoreFragment : Fragment() {
 
     private val movieMoreAdapter by lazy {
         MoviePagingAdapter { view, itemId ->
-            view.findNavController()
-                .navigate(
-                    MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(itemId)
-                )
+            view.findNavController().navigate(
+                MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(itemId)
+            )
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val category = args.category
+        val category = args.movieType
         viewModel.getMovieByCategory(category)
     }
 
@@ -65,18 +55,13 @@ class MovieMoreFragment : Fragment() {
         }
 
         binding.toolbar.apply {
-            title = args.category
+            title = args.movieType.value
             setOnClickListener { it.findNavController().navigateUp() }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movieMore.collect {
-                    movieMoreAdapter.submitData(it)
-                }
-            }
+        viewModel.movieMore.observe(viewLifecycleOwner) {
+            movieMoreAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
-
 
     }
 
