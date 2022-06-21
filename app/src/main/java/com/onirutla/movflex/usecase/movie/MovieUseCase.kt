@@ -2,7 +2,7 @@ package com.onirutla.movflex.usecase.movie
 
 import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
-import com.onirutla.movflex.ui.Category
+import com.onirutla.movflex.ui.SeeMore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
@@ -15,23 +15,23 @@ class MovieUseCase @Inject constructor(
     private val topRatedMovie = movieRepository.getMovieTopRatedHome()
     private val nowPlayingMovie = movieRepository.getMovieNowPlayingHome()
 
-    operator fun invoke(): Flow<List<Category<List<ItemResponse>>>> = combine(
+    operator fun invoke(): Flow<List<SeeMore<List<ItemResponse>>>> = combine(
         popularMovie,
         upcomingMovie,
         topRatedMovie,
         nowPlayingMovie
     ) { popular, upcoming, topRated, nowPlaying ->
 
-        val popularCategory = Category("Popular", popular)
-        val upcomingCategory = Category("Upcoming", upcoming)
-        val topRatedCategory = Category("Top Rated", topRated)
-        val nowPlayingCategory = Category("Now Playing", nowPlaying)
+        val popularSeeMore = SeeMore("Popular", popular)
+        val upcomingSeeMore = SeeMore("Upcoming", upcoming)
+        val topRatedSeeMore = SeeMore("Top Rated", topRated)
+        val nowPlayingSeeMore = SeeMore("Now Playing", nowPlaying)
 
         listOf(
-            popularCategory,
-            upcomingCategory,
-            topRatedCategory,
-            nowPlayingCategory
+            popularSeeMore,
+            upcomingSeeMore,
+            topRatedSeeMore,
+            nowPlayingSeeMore
         )
 
     }
