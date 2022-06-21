@@ -1,44 +1,38 @@
 package com.onirutla.movflex.ui.movie.detail
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.data.repository.movie.MovieRepository
-import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     private val movieRepository: MovieRepository
 ) : ViewModel() {
 
-    private val _movieId = MutableSharedFlow<Int>(1)
+    private val _movieId = MutableLiveData<Int>()
 
-    val movieDetail = _movieId.flatMapLatest {
-        movieRepository.getMovieDetail(it)
-    }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        FavoriteEntity()
-    )
-
-    fun getMovieDetail(id: Int) {
-        viewModelScope.launch {
-            _movieId.emit(id)
-        }
+    val movieDetail = _movieId.switchMap {
+        movieRepository.getMovieDetail(it).asLiveData(viewModelScope.coroutineContext)
     }
 
-    fun setFavorite(movie: FavoriteEntity) {
+    fun getMovieDetail(id: Int) {
+        _movieId.value = id
+    }
+
+    fun setFavorite() {
         viewModelScope.launch {
-            movieRepository.setFavorite(movie)
+            _movieId.value?.let { id ->
+                movieRepository.getMovieDetail(id).collect { movie ->
+                    movieRepository.setFavorite(movie)
+                }
+            }
         }
     }
 
