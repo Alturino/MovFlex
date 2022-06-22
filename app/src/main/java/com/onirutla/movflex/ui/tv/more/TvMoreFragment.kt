@@ -6,20 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvMoreBinding
 import com.onirutla.movflex.ui.adapter.TvPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class TvMoreFragment : Fragment() {
 
@@ -67,12 +60,8 @@ class TvMoreFragment : Fragment() {
             setNavigationOnClickListener { it.findNavController().navigateUp() }
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.tvMore.collect {
-                    tvPagingAdapter.submitData(it)
-                }
-            }
+        viewModel.tvMore.observe(viewLifecycleOwner) {
+            tvPagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
     }
