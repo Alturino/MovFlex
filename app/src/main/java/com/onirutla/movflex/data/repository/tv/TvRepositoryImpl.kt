@@ -8,7 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.source.local.entities.ItemType
+import com.onirutla.movflex.util.ItemType
 import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.tv.toEntity

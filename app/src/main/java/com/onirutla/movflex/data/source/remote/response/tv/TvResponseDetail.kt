@@ -1,7 +1,7 @@
 package com.onirutla.movflex.data.source.remote.response.tv
 
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.source.local.entities.ItemType
+import com.onirutla.movflex.util.ItemType
 import com.squareup.moshi.Json
 
 data class TvResponseDetail(

@@ -3,6 +3,7 @@ package com.onirutla.movflex.data.source.local.entities
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.onirutla.movflex.util.ItemType
 
 @Entity(tableName = "favorite")
 data class FavoriteEntity(
@@ -25,7 +26,3 @@ data class FavoriteEntity(
     val isFavorite: Boolean = false
 )
 
-enum class ItemType(val type: String) {
-    Movie("Movie"),
-    Tv("Tv")
-}
