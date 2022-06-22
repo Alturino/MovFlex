@@ -24,8 +24,8 @@ class TvMoreViewModel @Inject constructor(
         tvMoreUseCase.invoke(it).cachedIn(viewModelScope)
     }
 
-    fun getTvByCategory(category: String) {
-        _category.value = category
+    fun getTvByCategory(tvType: TvType) {
+        _tvType.value = tvType
     }
 
 }
