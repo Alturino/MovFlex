@@ -13,6 +13,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
 import com.onirutla.movflex.ui.adapter.SeeMoreAdapter
+import com.onirutla.movflex.util.TvType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -31,10 +32,19 @@ class TvFragment : Fragment() {
                 TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
             )
         }) { view, category ->
-            view.findNavController().navigate(
-                TvFragmentDirections.actionTvFragmentToTvMoreFragment(category)
-            )
+            when (category) {
+                TvType.TV_AIRING_TODAY.value -> navigator(view, TvType.TV_AIRING_TODAY)
+                TvType.TV_TOP_RATED.value -> navigator(view, TvType.TV_TOP_RATED)
+                TvType.TV_ON_THE_AIR.value -> navigator(view, TvType.TV_ON_THE_AIR)
+                TvType.TV_AIRING_TODAY.value -> navigator(view, TvType.TV_AIRING_TODAY)
+            }
         }
+    }
+
+    private fun navigator(view: View, tvType: TvType) {
+        view.findNavController().navigate(
+            TvFragmentDirections.actionTvFragmentToTvMoreFragment(tvType)
+        )
     }
 
     override fun onCreateView(
