@@ -36,8 +36,8 @@
             android:id="@+id/action_tvMoreFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
         <argument
-            android:name="category"
-            app:argType="string" />
+            android:name="tv_type"
+            app:argType="com.onirutla.movflex.util.TvType" />
     </fragment>
 
 
