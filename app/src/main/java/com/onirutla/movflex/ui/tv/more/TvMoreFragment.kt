@@ -25,17 +25,15 @@ class TvMoreFragment : Fragment() {
 
     private val tvPagingAdapter by lazy {
         TvPagingAdapter { view, itemId ->
-            view.findNavController()
-                .navigate(
-                    TvMoreFragmentDirections.actionTvMoreFragmentToTvDetailFragment(itemId)
-                )
+            view.findNavController().navigate(
+                TvMoreFragmentDirections.actionTvMoreFragmentToTvDetailFragment(itemId)
+            )
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val category = args.category
-        viewModel.getTvByCategory(category)
+        viewModel.getTvByCategory(args.tvType)
     }
 
     override fun onCreateView(
@@ -56,7 +54,7 @@ class TvMoreFragment : Fragment() {
         }
 
         binding.toolbar.apply {
-            title = args.category
+            title = args.tvType.value
             setNavigationOnClickListener { it.findNavController().navigateUp() }
         }
 
