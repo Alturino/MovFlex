@@ -1,24 +1,26 @@
 package com.onirutla.movflex.ui.tv.more
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.usecase.tv.TvMoreUseCase
+import com.onirutla.movflex.util.TvType
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
-@ExperimentalCoroutinesApi
 @HiltViewModel
 class TvMoreViewModel @Inject constructor(
     private val tvMoreUseCase: TvMoreUseCase
 ) : ViewModel() {
 
-    private val _category = MutableStateFlow("")
+    private val _tvType: MutableLiveData<TvType> = MutableLiveData<TvType>()
 
-    val tvMore = _category.flatMapLatest {
+    val tvMore: LiveData<PagingData<ItemResponse>> = _tvType.switchMap {
         tvMoreUseCase.invoke(it).cachedIn(viewModelScope)
     }
 
