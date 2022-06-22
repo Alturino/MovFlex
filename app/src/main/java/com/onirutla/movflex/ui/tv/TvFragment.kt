@@ -6,17 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
 import com.onirutla.movflex.ui.adapter.SeeMoreAdapter
 import com.onirutla.movflex.util.TvType
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TvFragment : Fragment() {
@@ -58,12 +53,8 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.tvHome.collect {
-                    seeMoreAdapter.submitList(it)
-                }
-            }
+        viewModel.tvHome.observe(viewLifecycleOwner) {
+            seeMoreAdapter.submitList(it)
         }
 
         binding.tvHomeList.apply {
