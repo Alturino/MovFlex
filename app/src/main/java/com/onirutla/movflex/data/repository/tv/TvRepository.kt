@@ -21,6 +21,4 @@ interface TvRepository {
     fun getTvAiringTodayHome(): Flow<List<ItemResponse>>
 
     fun getTvDetail(id: Int): Flow<FavoriteEntity>
-
-    suspend fun setFavorite(tv: FavoriteEntity)
 }

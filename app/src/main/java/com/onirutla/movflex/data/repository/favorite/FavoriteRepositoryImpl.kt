@@ -8,6 +8,8 @@ import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -19,4 +21,13 @@ class FavoriteRepositoryImpl @Inject constructor(
         config = PagingConfig(PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = { favoriteDao.getFavorite() }
     ).flow
+
+    override suspend fun setFavorite(movie: FavoriteEntity) {
+        favoriteDao.isFavorite(movie.id).filterNotNull().collect {
+            if (it.isFavorite)
+                favoriteDao.insertFavorite(it.copy(isFavorite = false))
+            else
+                favoriteDao.insertFavorite(it.copy(isFavorite = true))
+        }
+    }
 }

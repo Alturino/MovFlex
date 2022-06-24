@@ -119,13 +119,4 @@ class MovieRepositoryImpl @Inject constructor(
             Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
             emit(FavoriteEntity())
         }
-
-    override suspend fun setFavorite(movie: FavoriteEntity) {
-        favoriteDao.isFavorite(movie.id).filterNotNull().collect {
-            if (it.isFavorite)
-                favoriteDao.insertFavorite(it.copy(isFavorite = false))
-            else
-                favoriteDao.insertFavorite(it.copy(isFavorite = true))
-        }
-    }
 }

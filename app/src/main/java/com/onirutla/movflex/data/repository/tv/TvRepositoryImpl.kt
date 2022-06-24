@@ -16,8 +16,6 @@ import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -112,14 +110,4 @@ class TvRepositoryImpl @Inject constructor(
         }.catch {
             Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
         }
-
-
-    override suspend fun setFavorite(tv: FavoriteEntity) {
-        favoriteDao.isFavorite(tv.id).filterNotNull().collect {
-            if (it.isFavorite)
-                favoriteDao.insertFavorite(it.copy(isFavorite = false))
-            else
-                favoriteDao.insertFavorite(it.copy(isFavorite = true))
-        }
-    }
 }

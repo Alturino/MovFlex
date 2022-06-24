@@ -6,4 +6,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface FavoriteRepository {
     fun getFavorite(): Flow<PagingData<FavoriteEntity>>
+    suspend fun setFavorite(movie: FavoriteEntity)
 }

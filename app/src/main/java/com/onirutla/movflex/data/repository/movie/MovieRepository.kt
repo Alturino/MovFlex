@@ -21,6 +21,4 @@ interface MovieRepository {
     fun getMovieUpcomingHome(): Flow<List<ItemResponse>>
 
     fun getMovieDetail(id: Int): Flow<FavoriteEntity>
-
-    suspend fun setFavorite(movie: FavoriteEntity)
 }
