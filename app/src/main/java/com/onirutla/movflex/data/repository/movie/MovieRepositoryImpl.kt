@@ -8,7 +8,6 @@ import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.util.ItemType
 import com.onirutla.movflex.data.source.remote.PagingDataSource
 import com.onirutla.movflex.data.source.remote.response.ItemResponse
 import com.onirutla.movflex.data.source.remote.response.movie.toEntity
@@ -16,9 +15,11 @@ import com.onirutla.movflex.data.source.remote.service.MovieApiService
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
-import okio.IOException
-import retrofit2.HttpException
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -35,19 +36,14 @@ class MovieRepositoryImpl @Inject constructor(
     ).liveData
 
     override fun getMoviePopularHome(): Flow<List<ItemResponse>> = flow {
-        try {
-            val response = movieApiService.getMoviePopular()
-            if (response.isSuccessful)
-                emit(response.body()!!.results)
-            else
-                emit(emptyList())
-        } catch (ioException: IOException) {
-            Log.d("MovieRepo", "$ioException")
+        val response = movieApiService.getMoviePopular()
+        if (response.isSuccessful)
+            emit(response.body()!!.results)
+        else
             emit(emptyList())
-        } catch (httpException: HttpException) {
-            Log.d("MovieRepo", "$httpException")
-            emit(emptyList())
-        }
+    }.catch {
+        Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
     }
 
     override fun getMovieNowPlayingPaging(): LiveData<PagingData<ItemResponse>> = Pager(
@@ -58,19 +54,14 @@ class MovieRepositoryImpl @Inject constructor(
     ).liveData
 
     override fun getMovieNowPlayingHome(): Flow<List<ItemResponse>> = flow {
-        try {
-            val response = movieApiService.getMovieNowPlaying()
-            if (response.isSuccessful)
-                emit(response.body()!!.results)
-            else
-                emit(emptyList())
-        } catch (ioException: IOException) {
-            Log.d("MovieRepo", "$ioException")
+        val response = movieApiService.getMovieNowPlaying()
+        if (response.isSuccessful)
+            emit(response.body()!!.results)
+        else
             emit(emptyList())
-        } catch (httpException: HttpException) {
-            Log.d("MovieRepo", "$httpException")
-            emit(emptyList())
-        }
+    }.catch {
+        Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
     }
 
     override fun getMovieTopRatedPaging(): LiveData<PagingData<ItemResponse>> = Pager(
@@ -81,20 +72,16 @@ class MovieRepositoryImpl @Inject constructor(
     ).liveData
 
     override fun getMovieTopRatedHome(): Flow<List<ItemResponse>> = flow {
-        try {
-            val response = movieApiService.getMovieTopRated()
-            if (response.isSuccessful)
-                emit(response.body()!!.results)
-            else
-                emit(emptyList())
-        } catch (ioException: IOException) {
-            Log.d("MovieRepo", "$ioException")
+        val response = movieApiService.getMovieTopRated()
+        if (response.isSuccessful)
+            emit(response.body()!!.results)
+        else
             emit(emptyList())
-        } catch (httpException: HttpException) {
-            Log.d("MovieRepo", "$httpException")
-            emit(emptyList())
-        }
+    }.catch {
+        Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
     }
+
 
     override fun getMovieUpcomingPaging(): LiveData<PagingData<ItemResponse>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
@@ -104,47 +91,41 @@ class MovieRepositoryImpl @Inject constructor(
     ).liveData
 
     override fun getMovieUpcomingHome(): Flow<List<ItemResponse>> = flow {
-        try {
-            val response = movieApiService.getMovieUpcoming()
-            if (response.isSuccessful)
-                emit(response.body()!!.results)
-            else
-                emit(emptyList())
-        } catch (ioException: IOException) {
-            Log.d("MovieRepo", "$ioException")
+        val response = movieApiService.getMovieUpcoming()
+        if (response.isSuccessful)
+            emit(response.body()!!.results)
+        else
             emit(emptyList())
-        } catch (httpException: HttpException) {
-            Log.d("MovieRepo", "$httpException")
-            emit(emptyList())
-        }
+    }.catch {
+        Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
     }
 
-    override fun getMovieDetail(id: Int): Flow<FavoriteEntity> = flow {
-        try {
-            val fromDb = favoriteDao.isFavorite(id)
-            if (fromDb != null) {
-                emit(fromDb)
+
+    override fun getMovieDetail(id: Int): Flow<FavoriteEntity> =
+        favoriteDao.isFavorite(id).map {
+            if (it != null) {
+                it
             } else {
                 val response = movieApiService.getMovieDetail(id)
-                if (response.isSuccessful)
-                    emit(response.body()!!.toEntity())
-                else
-                    emit(FavoriteEntity(type = ItemType.Movie))
+                if (response.isSuccessful) {
+                    favoriteDao.insertFavorite(response.body()!!.toEntity())
+                    response.body()!!.toEntity()
+                } else {
+                    FavoriteEntity()
+                }
             }
-        } catch (ioException: IOException) {
-            Log.d("MovieRepo", "$ioException")
-            emit(FavoriteEntity())
-        } catch (httpException: HttpException) {
-            Log.d("MovieRepo", "$httpException")
+        }.catch {
+            Log.d(this@MovieRepositoryImpl.javaClass.simpleName, "$it")
             emit(FavoriteEntity())
         }
-    }
 
     override suspend fun setFavorite(movie: FavoriteEntity) {
-        val fromDb = movie.id.let { favoriteDao.isFavorite(it) }
-        if (fromDb != null && fromDb.isFavorite)
-            favoriteDao.insertFavorite(movie.copy(isFavorite = false))
-        else
-            favoriteDao.insertFavorite(movie.copy(isFavorite = true))
+        favoriteDao.isFavorite(movie.id).filterNotNull().collect {
+            if (it.isFavorite)
+                favoriteDao.insertFavorite(it.copy(isFavorite = false))
+            else
+                favoriteDao.insertFavorite(it.copy(isFavorite = true))
+        }
     }
 }
