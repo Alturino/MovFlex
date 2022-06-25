@@ -28,7 +28,7 @@ class TvFragment : Fragment() {
             )
         }) { view, category ->
             when (category) {
-                TvType.TV_AIRING_TODAY.value -> navigator(view, TvType.TV_AIRING_TODAY)
+                TvType.TV_POPULAR.value -> navigator(view, TvType.TV_POPULAR)
                 TvType.TV_TOP_RATED.value -> navigator(view, TvType.TV_TOP_RATED)
                 TvType.TV_ON_THE_AIR.value -> navigator(view, TvType.TV_ON_THE_AIR)
                 TvType.TV_AIRING_TODAY.value -> navigator(view, TvType.TV_AIRING_TODAY)
