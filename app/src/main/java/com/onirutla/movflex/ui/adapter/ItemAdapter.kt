@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.databinding.ItemContainerBinding
 import com.onirutla.movflex.util.Constants.ItemComparator
 
 class ItemAdapter(
-    private inline val onClickListener: (view: View, item: ItemResponse) -> Unit
-) : ListAdapter<ItemResponse, ItemAdapter.ViewHolder>(ItemComparator) {
+    private inline val onClickListener: (view: View, item: ItemDto) -> Unit
+) : ListAdapter<ItemDto, ItemAdapter.ViewHolder>(ItemComparator) {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position) ?: ItemResponse())
+        holder.bind(getItem(position) ?: ItemDto())
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
@@ -32,11 +32,11 @@ class ItemAdapter(
 
         init {
             binding.root.setOnClickListener {
-                onClickListener(it, getItem(bindingAdapterPosition) ?: ItemResponse())
+                onClickListener(it, getItem(bindingAdapterPosition) ?: ItemDto())
             }
         }
 
-        fun bind(item: ItemResponse) {
+        fun bind(item: ItemDto) {
             binding.item = item
         }
     }

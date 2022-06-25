@@ -1,7 +1,7 @@
 package com.onirutla.movflex.usecase.tv
 
 import com.onirutla.movflex.data.repository.tv.TvRepository
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.ui.SeeMore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -15,7 +15,7 @@ class TvUseCase @Inject constructor(
     private val onTheAir = tvRepository.getTvOnTheAirHome()
     private val topRated = tvRepository.getTvTopRatedHome()
 
-    operator fun invoke(): Flow<List<SeeMore<List<ItemResponse>>>> = combine(
+    operator fun invoke(): Flow<List<SeeMore<List<ItemDto>>>> = combine(
         popular,
         airingToday,
         onTheAir,

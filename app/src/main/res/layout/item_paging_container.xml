@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.onirutla.movflex.data.source.remote.response.ItemResponse" />
+            type="com.onirutla.movflex.data.source.remote.response.ItemDto" />
 
     </data>
 
@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@{item.name}"
+            android:text="@{item.title}"
             android:textAppearance="?attr/textAppearanceListItem"
             app:layout_constraintStart_toEndOf="@+id/item_image"
             app:layout_constraintTop_toTopOf="@+id/item_image"

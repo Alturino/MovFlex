@@ -1,7 +1,7 @@
 package com.onirutla.movflex.usecase.movie
 
 import com.onirutla.movflex.data.repository.movie.MovieRepository
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.ui.SeeMore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
@@ -15,7 +15,7 @@ class MovieUseCase @Inject constructor(
     private val topRatedMovie = movieRepository.getMovieTopRatedHome()
     private val nowPlayingMovie = movieRepository.getMovieNowPlayingHome()
 
-    operator fun invoke(): Flow<List<SeeMore<List<ItemResponse>>>> = combine(
+    operator fun invoke(): Flow<List<SeeMore<List<ItemDto>>>> = combine(
         popularMovie,
         upcomingMovie,
         topRatedMovie,

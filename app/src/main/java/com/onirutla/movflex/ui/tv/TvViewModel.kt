@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.ui.SeeMore
 import com.onirutla.movflex.usecase.tv.TvUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ class TvViewModel @Inject constructor(
     useCase: TvUseCase
 ) : ViewModel() {
 
-    val tvHome: LiveData<List<SeeMore<List<ItemResponse>>>> = useCase.invoke()
+    val tvHome: LiveData<List<SeeMore<List<ItemDto>>>> = useCase.invoke()
         .asLiveData(viewModelScope.coroutineContext)
 
 }

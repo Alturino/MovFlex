@@ -3,7 +3,7 @@ package com.onirutla.movflex.util
 import androidx.recyclerview.widget.DiffUtil
 import com.onirutla.movflex.BuildConfig
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 
 object Constants {
     const val TMDB_STARTING_PAGE_INDEX = 1
@@ -12,15 +12,15 @@ object Constants {
     const val BASE_URL = BuildConfig.BASE_URL
     const val BASE_IMAGE_PATH = BuildConfig.BASE_IMAGE_PATH
 
-    object ItemComparator : DiffUtil.ItemCallback<ItemResponse>() {
+    object ItemComparator : DiffUtil.ItemCallback<ItemDto>() {
         override fun areItemsTheSame(
-            oldItem: ItemResponse,
-            newItem: ItemResponse
+            oldItem: ItemDto,
+            newItem: ItemDto
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: ItemResponse,
-            newItem: ItemResponse
+            oldItem: ItemDto,
+            newItem: ItemDto
         ): Boolean = oldItem == newItem
     }
 

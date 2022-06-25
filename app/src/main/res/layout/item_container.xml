@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.onirutla.movflex.data.source.remote.response.ItemResponse" />
+            type="com.onirutla.movflex.data.source.remote.response.ItemDto" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
