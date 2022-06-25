@@ -6,12 +6,12 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
+import com.onirutla.movflex.data.source.PagingDataSource
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.source.remote.PagingDataSource
-import com.onirutla.movflex.data.source.remote.response.ItemResponse
+import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.data.source.remote.response.tv.toEntity
-import com.onirutla.movflex.data.source.remote.service.TvApiService
+import com.onirutla.movflex.data.source.remote.tv.TvRemoteDataSource
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
@@ -22,75 +22,81 @@ import javax.inject.Inject
 
 @ViewModelScoped
 class TvRepositoryImpl @Inject constructor(
-    private val tvApiService: TvApiService,
+    private val remoteDataSource: TvRemoteDataSource,
     private val favoriteDao: FavoriteDao
 ) : TvRepository {
 
-    override fun getTvPopularPaging(): LiveData<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-        pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvPopular(position) } },
-    ).liveData
-
-    override fun getTvPopularHome(): Flow<List<ItemResponse>> = flow {
-        val response = tvApiService.getTvPopular()
-        if (response.isSuccessful)
-            emit(response.body()!!.results)
-        else
-            emit(emptyList())
-    }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
-        emit(emptyList())
-    }
-
-    override fun getTvOnTheAirPaging(): LiveData<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-        pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvOnTheAir(position) } },
-    ).liveData
-
-    override fun getTvOnTheAirHome(): Flow<List<ItemResponse>> = flow {
-        val response = tvApiService.getTvOnTheAir()
-        if (response.isSuccessful)
-            emit(response.body()!!.results)
-        else
-            emit(emptyList())
-    }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
-        emit(emptyList())
-    }
-
-    override fun getTvTopRatedPaging(): LiveData<PagingData<ItemResponse>> = Pager(
-        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-        pagingSourceFactory = { PagingDataSource { position -> tvApiService.getTvTopRated(position) } }
-    ).liveData
-
-    override fun getTvTopRatedHome(): Flow<List<ItemResponse>> = flow {
-        val response = tvApiService.getTvTopRated()
-        if (response.isSuccessful)
-            emit(response.body()!!.results)
-        else
-            emit(emptyList())
-    }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
-        emit(emptyList())
-    }
-
-    override fun getTvAiringTodayPaging(): LiveData<PagingData<ItemResponse>> = Pager(
+    override fun getTvPopularPaging(): LiveData<PagingData<ItemDto>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                tvApiService.getTvAiringToday(
+                remoteDataSource.getTvPopular(
+                    position
+                )
+            }
+        },
+    ).liveData
+
+    override fun getTvPopularHome(): Flow<List<ItemDto>> = flow {
+        val dto = remoteDataSource.getTvPopular()
+        emit(dto)
+    }.catch {
+        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
+    }
+
+    override fun getTvOnTheAirPaging(): LiveData<PagingData<ItemDto>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                remoteDataSource.getTvOnTheAir(
+                    position
+                )
+            }
+        },
+    ).liveData
+
+    override fun getTvOnTheAirHome(): Flow<List<ItemDto>> = flow {
+        val dto = remoteDataSource.getTvOnTheAir()
+        emit(dto)
+    }.catch {
+        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
+    }
+
+    override fun getTvTopRatedPaging(): LiveData<PagingData<ItemDto>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                remoteDataSource.getTvTopRated(
                     position
                 )
             }
         }
     ).liveData
 
-    override fun getTvAiringTodayHome(): Flow<List<ItemResponse>> = flow {
-        val response = tvApiService.getTvAiringToday()
-        if (response.isSuccessful)
-            emit(response.body()!!.results)
-        else
-            emit(emptyList())
+    override fun getTvTopRatedHome(): Flow<List<ItemDto>> = flow {
+        val dto = remoteDataSource.getTvTopRated()
+        emit(dto)
+    }.catch {
+        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        emit(emptyList())
+    }
+
+    override fun getTvAiringTodayPaging(): LiveData<PagingData<ItemDto>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                remoteDataSource.getTvAiringToday(
+                    position
+                )
+            }
+        }
+    ).liveData
+
+    override fun getTvAiringTodayHome(): Flow<List<ItemDto>> = flow {
+        val dto = remoteDataSource.getTvAiringToday()
+        emit(dto)
     }.catch {
         Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
         emit(emptyList())
@@ -101,11 +107,8 @@ class TvRepositoryImpl @Inject constructor(
             if (it != null) {
                 it
             } else {
-                val response = tvApiService.getTvDetail(id)
-                if (response.isSuccessful)
-                    response.body()!!.toEntity()
-                else
-                    FavoriteEntity()
+                val response = remoteDataSource.getTvDetail(id)
+                response.toEntity()
             }
         }.catch {
             Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
