@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvMoreBinding
-import com.onirutla.movflex.ui.adapter.TvPagingAdapter
+import com.onirutla.movflex.ui.adapter.ItemPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,8 +23,8 @@ class TvMoreFragment : Fragment() {
 
     private val args: TvMoreFragmentArgs by navArgs()
 
-    private val tvPagingAdapter by lazy {
-        TvPagingAdapter { view, itemId ->
+    private val itemPagingAdapter by lazy {
+        ItemPagingAdapter { view, itemId ->
             view.findNavController().navigate(
                 TvMoreFragmentDirections.actionTvMoreFragmentToTvDetailFragment(itemId)
             )
@@ -48,7 +48,7 @@ class TvMoreFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.moviePaging.apply {
-            adapter = tvPagingAdapter
+            adapter = itemPagingAdapter
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
         }
@@ -59,7 +59,7 @@ class TvMoreFragment : Fragment() {
         }
 
         viewModel.tvMore.observe(viewLifecycleOwner) {
-            tvPagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+            itemPagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
         }
 
     }
