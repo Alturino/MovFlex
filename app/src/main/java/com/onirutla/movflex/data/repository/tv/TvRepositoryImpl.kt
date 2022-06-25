@@ -26,6 +26,10 @@ class TvRepositoryImpl @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : TvRepository {
 
+    companion object {
+        val TAG: String = this::class.java.simpleName
+    }
+
     override fun getTvPopularPaging(): LiveData<PagingData<ItemDto>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
@@ -41,7 +45,7 @@ class TvRepositoryImpl @Inject constructor(
         val dto = remoteDataSource.getTvPopular()
         emit(dto)
     }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        Log.d(TAG, "$it")
         emit(emptyList())
     }
 
@@ -60,7 +64,7 @@ class TvRepositoryImpl @Inject constructor(
         val dto = remoteDataSource.getTvOnTheAir()
         emit(dto)
     }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        Log.d(TAG, "$it")
         emit(emptyList())
     }
 
@@ -79,7 +83,7 @@ class TvRepositoryImpl @Inject constructor(
         val dto = remoteDataSource.getTvTopRated()
         emit(dto)
     }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        Log.d(TAG, "$it")
         emit(emptyList())
     }
 
@@ -98,7 +102,7 @@ class TvRepositoryImpl @Inject constructor(
         val dto = remoteDataSource.getTvAiringToday()
         emit(dto)
     }.catch {
-        Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+        Log.d(TAG, "$it")
         emit(emptyList())
     }
 
@@ -111,6 +115,6 @@ class TvRepositoryImpl @Inject constructor(
                 response.toEntity()
             }
         }.catch {
-            Log.d(this@TvRepositoryImpl.javaClass.simpleName, "$it")
+            Log.d(TAG, "$it")
         }
 }
