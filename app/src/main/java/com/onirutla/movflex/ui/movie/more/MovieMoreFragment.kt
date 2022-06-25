@@ -10,7 +10,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieMoreBinding
-import com.onirutla.movflex.ui.adapter.MoviePagingAdapter
+import com.onirutla.movflex.ui.adapter.ItemPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +24,7 @@ class MovieMoreFragment : Fragment() {
     private val args: MovieMoreFragmentArgs by navArgs()
 
     private val movieMoreAdapter by lazy {
-        MoviePagingAdapter { view, itemId ->
+        ItemPagingAdapter { view, itemId ->
             view.findNavController().navigate(
                 MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(itemId)
             )
