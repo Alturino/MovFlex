@@ -6,6 +6,10 @@ import com.onirutla.movflex.data.repository.movie.MovieRepository
 import com.onirutla.movflex.data.repository.movie.MovieRepositoryImpl
 import com.onirutla.movflex.data.repository.tv.TvRepository
 import com.onirutla.movflex.data.repository.tv.TvRepositoryImpl
+import com.onirutla.movflex.data.source.remote.movie.MovieRemoteDataSource
+import com.onirutla.movflex.data.source.remote.movie.MovieRemoteDataSourceImpl
+import com.onirutla.movflex.data.source.remote.tv.TvRemoteDataSource
+import com.onirutla.movflex.data.source.remote.tv.TvRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -27,4 +31,12 @@ abstract class BindModule {
     @Binds
     @ViewModelScoped
     abstract fun bindFavoriteRepository(repositoryImpl: FavoriteRepositoryImpl): FavoriteRepository
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindMovieRemoteDataSource(remoteDataSourceImpl: MovieRemoteDataSourceImpl): MovieRemoteDataSource
+
+    @Binds
+    @ViewModelScoped
+    abstract fun bindTvRemoteDataSource(remoteDataSourceImpl: TvRemoteDataSourceImpl): TvRemoteDataSource
 }
