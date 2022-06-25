@@ -1,24 +1,21 @@
-package com.onirutla.movflex.data.source.remote
+package com.onirutla.movflex.data.source
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.onirutla.movflex.data.source.remote.response.detail.PageResponse
 import com.onirutla.movflex.util.Constants.TMDB_STARTING_PAGE_INDEX
 import okio.IOException
 import retrofit2.HttpException
-import retrofit2.Response
 
 class PagingDataSource<R : Any>(
-    private inline val apiService: suspend (position: Int) -> Response<PageResponse<R>>
+    private inline val apiService: suspend (position: Int) -> List<R>
 ) : PagingSource<Int, R>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, R> = try {
         val position = params.key ?: TMDB_STARTING_PAGE_INDEX
         val response = apiService(position)
-        val movies = response.body()!!.results
-        val nextKey = if (movies.isEmpty()) null else position + 1
+        val nextKey = if (response.isEmpty()) null else position + 1
         LoadResult.Page(
-            data = movies,
+            data = response,
             prevKey = if (position == TMDB_STARTING_PAGE_INDEX) null else position - 1,
             nextKey = nextKey
         )
