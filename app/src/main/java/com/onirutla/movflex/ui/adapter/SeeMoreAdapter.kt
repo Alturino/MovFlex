@@ -7,26 +7,29 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.databinding.SeeMoreContainerBinding
-import com.onirutla.movflex.ui.SeeMore
+import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.domain.model.SeeMore
 
 class SeeMoreAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,
     private inline val seeMoreClickListener: (view: View, category: String) -> Unit
-) : ListAdapter<SeeMore<List<ItemDto>>, SeeMoreAdapter.ViewHolder>(Comparator) {
+) : ListAdapter<SeeMore<List<Content>>, SeeMoreAdapter.ViewHolder>(
+    Comparator
+) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
 
-    object Comparator : DiffUtil.ItemCallback<SeeMore<List<ItemDto>>>() {
+    object Comparator :
+        DiffUtil.ItemCallback<SeeMore<List<Content>>>() {
         override fun areItemsTheSame(
-            oldItem: SeeMore<List<ItemDto>>,
-            newItem: SeeMore<List<ItemDto>>
+            oldItem: SeeMore<List<Content>>,
+            newItem: SeeMore<List<Content>>
         ): Boolean = oldItem.items == newItem.items
 
         override fun areContentsTheSame(
-            oldItem: SeeMore<List<ItemDto>>,
-            newItem: SeeMore<List<ItemDto>>
+            oldItem: SeeMore<List<Content>>,
+            newItem: SeeMore<List<Content>>
         ): Boolean = oldItem == newItem
     }
 
@@ -59,7 +62,7 @@ class SeeMoreAdapter(
             }
         }
 
-        fun bind(seeMore: SeeMore<List<ItemDto>>) {
+        fun bind(seeMore: SeeMore<List<Content>>) {
             binding.seeMore = seeMore
             binding.apply {
                 movieGroupingList.apply {

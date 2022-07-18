@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.databinding.FavoritePagingContainerBinding
+import com.onirutla.movflex.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.util.Constants.FavoriteComparator
+import com.onirutla.movflex.databinding.FavoritePagingContainerBinding
 
 class FavoritePagingAdapter :
     PagingDataAdapter<FavoriteEntity, FavoritePagingAdapter.ViewHolder>(FavoriteComparator) {

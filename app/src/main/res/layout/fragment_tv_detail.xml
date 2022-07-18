@@ -8,7 +8,7 @@
 
         <variable
             name="tv"
-            type="com.onirutla.movflex.data.source.local.entities.FavoriteEntity" />
+            type="com.onirutla.movflex.source.local.entities.FavoriteEntity" />
 
         <variable
             name="format"

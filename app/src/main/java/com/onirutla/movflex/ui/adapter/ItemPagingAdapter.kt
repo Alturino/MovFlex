@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.onirutla.movflex.data.source.remote.response.ItemDto
 import com.onirutla.movflex.databinding.ItemPagingContainerBinding
-import com.onirutla.movflex.util.Constants.ItemComparator
+import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.util.ItemComparator
 
 class ItemPagingAdapter(
     private inline val onClickListener: (view: View, itemId: Int) -> Unit
-) : PagingDataAdapter<ItemDto, PagingViewHolder>(ItemComparator) {
+) : PagingDataAdapter<Content, PagingViewHolder>(ItemComparator) {
 
     override fun onBindViewHolder(holder: PagingViewHolder, position: Int) {
-        val item = getItem(position) ?: ItemDto()
+        val item = getItem(position) ?: Content()
         holder.bind(item, onClickListener)
     }
 

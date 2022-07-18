@@ -3,7 +3,7 @@ package com.onirutla.movflex.ui.favorite
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.onirutla.movflex.data.repository.favorite.FavoriteRepository
+import com.onirutla.movflex.domain.favorite.FavoriteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
