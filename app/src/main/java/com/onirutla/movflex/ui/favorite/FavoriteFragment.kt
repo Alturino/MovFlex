@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.onirutla.movflex.databinding.FragmentFavoriteBinding
-import com.onirutla.movflex.ui.adapter.FavoritePagingAdapter
+import com.onirutla.movflex.ui.ContentPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -23,7 +23,11 @@ class FavoriteFragment : Fragment() {
 
     private val viewModel: FavoriteViewModel by viewModels()
 
-    private val favoriteAdapter by lazy { FavoritePagingAdapter() }
+    private val favoriteAdapter by lazy {
+        ContentPagingAdapter { view, itemId ->
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
