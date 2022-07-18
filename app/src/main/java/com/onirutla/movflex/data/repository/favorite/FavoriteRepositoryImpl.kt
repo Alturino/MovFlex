@@ -9,7 +9,6 @@ import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.filterNotNull
 import javax.inject.Inject
 
 @ViewModelScoped
@@ -23,9 +22,9 @@ class FavoriteRepositoryImpl @Inject constructor(
     ).flow
 
     override suspend fun setFavorite(movie: FavoriteEntity) {
-        favoriteDao.isFavorite(movie.id).filterNotNull().collect {
-            if (it.isFavorite)
-                favoriteDao.insertFavorite(it.copy(isFavorite = false))
+        favoriteDao.isFavorite(movie.id).collect {
+            if (it == null || movie.isFavorite)
+                favoriteDao.insertFavorite(movie.copy(isFavorite = false))
             else
                 favoriteDao.insertFavorite(it.copy(isFavorite = true))
         }
