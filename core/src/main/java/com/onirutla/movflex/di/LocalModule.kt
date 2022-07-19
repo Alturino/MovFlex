@@ -2,8 +2,8 @@ package com.onirutla.movflex.di
 
 import android.content.Context
 import androidx.room.Room
-import com.onirutla.movflex.source.local.dao.FavoriteDao
-import com.onirutla.movflex.source.local.db.MovFlexDatabase
+import com.onirutla.movflex.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.data.source.local.db.MovFlexDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

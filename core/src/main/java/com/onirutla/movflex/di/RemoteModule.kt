@@ -1,8 +1,8 @@
 package com.onirutla.movflex.di
 
 import com.onirutla.movflex.core.BuildConfig
-import com.onirutla.movflex.source.remote.service.MovieApiService
-import com.onirutla.movflex.source.remote.service.TvApiService
+import com.onirutla.movflex.data.source.remote.service.MovieApiService
+import com.onirutla.movflex.data.source.remote.service.TvApiService
 import com.onirutla.movflex.util.Constants.API_TOKEN
 import com.onirutla.movflex.util.Constants.BASE_URL
 import com.squareup.moshi.Moshi

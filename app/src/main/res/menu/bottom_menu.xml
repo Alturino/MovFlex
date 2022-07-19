@@ -15,7 +15,7 @@
         android:title="@string/tv" />
 
     <item
-        android:id="@+id/favoriteFragment"
+        android:id="@+id/navigationFavorite"
         android:enabled="true"
         android:icon="@drawable/ic_favorite_24"
         android:orderInCategory="3"

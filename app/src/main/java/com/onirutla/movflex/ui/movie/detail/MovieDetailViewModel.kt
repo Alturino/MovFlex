@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.onirutla.movflex.favorite.FavoriteRepository
-import com.onirutla.movflex.repository.movie.MovieRepository
+import com.onirutla.movflex.data.repository.favorite.FavoriteRepository
+import com.onirutla.movflex.data.repository.movie.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
