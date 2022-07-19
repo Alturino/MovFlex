@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.model
+package com.onirutla.movflex.model
 
 enum class TvType(val value: String) {
     TV_POPULAR("Popular"),

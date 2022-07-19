@@ -1,9 +1,9 @@
-package com.onirutla.movflex.domain.repository.movie
+package com.onirutla.movflex.repository.movie
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
 import com.onirutla.movflex.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.model.Content
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {

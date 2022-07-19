@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.databinding.ItemContainerBinding
-import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.model.Content
 import com.onirutla.movflex.util.ItemComparator
 
 class ItemAdapter(

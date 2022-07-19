@@ -1,8 +1,8 @@
-package com.onirutla.movflex.domain.util
+package com.onirutla.movflex.util
 
 import com.onirutla.movflex.source.remote.response.movie.MovieResponse
 import com.onirutla.movflex.source.remote.response.tv.TvResponse
-import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.model.Content
 
 fun TvResponse.toContent(): Content = Content(
     id = id,
