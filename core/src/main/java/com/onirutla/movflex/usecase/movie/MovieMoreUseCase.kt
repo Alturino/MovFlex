@@ -1,10 +1,10 @@
-package com.onirutla.movflex.domain.usecase.movie
+package com.onirutla.movflex.usecase.movie
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingData
-import com.onirutla.movflex.domain.repository.movie.MovieRepository
-import com.onirutla.movflex.domain.model.MovieType
-import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.repository.movie.MovieRepository
+import com.onirutla.movflex.model.MovieType
+import com.onirutla.movflex.model.Content
 import javax.inject.Inject
 
 class MovieMoreUseCase @Inject constructor(

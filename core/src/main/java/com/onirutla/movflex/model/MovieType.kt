@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.model
+package com.onirutla.movflex.model
 
 enum class MovieType(val value: String) {
     MOVIE_UPCOMING("Upcoming"),

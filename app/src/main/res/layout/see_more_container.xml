@@ -7,7 +7,7 @@
 
         <variable
             name="seeMore"
-            type="com.onirutla.movflex.domain.model.SeeMore" />
+            type="com.onirutla.movflex.model.SeeMore" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

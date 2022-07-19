@@ -15,4 +15,3 @@ dependencyResolutionManagement {
 rootProject.name = "MovFlex"
 include ':app'
 include ':core'
-include ':domain'

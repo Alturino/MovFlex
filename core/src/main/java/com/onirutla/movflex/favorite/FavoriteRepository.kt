@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.favorite
+package com.onirutla.movflex.favorite
 
 import androidx.paging.PagingData
 import com.onirutla.movflex.source.local.entities.FavoriteEntity

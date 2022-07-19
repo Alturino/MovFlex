@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.repository.tv
+package com.onirutla.movflex.repository.tv
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,9 +12,9 @@ import com.onirutla.movflex.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.source.remote.response.tv.toEntity
 import com.onirutla.movflex.source.remote.tv.TvRemoteDataSource
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
-import com.onirutla.movflex.domain.model.Content
-import com.onirutla.movflex.domain.util.mapper
-import com.onirutla.movflex.domain.util.toContent
+import com.onirutla.movflex.model.Content
+import com.onirutla.movflex.util.mapper
+import com.onirutla.movflex.util.toContent
 import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch

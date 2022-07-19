@@ -1,8 +1,8 @@
-package com.onirutla.movflex.domain.usecase.tv
+package com.onirutla.movflex.usecase.tv
 
-import com.onirutla.movflex.domain.model.Content
-import com.onirutla.movflex.domain.model.SeeMore
-import com.onirutla.movflex.domain.repository.tv.TvRepository
+import com.onirutla.movflex.model.Content
+import com.onirutla.movflex.model.SeeMore
+import com.onirutla.movflex.repository.tv.TvRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
 import javax.inject.Inject

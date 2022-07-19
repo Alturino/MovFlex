@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentTvBinding
-import com.onirutla.movflex.domain.model.TvType
+import com.onirutla.movflex.model.TvType
 import com.onirutla.movflex.ui.adapter.SeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 

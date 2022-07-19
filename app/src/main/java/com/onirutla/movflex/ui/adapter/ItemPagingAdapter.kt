@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.onirutla.movflex.databinding.ItemPagingContainerBinding
-import com.onirutla.movflex.domain.model.Content
+import com.onirutla.movflex.model.Content
 import com.onirutla.movflex.util.ItemComparator
 
 class ItemPagingAdapter(

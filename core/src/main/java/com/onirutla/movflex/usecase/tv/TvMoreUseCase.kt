@@ -1,7 +1,7 @@
-package com.onirutla.movflex.domain.usecase.tv
+package com.onirutla.movflex.usecase.tv
 
-import com.onirutla.movflex.domain.repository.tv.TvRepository
-import com.onirutla.movflex.domain.model.TvType
+import com.onirutla.movflex.repository.tv.TvRepository
+import com.onirutla.movflex.model.TvType
 import javax.inject.Inject
 
 class TvMoreUseCase @Inject constructor(

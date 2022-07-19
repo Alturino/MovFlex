@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.favorite
+package com.onirutla.movflex.favorite
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig

@@ -1,4 +1,4 @@
-package com.onirutla.movflex.domain.model
+package com.onirutla.movflex.model
 
 data class Content(
     val id: Int = 0,

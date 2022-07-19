@@ -7,9 +7,9 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.onirutla.movflex.domain.model.Content
-import com.onirutla.movflex.domain.model.TvType
-import com.onirutla.movflex.domain.usecase.tv.TvMoreUseCase
+import com.onirutla.movflex.model.Content
+import com.onirutla.movflex.model.TvType
+import com.onirutla.movflex.usecase.tv.TvMoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

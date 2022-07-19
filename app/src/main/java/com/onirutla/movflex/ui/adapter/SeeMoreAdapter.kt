@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.databinding.SeeMoreContainerBinding
-import com.onirutla.movflex.domain.model.Content
-import com.onirutla.movflex.domain.model.SeeMore
+import com.onirutla.movflex.model.Content
+import com.onirutla.movflex.model.SeeMore
 
 class SeeMoreAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,
