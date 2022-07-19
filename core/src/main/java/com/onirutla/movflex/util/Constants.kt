@@ -2,7 +2,8 @@ package com.onirutla.movflex.util
 
 import androidx.recyclerview.widget.DiffUtil
 import com.onirutla.movflex.core.BuildConfig
-import com.onirutla.movflex.source.local.entities.FavoriteEntity
+import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
+import com.onirutla.movflex.domain.model.Content
 
 object Constants {
     const val TMDB_STARTING_PAGE_INDEX = 1
@@ -20,6 +21,18 @@ object Constants {
         override fun areContentsTheSame(
             oldItem: FavoriteEntity,
             newItem: FavoriteEntity
+        ): Boolean = oldItem == newItem
+    }
+
+    object ItemComparator : DiffUtil.ItemCallback<Content>() {
+        override fun areItemsTheSame(
+            oldItem: Content,
+            newItem: Content
+        ): Boolean = oldItem.id == newItem.id
+
+        override fun areContentsTheSame(
+            oldItem: Content,
+            newItem: Content
         ): Boolean = oldItem == newItem
     }
 }
