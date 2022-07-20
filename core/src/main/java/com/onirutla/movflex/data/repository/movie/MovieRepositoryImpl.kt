@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.onirutla.movflex.data.ItemType
 import com.onirutla.movflex.data.source.PagingDataSource
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.remote.movie.MovieRemoteDataSource
@@ -15,7 +14,6 @@ import com.onirutla.movflex.util.toContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -98,15 +96,15 @@ class MovieRepositoryImpl @Inject constructor(
         emit(emptyList())
     }
 
-    override fun getMovieDetail(id: Int): Flow<Content> = favoriteDao.isFavorite(id).map {
-        if (it != null)
-            it.toContent()
+    override fun getMovieDetail(id: Int): Flow<Content> = flow {
+        val isInDb = favoriteDao.isFavorite(id)
+        if (isInDb != null)
+            emit(isInDb.toContent())
         else {
             val response = remoteDataSource.getMovieDetail(id)
-            response.toContent()
+            emit(response.toContent())
         }
-    }.catch {
-        Log.d(TAG, "$it")
-        emit(Content(type = ItemType.Movie))
     }
+
+
 }

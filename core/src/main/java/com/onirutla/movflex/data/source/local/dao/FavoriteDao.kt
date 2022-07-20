@@ -7,7 +7,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
 import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FavoriteDao {
@@ -22,5 +21,5 @@ interface FavoriteDao {
     fun getFavorite(): PagingSource<Int, FavoriteEntity>
 
     @Query("SELECT * FROM favorite WHERE id = :id")
-    fun isFavorite(id: Int): Flow<FavoriteEntity?>
+    suspend fun isFavorite(id: Int): FavoriteEntity?
 }

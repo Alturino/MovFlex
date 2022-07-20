@@ -10,7 +10,6 @@ import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.util.toContent
 import com.onirutla.movflex.util.toEntity
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -30,11 +29,10 @@ class FavoriteRepositoryImpl @Inject constructor(
     }
 
     override suspend fun setFavorite(content: Content) {
-        favoriteDao.isFavorite(content.id).collect {
-            if (it == null || content.isFavorite)
-                favoriteDao.insertFavorite(content.copy(isFavorite = false).toEntity())
-            else
-                favoriteDao.insertFavorite(it.copy(isFavorite = true))
-        }
+        val isInDb = favoriteDao.isFavorite(content.id)
+        if (isInDb != null && isInDb.isFavorite)
+            favoriteDao.insertFavorite(isInDb.copy(isFavorite = false))
+        else
+            favoriteDao.insertFavorite(content.toEntity().copy(isFavorite = true))
     }
 }
