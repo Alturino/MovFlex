@@ -6,9 +6,12 @@
 
     <include app:graph="@navigation/navigation_movie" />
     <include app:graph="@navigation/navigation_tv" />
+
+    <!--graphResName Must be the same as navigation file if the name is navigation_favorite.xml then it must be navigation_favorite-->
+    <!--Must be the same as module name in app/build.gradle if the module name is :favorite then moduleName is favorite-->
     <include-dynamic
         android:id="@+id/navigationFavorite"
-        app:graphResName="navigationFavorite"
-        app:moduleName="Favorite" />
+        app:graphResName="navigation_favorite"
+        app:moduleName="favorite" />
 
 </navigation>
