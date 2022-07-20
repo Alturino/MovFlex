@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
-import com.onirutla.movflex.data.repository.favorite.FavoriteRepository
 import com.onirutla.movflex.data.repository.tv.TvRepository
+import com.onirutla.movflex.domain.usecase.favorite.FavoriteUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TvDetailViewModel @Inject constructor(
     private val tvRepository: TvRepository,
-    private val favoriteRepository: FavoriteRepository
+    private val favoriteUseCase: FavoriteUseCaseImpl
 ) : ViewModel() {
 
     private val _tvId = MutableLiveData<Int>()
@@ -28,7 +28,7 @@ class TvDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _tvId.value?.let { id ->
                 tvRepository.getTvDetail(id).collect {
-                    favoriteRepository.setFavorite(it)
+                    favoriteUseCase.setFavorite(it)
                 }
             }
         }

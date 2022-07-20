@@ -5,7 +5,9 @@ import com.onirutla.movflex.data.source.remote.response.tv.TvResponse
 import com.onirutla.movflex.data.source.remote.response.tv.TvResponseDetail
 import com.onirutla.movflex.data.source.remote.service.TvApiService
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class TvRemoteDataSourceImpl @Inject constructor(
     private val tvApiService: TvApiService
 ) : TvRemoteDataSource {

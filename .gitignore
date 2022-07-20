@@ -16,3 +16,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app.apks
+/bundletool-all-1.11.0.jar

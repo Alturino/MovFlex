@@ -5,7 +5,9 @@ import com.onirutla.movflex.data.source.remote.response.movie.MovieResponse
 import com.onirutla.movflex.data.source.remote.response.movie.MovieResponseDetail
 import com.onirutla.movflex.data.source.remote.service.MovieApiService
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class MovieRemoteDataSourceImpl @Inject constructor(
     private val movieApiService: MovieApiService
 ) : MovieRemoteDataSource {

@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/navigationMovie"
+        android:id="@id/navigationMovie"
         android:enabled="true"
         android:icon="@drawable/ic_movie_24"
         android:orderInCategory="1"
         android:title="@string/movie" />
 
     <item
-        android:id="@+id/navigationTv"
+        android:id="@id/navigationTv"
         android:enabled="true"
         android:icon="@drawable/ic_tv_24"
         android:orderInCategory="2"
         android:title="@string/tv" />
 
     <item
-        android:id="@+id/navigationFavorite"
+        android:id="@id/navigationFavorite"
         android:enabled="true"
         android:icon="@drawable/ic_favorite_24"
         android:orderInCategory="3"

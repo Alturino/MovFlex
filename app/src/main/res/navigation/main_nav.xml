@@ -6,6 +6,9 @@
 
     <include app:graph="@navigation/navigation_movie" />
     <include app:graph="@navigation/navigation_tv" />
-    <include app:graph="@navigation/navigation_favorite" />
+    <include-dynamic
+        android:id="@+id/navigationFavorite"
+        app:graphResName="navigationFavorite"
+        app:moduleName="Favorite" />
 
 </navigation>

@@ -9,13 +9,13 @@ import com.onirutla.movflex.domain.model.Content
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.util.toContent
 import com.onirutla.movflex.util.toEntity
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@ViewModelScoped
+@Singleton
 class FavoriteRepositoryImpl @Inject constructor(
     private val favoriteDao: FavoriteDao
 ) : FavoriteRepository {

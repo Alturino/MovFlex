@@ -45,6 +45,8 @@ android {
     kotlinOptions {
         jvmTarget = '11'
     }
+
+    dynamicFeatures = [":favorite"]
 }
 
 dependencies {

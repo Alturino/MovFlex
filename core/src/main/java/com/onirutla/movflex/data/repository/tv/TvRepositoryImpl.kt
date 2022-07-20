@@ -11,14 +11,14 @@ import com.onirutla.movflex.domain.model.Content
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.util.mapper
 import com.onirutla.movflex.util.toContent
-import dagger.hilt.android.scopes.ViewModelScoped
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import javax.inject.Singleton
 
-@ViewModelScoped
+@Singleton
 class TvRepositoryImpl @Inject constructor(
     private val remoteDataSource: TvRemoteDataSource,
     private val favoriteDao: FavoriteDao

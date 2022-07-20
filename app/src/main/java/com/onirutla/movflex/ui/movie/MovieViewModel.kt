@@ -13,7 +13,7 @@ class MovieViewModel @Inject constructor(
     movieUseCase: MovieUseCase
 ) : ViewModel() {
 
-    val movie = movieUseCase.invoke().stateIn(
+    val movie = movieUseCase.movies.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5000),
         emptyList()
