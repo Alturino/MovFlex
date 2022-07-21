@@ -1,4 +1,4 @@
-package com.onirutla.movflex.data.repository.movie
+package com.onirutla.movflex.domain.repository
 
 import androidx.paging.PagingData
 import com.onirutla.movflex.domain.model.Content

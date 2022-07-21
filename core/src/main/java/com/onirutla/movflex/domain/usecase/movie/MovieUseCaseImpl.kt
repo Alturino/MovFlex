@@ -1,6 +1,6 @@
 package com.onirutla.movflex.domain.usecase.movie
 
-import com.onirutla.movflex.data.repository.movie.MovieRepository
+import com.onirutla.movflex.domain.repository.MovieRepository
 import com.onirutla.movflex.domain.model.Content
 import com.onirutla.movflex.domain.model.SeeMore
 import kotlinx.coroutines.flow.Flow

@@ -7,6 +7,7 @@ import androidx.paging.PagingData
 import com.onirutla.movflex.data.source.PagingDataSource
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.data.source.remote.movie.MovieRemoteDataSource
+import com.onirutla.movflex.domain.repository.MovieRepository
 import com.onirutla.movflex.domain.model.Content
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.util.mapper

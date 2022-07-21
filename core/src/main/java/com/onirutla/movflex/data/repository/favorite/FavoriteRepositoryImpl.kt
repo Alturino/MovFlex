@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.onirutla.movflex.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.domain.repository.FavoriteRepository
 import com.onirutla.movflex.domain.model.Content
 import com.onirutla.movflex.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.util.toContent

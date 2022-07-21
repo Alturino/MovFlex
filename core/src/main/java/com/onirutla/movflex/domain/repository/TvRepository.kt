@@ -1,7 +1,6 @@
-package com.onirutla.movflex.data.repository.tv
+package com.onirutla.movflex.domain.repository
 
 import androidx.paging.PagingData
-import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.domain.model.Content
 import kotlinx.coroutines.flow.Flow
 
