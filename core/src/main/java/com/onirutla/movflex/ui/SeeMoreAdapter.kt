@@ -14,9 +14,7 @@ import com.onirutla.movflex.domain.model.SeeMore
 class SeeMoreAdapter(
     private inline val itemClickListener: (view: View, itemId: Int) -> Unit,
     private inline val seeMoreClickListener: (view: View, category: String) -> Unit
-) : ListAdapter<SeeMore<List<Content>>, SeeMoreAdapter.ViewHolder>(
-    Comparator
-) {
+) : ListAdapter<SeeMore<List<Content>>, SeeMoreAdapter.ViewHolder>(Comparator) {
 
     private val rvViewPool = RecyclerView.RecycledViewPool()
 
