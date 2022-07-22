@@ -12,10 +12,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.onirutla.movflex.databinding.FragmentMovieBinding
-import com.onirutla.movflex.ui.SeeMoreAdapter
 import com.onirutla.movflex.domain.model.type.MovieType
+import com.onirutla.movflex.ui.SeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -23,29 +22,7 @@ class MovieFragment : Fragment() {
 
     private val viewModel: MovieViewModel by viewModels()
 
-    private val seeMoreAdapter: SeeMoreAdapter by lazy {
-        SeeMoreAdapter(itemClickListener = { view, itemId ->
-            view.findNavController()
-                .navigate(
-                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
-                )
-        }) { view, category ->
-            when (category) {
-                MovieType.MOVIE_NOW_PLAYING.value -> {
-                    navigator(view, MovieType.MOVIE_NOW_PLAYING)
-                }
-                MovieType.MOVIE_POPULAR.value -> {
-                    navigator(view, MovieType.MOVIE_POPULAR)
-                }
-                MovieType.MOVIE_TOP_RATED.value -> {
-                    navigator(view, MovieType.MOVIE_TOP_RATED)
-                }
-                MovieType.MOVIE_UPCOMING.value -> {
-                    navigator(view, MovieType.MOVIE_UPCOMING)
-                }
-            }
-        }
-    }
+    private var seeMoreAdapter: SeeMoreAdapter? = null
 
     private fun navigator(view: View, movieType: MovieType) {
         view.findNavController()
@@ -66,6 +43,28 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        seeMoreAdapter = SeeMoreAdapter(itemClickListener = { itemView, itemId ->
+            itemView.findNavController()
+                .navigate(
+                    MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
+                )
+        }) { moreView, category ->
+            when (category) {
+                MovieType.MOVIE_NOW_PLAYING.value -> {
+                    navigator(moreView, MovieType.MOVIE_NOW_PLAYING)
+                }
+                MovieType.MOVIE_POPULAR.value -> {
+                    navigator(moreView, MovieType.MOVIE_POPULAR)
+                }
+                MovieType.MOVIE_TOP_RATED.value -> {
+                    navigator(moreView, MovieType.MOVIE_TOP_RATED)
+                }
+                MovieType.MOVIE_UPCOMING.value -> {
+                    navigator(moreView, MovieType.MOVIE_UPCOMING)
+                }
+            }
+        }
+
         observeData()
 
         binding.movieHomeList.apply {
@@ -79,7 +78,7 @@ class MovieFragment : Fragment() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.movie.collect {
-                    seeMoreAdapter.submitList(it.toMutableList())
+                    seeMoreAdapter?.submitList(it.toMutableList())
                 }
             }
         }
@@ -88,5 +87,6 @@ class MovieFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        seeMoreAdapter = null
     }
 }
