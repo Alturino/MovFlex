@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.domain.repository.MovieRepository
 import com.onirutla.movflex.domain.usecase.favorite.FavoriteUseCaseImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
