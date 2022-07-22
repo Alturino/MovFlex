@@ -1,7 +1,5 @@
 package com.onirutla.movflex.data.source.remote.response.tv
 
-import com.onirutla.movflex.data.source.local.entities.FavoriteEntity
-import com.onirutla.movflex.data.ItemType
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -19,15 +17,4 @@ data class TvResponseDetail(
     val posterPath: String? = "",
     @Json(name = "vote_average")
     val voteAverage: Double? = 0.0,
-)
-
-fun TvResponseDetail.toEntity(): FavoriteEntity = FavoriteEntity(
-    id = id ?: 0,
-    backdropPath = backdropPath.orEmpty(),
-    title = name.orEmpty(),
-    description = overview.orEmpty(),
-    posterPath = posterPath.orEmpty(),
-    voteAverage = voteAverage ?: 0.0,
-    type = ItemType.Tv,
-    isFavorite = false
 )
