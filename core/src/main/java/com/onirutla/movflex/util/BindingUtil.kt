@@ -7,5 +7,5 @@ import com.onirutla.movflex.util.Constants.BASE_IMAGE_PATH
 
 @BindingAdapter("load_image")
 fun loadImage(imageView: ImageView, any: Any?) {
-    any?.let { Glide.with(imageView).load("$BASE_IMAGE_PATH$any").into(imageView) }
+    any?.let { Glide.with(imageView).load("$BASE_IMAGE_PATH$any").into(imageView).clearOnDetach() }
 }
