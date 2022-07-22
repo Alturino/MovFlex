@@ -21,20 +21,7 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private val seeMoreAdapter by lazy {
-        SeeMoreAdapter(itemClickListener = { view, itemId ->
-            view.findNavController().navigate(
-                TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
-            )
-        }) { view, category ->
-            when (category) {
-                TvType.TV_POPULAR.value -> navigator(view, TvType.TV_POPULAR)
-                TvType.TV_TOP_RATED.value -> navigator(view, TvType.TV_TOP_RATED)
-                TvType.TV_ON_THE_AIR.value -> navigator(view, TvType.TV_ON_THE_AIR)
-                TvType.TV_AIRING_TODAY.value -> navigator(view, TvType.TV_AIRING_TODAY)
-            }
-        }
-    }
+    private var seeMoreAdapter: SeeMoreAdapter? = null
 
     private fun navigator(view: View, tvType: TvType) {
         view.findNavController().navigate(
@@ -53,8 +40,21 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        seeMoreAdapter = SeeMoreAdapter(itemClickListener = { itemView, itemId ->
+            itemView.findNavController().navigate(
+                TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
+            )
+        }) { seeMoreView, category ->
+            when (category) {
+                TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
+                TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
+                TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
+                TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
+            }
+        }
+
         viewModel.tvHome.observe(viewLifecycleOwner) {
-            seeMoreAdapter.submitList(it)
+            seeMoreAdapter?.submitList(it)
         }
 
         binding.tvHomeList.apply {
@@ -67,5 +67,6 @@ class TvFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        seeMoreAdapter = null
     }
 }
