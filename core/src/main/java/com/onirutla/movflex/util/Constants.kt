@@ -10,6 +10,7 @@ object Constants {
     const val API_TOKEN = BuildConfig.API_TOKEN
     const val BASE_URL = BuildConfig.BASE_URL
     const val BASE_IMAGE_PATH = BuildConfig.BASE_IMAGE_PATH
+    const val DB_PASSPHRASE = BuildConfig.DB_PASSPRHASE
 
     object ItemComparator : DiffUtil.ItemCallback<Content>() {
         override fun areItemsTheSame(
