@@ -1,7 +1,9 @@
 package com.onirutla.movflex.data.source.remote.response.detail
 
 import com.squareup.moshi.Json
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class PageResponse<T>(
     @Json(name = "page")
     val page: Int = 0,
