@@ -28,7 +28,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: setup local.properties
+      - name: setup secrets.properties
         env:
           API_TOKEN: ${{secrets.API_TOKEN}}
           BASE_URL: ${{secrets.BASE_URL}}
@@ -39,14 +39,14 @@ jobs:
           CERTIFICATE_1: ${{secrets.CERTIFICATE_1}}
           CERTIFICATE_2: ${{secrets.CERTIFICATE_2}}
         run:
-          echo API_TOKEN="$API_TOKEN" > ./local.properties
-          echo BASE_URL="$BASE_URL" > ./local.properties
-          echo HOST_NAME="$HOST_NAME" > ./local.properties
-          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./local.properties
-          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./local.properties
-          echo CERTIFICATE_0="$CERTIFICATE_0" > ./local.properties
-          echo CERTIFICATE_1="$CERTIFICATE_1" > ./local.properties
-          echo CERTIFICATE_2="$CERTIFICATE_2" > ./local.properties
+          echo API_TOKEN="$API_TOKEN" > ./secrets.properties
+          echo BASE_URL="$BASE_URL" > ./secrets.properties
+          echo HOST_NAME="$HOST_NAME" > ./secrets.properties
+          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./secrets.properties
+          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./secrets.properties
+          echo CERTIFICATE_0="$CERTIFICATE_0" > ./secrets.properties
+          echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
+          echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
 
       - name: Run Test
         run: |
@@ -71,7 +71,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: setup local.properties
+      - name: setup secrets.properties
         env:
           API_TOKEN: ${{secrets.API_TOKEN}}
           BASE_URL: ${{secrets.BASE_URL}}
@@ -82,14 +82,14 @@ jobs:
           CERTIFICATE_1: ${{secrets.CERTIFICATE_1}}
           CERTIFICATE_2: ${{secrets.CERTIFICATE_2}}
         run:
-          echo API_TOKEN="$API_TOKEN" > ./local.properties
-          echo BASE_URL="$BASE_URL" > ./local.properties
-          echo HOST_NAME="$HOST_NAME" > ./local.properties
-          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./local.properties
-          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./local.properties
-          echo CERTIFICATE_0="$CERTIFICATE_0" > ./local.properties
-          echo CERTIFICATE_1="$CERTIFICATE_1" > ./local.properties
-          echo CERTIFICATE_2="$CERTIFICATE_2" > ./local.properties
+          echo API_TOKEN="$API_TOKEN" > ./secrets.properties
+          echo BASE_URL="$BASE_URL" > ./secrets.properties
+          echo HOST_NAME="$HOST_NAME" > ./secrets.properties
+          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./secrets.properties
+          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./secrets.properties
+          echo CERTIFICATE_0="$CERTIFICATE_0" > ./secrets.properties
+          echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
+          echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
 
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
@@ -114,7 +114,7 @@ jobs:
       - name: Make gradlew executable
         run: chmod +x ./gradlew
 
-      - name: setup local.properties
+      - name: setup secrets.properties
         env:
           API_TOKEN: ${{secrets.API_TOKEN}}
           BASE_URL: ${{secrets.BASE_URL}}
@@ -125,14 +125,14 @@ jobs:
           CERTIFICATE_1: ${{secrets.CERTIFICATE_1}}
           CERTIFICATE_2: ${{secrets.CERTIFICATE_2}}
         run:
-          echo API_TOKEN="$API_TOKEN" > ./local.properties
-          echo BASE_URL="$BASE_URL" > ./local.properties
-          echo HOST_NAME="$HOST_NAME" > ./local.properties
-          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./local.properties
-          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./local.properties
-          echo CERTIFICATE_0="$CERTIFICATE_0" > ./local.properties
-          echo CERTIFICATE_1="$CERTIFICATE_1" > ./local.properties
-          echo CERTIFICATE_2="$CERTIFICATE_2" > ./local.properties
+          echo API_TOKEN="$API_TOKEN" > ./secrets.properties
+          echo BASE_URL="$BASE_URL" > ./secrets.properties
+          echo HOST_NAME="$HOST_NAME" > ./secrets.properties
+          echo BASE_IMAGE_PATH="$BASE_IMAGE_PATH" > ./secrets.properties
+          echo DB_PASSPRHASE="$DB_PASSPRHASE" > ./secrets.properties
+          echo CERTIFICATE_0="$CERTIFICATE_0" > ./secrets.properties
+          echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
+          echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
 
       - name: Build APK
         run: ./gradlew build
