@@ -7,6 +7,6 @@
 
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.onirutla.movflex.favorite.FavoriteFragment"
+        android:name="com.onirutla.movflex.FavoriteFragment"
         android:label="fragment_favorite" />
 </navigation>

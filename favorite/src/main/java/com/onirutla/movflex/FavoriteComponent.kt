@@ -1,4 +1,4 @@
-package com.onirutla.movflex.favorite
+package com.onirutla.movflex
 
 import android.content.Context
 import com.onirutla.movflex.di.FavoriteModuleDependencies

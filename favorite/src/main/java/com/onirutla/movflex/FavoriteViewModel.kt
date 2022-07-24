@@ -1,4 +1,4 @@
-package com.onirutla.movflex.favorite
+package com.onirutla.movflex
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
