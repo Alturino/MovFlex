@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottom_nav"
     app:startDestination="@id/navigationMovie">
 
     <include app:graph="@navigation/navigation_movie" />
     <include app:graph="@navigation/navigation_tv" />
 
-    <fragment
-        android:id="@+id/favoriteFragment"
-        android:name="com.onirutla.movflex.ui.favorite.FavoriteFragment"
-        android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+    <!--graphResName Must be the same as navigation file if the name is navigation_favorite.xml then it must be navigation_favorite-->
+    <!--Must be the same as module name in app/build.gradle if the module name is :favorite then moduleName is favorite-->
+    <include-dynamic
+        android:id="@+id/navigationFavorite"
+        app:graphResName="navigation_favorite"
+        app:moduleName="favorite" />
 
 </navigation>
