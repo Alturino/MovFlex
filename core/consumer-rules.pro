@@ -103,11 +103,11 @@
 -dontwarn org.openjsse.net.ssl.OpenJSSE
 
 # -----------------------START CORE-----------------------------------
--keep public enum com.onirutla.movflex.domain.model.type.*
--keep public enum com.onirutla.movflex.data.ItemType
--keep public interface com.onirutla.movflex.data.repository.*
--keep public interface com.onirutla.movflex.domain.repository.*
--keep public interface com.onirutla.movflex.domain.usecase.*
+-keep public enum com.onirutla.movflex.core.domain.model.type.*
+-keep public enum com.onirutla.movflex.core.data.ItemType
+-keep public interface com.onirutla.movflex.core.data.repository.*
+-keep public interface com.onirutla.movflex.core.domain.repository.*
+-keep public interface com.onirutla.movflex.core.domain.usecase.*
 -keep,includedescriptorclasses class net.sqlcipher.** { *; }
 -keep,includedescriptorclasses interface net.sqlcipher.** { *; }
 # -----------------------END CORE-----------------------------------

@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
-import com.onirutla.movflex.domain.usecase.movie.MovieMoreUseCase
-import com.onirutla.movflex.domain.model.type.MovieType
+import com.onirutla.movflex.core.domain.model.type.MovieType
+import com.onirutla.movflex.core.domain.usecase.movie.MovieMoreUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 

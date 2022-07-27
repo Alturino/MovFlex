@@ -1,6 +1,6 @@
 package com.onirutla.movflex.di
 
-import com.onirutla.movflex.domain.usecase.favorite.FavoriteUseCase
+import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCase
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent

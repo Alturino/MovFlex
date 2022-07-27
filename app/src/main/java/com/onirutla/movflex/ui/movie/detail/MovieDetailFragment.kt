@@ -13,7 +13,6 @@ import com.onirutla.movflex.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
-@ExperimentalCoroutinesApi
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 

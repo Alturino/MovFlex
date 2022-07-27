@@ -7,7 +7,7 @@
 
         <variable
             name="content"
-            type="com.onirutla.movflex.domain.model.Content" />
+            type="com.onirutla.movflex.core.domain.model.Content" />
 
     </data>
 
