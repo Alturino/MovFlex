@@ -8,7 +8,7 @@
 
         <variable
             name="tv"
-            type="com.onirutla.movflex.domain.model.Content" />
+            type="com.onirutla.movflex.core.domain.model.Content" />
 
         <variable
             name="format"

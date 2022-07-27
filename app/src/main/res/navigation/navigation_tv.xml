@@ -23,9 +23,12 @@
         android:label="fragment_tv_detail"
         tools:layout="@layout/fragment_tv_detail">
         <argument
-            android:name="tv_id"
+            android:name="tvId"
             android:defaultValue="1"
             app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_tv_detail"
+            app:uri="movflex://main_nav/tv/{tvId}" />
     </fragment>
     <fragment
         android:id="@+id/tvMoreFragment"
@@ -36,8 +39,8 @@
             android:id="@+id/action_tvMoreFragment_to_tvDetailFragment"
             app:destination="@id/tvDetailFragment" />
         <argument
-            android:name="tv_type"
-            app:argType="com.onirutla.movflex.domain.model.type.TvType" />
+            android:name="tvType"
+            app:argType="com.onirutla.movflex.core.domain.model.type.TvType" />
     </fragment>
 
 

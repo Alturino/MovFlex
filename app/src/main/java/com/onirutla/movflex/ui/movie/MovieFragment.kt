@@ -11,9 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onirutla.movflex.core.domain.model.type.MovieType
+import com.onirutla.movflex.core.ui.SeeMoreAdapter
 import com.onirutla.movflex.databinding.FragmentMovieBinding
-import com.onirutla.movflex.domain.model.type.MovieType
-import com.onirutla.movflex.ui.SeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

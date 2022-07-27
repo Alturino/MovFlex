@@ -23,9 +23,13 @@
         android:label="fragment_movie_detail"
         tools:layout="@layout/fragment_movie_detail">
         <argument
-            android:name="movie_id"
+            android:name="movieId"
             android:defaultValue="1"
             app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_movie_detail"
+            app:action="ACTION_VIEW"
+            app:uri="movflex://main_nav/movie/{movieId}" />
     </fragment>
     <fragment
         android:id="@+id/movieMoreFragment"
@@ -34,7 +38,7 @@
         tools:layout="@layout/fragment_movie_more">
         <argument
             android:name="movieType"
-            app:argType="com.onirutla.movflex.domain.model.type.MovieType" />
+            app:argType="com.onirutla.movflex.core.domain.model.type.MovieType" />
         <action
             android:id="@+id/action_movieMoreFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />

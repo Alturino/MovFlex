@@ -1,15 +1,15 @@
 package com.onirutla.movflex.di
 
-import com.onirutla.movflex.domain.usecase.favorite.FavoriteUseCase
-import com.onirutla.movflex.domain.usecase.favorite.FavoriteUseCaseImpl
-import com.onirutla.movflex.domain.usecase.movie.MovieMoreUseCase
-import com.onirutla.movflex.domain.usecase.movie.MovieMoreUseCaseImpl
-import com.onirutla.movflex.domain.usecase.movie.MovieUseCase
-import com.onirutla.movflex.domain.usecase.movie.MovieUseCaseImpl
-import com.onirutla.movflex.domain.usecase.tv.TvMoreUseCase
-import com.onirutla.movflex.domain.usecase.tv.TvMoreUseCaseImpl
-import com.onirutla.movflex.domain.usecase.tv.TvUseCase
-import com.onirutla.movflex.domain.usecase.tv.TvUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCase
+import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.movie.MovieMoreUseCase
+import com.onirutla.movflex.core.domain.usecase.movie.MovieMoreUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.movie.MovieUseCase
+import com.onirutla.movflex.core.domain.usecase.movie.MovieUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.tv.TvMoreUseCase
+import com.onirutla.movflex.core.domain.usecase.tv.TvMoreUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.tv.TvUseCase
+import com.onirutla.movflex.core.domain.usecase.tv.TvUseCaseImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

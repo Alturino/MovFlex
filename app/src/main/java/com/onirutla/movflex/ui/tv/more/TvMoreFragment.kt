@@ -9,8 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.onirutla.movflex.core.ui.ContentPagingAdapter
 import com.onirutla.movflex.databinding.FragmentTvMoreBinding
-import com.onirutla.movflex.ui.ContentPagingAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,9 +24,11 @@ class TvMoreFragment : Fragment() {
     private val args: TvMoreFragmentArgs by navArgs()
 
     private val contentPagingAdapter by lazy {
-        ContentPagingAdapter { view, itemId ->
+        ContentPagingAdapter { view, content ->
             view.findNavController().navigate(
-                TvMoreFragmentDirections.actionTvMoreFragmentToTvDetailFragment(itemId)
+                TvMoreFragmentDirections.actionTvMoreFragmentToTvDetailFragment(
+                    content.id
+                )
             )
         }
     }
