@@ -11,7 +11,6 @@ import androidx.navigation.fragment.navArgs
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.databinding.FragmentMovieDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
