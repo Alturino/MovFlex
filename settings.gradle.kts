@@ -13,6 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "MovFlex"
-include ':app'
-include ':core'
-include ':favorite'
+include(":app", ":core", ":favorite")
