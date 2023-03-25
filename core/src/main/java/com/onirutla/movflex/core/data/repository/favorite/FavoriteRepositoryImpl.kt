@@ -5,6 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.onirutla.movflex.core.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.core.data.source.local.entities.FavoriteEntity
 import com.onirutla.movflex.core.data.source.local.entities.toContent
 import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.model.toEntity
@@ -34,4 +35,10 @@ class FavoriteRepositoryImpl @Inject constructor(
         else
             favoriteDao.insertFavorite(content.toEntity().copy(isFavorite = true))
     }
+
+    override suspend fun isFavorite(id: Int): FavoriteEntity? {
+        return favoriteDao.isFavorite(id)
+    }
+
+
 }

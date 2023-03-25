@@ -5,9 +5,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.onirutla.movflex.core.data.source.PagingDataSource
-import com.onirutla.movflex.core.data.source.local.dao.FavoriteDao
 import com.onirutla.movflex.core.data.source.local.entities.toContent
 import com.onirutla.movflex.core.domain.model.Content
+import com.onirutla.movflex.core.domain.repository.FavoriteRepository
 import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.movie.domain.remote.MovieRemoteDataSource
 import com.onirutla.movflex.movie.domain.repository.MovieRepository
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     private val remoteDataSource: MovieRemoteDataSource,
-    private val favoriteDao: FavoriteDao,
+    private val favoriteRepository: FavoriteRepository,
 ) : MovieRepository {
 
     companion object {
@@ -101,7 +101,7 @@ class MovieRepositoryImpl @Inject constructor(
         }
 
     override fun getMovieDetail(id: Int): Flow<Content> = flow {
-        val isInDb = favoriteDao.isFavorite(id)
+        val isInDb = favoriteRepository.isFavorite(id)
         if (isInDb != null)
             emit(isInDb.toContent())
         else {

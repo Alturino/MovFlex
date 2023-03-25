@@ -70,4 +70,5 @@ dependencies {
     applyShared()
     implementation(project(Modules.core))
     implementation(project(Modules.movie))
+    implementation(project(Modules.tv))
 }

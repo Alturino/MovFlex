@@ -7,6 +7,8 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.onirutla.movflex.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.onirutla.movflex.movie.R as movieR
+import com.onirutla.movflex.tv.R as tvR
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -25,8 +27,8 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-//                R.id.movieDetailFragment -> hideBottomAppbar()
-                R.id.tvDetailFragment -> hideBottomAppbar()
+                movieR.id.movieDetailFragment -> hideBottomAppbar()
+                tvR.id.tvDetailFragment -> hideBottomAppbar()
                 else -> showBottomAppbar()
             }
         }

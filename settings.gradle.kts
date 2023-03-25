@@ -14,3 +14,4 @@ dependencyResolutionManagement {
 }
 rootProject.name = "MovFlex"
 include(":app", ":core", ":favorite", ":movie")
+include(":tv")

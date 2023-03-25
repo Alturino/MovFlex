@@ -22,4 +22,5 @@ fun Content.toEntity() = FavoriteEntity(
     posterPath = posterPath,
     voteAverage = voteAverage,
     isFavorite = isFavorite,
+    type = type,
 )

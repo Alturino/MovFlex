@@ -5,7 +5,6 @@ import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_0
 import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_1
 import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_2
 import com.onirutla.movflex.core.BuildConfig.HOST_NAME
-import com.onirutla.movflex.core.data.source.remote.service.TvApiService
 import com.onirutla.movflex.core.util.Constants.API_TOKEN
 import com.onirutla.movflex.core.util.Constants.BASE_URL
 import com.squareup.moshi.Moshi
@@ -74,8 +73,4 @@ object RemoteModule {
             .build()
     }
 
-    @Singleton
-    @Provides
-    fun provideTvApiService(retrofit: Retrofit): TvApiService =
-        retrofit.create(TvApiService::class.java)
 }

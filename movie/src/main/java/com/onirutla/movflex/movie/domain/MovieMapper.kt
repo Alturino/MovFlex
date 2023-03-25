@@ -1,5 +1,6 @@
 package com.onirutla.movflex.movie.domain
 
+import com.onirutla.movflex.core.data.ItemType
 import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponseDetail
@@ -13,6 +14,7 @@ fun MovieResponse.toContent(): Content =
         description = "",
         posterPath = posterPath.orEmpty(),
         voteAverage = voteAverage ?: 0.0,
+        type = ItemType.Movie,
         isFavorite = false,
     )
 
@@ -24,5 +26,6 @@ fun MovieResponseDetail.toContent(): Content =
         description = overview.orEmpty(),
         posterPath = posterPath.orEmpty(),
         voteAverage = voteAverage ?: 0.0,
+        type = ItemType.Movie,
         isFavorite = false,
     )
