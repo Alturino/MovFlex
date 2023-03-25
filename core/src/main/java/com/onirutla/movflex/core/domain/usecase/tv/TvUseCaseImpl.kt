@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.combine
 import javax.inject.Inject
 
 class TvUseCaseImpl @Inject constructor(
-    tvRepository: TvRepository
+    tvRepository: TvRepository,
 ) : TvUseCase {
 
     private val popular = tvRepository.getTvPopularHome()

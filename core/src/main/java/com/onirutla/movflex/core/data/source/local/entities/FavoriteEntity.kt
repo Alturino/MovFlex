@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.onirutla.movflex.core.data.ItemType
+import com.onirutla.movflex.core.domain.model.Content
+import com.onirutla.movflex.core.domain.model.FavoriteContent
 
 @Entity(tableName = "favorite")
 data class FavoriteEntity(
@@ -23,6 +25,17 @@ data class FavoriteEntity(
     @ColumnInfo(name = "type")
     val type: ItemType = ItemType.Movie,
     @ColumnInfo(name = "is_favorite")
-    val isFavorite: Boolean = false
+    val isFavorite: Boolean = false,
 )
 
+fun FavoriteEntity.toContent(): Content =
+    FavoriteContent(
+        id = id,
+        backdropPath = backdropPath,
+        title = title,
+        description = description,
+        posterPath = posterPath,
+        voteAverage = voteAverage,
+        isFavorite = isFavorite,
+        type = type,
+    )

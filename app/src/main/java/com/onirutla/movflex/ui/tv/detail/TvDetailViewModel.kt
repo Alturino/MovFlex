@@ -6,7 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.core.domain.repository.TvRepository
-import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCaseImpl
+import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TvDetailViewModel @Inject constructor(
     private val tvRepository: TvRepository,
-    private val favoriteUseCase: FavoriteUseCaseImpl
+    private val favoriteUseCase: FavoriteUseCase,
 ) : ViewModel() {
 
     private val _tvId = MutableLiveData<Int>()

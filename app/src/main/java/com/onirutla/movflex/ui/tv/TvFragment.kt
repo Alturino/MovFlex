@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.onirutla.movflex.core.domain.model.type.TvType
 import com.onirutla.movflex.core.ui.SeeMoreAdapter
 import com.onirutla.movflex.databinding.FragmentTvBinding
@@ -30,8 +31,9 @@ class TvFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentTvBinding.inflate(inflater, container, false)
         return binding.root
@@ -40,21 +42,25 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        seeMoreAdapter = SeeMoreAdapter(itemClickListener = { itemView, itemId ->
-            itemView.findNavController().navigate(
-                TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
-            )
-        }) { seeMoreView, category ->
-            when (category) {
-                TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
-                TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
-                TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
-                TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
-            }
-        }
+        seeMoreAdapter = SeeMoreAdapter(
+            itemClickListener = { itemView, itemId ->
+                itemView.findNavController().navigate(
+                    TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
+                )
+            },
+            seeMoreClickListener = { seeMoreView, category ->
+                when (category) {
+                    TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
+                    TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
+                    TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
+                    TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
+                }
+            },
+            rvViewPool = RecyclerView.RecycledViewPool()
+        )
 
         viewModel.tvHome.observe(viewLifecycleOwner) {
-            seeMoreAdapter?.submitList(it)
+            seeMoreAdapter?.submitList(it.toMutableList())
         }
 
         binding.tvHomeList.apply {

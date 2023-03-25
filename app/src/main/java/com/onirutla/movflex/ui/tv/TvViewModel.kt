@@ -12,11 +12,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TvViewModel @Inject constructor(
-    useCase: TvUseCase
+    useCase: TvUseCase,
 ) : ViewModel() {
 
-    val tvHome: LiveData<List<SeeMore<List<Content>>>> =
-        useCase.invoke()
-            .asLiveData(viewModelScope.coroutineContext)
+    val tvHome: LiveData<List<SeeMore<List<Content>>>> = useCase.invoke()
+        .asLiveData(viewModelScope.coroutineContext)
 
 }

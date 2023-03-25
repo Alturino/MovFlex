@@ -2,10 +2,6 @@ package com.onirutla.movflex.di
 
 import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCase
 import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCaseImpl
-import com.onirutla.movflex.core.domain.usecase.movie.MovieMoreUseCase
-import com.onirutla.movflex.core.domain.usecase.movie.MovieMoreUseCaseImpl
-import com.onirutla.movflex.core.domain.usecase.movie.MovieUseCase
-import com.onirutla.movflex.core.domain.usecase.movie.MovieUseCaseImpl
 import com.onirutla.movflex.core.domain.usecase.tv.TvMoreUseCase
 import com.onirutla.movflex.core.domain.usecase.tv.TvMoreUseCaseImpl
 import com.onirutla.movflex.core.domain.usecase.tv.TvUseCase
@@ -18,12 +14,6 @@ import dagger.hilt.components.SingletonComponent
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class UseCaseModule {
-
-    @Binds
-    abstract fun bindMovieMoreUseCase(movieMoreUseCaseImpl: MovieMoreUseCaseImpl): MovieMoreUseCase
-
-    @Binds
-    abstract fun bindMovieUseCase(movieUseCaseImpl: MovieUseCaseImpl): MovieUseCase
 
     @Binds
     abstract fun bindFavoriteUseCase(favoriteUseCaseImpl: FavoriteUseCaseImpl): FavoriteUseCase

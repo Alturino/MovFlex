@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TvMoreViewModel @Inject constructor(
-    private val tvMoreUseCase: TvMoreUseCase
+    private val tvMoreUseCase: TvMoreUseCase,
 ) : ViewModel() {
 
     private val _tvType: MutableLiveData<TvType> = MutableLiveData<TvType>()

@@ -5,7 +5,6 @@ import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_0
 import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_1
 import com.onirutla.movflex.core.BuildConfig.CERTIFICATE_2
 import com.onirutla.movflex.core.BuildConfig.HOST_NAME
-import com.onirutla.movflex.core.data.source.remote.service.MovieApiService
 import com.onirutla.movflex.core.data.source.remote.service.TvApiService
 import com.onirutla.movflex.core.util.Constants.API_TOKEN
 import com.onirutla.movflex.core.util.Constants.BASE_URL
@@ -74,11 +73,6 @@ object RemoteModule {
             .client(okHttpClient)
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideMovieApiService(retrofit: Retrofit): MovieApiService =
-        retrofit.create(MovieApiService::class.java)
 
     @Singleton
     @Provides

@@ -5,7 +5,7 @@ import androidx.paging.PagingData
 import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.model.type.TvType
 
-interface TvMoreUseCase  {
+interface TvMoreUseCase {
 
     operator fun invoke(tvType: TvType): LiveData<PagingData<Content>>
 }

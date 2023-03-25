@@ -9,6 +9,7 @@ class FavoriteViewModel constructor(
     favoriteUseCase: FavoriteUseCase
 ) : ViewModel() {
 
-    val favorite = favoriteUseCase.getFavorite().cachedIn(viewModelScope)
+    val favorite = favoriteUseCase.getFavorite()
+        .cachedIn(viewModelScope)
 
 }

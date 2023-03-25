@@ -52,7 +52,7 @@
             app:layout_constraintTop_toBottomOf="@+id/item_grouping_text"
             tools:itemCount="3"
             tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_container"
+            tools:listitem="@layout/item_content_horizontal"
             tools:orientation="horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

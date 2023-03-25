@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.movieDetailFragment -> hideBottomAppbar()
+//                R.id.movieDetailFragment -> hideBottomAppbar()
                 R.id.tvDetailFragment -> hideBottomAppbar()
                 else -> showBottomAppbar()
             }

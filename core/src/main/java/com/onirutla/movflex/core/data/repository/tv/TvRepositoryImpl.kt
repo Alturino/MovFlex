@@ -4,25 +4,23 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.onirutla.movflex.core.data.ItemType
 import com.onirutla.movflex.core.data.source.PagingDataSource
 import com.onirutla.movflex.core.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.core.data.source.local.entities.toContent
 import com.onirutla.movflex.core.data.source.remote.tv.TvRemoteDataSource
 import com.onirutla.movflex.core.domain.model.Content
+import com.onirutla.movflex.core.domain.model.TvContent
 import com.onirutla.movflex.core.domain.repository.TvRepository
 import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
-import com.onirutla.movflex.core.util.mapper
 import com.onirutla.movflex.core.util.toContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class TvRepositoryImpl @Inject constructor(
     private val remoteDataSource: TvRemoteDataSource,
-    private val favoriteDao: FavoriteDao
+    private val favoriteDao: FavoriteDao,
 ) : TvRepository {
 
     companion object {
@@ -33,13 +31,13 @@ class TvRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getTvPopular(position).mapper { it.toContent() }
+                remoteDataSource.getTvPopular(position).map { it.toContent() }
             }
         },
     ).flow
 
     override fun getTvPopularHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getTvPopular().mapper { it.toContent() }
+        val dto = remoteDataSource.getTvPopular().map { it.toContent() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -50,13 +48,13 @@ class TvRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getTvOnTheAir(position).mapper { it.toContent() }
+                remoteDataSource.getTvOnTheAir(position).map { it.toContent() }
             }
         },
     ).flow
 
     override fun getTvOnTheAirHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getTvOnTheAir().mapper { it.toContent() }
+        val dto = remoteDataSource.getTvOnTheAir().map { it.toContent() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -67,13 +65,13 @@ class TvRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getTvTopRated(position).mapper { it.toContent() }
+                remoteDataSource.getTvTopRated(position).map { it.toContent() }
             }
         }
     ).flow
 
     override fun getTvTopRatedHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getTvTopRated().mapper { it.toContent() }
+        val dto = remoteDataSource.getTvTopRated().map { it.toContent() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -84,13 +82,13 @@ class TvRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getTvAiringToday(position).mapper { it.toContent() }
+                remoteDataSource.getTvAiringToday(position).map { it.toContent() }
             }
         }
     ).flow
 
     override fun getTvAiringTodayHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getTvAiringToday().mapper { it.toContent() }
+        val dto = remoteDataSource.getTvAiringToday().map { it.toContent() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -107,6 +105,6 @@ class TvRepositoryImpl @Inject constructor(
         }
     }.catch {
         Log.d(TAG, "$it")
-        emit(Content(type = ItemType.Movie))
+        emit(TvContent())
     }
 }

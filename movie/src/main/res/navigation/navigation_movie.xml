@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigationMovie"
+    app:startDestination="@id/movieFragment">
+
+    <fragment
+        android:id="@+id/movieFragment"
+        android:name="com.onirutla.movflex.movie.ui.MovieFragment"
+        android:label="fragment_movie"
+        tools:layout="@layout/fragment_movie">
+        <action
+            android:id="@+id/action_movieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_movieFragment_to_movieMoreFragment"
+            app:destination="@id/movieMoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.onirutla.movflex.movie.ui.detail.MovieDetailFragment"
+        android:label="fragment_movie_detail"
+        tools:layout="@layout/fragment_movie_detail">
+        <argument
+            android:name="movieId"
+            android:defaultValue="1"
+            app:argType="integer" />
+        <deepLink
+            android:id="@+id/deep_link_movie_detail"
+            app:action="ACTION_VIEW"
+            app:uri="movflex://main_nav/movie/{movieId}" />
+    </fragment>
+    <fragment
+        android:id="@+id/movieMoreFragment"
+        android:name="com.onirutla.movflex.movie.ui.more.MovieMoreFragment"
+        android:label="fragment_movie_more"
+        tools:layout="@layout/fragment_movie_more">
+        <argument
+            android:name="movieType"
+            app:argType="com.onirutla.movflex.movie.domain.model.MovieType" />
+        <action
+            android:id="@+id/action_movieMoreFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
+
+</navigation>
+
