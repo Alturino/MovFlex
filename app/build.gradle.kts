@@ -69,4 +69,5 @@ android {
 dependencies {
     applyShared()
     implementation(project(Modules.core))
+    implementation(project(Modules.movie))
 }
