@@ -48,6 +48,10 @@ jobs:
           echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
           echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
 
+      - name: setup local.properties
+        run:
+          touch local.properties
+
       - name: Run Test
         run: |
           ./gradlew test --stacktrace
@@ -91,6 +95,10 @@ jobs:
           echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
           echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
 
+      - name: setup local.properties
+        run:
+          touch local.properties
+
       - name: run tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -133,6 +141,10 @@ jobs:
           echo CERTIFICATE_0="$CERTIFICATE_0" > ./secrets.properties
           echo CERTIFICATE_1="$CERTIFICATE_1" > ./secrets.properties
           echo CERTIFICATE_2="$CERTIFICATE_2" > ./secrets.properties
+
+      - name: setup local.properties
+        run:
+          touch local.properties
 
       - name: Build APK
         run: ./gradlew build
