@@ -15,12 +15,12 @@ object Constants {
     object ItemComparator : DiffUtil.ItemCallback<Content>() {
         override fun areItemsTheSame(
             oldItem: Content,
-            newItem: Content
+            newItem: Content,
         ): Boolean = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
             oldItem: Content,
-            newItem: Content
-        ): Boolean = oldItem == newItem
+            newItem: Content,
+        ): Boolean = oldItem.title == newItem.title && oldItem.description == newItem.description
     }
 }
