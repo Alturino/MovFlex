@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
-import com.onirutla.movflex.core.data.ItemType
+import com.onirutla.movflex.core.domain.model.type.ItemType
 import com.onirutla.movflex.core.ui.ItemContentPagingVerticalAdapter
 import com.onirutla.movflex.di.FavoriteModuleDependencies
 import com.onirutla.movflex.favorite.databinding.FragmentFavoriteBinding
@@ -43,7 +43,7 @@ class FavoriteFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
@@ -53,7 +53,7 @@ class FavoriteFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         favoriteAdapter = ItemContentPagingVerticalAdapter { itemView, content ->
-            when (content.type) {
+            when (content.itemType) {
                 ItemType.Movie -> {
                     itemView.findNavController()
                         .navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))

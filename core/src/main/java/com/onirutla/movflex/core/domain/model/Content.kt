@@ -1,26 +1,22 @@
 package com.onirutla.movflex.core.domain.model
 
-import com.onirutla.movflex.core.data.ItemType
-import com.onirutla.movflex.core.data.source.local.entities.FavoriteEntity
+import com.onirutla.movflex.core.domain.model.shared.Genre
+import com.onirutla.movflex.core.domain.model.type.ItemType
 
 interface Content {
-    val id: Int
     val backdropPath: String
-    val title: String
-    val description: String
+    val releaseDate: String
+    val genre: Genre
+    val id: Int
+    val name: String
+    val originCountry: List<String>
+    val originalLanguage: String
+    val originalName: String
+    val overview: String
+    val popularity: Double
     val posterPath: String
-    val type: ItemType
     val voteAverage: Double
+    val voteCount: Int
     val isFavorite: Boolean
+    val itemType: ItemType
 }
-
-fun Content.toEntity() = FavoriteEntity(
-    id = id,
-    backdropPath = backdropPath,
-    title = title,
-    description = description,
-    posterPath = posterPath,
-    voteAverage = voteAverage,
-    isFavorite = isFavorite,
-    type = type,
-)

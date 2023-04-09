@@ -17,9 +17,9 @@ interface FavoriteDao {
     @Delete
     suspend fun deleteFavorite(vararg favoriteEntity: FavoriteEntity)
 
-    @Query("SELECT * FROM favorite WHERE is_favorite = 1")
-    fun getFavorite(): PagingSource<Int, FavoriteEntity>
-
     @Query("SELECT * FROM favorite WHERE id = :id")
     suspend fun isFavorite(id: Int): FavoriteEntity?
+
+    @Query("SELECT * FROM favorite")
+    fun getFavorite(): PagingSource<Int, FavoriteEntity>
 }

@@ -10,7 +10,7 @@ import com.onirutla.movflex.core.util.Constants
 
 class ItemContentHorizontalAdapter(
     private inline val onClickListener: (view: View, item: Content) -> Unit,
-) : ListAdapter<Content, ItemContentHorizontalViewHolder>(Constants.ItemComparator) {
+) : ListAdapter<Content, ItemContentHorizontalViewHolder>(ContentComparator) {
 
     override fun onBindViewHolder(holder: ItemContentHorizontalViewHolder, position: Int) {
         val item = getItem(position)

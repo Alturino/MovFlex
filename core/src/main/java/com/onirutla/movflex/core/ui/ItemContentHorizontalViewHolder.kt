@@ -10,12 +10,12 @@ class ItemContentHorizontalViewHolder(
     private val onClickListener: (view: View, item: Content) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: Content) {
+    fun bind(content: Content) {
         binding.apply {
             root.setOnClickListener {
-                onClickListener(it, item)
+                onClickListener(it, content)
             }
-            content = item
+            item = content
         }
     }
 }

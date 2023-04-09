@@ -11,7 +11,7 @@ interface TvRemoteDataSource {
 
     suspend fun getTvTopRated(page: Int = 1): List<TvResponse>
 
-    suspend fun getTvDetail(tvId: Int): TvResponseDetail
+    suspend fun getTvDetail(tvId: Int): TvResponseDetail?
 
     suspend fun getTvAiringToday(page: Int = 1): List<TvResponse>
 

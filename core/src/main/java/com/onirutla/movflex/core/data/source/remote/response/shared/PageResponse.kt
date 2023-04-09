@@ -1,4 +1,4 @@
-package com.onirutla.movflex.core.data.source.remote.response.detail
+package com.onirutla.movflex.core.data.source.remote.response.shared
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

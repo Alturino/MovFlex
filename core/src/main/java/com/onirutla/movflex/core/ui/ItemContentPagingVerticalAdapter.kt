@@ -6,11 +6,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.onirutla.movflex.core.databinding.ItemContentVerticalBinding
 import com.onirutla.movflex.core.domain.model.Content
-import com.onirutla.movflex.core.util.Constants
 
 class ItemContentPagingVerticalAdapter(
     private inline val onClickListener: (view: View, movieContent: Content) -> Unit,
-) : PagingDataAdapter<Content, ItemContentPagingVerticalViewHolder>(Constants.ItemComparator) {
+) : PagingDataAdapter<Content, ItemContentPagingVerticalViewHolder>(ContentComparator) {
 
     override fun onBindViewHolder(holder: ItemContentPagingVerticalViewHolder, position: Int) {
         val item = getItem(position)

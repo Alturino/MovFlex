@@ -1,8 +1,8 @@
 package com.onirutla.movflex.movie.core.remote
 
 import android.util.Log
+import com.onirutla.movflex.movie.core.remote.model.MovieDetailResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
-import com.onirutla.movflex.movie.core.remote.model.MovieResponseDetail
 import com.onirutla.movflex.movie.domain.remote.MovieRemoteDataSource
 import javax.inject.Inject
 
@@ -58,18 +58,18 @@ class MovieRemoteDataSourceImpl @Inject constructor(
             emptyList()
         }
 
-    override suspend fun getMovieDetail(id: Int): MovieResponseDetail = try {
+    override suspend fun getMovieDetail(id: Int): MovieDetailResponse? = try {
         val response = movieApiService.getMovieDetail(id)
         if (response.isSuccessful) {
             Log.d(TAG, "${response.body()}")
             response.body()!!
         } else {
             Log.d(TAG, "${response.errorBody()}")
-            MovieResponseDetail()
+            null
         }
     } catch (e: Exception) {
         Log.d(TAG, "$e")
-        MovieResponseDetail()
+        null
     }
 
     override suspend fun getMovieUpcoming(page: Int): List<MovieResponse> =

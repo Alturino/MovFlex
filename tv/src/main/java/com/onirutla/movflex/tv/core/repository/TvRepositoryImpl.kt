@@ -9,12 +9,13 @@ import com.onirutla.movflex.core.data.source.local.entities.toContent
 import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.repository.FavoriteRepository
 import com.onirutla.movflex.core.util.Constants
-import com.onirutla.movflex.tv.domain.model.TvContent
 import com.onirutla.movflex.tv.domain.remote.TvRemoteDataSource
 import com.onirutla.movflex.tv.domain.repository.TvRepository
 import com.onirutla.movflex.tv.domain.util.toContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -41,8 +42,7 @@ class TvRepositoryImpl @Inject constructor(
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
-        emit(emptyList())
-    }
+    }.filterNot { it.isEmpty() }
 
     override fun getTvOnTheAirPaging(): Flow<PagingData<Content>> = Pager(
         config = PagingConfig(pageSize = Constants.PAGE_SIZE, enablePlaceholders = false),
@@ -92,19 +92,12 @@ class TvRepositoryImpl @Inject constructor(
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
-        emit(emptyList())
-    }
+    }.filterNot { it.isEmpty() }
 
     override fun getTvDetail(id: Int): Flow<Content> = flow {
         val isInDb = favoriteRepository.isFavorite(id)
-        if (isInDb != null)
-            emit(isInDb.toContent())
-        else {
-            val response = remoteDataSource.getTvDetail(id)
-            emit(response.toContent())
-        }
+        emit(isInDb?.toContent())
     }.catch {
         Log.d(TAG, "$it")
-        emit(TvContent())
-    }
+    }.filterNotNull()
 }

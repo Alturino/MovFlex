@@ -56,18 +56,18 @@ class TvRemoteDataSourceImpl @Inject constructor(
         emptyList()
     }
 
-    override suspend fun getTvDetail(tvId: Int): TvResponseDetail = try {
+    override suspend fun getTvDetail(tvId: Int): TvResponseDetail? = try {
         val response = tvApiService.getTvDetail(tvId)
         if (response.isSuccessful) {
             Log.d(TAG, "${response.body()}")
             response.body()!!
         } else {
             Log.d(TAG, "${response.body()}")
-            TvResponseDetail()
+            null
         }
     } catch (e: Exception) {
         Log.d(TAG, "$e")
-        TvResponseDetail()
+        null
     }
 
 

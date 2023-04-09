@@ -14,6 +14,8 @@ import com.onirutla.movflex.movie.domain.repository.MovieRepository
 import com.onirutla.movflex.movie.domain.toContent
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.filterNot
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -52,53 +54,47 @@ class MovieRepositoryImpl @Inject constructor(
         },
     ).flow
 
-    override fun getMovieNowPlayingHome(): Flow<List<Content>> =
-        flow {
-            val dto = remoteDataSource.getMovieNowPlaying().map { it.toContent() }
-            emit(dto)
-        }.catch {
-            Log.d(TAG, "$it")
-            emit(emptyList())
-        }
+    override fun getMovieNowPlayingHome(): Flow<List<Content>> = flow {
+        val dto = remoteDataSource.getMovieNowPlaying().map { it.toContent() }
+        emit(dto)
+    }.catch {
+        Log.d(TAG, "$it")
+    }.filterNotNull()
 
-    override fun getMovieTopRatedPaging(): Flow<PagingData<Content>> =
-        Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = {
-                PagingDataSource { position ->
-                    remoteDataSource.getMovieTopRated(position).map { it.toContent() }
-                }
+    override fun getMovieTopRatedPaging(): Flow<PagingData<Content>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                remoteDataSource.getMovieTopRated(position).map { it.toContent() }
             }
-        ).flow
-
-    override fun getMovieTopRatedHome(): Flow<List<Content>> =
-        flow {
-            val dto = remoteDataSource.getMovieTopRated().map { it.toContent() }
-            emit(dto)
-        }.catch {
-            Log.d(TAG, "$it")
-            emit(emptyList())
         }
+    ).flow
+
+    override fun getMovieTopRatedHome(): Flow<List<Content>> = flow {
+        val dto = remoteDataSource.getMovieTopRated().map { it.toContent() }
+        emit(dto)
+    }.catch {
+        Log.d(TAG, "$it")
+        emit(emptyList())
+    }
 
 
-    override fun getMovieUpcomingPaging(): Flow<PagingData<Content>> =
-        Pager(
-            config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
-            pagingSourceFactory = {
-                PagingDataSource { position ->
-                    remoteDataSource.getMovieUpcoming(position).map { it.toContent() }
-                }
+    override fun getMovieUpcomingPaging(): Flow<PagingData<Content>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                remoteDataSource.getMovieUpcoming(position).map { it.toContent() }
             }
-        ).flow
-
-    override fun getMovieUpcomingHome(): Flow<List<Content>> =
-        flow {
-            val dto = remoteDataSource.getMovieUpcoming().map { it.toContent() }
-            emit(dto)
-        }.catch {
-            Log.d(TAG, "$it")
-            emit(emptyList())
         }
+    ).flow
+
+    override fun getMovieUpcomingHome(): Flow<List<Content>> = flow {
+        val dto = remoteDataSource.getMovieUpcoming().map { it.toContent() }
+        emit(dto)
+    }.catch {
+        Log.d(TAG, "$it")
+    }.filterNotNull()
+        .filterNot { it.isEmpty() }
 
     override fun getMovieDetail(id: Int): Flow<Content> = flow {
         val isInDb = favoriteRepository.isFavorite(id)
@@ -106,8 +102,8 @@ class MovieRepositoryImpl @Inject constructor(
             emit(isInDb.toContent())
         else {
             val response = remoteDataSource.getMovieDetail(id)
-            emit(response.toContent())
+            emit(response?.toContent())
         }
-    }
+    }.filterNotNull()
 
 }

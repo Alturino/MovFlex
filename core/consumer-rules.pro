@@ -104,7 +104,7 @@
 
 # -----------------------START CORE-----------------------------------
 -keep public enum com.onirutla.movflex.core.domain.model.type.*
--keep public enum com.onirutla.movflex.core.data.ItemType
+-keep public enum com.onirutla.movflex.core.domain.model.type.ItemType
 -keep public interface com.onirutla.movflex.core.data.repository.*
 -keep public interface com.onirutla.movflex.core.domain.repository.*
 -keep public interface com.onirutla.movflex.core.domain.usecase.*

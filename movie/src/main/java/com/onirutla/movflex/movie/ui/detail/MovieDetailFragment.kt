@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.movie.databinding.FragmentMovieDetailBinding
@@ -41,7 +40,7 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.movieDetail.observe(viewLifecycleOwner) {
-            binding.content = it
+            binding.item = it
             fabState = it.isFavorite
             setFabState(it.isFavorite)
         }
@@ -52,9 +51,6 @@ class MovieDetailFragment : Fragment() {
             setFabState(fabState)
         }
 
-        binding.toolbar.setNavigationOnClickListener {
-            it.findNavController().navigateUp()
-        }
     }
 
     private fun setFabState(state: Boolean) {
