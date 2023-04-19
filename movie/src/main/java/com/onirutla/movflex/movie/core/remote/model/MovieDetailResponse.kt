@@ -1,9 +1,9 @@
 package com.onirutla.movflex.movie.core.remote.model
 
-import com.onirutla.movflex.core.data.source.remote.response.shared.GenreResponse
-import com.onirutla.movflex.core.data.source.remote.response.shared.ProductionCompanyResponse
-import com.onirutla.movflex.core.data.source.remote.response.shared.ProductionCountryResponse
-import com.onirutla.movflex.core.data.source.remote.response.shared.SpokenLanguageResponse
+import com.onirutla.movflex.core.data.source.remote.response.GenreResponse
+import com.onirutla.movflex.core.data.source.remote.response.ProductionCompanyResponse
+import com.onirutla.movflex.core.data.source.remote.response.ProductionCountryResponse
+import com.onirutla.movflex.core.data.source.remote.response.SpokenLanguageResponse
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -14,7 +14,7 @@ data class MovieDetailResponse(
     @Json(name = "backdrop_path")
     val backdropPath: String,
     @Json(name = "belongs_to_collection")
-    val belongsToCollection: Any,
+    val belongsToCollection: Any?,
     @Json(name = "budget")
     val budget: Int,
     @Json(name = "genres")

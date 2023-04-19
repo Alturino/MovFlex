@@ -4,9 +4,8 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.onirutla.movflex.core.data.source.PagingDataSource
+import com.onirutla.movflex.core.data.source.remote.PagingDataSource
 import com.onirutla.movflex.core.data.source.local.entities.toContent
-import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.repository.FavoriteRepository
 import com.onirutla.movflex.core.util.Constants
 import com.onirutla.movflex.tv.domain.remote.TvRemoteDataSource

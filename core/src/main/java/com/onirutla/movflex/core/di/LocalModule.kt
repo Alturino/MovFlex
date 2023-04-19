@@ -2,7 +2,8 @@ package com.onirutla.movflex.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.onirutla.movflex.core.data.source.local.dao.FavoriteDao
+import com.onirutla.movflex.core.data.source.local.dao.MovieDao
+import com.onirutla.movflex.core.data.source.local.dao.TvDao
 import com.onirutla.movflex.core.data.source.local.db.MovFlexDatabase
 import com.onirutla.movflex.core.util.Constants.DB_PASSPHRASE
 import dagger.Module
@@ -27,12 +28,16 @@ object LocalModule {
             context,
             MovFlexDatabase::class.java,
             "movflex.db"
-        ).openHelperFactory(factory)
+        ).fallbackToDestructiveMigration()
+            .openHelperFactory(factory)
             .build()
     }
 
     @Singleton
     @Provides
-    fun provideFavoriteDao(db: MovFlexDatabase): FavoriteDao = db.favoriteDao
+    fun provideMovieDao(db: MovFlexDatabase): MovieDao = db.movieDao
 
+    @Singleton
+    @Provides
+    fun provideTvDao(db: MovFlexDatabase): TvDao = db.tvDao
 }

@@ -3,7 +3,6 @@ package com.onirutla.movflex.tv.core.usecase
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.asLiveData
 import androidx.paging.PagingData
-import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.tv.domain.usecase.TvMoreUseCase
 import com.onirutla.movflex.tv.domain.repository.TvRepository
 import com.onirutla.movflex.tv.domain.model.TvType

@@ -5,7 +5,7 @@ object Versions {
     const val recyclerView = "1.2.1"
     const val nav = "2.5.0"
     const val paging = "3.1.1"
-    const val room = "2.4.2"
+    const val room = "2.5.1"
     const val material = "1.6.0"
     const val constraintLayout = "2.1.3"
     const val appcompat = "1.4.1"

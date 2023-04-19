@@ -1,6 +1,5 @@
 package com.onirutla.movflex.movie.core.usecase
 
-import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.movie.domain.repository.MovieRepository
 import com.onirutla.movflex.movie.domain.usecase.MovieUseCase

@@ -1,7 +1,6 @@
 package com.onirutla.movflex.movie.domain.repository
 
 import androidx.paging.PagingData
-import com.onirutla.movflex.core.domain.model.Content
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {

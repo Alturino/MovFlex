@@ -2,7 +2,7 @@ package com.onirutla.movflex.tv.core.remote
 
 import android.util.Log
 import com.onirutla.movflex.tv.core.remote.model.TvResponse
-import com.onirutla.movflex.tv.core.remote.model.TvResponseDetail
+import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
 import com.onirutla.movflex.tv.domain.remote.TvRemoteDataSource
 import javax.inject.Inject
 
@@ -56,7 +56,7 @@ class TvRemoteDataSourceImpl @Inject constructor(
         emptyList()
     }
 
-    override suspend fun getTvDetail(tvId: Int): TvResponseDetail? = try {
+    override suspend fun getTvDetail(tvId: Int): TvDetailResponse? = try {
         val response = tvApiService.getTvDetail(tvId)
         if (response.isSuccessful) {
             Log.d(TAG, "${response.body()}")

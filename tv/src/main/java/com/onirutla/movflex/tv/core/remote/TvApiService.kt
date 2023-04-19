@@ -1,11 +1,11 @@
 package com.onirutla.movflex.tv.core.remote
 
-import com.onirutla.movflex.core.data.source.remote.response.cast.CreditResponse
-import com.onirutla.movflex.core.data.source.remote.response.review.ReviewResponses
-import com.onirutla.movflex.core.data.source.remote.response.shared.PageResponse
-import com.onirutla.movflex.core.domain.model.shared.Season
+import com.onirutla.movflex.core.data.source.remote.response.CreditResponse
+import com.onirutla.movflex.core.data.source.remote.response.ReviewResponses
+import com.onirutla.movflex.core.data.source.remote.response.PageResponse
+import com.onirutla.movflex.core.domain.model.Season
 import com.onirutla.movflex.tv.core.remote.model.TvResponse
-import com.onirutla.movflex.tv.core.remote.model.TvResponseDetail
+import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -23,7 +23,7 @@ interface TvApiService {
     suspend fun getTvTopRated(@Query(value = "page") page: Int = 1): Response<PageResponse<TvResponse>>
 
     @GET(value = "tv/{tvId}")
-    suspend fun getTvDetail(@Path(value = "tvId") tvId: Int): Response<TvResponseDetail>
+    suspend fun getTvDetail(@Path(value = "tvId") tvId: Int): Response<TvDetailResponse>
 
     @GET(value = "tv/airing_today")
     suspend fun getTvAiringToday(@Query(value = "page") page: Int = 1): Response<PageResponse<TvResponse>>

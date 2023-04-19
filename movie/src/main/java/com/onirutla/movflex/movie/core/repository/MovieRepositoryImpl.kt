@@ -4,14 +4,14 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.onirutla.movflex.core.data.source.PagingDataSource
+import com.onirutla.movflex.core.data.source.remote.PagingDataSource
 import com.onirutla.movflex.core.data.source.local.entities.toContent
-import com.onirutla.movflex.core.domain.model.Content
 import com.onirutla.movflex.core.domain.repository.FavoriteRepository
 import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.movie.domain.remote.MovieRemoteDataSource
 import com.onirutla.movflex.movie.domain.repository.MovieRepository
-import com.onirutla.movflex.movie.domain.toContent
+import com.onirutla.movflex.movie.domain.toMovieDetail
+import com.onirutla.movflex.movie.domain.toMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNot
@@ -32,13 +32,13 @@ class MovieRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getMoviePopular(position).map { it.toContent() }
+                remoteDataSource.getMoviePopular(position).map { it.toMovie() }
             }
         },
     ).flow
 
     override fun getMoviePopularHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getMoviePopular().map { it.toContent() }
+        val dto = remoteDataSource.getMoviePopular().map { it.toMovie() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -49,13 +49,13 @@ class MovieRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getMovieNowPlaying(position).map { it.toContent() }
+                remoteDataSource.getMovieNowPlaying(position).map { it.toMovie() }
             }
         },
     ).flow
 
     override fun getMovieNowPlayingHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getMovieNowPlaying().map { it.toContent() }
+        val dto = remoteDataSource.getMovieNowPlaying().map { it.toMovie() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -65,13 +65,13 @@ class MovieRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getMovieTopRated(position).map { it.toContent() }
+                remoteDataSource.getMovieTopRated(position).map { it.toMovie() }
             }
         }
     ).flow
 
     override fun getMovieTopRatedHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getMovieTopRated().map { it.toContent() }
+        val dto = remoteDataSource.getMovieTopRated().map { it.toMovie() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -83,13 +83,13 @@ class MovieRepositoryImpl @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remoteDataSource.getMovieUpcoming(position).map { it.toContent() }
+                remoteDataSource.getMovieUpcoming(position).map { it.toMovie() }
             }
         }
     ).flow
 
     override fun getMovieUpcomingHome(): Flow<List<Content>> = flow {
-        val dto = remoteDataSource.getMovieUpcoming().map { it.toContent() }
+        val dto = remoteDataSource.getMovieUpcoming().map { it.toMovie() }
         emit(dto)
     }.catch {
         Log.d(TAG, "$it")
@@ -102,7 +102,7 @@ class MovieRepositoryImpl @Inject constructor(
             emit(isInDb.toContent())
         else {
             val response = remoteDataSource.getMovieDetail(id)
-            emit(response?.toContent())
+            emit(response?.toMovieDetail())
         }
     }.filterNotNull()
 

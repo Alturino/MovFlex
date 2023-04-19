@@ -1,7 +1,7 @@
 package com.onirutla.movflex.movie.core.remote
 
-import com.onirutla.movflex.core.data.source.remote.response.cast.CastResponse
-import com.onirutla.movflex.core.data.source.remote.response.shared.PageResponse
+import com.onirutla.movflex.core.data.source.remote.response.CastResponse
+import com.onirutla.movflex.core.data.source.remote.response.PageResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieDetailResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
 import retrofit2.Response

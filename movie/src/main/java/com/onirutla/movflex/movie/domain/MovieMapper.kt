@@ -1,17 +1,20 @@
 package com.onirutla.movflex.movie.domain
 
-import com.onirutla.movflex.core.data.source.remote.response.shared.toGenre
-import com.onirutla.movflex.core.domain.model.Content
-import com.onirutla.movflex.core.domain.model.shared.Genre
+import com.onirutla.movflex.core.data.source.remote.response.toGenre
+import com.onirutla.movflex.core.data.source.remote.response.toProductionCompany
+import com.onirutla.movflex.core.data.source.remote.response.toProductionCountry
+import com.onirutla.movflex.core.data.source.remote.response.toSpokenLanguage
+import com.onirutla.movflex.core.domain.model.Genre
 import com.onirutla.movflex.core.domain.model.type.ItemType
 import com.onirutla.movflex.movie.core.remote.model.MovieDetailResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
-import com.onirutla.movflex.movie.domain.model.MovieContent
+import com.onirutla.movflex.movie.domain.model.Movie
+import com.onirutla.movflex.movie.domain.model.MovieDetail
 
-fun MovieResponse.toContent(): Content = MovieContent(
+fun MovieResponse.toMovie(): Movie = Movie(
     backdropPath = backdropPath,
     releaseDate = releaseDate,
-    genre = Genre(genreIds.first(), ""),
+    genres = genreIds.map { Genre(it, "") },
     id = id,
     name = title,
     originCountry = emptyList(),
@@ -22,24 +25,90 @@ fun MovieResponse.toContent(): Content = MovieContent(
     posterPath = posterPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    isFavorite = false,
-    itemType = ItemType.Movie,
+    adult = adult,
+    originalTitle = originalTitle,
+    title = title,
+    video = video,
 )
 
-fun MovieDetailResponse.toContent(): Content = MovieContent(
-    posterPath = posterPath,
-    id = id,
-    genre = genres.first().toGenre(),
-    originalName = originalTitle,
+fun Movie.toFavorite() = FavoriteEntity(
+    backdropPath = backdropPath,
+    releaseDate = releaseDate,
+    genre = genres.first().name,
+    id = id.toLong(),
+    name = name,
     originalLanguage = originalLanguage,
-    originCountry = emptyList(),
+    originalName = name,
     overview = overview,
     popularity = popularity,
+    posterPath = posterPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    isFavorite = false,
-    name = title,
-    releaseDate = releaseDate,
-    backdropPath = backdropPath,
     itemType = ItemType.Movie,
+    adult = adult,
+    video = video,
+    tagline = "",
+    status = "",
+    runtime = 0,
+    revenue = 0,
+    imdbId = "",
+    homepage = "",
+    budget = 0,
+    title = title,
+    originalTitle = originalTitle,
+)
+
+fun MovieDetailResponse.toMovieDetail() = MovieDetail(
+    adult = adult,
+    backdropPath = backdropPath,
+    belongsToCollection = belongsToCollection,
+    budget = budget,
+    genres = genres.toGenre(),
+    homepage = homepage,
+    id = id,
+    imdbId = imdbId,
+    originalLanguage = originalLanguage,
+    originalTitle = originalTitle,
+    overview = overview,
+    popularity = popularity,
+    posterPath = posterPath,
+    productionCompanies = productionCompanies.toProductionCompany(),
+    productionCountries = productionCountries.toProductionCountry(),
+    releaseDate = releaseDate,
+    revenue = revenue,
+    runtime = runtime,
+    spokenLanguages = spokenLanguages.toSpokenLanguage(),
+    status = status,
+    tagline = tagline,
+    title = title,
+    video = video,
+    voteAverage = voteAverage,
+    voteCount = voteCount,
+)
+
+fun MovieDetail.toFavorite() = FavoriteEntity(
+    backdropPath = backdropPath,
+    releaseDate = releaseDate,
+    genre = genres.first().name,
+    id = id.toLong(),
+    name = title,
+    originalLanguage = originalLanguage,
+    originalName = originalTitle,
+    overview = overview,
+    popularity = popularity,
+    posterPath = posterPath,
+    voteAverage = voteAverage,
+    voteCount = voteCount,
+    itemType = ItemType.Movie,
+    adult = adult,
+    budget = budget,
+    homepage = homepage,
+    imdbId = imdbId,
+    originalTitle = originalTitle,
+    revenue = revenue,
+    runtime = runtime,
+    status = status,
+    tagline = tagline,
+    title = title,
+    video = video
 )

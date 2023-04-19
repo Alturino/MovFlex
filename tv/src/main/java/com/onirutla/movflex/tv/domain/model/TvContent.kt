@@ -1,14 +1,17 @@
 package com.onirutla.movflex.tv.domain.model
 
-import com.onirutla.movflex.core.domain.model.Content
-import com.onirutla.movflex.core.domain.model.shared.Genre
+import com.onirutla.movflex.core.domain.model.Genre
 import com.onirutla.movflex.core.domain.model.type.ItemType
 
 data class TvContent(
-    override val backdropPath: String,
-    override val releaseDate: String,
-    override val genre: Genre,
+    override val adult: Boolean,
     override val id: Int,
+    override val originalTitle: String,
+    val firstAirDate: String,
+    override val title: String,
+    override val video: Boolean,
+    override val backdropPath: String,
+    override val genres: List<Genre>,
     override val name: String,
     override val originCountry: List<String>,
     override val originalLanguage: String,
@@ -18,6 +21,8 @@ data class TvContent(
     override val posterPath: String,
     override val voteAverage: Double,
     override val voteCount: Int,
-    override val isFavorite: Boolean,
-    override val itemType: ItemType,
-) : Content
+    override val itemType: ItemType = ItemType.Tv,
+) : Content {
+    override val releaseDate: String
+        get() = firstAirDate
+}
