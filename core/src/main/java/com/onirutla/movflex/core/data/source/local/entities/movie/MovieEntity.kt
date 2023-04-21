@@ -10,7 +10,6 @@ data class MovieEntity(
     @ColumnInfo(name = "backdrop_path")
     val backdropPath: String,
     val budget: Int,
-//    val genres: List<GenreEntity>,
     val homepage: String,
     @PrimaryKey
     val id: Int,
@@ -24,13 +23,10 @@ data class MovieEntity(
     val popularity: Double,
     @ColumnInfo(name = "poster_path")
     val posterPath: String,
-//    val productionCompanies: List<ProductionCompanyEntity>,
-//    val productionCountries: List<ProductionCountryResponse>,
     @ColumnInfo(name = "release_date")
     val releaseDate: String,
     val revenue: Int,
     val runtime: Int,
-//    val spokenLanguages: List<SpokenLanguageResponse>,
     val status: String,
     val tagline: String,
     val title: String,

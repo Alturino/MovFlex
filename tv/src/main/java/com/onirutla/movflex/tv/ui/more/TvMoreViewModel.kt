@@ -7,7 +7,8 @@ import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.onirutla.movflex.tv.domain.usecase.TvMoreUseCase
+import com.onirutla.movflex.tv.core.usecase.TvMoreUseCase
+import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.domain.model.TvType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -19,7 +20,7 @@ class TvMoreViewModel @Inject constructor(
 
     private val _tvType: MutableLiveData<TvType> = MutableLiveData<TvType>()
 
-    val tvMore: LiveData<PagingData<Content>> = _tvType.switchMap {
+    val tvMore: LiveData<PagingData<Tv>> = _tvType.switchMap {
         tvMoreUseCase.invoke(it).cachedIn(viewModelScope)
     }
 

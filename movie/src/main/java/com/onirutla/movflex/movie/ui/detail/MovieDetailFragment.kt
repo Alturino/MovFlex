@@ -40,9 +40,7 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.movieDetail.observe(viewLifecycleOwner) {
-            binding.item = it
-            fabState = it.isFavorite
-            setFabState(it.isFavorite)
+
         }
 
         binding.fab.setOnClickListener {

@@ -2,7 +2,6 @@ package com.onirutla.movflex.favorite
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.onirutla.movflex.core.domain.usecase.favorite.FavoriteUseCase
 import javax.inject.Inject
 
 class ViewModelFactory @Inject constructor(

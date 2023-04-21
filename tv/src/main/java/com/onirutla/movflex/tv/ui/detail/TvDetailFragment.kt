@@ -40,9 +40,9 @@ class TvDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.tvDetail.observe(viewLifecycleOwner) {
-            binding.item = it
-            fabState = it.isFavorite
-            setFabState(it.isFavorite)
+//            binding.item = it
+//            fabState = it.isFavorite
+//            setFabState(it.isFavorite)
         }
 
         binding.fab.setOnClickListener {

@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.onirutla.movflex.core.domain.model.type.ItemType
-import com.onirutla.movflex.core.ui.ItemContentPagingVerticalAdapter
 import com.onirutla.movflex.di.FavoriteModuleDependencies
 import com.onirutla.movflex.favorite.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.EntryPointAccessors

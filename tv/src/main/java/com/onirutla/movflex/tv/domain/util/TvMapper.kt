@@ -8,18 +8,15 @@ import com.onirutla.movflex.core.data.source.remote.response.toProductionCompany
 import com.onirutla.movflex.core.data.source.remote.response.toProductionCountry
 import com.onirutla.movflex.core.data.source.remote.response.toSeason
 import com.onirutla.movflex.core.data.source.remote.response.toSpokenLanguage
-import com.onirutla.movflex.core.domain.model.ContentDetail
-import com.onirutla.movflex.core.domain.model.Genre
-import com.onirutla.movflex.core.domain.model.type.ItemType
-import com.onirutla.movflex.tv.core.remote.model.TvResponse
 import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
-import com.onirutla.movflex.tv.domain.model.TvContent
-import com.onirutla.movflex.tv.domain.model.TvContentDetail
+import com.onirutla.movflex.tv.core.remote.model.TvResponse
+import com.onirutla.movflex.tv.domain.model.Tv
+import com.onirutla.movflex.tv.domain.model.TvDetail
 
-fun TvResponse.toContent(): Content = TvContent(
+fun TvResponse.toDomain() = Tv(
     backdropPath = backdropPath,
-    releaseDate = firstAirDate,
-    genre = Genre(id, ""),
+    firstAirDate = firstAirDate,
+    genreIds = genreIds,
     id = id,
     name = name,
     originCountry = originCountry,
@@ -30,11 +27,9 @@ fun TvResponse.toContent(): Content = TvContent(
     posterPath = posterPath,
     voteAverage = voteAverage,
     voteCount = voteCount,
-    isFavorite = false,
-    itemType = ItemType.Tv
 )
 
-fun TvDetailResponse.toContent(): ContentDetail = TvContentDetail(
+fun TvDetailResponse.toDomain() = TvDetail(
     adult = adult,
     backdropPath = backdropPath,
     createdBy = createdBy.toCreatedBy(),
@@ -49,7 +44,7 @@ fun TvDetailResponse.toContent(): ContentDetail = TvContentDetail(
     lastEpisodeToAir = lastEpisodeToAir.toLastEpisodeToAir(),
     name = name,
     networks = networks.toNetwork(),
-    nextEpisodeToAir = nextEpisodeToAir,
+    nextEpisodeToAir = nextEpisodeToAir.toString(),
     numberOfEpisodes = numberOfEpisodes,
     numberOfSeasons = numberOfSeasons,
     originCountry = originCountry,

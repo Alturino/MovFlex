@@ -9,9 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.core.ui.SeeMoreAdapter
 import com.onirutla.movflex.tv.databinding.FragmentTvBinding
 import com.onirutla.movflex.tv.domain.model.TvType
+import com.onirutla.movflex.tv.ui.adapter.TvSeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +22,7 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private var seeMoreAdapter: SeeMoreAdapter? = null
+    private var seeMoreAdapter: TvSeeMoreAdapter? = null
 
     private fun navigator(view: View, tvType: TvType) {
         view.findNavController().navigate(
@@ -42,7 +42,7 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        seeMoreAdapter = SeeMoreAdapter(
+        seeMoreAdapter = TvSeeMoreAdapter(
             itemClickListener = { itemView, itemId ->
                 itemView.findNavController().navigate(
                     TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)

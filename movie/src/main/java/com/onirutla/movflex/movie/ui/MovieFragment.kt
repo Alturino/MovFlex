@@ -12,9 +12,9 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.onirutla.movflex.core.ui.SeeMoreAdapter
 import com.onirutla.movflex.movie.databinding.FragmentMovieBinding
 import com.onirutla.movflex.movie.domain.model.MovieType
+import com.onirutla.movflex.movie.ui.adapter.MovieSeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -23,7 +23,7 @@ class MovieFragment : Fragment() {
 
     private val viewModel: MovieViewModel by viewModels()
 
-    private var seeMoreAdapter: SeeMoreAdapter? = null
+    private var seeMoreAdapter: MovieSeeMoreAdapter? = null
 
     private fun navigator(view: View, movieType: MovieType) {
         view.findNavController().navigate(
@@ -45,7 +45,7 @@ class MovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        seeMoreAdapter = SeeMoreAdapter(
+        seeMoreAdapter = MovieSeeMoreAdapter(
             itemClickListener = { itemView, itemId ->
                 itemView.findNavController().navigate(
                     MovieFragmentDirections.actionMovieFragmentToMovieDetailFragment(itemId)
@@ -57,11 +57,13 @@ class MovieFragment : Fragment() {
                         moreView,
                         MovieType.MOVIE_NOW_PLAYING
                     )
+
                     MovieType.MOVIE_POPULAR.value -> navigator(moreView, MovieType.MOVIE_POPULAR)
                     MovieType.MOVIE_TOP_RATED.value -> navigator(
                         moreView,
                         MovieType.MOVIE_TOP_RATED
                     )
+
                     MovieType.MOVIE_UPCOMING.value -> navigator(moreView, MovieType.MOVIE_UPCOMING)
                 }
             },
