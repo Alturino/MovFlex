@@ -1,6 +1,5 @@
 package com.onirutla.movflex.movie.domain.model
 
-import com.onirutla.movflex.core.domain.model.Genre
 import com.onirutla.movflex.core.domain.model.ProductionCompany
 import com.onirutla.movflex.core.domain.model.ProductionCountry
 import com.onirutla.movflex.core.domain.model.SpokenLanguage
@@ -8,9 +7,8 @@ import com.onirutla.movflex.core.domain.model.SpokenLanguage
 data class MovieDetail(
     val adult: Boolean,
     val backdropPath: String,
-    val belongsToCollection: Any?,
     val budget: Int,
-    val genres: List<Genre>,
+    val genre: String,
     val homepage: String,
     val id: Int,
     val imdbId: String,

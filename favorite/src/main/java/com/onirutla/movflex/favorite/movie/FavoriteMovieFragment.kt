@@ -22,9 +22,15 @@ class FavoriteMovieFragment : Fragment() {
     private val vm: FavoriteMovieViewModel by viewModels()
 
     private val moviePagingAdapter by lazy {
-        MoviePagingVerticalAdapter { view, content ->
-            view.findNavController().navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))
-        }
+        MoviePagingVerticalAdapter(
+            onItemClickListener = { view, content ->
+                view.findNavController()
+                    .navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))
+            },
+            onFavoriteClickListener = {
+                vm.setFavorite(it)
+            },
+        )
     }
 
     override fun onCreateView(

@@ -6,8 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.databinding.ItemReviewBinding
 import com.onirutla.movflex.core.domain.model.Review
+import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import timber.log.Timber
 
 class ReviewAdapter(
     private val clickListener: (View, Review) -> Unit,
@@ -38,10 +42,24 @@ class ReviewViewHolder(
     fun bind(item: Review) {
         binding.apply {
             root.setOnClickListener { onClickListener(it, item) }
-            itemContent.text = item.content
-            itemUsername.text = item.author
-            itemPostedDated.text = item.createdAt
-            chipRating.text = "${item.authorDetail.rating}"
+            item.apply {
+                val imageUrl = if (authorDetail.avatarPath.contains("http", ignoreCase = true)) {
+                    authorDetail.avatarPath.removePrefix("/")
+                } else {
+                    "${BASE_IMAGE_PATH}${authorDetail.avatarPath}"
+                }
+                Timber.d("imageUrl : $imageUrl")
+                Glide.with(ivAvatar.context)
+                    .load(imageUrl)
+                    .into(ivAvatar)
+                tvContent.text = content
+                tvUsername.text = author
+                tvPostedDate.text = createdAt
+                chipRating.text = root.context.getString(
+                    R.string.format_rating,
+                    (authorDetail.rating.toFloat() / 2)
+                )
+            }
         }
     }
 }

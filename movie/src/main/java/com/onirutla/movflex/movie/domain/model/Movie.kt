@@ -1,7 +1,5 @@
 package com.onirutla.movflex.movie.domain.model
 
-import com.onirutla.movflex.core.domain.model.Genre
-
 data class Movie(
     val adult: Boolean,
     val id: Int,
@@ -10,9 +8,8 @@ data class Movie(
     val title: String,
     val video: Boolean,
     val backdropPath: String,
-    val genres: List<Genre>,
+    val genres: String,
     val name: String,
-    val originCountry: List<String>,
     val originalLanguage: String,
     val originalName: String,
     val overview: String,
@@ -20,5 +17,6 @@ data class Movie(
     val posterPath: String,
     val voteAverage: Double,
     val voteCount: Int,
+    val isFavorite: Boolean = false,
 )
 

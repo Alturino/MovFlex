@@ -62,15 +62,22 @@ class MovieDetailFragment : Fragment() {
         viewModel.apply {
             movieDetail.observe(viewLifecycleOwner) { movie ->
                 binding.apply {
-                    Glide.with(ivImage)
+                    Glide.with(ivImage.context)
                         .load("${Constants.BASE_IMAGE_PATH}${movie.backdropPath}")
                         .into(ivImage)
-                    tvVoteAverage.text = requireContext().getString(
+                        .clearOnDetach()
+                    tvTitle.text = movie.title
+                    tvOriginalTitle.text = movie.originalTitle
+                    tvRating.text = requireContext().getString(
                         R.string.format_rating,
                         (movie.voteAverage / 2)
                     )
-                    tvTitle.text = movie.originalTitle
+                    tvVoteCount.text = requireContext().getString(
+                        R.string.format_vote_count,
+                        movie.voteCount,
+                    )
                     tvOverview.text = movie.overview
+                    tvGenre.text = movie.genre
                     fab.setOnClickListener {
                         viewModel.setFavorite(movie)
                     }
@@ -78,6 +85,8 @@ class MovieDetailFragment : Fragment() {
             }
             movieSimilar.observe(viewLifecycleOwner) {
                 Timber.d("Similar: $it")
+                if (it.isEmpty())
+                    binding.rvSimilar.visibility = View.GONE
                 similarAdapter.submitList(it)
             }
             movieCasts.observe(viewLifecycleOwner) {

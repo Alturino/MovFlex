@@ -3,11 +3,12 @@
     <string name="app_name">MovFlex</string>
     <string name="see_more">See More</string>
     <string name="favorite">Favorite</string>
-    <string name="format_rating">%1$f</string>
+    <string name="format_rating">%1$.2f</string>
     <string name="overview">Overview</string>
     <string name="reviews">Reviews</string>
     <string name="trailers">Trailers</string>
     <string name="casts">Casts</string>
     <string name="recommendation">Recommendation</string>
     <string name="similar">Similar</string>
+    <string name="format_vote_count">(%1d)</string>
 </resources>

@@ -9,13 +9,18 @@ import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.ui.MovieComparator
 
 class MoviePagingVerticalAdapter(
-    private inline val onClickListener: (view: View, movieContent: Movie) -> Unit,
+    private inline val onItemClickListener: (view: View, movieContent: Movie) -> Unit,
+    private inline val onFavoriteClickListener: (Movie) -> Unit,
 ) : PagingDataAdapter<Movie, MoviePagingVerticalViewHolder>(MovieComparator) {
 
     override fun onBindViewHolder(holder: MoviePagingVerticalViewHolder, position: Int) {
         val item = getItem(position)
         if (item != null) {
-            holder.bind(item, onClickListener)
+            holder.bind(
+                content = item,
+                itemClickListener = onItemClickListener,
+                favoriteClickListener = onFavoriteClickListener
+            )
         }
     }
 

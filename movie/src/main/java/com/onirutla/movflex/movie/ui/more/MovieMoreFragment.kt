@@ -24,11 +24,16 @@ class MovieMoreFragment : Fragment() {
     private val args: MovieMoreFragmentArgs by navArgs()
 
     private val movieMoreAdapter by lazy {
-        MoviePagingVerticalAdapter { view, content ->
-            view.findNavController().navigate(
-                MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(content.id)
-            )
-        }
+        MoviePagingVerticalAdapter(
+            onItemClickListener = { view, content ->
+                view.findNavController().navigate(
+                    MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(content.id)
+                )
+            },
+            onFavoriteClickListener = {
+                viewModel.setFavorite(it)
+            }
+        )
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
