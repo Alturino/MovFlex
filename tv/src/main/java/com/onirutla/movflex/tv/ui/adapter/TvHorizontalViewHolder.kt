@@ -1,6 +1,7 @@
 package com.onirutla.movflex.tv.ui.adapter
 
 import android.view.View
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
@@ -19,15 +20,21 @@ class TvHorizontalViewHolder(
                 onClickListener(it, content)
             }
             content.apply {
-                Glide.with(itemImage.context)
+                Glide.with(ivImage.context)
                     .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(itemImage)
+                    .into(ivImage)
                     .clearOnDetach()
+                    .onLoadFailed(
+                        AppCompatResources.getDrawable(
+                            ivImage.context,
+                            R.drawable.ic_launcher_background
+                        )
+                    )
 
-                itemTitle.text = name
-                itemRating.text = root.context.getString(R.string.format_rating, (voteAverage / 2))
-                itemYearRelease.text = firstAirDate
-                itemVoteCount.text = voteCount.toString()
+                tvTitle.text = name
+                tvRating.text = root.context.getString(R.string.format_rating, (voteAverage / 2))
+                tvYearRelease.text = firstAirDate
+                tvVoteCount.text = voteCount.toString()
             }
         }
     }

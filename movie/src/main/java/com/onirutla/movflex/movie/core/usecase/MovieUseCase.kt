@@ -3,8 +3,8 @@ package com.onirutla.movflex.movie.core.usecase
 import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.movie.core.repository.MovieRepository
 import com.onirutla.movflex.movie.domain.model.Movie
+import com.onirutla.movflex.movie.domain.model.MovieType
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.supervisorScope
@@ -21,10 +21,11 @@ class MovieUseCase @Inject constructor(
             val topRated = async { repository.getMovieTopRatedHome() }
             val nowPlaying = async { repository.getMovieNowPlayingHome() }
 
-            val popularSeeMore = SeeMore("Popular", popular.await())
-            val upcomingSeeMore = SeeMore("Upcoming", upcoming.await())
-            val topRatedSeeMore = SeeMore("Top Rated", topRated.await())
-            val nowPlayingSeeMore = SeeMore("Now Playing", nowPlaying.await())
+            val popularSeeMore = SeeMore(MovieType.MOVIE_POPULAR.value, popular.await())
+            val upcomingSeeMore = SeeMore(MovieType.MOVIE_UPCOMING.value, upcoming.await())
+            val topRatedSeeMore = SeeMore(MovieType.MOVIE_TOP_RATED.value, topRated.await())
+            val nowPlayingSeeMore =
+                SeeMore(MovieType.MOVIE_NOW_PLAYING.value, nowPlaying.await())
 
             listOf(
                 popularSeeMore,

@@ -19,7 +19,7 @@ data class SeasonResponse(
     @Json(name = "overview")
     val overview: String,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String? = "",
     @Json(name = "season_number")
     val seasonNumber: Int,
 )
@@ -31,7 +31,7 @@ fun SeasonResponse.toSeason(): Season = Season(
     id = id,
     name = name,
     overview = overview,
-    posterPath = posterPath,
+    posterPath = posterPath.orEmpty(),
     seasonNumber = seasonNumber
 )
 

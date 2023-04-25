@@ -22,7 +22,24 @@ class TvFragment : Fragment() {
 
     private val viewModel: TvViewModel by viewModels()
 
-    private var seeMoreAdapter: TvSeeMoreAdapter? = null
+    private val seeMoreAdapter: TvSeeMoreAdapter by lazy {
+        TvSeeMoreAdapter(
+            itemClickListener = { itemView, itemId ->
+                itemView.findNavController().navigate(
+                    TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
+                )
+            },
+            seeMoreClickListener = { seeMoreView, category ->
+                when (category) {
+                    TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
+                    TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
+                    TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
+                    TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
+                }
+            },
+            rvViewPool = RecyclerView.RecycledViewPool()
+        )
+    }
 
     private fun navigator(view: View, tvType: TvType) {
         view.findNavController().navigate(
@@ -42,25 +59,8 @@ class TvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        seeMoreAdapter = TvSeeMoreAdapter(
-            itemClickListener = { itemView, itemId ->
-                itemView.findNavController().navigate(
-                    TvFragmentDirections.actionTvFragmentToTvDetailFragment(itemId)
-                )
-            },
-            seeMoreClickListener = { seeMoreView, category ->
-                when (category) {
-                    TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
-                    TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
-                    TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
-                    TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
-                }
-            },
-            rvViewPool = RecyclerView.RecycledViewPool()
-        )
-
         viewModel.tvHome.observe(viewLifecycleOwner) {
-            seeMoreAdapter?.submitList(it.toMutableList())
+            seeMoreAdapter.submitList(it.toMutableList())
         }
 
         binding.tvHomeList.apply {
@@ -73,6 +73,5 @@ class TvFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-        seeMoreAdapter = null
     }
 }

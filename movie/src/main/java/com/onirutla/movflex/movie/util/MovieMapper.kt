@@ -12,7 +12,7 @@ import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieDetail
 
 fun MovieResponse.toDomain(): Movie = Movie(
-    backdropPath = backdropPath,
+    backdropPath = backdropPath.orEmpty(),
     releaseDate = releaseDate,
     genres = genreIds.map { Genre(it, "") },
     id = id,
@@ -22,7 +22,7 @@ fun MovieResponse.toDomain(): Movie = Movie(
     originalName = originalTitle,
     overview = overview,
     popularity = popularity,
-    posterPath = posterPath,
+    posterPath = posterPath.orEmpty(),
     voteAverage = voteAverage,
     voteCount = voteCount,
     adult = adult,
@@ -30,6 +30,8 @@ fun MovieResponse.toDomain(): Movie = Movie(
     title = title,
     video = video,
 )
+
+fun List<MovieResponse>.toDomain(): List<Movie> = this.map { it.toDomain() }
 
 fun Movie.toEntity() = MovieEntity(
     backdropPath = backdropPath,
@@ -54,9 +56,29 @@ fun Movie.toEntity() = MovieEntity(
     budget = 0,
 )
 
-fun MovieDetailResponse.toMovieDetail() = MovieDetail(
-    adult = adult,
+fun MovieEntity.toDomain() = Movie(
     backdropPath = backdropPath,
+    releaseDate = releaseDate,
+    genres = emptyList(),
+    id = id,
+    name = title,
+    originCountry = emptyList(),
+    originalLanguage = originalLanguage,
+    originalName = originalTitle,
+    overview = overview,
+    popularity = popularity,
+    posterPath = posterPath,
+    voteAverage = voteAverage,
+    voteCount = voteCount,
+    adult = adult,
+    originalTitle = originalTitle,
+    title = title,
+    video = video,
+)
+
+fun MovieDetailResponse.toDetail() = MovieDetail(
+    adult = adult,
+    backdropPath = backdropPath.orEmpty(),
     belongsToCollection = belongsToCollection,
     budget = budget,
     genres = genres.toGenre(),
@@ -67,7 +89,7 @@ fun MovieDetailResponse.toMovieDetail() = MovieDetail(
     originalTitle = originalTitle,
     overview = overview,
     popularity = popularity,
-    posterPath = posterPath,
+    posterPath = posterPath.orEmpty(),
     productionCompanies = productionCompanies.toProductionCompany(),
     productionCountries = productionCountries.toProductionCountry(),
     releaseDate = releaseDate,

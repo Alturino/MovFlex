@@ -24,4 +24,5 @@ object Versions {
     const val mapsplaform_secrets = "2.0.1"
     const val sqlite = "2.3.0"
     const val zeteticSqlCipher = "4.5.3"
+    const val timber = "5.0.1"
 }

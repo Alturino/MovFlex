@@ -30,6 +30,9 @@
             android:id="@+id/deep_link_movie_detail"
             app:action="ACTION_VIEW"
             app:uri="movflex://main_nav/movie/{movieId}" />
+        <action
+            android:id="@+id/action_movieDetailFragment_self"
+            app:destination="@id/movieDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieMoreFragment"

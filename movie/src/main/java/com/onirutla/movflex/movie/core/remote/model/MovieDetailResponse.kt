@@ -12,7 +12,7 @@ data class MovieDetailResponse(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String? = "",
     @Json(name = "belongs_to_collection")
     val belongsToCollection: Any?,
     @Json(name = "budget")
@@ -34,7 +34,7 @@ data class MovieDetailResponse(
     @Json(name = "popularity")
     val popularity: Double,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String? = "",
     @Json(name = "production_companies")
     val productionCompanies: List<ProductionCompanyResponse>,
     @Json(name = "production_countries")

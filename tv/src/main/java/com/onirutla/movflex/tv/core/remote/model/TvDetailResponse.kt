@@ -16,7 +16,7 @@ data class TvDetailResponse(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String? = "",
     @Json(name = "created_by")
     val createdBy: List<CreatedByResponse>,
     @Json(name = "episode_run_time")

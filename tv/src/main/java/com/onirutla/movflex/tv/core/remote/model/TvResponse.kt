@@ -6,29 +6,29 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class TvResponse(
     @Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String? = "",
     @Json(name = "first_air_date")
-    val firstAirDate: String,
+    val firstAirDate: String = "",
     @Json(name = "genre_ids")
-    val genreIds: List<Int>,
+    val genreIds: List<Int> = emptyList(),
     @Json(name = "id")
-    val id: Int,
+    val id: Int = 0,
     @Json(name = "name")
-    val name: String,
+    val name: String = "",
     @Json(name = "origin_country")
-    val originCountry: List<String>,
+    val originCountry: List<String> = emptyList(),
     @Json(name = "original_language")
-    val originalLanguage: String,
+    val originalLanguage: String = "",
     @Json(name = "original_name")
-    val originalName: String,
+    val originalName: String = "",
     @Json(name = "overview")
-    val overview: String,
+    val overview: String = "",
     @Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double = 0.0,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String = "",
     @Json(name = "vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double = 0.0,
     @Json(name = "vote_count")
-    val voteCount: Int,
+    val voteCount: Int = 0,
 )

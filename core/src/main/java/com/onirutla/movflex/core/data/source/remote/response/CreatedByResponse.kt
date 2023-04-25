@@ -15,7 +15,7 @@ data class CreatedByResponse(
     @Json(name = "name")
     val name: String,
     @Json(name = "profile_path")
-    val profilePath: String,
+    val profilePath: String? = "",
 )
 
 fun CreatedByResponse.toCreatedBy(): CreatedBy = CreatedBy(
@@ -23,7 +23,7 @@ fun CreatedByResponse.toCreatedBy(): CreatedBy = CreatedBy(
     gender = gender,
     id = id,
     name = name,
-    profilePath = profilePath
+    profilePath = profilePath.orEmpty()
 )
 
 fun List<CreatedByResponse>.toCreatedBy(): List<CreatedBy> = this.map { it.toCreatedBy() }

@@ -19,16 +19,16 @@ class MovieHorizontalViewHolder(
                 onClickListener(it, content)
             }
             content.apply {
-                Glide.with(itemImage.context)
+                Glide.with(ivImage.context)
                     .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(itemImage)
+                    .into(ivImage)
                     .clearOnDetach()
 
-                itemTitle.text = title
-                itemRating.text = root.context.getString(R.string.format_rating, (voteAverage / 2))
-                itemYearRelease.text = releaseDate
-                itemGenre.text = genres.first().name
-                itemVoteCount.text = voteCount.toString()
+                tvTitle.text = title
+                tvRating.text = root.context.getString(R.string.format_rating, (voteAverage / 2))
+                tvYearRelease.text = releaseDate
+//                tvGenre.text = genres.first().name
+                tvVoteCount.text = voteCount.toString()
             }
         }
     }

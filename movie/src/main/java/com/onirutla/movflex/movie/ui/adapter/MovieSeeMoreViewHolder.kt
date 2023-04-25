@@ -23,6 +23,7 @@ class MovieSeeMoreViewHolder(
             seeAll.setOnClickListener {
                 seeMoreClickListener(it, item.title)
             }
+            itemGroupingText.text = item.title
             itemAdapter.submitList(item.items)
             movieGroupingList.apply {
                 adapter = itemAdapter

@@ -12,7 +12,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object TvModule {
 
-    @Singleton
     @Provides
     fun provideTvApiService(retrofit: Retrofit): TvApiService =
         retrofit.create(TvApiService::class.java)

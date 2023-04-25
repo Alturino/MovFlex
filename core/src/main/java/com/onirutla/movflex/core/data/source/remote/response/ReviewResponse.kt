@@ -1,6 +1,5 @@
 package com.onirutla.movflex.core.data.source.remote.response
 
-import com.onirutla.movflex.core.domain.model.AuthorDetail
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -9,7 +8,7 @@ data class ReviewResponse(
     @Json(name = "author")
     val author: String,
     @Json(name = "author_details")
-    val authorDetailsResponse: AuthorDetail,
+    val authorDetailsResponse: AuthorDetailResponse,
     @Json(name = "content")
     val content: String,
     @Json(name = "created_at")

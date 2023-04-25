@@ -4,7 +4,6 @@ plugins {
     kotlin("kapt")
     id(Plugin.safeArg)
     id(Plugin.daggerHilt)
-    id(Plugin.mapsSecret)
 }
 
 android {
@@ -43,7 +42,5 @@ android {
 dependencies {
     applyShared()
     applyRetrofit()
-    applyOkhttp()
-    applyMoshi()
     implementation(project(Modules.core))
 }

@@ -1,5 +1,6 @@
 package com.onirutla.movflex.core.data.source.remote.response
 
+import com.onirutla.movflex.core.domain.model.AuthorDetail
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -12,5 +13,6 @@ data class AuthorDetailResponse(
     @Json(name = "rating")
     val rating: Int,
     @Json(name = "username")
-    val username: String
+    val username: String,
 )
+

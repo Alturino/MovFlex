@@ -4,20 +4,26 @@ import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.map
+import com.onirutla.movflex.core.data.source.local.dao.TvDao
 import com.onirutla.movflex.core.data.source.remote.PagingDataSource
 import com.onirutla.movflex.core.util.Constants
+import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
 import com.onirutla.movflex.tv.core.remote.TvRemoteDataSource
 import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.domain.model.TvDetail
 import com.onirutla.movflex.tv.domain.util.toDomain
+import com.onirutla.movflex.tv.domain.util.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class TvRepository @Inject constructor(
     private val remoteDataSource: TvRemoteDataSource,
+    private val tvDao: TvDao,
 ) {
 
     companion object {
@@ -78,4 +84,24 @@ class TvRepository @Inject constructor(
     }.catch {
         Log.d(TAG, "$it")
     }.filterNotNull()
+
+
+    suspend fun setFavorite(tv: TvDetail) {
+        val isFavorite = tvDao.isFavorite(tv.id)
+        if (isFavorite == null)
+            tvDao.addToFavorite(tv.toEntity())
+        else
+            tvDao.deleteFavorite(isFavorite)
+    }
+
+    fun getTvFavorite(): Flow<PagingData<Tv>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE),
+        pagingSourceFactory = {
+            tvDao.getFavorite()
+        }
+    ).flow.map { pagingData ->
+        pagingData.map {
+            it.toDomain()
+        }
+    }
 }

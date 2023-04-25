@@ -18,15 +18,15 @@ class MoviePagingVerticalViewHolder(
             }
 
             content.apply {
-                Glide.with(itemImage.context)
+                Glide.with(ivImage.context)
                     .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(itemImage)
+                    .into(ivImage)
                     .clearOnDetach()
 
-                itemGenre.text = genres.first().name
-                itemSynopsis.text = overview
-                itemYearRelease.text = releaseDate
-                itemTitle.text = title
+//                itemGenre.text = genres.first().name
+                tvSynopsis.text = overview
+                tvYearRelease.text = releaseDate
+                tvTitle.text = title
             }
         }
     }

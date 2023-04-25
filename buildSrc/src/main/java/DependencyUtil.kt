@@ -100,4 +100,5 @@ fun DependencyHandler.applyShared() {
     applyTest()
 
     implementation(Dependency.glide)
+    implementation(Dependency.timber)
 }

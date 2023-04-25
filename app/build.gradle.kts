@@ -62,12 +62,12 @@ android {
         jvmTarget = AppConfig.kotlinJvmTarget
     }
 
-    dynamicFeatures.addAll(setOf(Modules.favorite))
 }
 
 dependencies {
     applyShared()
     implementation(project(Modules.core))
     implementation(project(Modules.movie))
+    implementation(project(Modules.favorite))
     implementation(project(Modules.tv))
 }

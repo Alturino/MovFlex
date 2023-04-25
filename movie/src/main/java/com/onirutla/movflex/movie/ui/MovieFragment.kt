@@ -70,7 +70,9 @@ class MovieFragment : Fragment() {
             rvViewPool = RecyclerView.RecycledViewPool()
         )
 
-        observeData()
+        viewModel.movie.observe(viewLifecycleOwner){
+            seeMoreAdapter?.submitList(it)
+        }
 
         binding.movieHomeList.apply {
             adapter = seeMoreAdapter
@@ -79,15 +81,6 @@ class MovieFragment : Fragment() {
         }
     }
 
-    private fun observeData() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.movie.collect {
-                    seeMoreAdapter?.submitList(it.toMutableList())
-                }
-            }
-        }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

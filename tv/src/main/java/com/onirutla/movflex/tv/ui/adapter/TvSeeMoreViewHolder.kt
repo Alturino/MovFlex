@@ -20,10 +20,10 @@ class TvSeeMoreViewHolder(
 
     fun bind(item: SeeMore<List<Tv>>) {
         binding.apply {
-//            seeMore = item
             seeAll.setOnClickListener {
                 seeMoreClickListener(it, item.title)
             }
+            itemGroupingText.text = item.title
             itemAdapter.submitList(item.items)
             movieGroupingList.apply {
                 adapter = itemAdapter

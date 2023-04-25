@@ -29,7 +29,8 @@ object LocalModule {
             MovFlexDatabase::class.java,
             "movflex.db"
         ).fallbackToDestructiveMigration()
-            .openHelperFactory(factory)
+            .allowMainThreadQueries()
+//            .openHelperFactory(factory)
             .build()
     }
 

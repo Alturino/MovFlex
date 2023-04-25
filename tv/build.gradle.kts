@@ -42,7 +42,5 @@ android {
 dependencies {
     applyShared()
     applyRetrofit()
-    applyOkhttp()
-    applyMoshi()
     implementation(project(Modules.core))
 }

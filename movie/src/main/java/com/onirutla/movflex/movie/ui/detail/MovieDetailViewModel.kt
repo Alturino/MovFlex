@@ -6,6 +6,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.movie.core.repository.MovieRepository
+import com.onirutla.movflex.movie.domain.model.MovieDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -21,18 +22,35 @@ class MovieDetailViewModel @Inject constructor(
         movieRepository.getMovieDetail(it).asLiveData(viewModelScope.coroutineContext)
     }
 
+    val movieRecommendations = _movieId.switchMap {
+        movieRepository.getMovieRecommendations(it).asLiveData(viewModelScope.coroutineContext)
+    }
+
+    val movieReviews = _movieId.switchMap {
+        movieRepository.getMovieReviews(it).asLiveData(viewModelScope.coroutineContext)
+    }
+
+    val movieCasts = _movieId.switchMap {
+        movieRepository.getMovieCasts(it).asLiveData(viewModelScope.coroutineContext)
+    }
+
+    val movieSimilar = _movieId.switchMap {
+        movieRepository.getMovieSimilar(it).asLiveData(viewModelScope.coroutineContext)
+    }
+
+    val isFavorite = _movieId.switchMap {
+        movieRepository.observeFavoriteState(it).asLiveData(viewModelScope.coroutineContext)
+    }
+
     fun getMovieDetail(id: Int) {
         _movieId.value = id
     }
 
-    fun setFavorite() {
+    fun setFavorite(movie: MovieDetail) {
         viewModelScope.launch {
-            _movieId.value?.let { id ->
-                movieRepository.getMovieDetail(id).collect { movie ->
-                    movieRepository.setFavorite(movie)
-                }
-            }
+            movieRepository.setFavorite(movie)
         }
     }
+
 
 }

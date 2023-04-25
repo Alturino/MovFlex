@@ -18,15 +18,15 @@ class TvPagingVerticalViewHolder(
             }
 
             content.apply {
-                Glide.with(itemImage.context)
+                Glide.with(ivImage.context)
                     .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(itemImage)
+                    .into(ivImage)
                     .clearOnDetach()
 
-//                itemGenre.text = genres.first().name
-                itemSynopsis.text = overview
-                itemYearRelease.text = firstAirDate
-                itemTitle.text = name
+//                Genre.text = genres.first().name
+                tvSynopsis.text = overview
+                tvYearRelease.text = firstAirDate
+                tvTitle.text = name
             }
         }
     }

@@ -1,7 +1,10 @@
 package com.onirutla.movflex.movie.core.remote
 
 import com.onirutla.movflex.core.data.source.remote.response.CastResponse
+import com.onirutla.movflex.core.data.source.remote.response.CreditResponse
 import com.onirutla.movflex.core.data.source.remote.response.PageResponse
+import com.onirutla.movflex.core.data.source.remote.response.ReviewResponse
+import com.onirutla.movflex.core.data.source.remote.response.ReviewResponses
 import com.onirutla.movflex.movie.core.remote.model.MovieDetailResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
 import retrofit2.Response
@@ -48,9 +51,16 @@ interface MovieApiService {
         @Query(value = "page") page: Int = 1,
     ): Response<PageResponse<MovieResponse>>
 
+    @GET(value = "movie/{movieId}/reviews")
+    suspend fun getMovieReviews(
+        @Path(value = "movieId") movieId: Int,
+        @Query(value = "page") page: Int = 1,
+    ): Response<ReviewResponses>
+
     @GET(value = "movie/{movieId}/credits")
     suspend fun getMovieCasts(
         @Path(value = "movieId") movieId: Int,
-    ): Response<CastResponse>
+        @Query(value = "page") page: Int = 1,
+    ): Response<CreditResponse>
 
 }

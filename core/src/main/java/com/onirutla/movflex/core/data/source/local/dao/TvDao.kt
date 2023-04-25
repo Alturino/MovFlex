@@ -3,14 +3,13 @@ package com.onirutla.movflex.core.data.source.local.dao
 import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy.Companion.REPLACE
 import androidx.room.Query
+import androidx.room.Upsert
 import com.onirutla.movflex.core.data.source.local.entities.tv.TvEntity
 
 @Dao
 interface TvDao {
-    @Insert(onConflict = REPLACE)
+    @Upsert
     suspend fun addToFavorite(vararg favorites: TvEntity)
 
     @Delete

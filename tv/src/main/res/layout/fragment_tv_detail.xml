@@ -71,7 +71,7 @@
             tools:text="(491 reviews)" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/vote_average"
+            android:id="@+id/tv_vote_average"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:text="@{String.valueOf(item.voteAverage)}"
