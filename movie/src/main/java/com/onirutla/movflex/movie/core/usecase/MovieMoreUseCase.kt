@@ -8,6 +8,8 @@ import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieType
 import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_NOW_PLAYING
 import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_POPULAR
+import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_RECOMMENDATIONS
+import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_SIMILAR
 import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_TOP_RATED
 import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_UPCOMING
 import javax.inject.Inject
@@ -16,11 +18,24 @@ class MovieMoreUseCase @Inject constructor(
     private val movieRepository: MovieRepository,
 ) {
 
-    fun invoke(movieType: MovieType): LiveData<PagingData<Movie>> =
+    fun invoke(movieType: MovieType, movieId: Int): LiveData<PagingData<Movie>> =
         when (movieType) {
-            MOVIE_UPCOMING -> movieRepository.getMovieUpcomingPaging().asLiveData()
-            MOVIE_TOP_RATED -> movieRepository.getMovieTopRatedPaging().asLiveData()
-            MOVIE_NOW_PLAYING -> movieRepository.getMovieNowPlayingPaging().asLiveData()
-            MOVIE_POPULAR -> movieRepository.getMoviePopularPaging().asLiveData()
+            MOVIE_UPCOMING -> movieRepository.getMovieUpcomingPaging()
+                .asLiveData()
+
+            MOVIE_TOP_RATED -> movieRepository.getMovieTopRatedPaging()
+                .asLiveData()
+
+            MOVIE_NOW_PLAYING -> movieRepository.getMovieNowPlayingPaging()
+                .asLiveData()
+
+            MOVIE_POPULAR -> movieRepository.getMoviePopularPaging()
+                .asLiveData()
+
+            MOVIE_RECOMMENDATIONS -> movieRepository.getMovieRecommendationsPaging(movieId)
+                .asLiveData()
+
+            MOVIE_SIMILAR -> movieRepository.getMovieSimilarPaging(movieId)
+                .asLiveData()
         }
 }

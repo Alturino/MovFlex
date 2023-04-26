@@ -33,6 +33,9 @@
         <action
             android:id="@+id/action_movieDetailFragment_self"
             app:destination="@id/movieDetailFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_movieMoreFragment"
+            app:destination="@id/movieMoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/movieMoreFragment"
@@ -45,6 +48,10 @@
         <action
             android:id="@+id/action_movieMoreFragment_to_movieDetailFragment"
             app:destination="@id/movieDetailFragment" />
+        <argument
+            android:name="movieId"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

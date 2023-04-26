@@ -24,8 +24,10 @@ class MovieMoreViewModel @Inject constructor(
 
     private val _movieType = MutableLiveData<MovieType>()
 
+    var movieId = 0
+
     val movieMore = _movieType.switchMap {
-        movieMoreUseCase.invoke(it).cachedIn(viewModelScope)
+        movieMoreUseCase.invoke(it, movieId).cachedIn(viewModelScope)
     }
 
     fun getMovieByCategory(movieType: MovieType) {

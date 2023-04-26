@@ -9,18 +9,18 @@ data class ProductionCompanyResponse(
     @Json(name = "id")
     val id: Int,
     @Json(name = "logo_path")
-    val logoPath: String,
+    val logoPath: String? = "",
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
     @Json(name = "origin_country")
-    val originCountry: String,
+    val originCountry: String? = "",
 )
 
 fun ProductionCompanyResponse.toProductionCompany(): ProductionCompany = ProductionCompany(
     id = id,
-    logoPath = logoPath,
-    name = name,
-    originCountry = originCountry,
+    logoPath = logoPath.orEmpty(),
+    name = name.orEmpty(),
+    originCountry = originCountry.orEmpty(),
 )
 
 fun List<ProductionCompanyResponse>.toProductionCompany(): List<ProductionCompany> = this.map {

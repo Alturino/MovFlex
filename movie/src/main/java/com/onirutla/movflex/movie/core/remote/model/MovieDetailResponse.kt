@@ -10,53 +10,53 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class MovieDetailResponse(
     @Json(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean? = false,
     @Json(name = "backdrop_path")
     val backdropPath: String? = "",
     @Json(name = "belongs_to_collection")
     val belongsToCollection: Any?,
     @Json(name = "budget")
-    val budget: Int,
+    val budget: Int? = 0,
     @Json(name = "genres")
-    val genres: List<GenreResponse>,
+    val genres: List<GenreResponse>? = emptyList(),
     @Json(name = "homepage")
-    val homepage: String,
+    val homepage: String? = "",
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "imdb_id")
-    val imdbId: String,
+    val imdbId: String? = "",
     @Json(name = "original_language")
-    val originalLanguage: String,
+    val originalLanguage: String? = "",
     @Json(name = "original_title")
-    val originalTitle: String,
+    val originalTitle: String? = "",
     @Json(name = "overview")
-    val overview: String,
+    val overview: String? = "",
     @Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double? = 0.0,
     @Json(name = "poster_path")
     val posterPath: String? = "",
     @Json(name = "production_companies")
-    val productionCompanies: List<ProductionCompanyResponse>,
+    val productionCompanies: List<ProductionCompanyResponse>? = emptyList(),
     @Json(name = "production_countries")
-    val productionCountries: List<ProductionCountryResponse>,
+    val productionCountries: List<ProductionCountryResponse>? = emptyList(),
     @Json(name = "release_date")
-    val releaseDate: String,
+    val releaseDate: String? = "",
     @Json(name = "revenue")
-    val revenue: Int,
+    val revenue: Int? = 0,
     @Json(name = "runtime")
-    val runtime: Int,
+    val runtime: Int? = 0,
     @Json(name = "spoken_languages")
-    val spokenLanguages: List<SpokenLanguageResponse>,
+    val spokenLanguages: List<SpokenLanguageResponse>? = emptyList(),
     @Json(name = "status")
-    val status: String,
+    val status: String? = "",
     @Json(name = "tagline")
-    val tagline: String,
+    val tagline: String? = "",
     @Json(name = "title")
-    val title: String,
+    val title: String? = "",
     @Json(name = "video")
-    val video: Boolean,
+    val video: Boolean? = false,
     @Json(name = "vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double? = 0.0,
     @Json(name = "vote_count")
-    val voteCount: Int,
+    val voteCount: Int? = 0,
 )

@@ -39,6 +39,7 @@ class MovieMoreFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val category = args.movieType
+        viewModel.movieId = args.movieId
         viewModel.getMovieByCategory(category)
     }
 

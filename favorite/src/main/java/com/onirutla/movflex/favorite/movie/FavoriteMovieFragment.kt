@@ -21,17 +21,7 @@ class FavoriteMovieFragment : Fragment() {
 
     private val vm: FavoriteMovieViewModel by viewModels()
 
-    private val moviePagingAdapter by lazy {
-        MoviePagingVerticalAdapter(
-            onItemClickListener = { view, content ->
-                view.findNavController()
-                    .navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))
-            },
-            onFavoriteClickListener = {
-                vm.setFavorite(it)
-            },
-        )
-    }
+    private lateinit var moviePagingAdapter: MoviePagingVerticalAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,6 +34,16 @@ class FavoriteMovieFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        moviePagingAdapter = MoviePagingVerticalAdapter(
+            onItemClickListener = { itemView, content ->
+                itemView.findNavController()
+                    .navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))
+            },
+            onFavoriteClickListener = {
+                vm.setFavorite(it)
+            },
+        )
 
         vm.movieFavorite.observe(viewLifecycleOwner) {
             moviePagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)

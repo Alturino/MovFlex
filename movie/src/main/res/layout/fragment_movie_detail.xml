@@ -121,7 +121,7 @@
             app:layout_constraintTop_toBottomOf="@id/rv_reviews" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_casts_seemore"
+            android:id="@+id/tv_casts_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -192,7 +192,7 @@
             app:layout_constraintTop_toBottomOf="@id/tv_overview" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_review_seemore"
+            android:id="@+id/tv_review_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -227,7 +227,7 @@
             app:layout_constraintTop_toBottomOf="@id/rv_casts" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_reviews_seemore"
+            android:id="@+id/tv_recommendations_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -235,7 +235,7 @@
             android:textAppearance="?attr/textAppearanceSubtitle1"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintBottom_toBottomOf="@+id/tv_recommendation"
-            app:layout_constraintEnd_toEndOf="@+id/rv_reviews"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_recommendation" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -263,7 +263,7 @@
             app:layout_constraintTop_toBottomOf="@id/rv_recommendation" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_similar_seemore"
+            android:id="@+id/tv_similar_see_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"

@@ -37,8 +37,8 @@ fun ReviewResponse.toReview() = Review(
 fun List<ReviewResponse>.toReviews() = this.map { it.toReview() }
 
 fun AuthorDetailResponse.toAuthorDetail() = AuthorDetail(
-    avatarPath = avatarPath,
-    name = name,
-    rating = rating,
-    username = username,
+    avatarPath = avatarPath.orEmpty(),
+    name = name.orEmpty(),
+    rating = rating ?: 0,
+    username = username.orEmpty(),
 )

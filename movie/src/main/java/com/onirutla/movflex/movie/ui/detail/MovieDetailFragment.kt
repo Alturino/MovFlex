@@ -12,8 +12,10 @@ import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.ui.CastAdapter
 import com.onirutla.movflex.core.ui.ReviewAdapter
-import com.onirutla.movflex.core.util.Constants
+import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
 import com.onirutla.movflex.movie.databinding.FragmentMovieDetailBinding
+import com.onirutla.movflex.movie.domain.model.MovieType
+import com.onirutla.movflex.movie.ui.MovieFragmentDirections
 import com.onirutla.movflex.movie.ui.adapter.MovieHorizontalAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -27,6 +29,12 @@ class MovieDetailFragment : Fragment() {
     private val viewModel: MovieDetailViewModel by viewModels()
 
     private val args: MovieDetailFragmentArgs by navArgs()
+
+    private fun navigator(view: View, movieType: MovieType, movieId: Int) {
+        view.findNavController().navigate(
+            MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieMoreFragment(movieType, movieId)
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,57 +66,18 @@ class MovieDetailFragment : Fragment() {
                 .navigate(MovieDetailFragmentDirections.actionMovieDetailFragmentSelf(movie.id))
         }
 
-
-        viewModel.apply {
-            movieDetail.observe(viewLifecycleOwner) { movie ->
-                binding.apply {
-                    Glide.with(ivImage.context)
-                        .load("${Constants.BASE_IMAGE_PATH}${movie.backdropPath}")
-                        .into(ivImage)
-                        .clearOnDetach()
-                    tvTitle.text = movie.title
-                    tvOriginalTitle.text = movie.originalTitle
-                    tvRating.text = requireContext().getString(
-                        R.string.format_rating,
-                        (movie.voteAverage / 2)
-                    )
-                    tvVoteCount.text = requireContext().getString(
-                        R.string.format_vote_count,
-                        movie.voteCount,
-                    )
-                    tvOverview.text = movie.overview
-                    tvGenre.text = movie.genre
-                    fab.setOnClickListener {
-                        viewModel.setFavorite(movie)
-                    }
-                }
-            }
-            movieSimilar.observe(viewLifecycleOwner) {
-                Timber.d("Similar: $it")
-                if (it.isEmpty())
-                    binding.rvSimilar.visibility = View.GONE
-                similarAdapter.submitList(it)
-            }
-            movieCasts.observe(viewLifecycleOwner) {
-                Timber.d("Casts: $it")
-                castAdapter.submitList(it)
-            }
-            movieRecommendations.observe(viewLifecycleOwner) {
-                Timber.d("Recommendations: $it")
-                recommendationAdapter.submitList(it)
-            }
-            movieReviews.observe(viewLifecycleOwner) {
-                Timber.d("Reviews: $it")
-                reviewAdapter.submitList(it)
-            }
-        }
-
-        viewModel.isFavorite.observe(viewLifecycleOwner) {
-            Timber.d("isFavorite: $it")
-            setFabState(it)
-        }
-
         binding.apply {
+            tvCastsSeeMore.setOnClickListener {
+            }
+            tvReviewSeeMore.setOnClickListener {
+
+            }
+            tvRecommendationsSeeMore.setOnClickListener {
+                navigator(it, MovieType.MOVIE_RECOMMENDATIONS, args.movieId)
+            }
+            tvSimilarSeeMore.setOnClickListener {
+                navigator(it, MovieType.MOVIE_SIMILAR, args.movieId)
+            }
             rvCasts.apply {
                 adapter = castAdapter
             }
@@ -121,6 +90,51 @@ class MovieDetailFragment : Fragment() {
             rvSimilar.apply {
                 adapter = similarAdapter
             }
+        }
+
+        viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
+            binding.apply {
+                Glide.with(ivImage.context)
+                    .load("${BASE_IMAGE_PATH}${movie.backdropPath}")
+                    .into(ivImage)
+                    .clearOnDetach()
+                tvTitle.text = movie.title
+                tvOriginalTitle.text = movie.originalTitle
+                tvRating.text = requireContext().getString(
+                    R.string.format_rating,
+                    (movie.voteAverage / 2)
+                )
+                tvVoteCount.text = requireContext().getString(
+                    R.string.format_vote_count,
+                    movie.voteCount,
+                )
+                tvOverview.text = movie.overview
+                tvGenre.text = movie.genre
+                fab.setOnClickListener {
+                    viewModel.setFavorite(movie)
+                }
+            }
+        }
+        viewModel.movieSimilar.observe(viewLifecycleOwner) {
+            Timber.d("Similar: $it")
+            similarAdapter.submitList(it)
+        }
+        viewModel.movieCasts.observe(viewLifecycleOwner) {
+            Timber.d("Casts: $it")
+            castAdapter.submitList(it)
+        }
+        viewModel.movieRecommendations.observe(viewLifecycleOwner) {
+            Timber.d("Recommendations: $it")
+            recommendationAdapter.submitList(it)
+        }
+        viewModel.movieReviews.observe(viewLifecycleOwner) {
+            Timber.d("Reviews: $it")
+            reviewAdapter.submitList(it)
+        }
+
+        viewModel.isFavorite.observe(viewLifecycleOwner) {
+            Timber.d("isFavorite: $it")
+            setFabState(it)
         }
 
     }

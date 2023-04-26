@@ -36,10 +36,6 @@ class MoviePagingVerticalViewHolder(
 
                 ivFavorite.setOnClickListener { favoriteClickListener(this) }
 
-                ivFavorite.setOnClickListener {
-                    itemClickListener(it, this)
-                }
-
                 tvRating.text = root.context.getString(coreR.string.format_rating)
                 tvGenre.text = genres
                 tvSynopsis.text = overview

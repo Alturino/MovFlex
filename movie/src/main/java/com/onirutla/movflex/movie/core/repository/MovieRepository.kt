@@ -14,7 +14,8 @@ import com.onirutla.movflex.movie.core.remote.MovieRemoteDataSource
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieDetail
 import com.onirutla.movflex.movie.util.toDetail
-import com.onirutla.movflex.movie.util.toDomain
+import com.onirutla.movflex.movie.util.toEntity
+import com.onirutla.movflex.movie.util.toMovie
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
@@ -31,61 +32,62 @@ class MovieRepository @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMoviePopular(position).toDomain()
+                remote.getMoviePopular(position).toMovie()
             }
         },
     ).flow
 
     suspend fun getMoviePopularHome(): List<Movie> = remote.getMoviePopular()
-        .toDomain()
+        .toMovie()
 
     fun getMovieNowPlayingPaging(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieNowPlaying(position).toDomain()
+                remote.getMovieNowPlaying(position).toMovie()
             }
         },
     ).flow
 
     suspend fun getMovieNowPlayingHome(): List<Movie> = remote.getMovieNowPlaying()
-        .toDomain()
+        .toMovie()
 
     fun getMovieTopRatedPaging(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieTopRated(position).toDomain()
+                remote.getMovieTopRated(position).toMovie()
             }
         }
     ).flow
 
     suspend fun getMovieTopRatedHome(): List<Movie> = remote.getMovieTopRated()
-        .toDomain()
+        .toMovie()
 
     fun getMovieUpcomingPaging(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieUpcoming(position).toDomain()
+                remote.getMovieUpcoming(position).toMovie()
             }
         }
     ).flow
 
     suspend fun getMovieUpcomingHome(): List<Movie> = remote.getMovieUpcoming()
-        .toDomain()
+        .toMovie()
 
     fun getMovieDetail(id: Int): Flow<MovieDetail> = flow {
-        val dto = remote.getMovieDetail(id)?.toDetail()
+        val isInDb = local.isInDb(id)
+        val dto = isInDb?.toDetail() ?: remote.getMovieDetail(id)?.toDetail()
         emit(dto)
     }.catch {
         Timber.d(it)
     }.filterNotNull()
 
     suspend fun setFavorite(movie: MovieDetail) {
-        val isFavorite = local.isFavorite(movie.id)
+        val isFavorite = local.isInDb(movie.id)
         if (isFavorite == null)
-            local.addToFavorite(movie)
+            local.addToFavorite(movie.toEntity())
         else
             local.deleteFavorite(isFavorite)
     }
@@ -93,7 +95,7 @@ class MovieRepository @Inject constructor(
     fun getMovieFavorite(): Flow<PagingData<Movie>> = local.getFavorite()
 
     fun getMovieSimilar(movieId: Int): Flow<List<Movie>> = flow {
-        val result = remote.getMovieSimilar(movieId).toDomain()
+        val result = remote.getMovieSimilar(movieId).toMovie()
         emit(result)
     }
 
@@ -101,13 +103,13 @@ class MovieRepository @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieSimilar(movieId = movieId, page = position).toDomain()
+                remote.getMovieSimilar(movieId = movieId, page = position).toMovie()
             }
         }
     ).flow
 
     fun getMovieRecommendations(movieId: Int): Flow<List<Movie>> = flow {
-        val result = remote.getMovieRecommendations(movieId).toDomain()
+        val result = remote.getMovieRecommendations(movieId).toMovie()
         emit(result)
     }
 
@@ -115,7 +117,7 @@ class MovieRepository @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieRecommendations(movieId, page = position).toDomain()
+                remote.getMovieRecommendations(movieId, page = position).toMovie()
             }
         }
     ).flow
