@@ -40,9 +40,6 @@ class FavoriteMovieFragment : Fragment() {
                 itemView.findNavController()
                     .navigate(Uri.parse("movflex://main_nav/movie/${content.id}"))
             },
-            onFavoriteClickListener = {
-                vm.setFavorite(it)
-            },
         )
 
         vm.movieFavorite.observe(viewLifecycleOwner) {

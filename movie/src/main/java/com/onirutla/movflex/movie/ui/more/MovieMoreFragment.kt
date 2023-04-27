@@ -23,18 +23,7 @@ class MovieMoreFragment : Fragment() {
 
     private val args: MovieMoreFragmentArgs by navArgs()
 
-    private val movieMoreAdapter by lazy {
-        MoviePagingVerticalAdapter(
-            onItemClickListener = { view, content ->
-                view.findNavController().navigate(
-                    MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(content.id)
-                )
-            },
-            onFavoriteClickListener = {
-                viewModel.setFavorite(it)
-            }
-        )
-    }
+    private lateinit var movieMoreAdapter: MoviePagingVerticalAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +42,14 @@ class MovieMoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        movieMoreAdapter = MoviePagingVerticalAdapter(
+            onItemClickListener = { itemView, content ->
+                itemView.findNavController().navigate(
+                    MovieMoreFragmentDirections.actionMovieMoreFragmentToMovieDetailFragment(content.id)
+                )
+            },
+        )
 
         binding.moviePaging.apply {
             adapter = movieMoreAdapter

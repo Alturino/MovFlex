@@ -118,17 +118,6 @@
             app:layout_constraintTop_toTopOf="@+id/iv_star"
             tools:text="8.9" />
 
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/iv_favorite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_favorite_border_24"
-            android:tint="@color/red"
-            app:layout_constraintBottom_toBottomOf="@+id/tv_genre"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:tint="@color/red" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

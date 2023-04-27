@@ -15,7 +15,6 @@ class MoviePagingVerticalViewHolder(
     fun bind(
         content: Movie,
         itemClickListener: (View, Movie) -> Unit = { _, _ -> },
-        favoriteClickListener: (Movie) -> Unit = {},
     ) {
         binding.apply {
             root.setOnClickListener {
@@ -28,15 +27,9 @@ class MoviePagingVerticalViewHolder(
                     .into(ivImage)
                     .clearOnDetach()
 
-                if (isFavorite) {
-                    ivFavorite.setImageResource(coreR.drawable.ic_favorite_24)
-                } else {
-                    ivFavorite.setImageResource(coreR.drawable.ic_favorite_border_24)
-                }
+                tvRating.text = root.context
+                    .getString(coreR.string.format_rating, (voteAverage.toFloat() / 2f))
 
-                ivFavorite.setOnClickListener { favoriteClickListener(this) }
-
-                tvRating.text = root.context.getString(coreR.string.format_rating)
                 tvGenre.text = genres
                 tvSynopsis.text = overview
                 tvYearRelease.text = releaseDate

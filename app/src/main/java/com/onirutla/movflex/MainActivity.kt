@@ -29,6 +29,8 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 movieR.id.movieDetailFragment -> hideBottomAppbar()
                 tvR.id.tvDetailFragment -> hideBottomAppbar()
+                movieR.id.movieMoreFragment -> hideBottomAppbar()
+                tvR.id.tvMoreFragment -> hideBottomAppbar()
                 else -> showBottomAppbar()
             }
         }

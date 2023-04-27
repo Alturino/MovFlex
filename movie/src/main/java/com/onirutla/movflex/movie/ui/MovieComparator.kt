@@ -8,5 +8,5 @@ object MovieComparator : DiffUtil.ItemCallback<Movie>() {
         oldItem.id == newItem.id
 
     override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean =
-        oldItem.title == newItem.title && oldItem.originalTitle == newItem.originalName
+        oldItem.title == newItem.title && oldItem.originalTitle == newItem.originalName && oldItem.isFavorite == newItem.isFavorite
 }
