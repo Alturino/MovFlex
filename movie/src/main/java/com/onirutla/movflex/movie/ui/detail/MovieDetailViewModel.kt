@@ -3,6 +3,7 @@ package com.onirutla.movflex.movie.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.liveData
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.movie.core.repository.MovieRepository
@@ -25,19 +26,19 @@ class MovieDetailViewModel @Inject constructor(
     }
 
     val movieRecommendations = _movieId.switchMap {
-        movieRepository.getMovieRecommendations(it).asLiveData(viewModelScope.coroutineContext)
+        liveData { emit(movieRepository.getMovieRecommendations(it)) }
     }
 
     val movieReviews = _movieId.switchMap {
-        movieRepository.getMovieReviews(it).asLiveData(viewModelScope.coroutineContext)
+        liveData { emit(movieRepository.getMovieReviews(it)) }
     }
 
     val movieCasts = _movieId.switchMap {
-        movieRepository.getMovieCasts(it).asLiveData(viewModelScope.coroutineContext)
+        liveData { emit(movieRepository.getMovieCasts(it)) }
     }
 
     val movieSimilar = _movieId.switchMap {
-        movieRepository.getMovieSimilar(it).asLiveData(viewModelScope.coroutineContext)
+        liveData { emit(movieRepository.getMovieSimilar(it)) }
     }
 
     val isFavorite = _movieId.switchMap {

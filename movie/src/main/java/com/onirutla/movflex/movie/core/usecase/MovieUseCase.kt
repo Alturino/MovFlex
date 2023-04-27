@@ -16,10 +16,10 @@ class MovieUseCase @Inject constructor(
 
     val movies: Flow<List<SeeMore<List<Movie>>>> = flow {
         val result = supervisorScope {
-            val popular = async { repository.getMoviePopularHome() }
-            val upcoming = async { repository.getMovieUpcomingHome() }
-            val topRated = async { repository.getMovieTopRatedHome() }
-            val nowPlaying = async { repository.getMovieNowPlayingHome() }
+            val popular = async { repository.getMoviePopular() }
+            val upcoming = async { repository.getMovieUpcoming() }
+            val topRated = async { repository.getMovieTopRated() }
+            val nowPlaying = async { repository.getMovieNowPlaying() }
 
             val popularSeeMore = SeeMore(MovieType.MOVIE_POPULAR.value, popular.await())
             val upcomingSeeMore = SeeMore(MovieType.MOVIE_UPCOMING.value, upcoming.await())

@@ -21,7 +21,7 @@ class MovieMoreViewModel @Inject constructor(
     var movieId = 0
 
     val movieMore = _movieType.switchMap {
-        movieMoreUseCase.invoke(it, movieId)
+        movieMoreUseCase(it, movieId)
             .cachedIn(viewModelScope)
             .asLiveData(viewModelScope.coroutineContext)
     }

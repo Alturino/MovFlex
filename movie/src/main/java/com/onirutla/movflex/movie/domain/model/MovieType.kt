@@ -7,6 +7,6 @@ enum class MovieType(val value: String) {
     MOVIE_POPULAR("Popular"),
     MOVIE_RECOMMENDATIONS("Recommendations"),
     MOVIE_SIMILAR("Similar"),
-//    MOVIE_REVIEWS("Reviews"),
-//    MOVIE_CASTS("Casts"),
+    MOVIE_REVIEWS("Reviews"),
+    MOVIE_CASTS("Casts"),
 }

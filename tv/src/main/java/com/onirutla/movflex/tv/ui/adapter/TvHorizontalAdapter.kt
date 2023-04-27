@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import com.onirutla.movflex.core.databinding.ItemContentHorizontalBinding
+import com.onirutla.movflex.tv.databinding.ItemTvHorizontalBinding
 import com.onirutla.movflex.tv.domain.model.Tv
 
 class TvHorizontalAdapter(
@@ -20,7 +20,7 @@ class TvHorizontalAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): TvHorizontalViewHolder {
-        val view = ItemContentHorizontalBinding.inflate(
+        val view = ItemTvHorizontalBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

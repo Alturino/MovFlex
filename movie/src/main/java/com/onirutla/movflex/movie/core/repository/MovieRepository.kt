@@ -32,36 +32,36 @@ class MovieRepository @Inject constructor(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMoviePopular(position).toMovie()
+                getMoviePopular(position)
             }
         },
     ).flow
 
-    suspend fun getMoviePopularHome(): List<Movie> = remote.getMoviePopular()
+    suspend fun getMoviePopular(page: Int = 1): List<Movie> = remote.getMoviePopular(page)
         .toMovie()
 
     fun getMovieNowPlayingPaging(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieNowPlaying(position).toMovie()
+                getMovieNowPlaying(position)
             }
         },
     ).flow
 
-    suspend fun getMovieNowPlayingHome(): List<Movie> = remote.getMovieNowPlaying()
+    suspend fun getMovieNowPlaying(page: Int = 1): List<Movie> = remote.getMovieNowPlaying(page)
         .toMovie()
 
     fun getMovieTopRatedPaging(): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE, enablePlaceholders = false),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieTopRated(position).toMovie()
+                getMovieTopRated(position)
             }
         }
     ).flow
 
-    suspend fun getMovieTopRatedHome(): List<Movie> = remote.getMovieTopRated()
+    suspend fun getMovieTopRated(page: Int = 1): List<Movie> = remote.getMovieTopRated(page)
         .toMovie()
 
     fun getMovieUpcomingPaging(): Flow<PagingData<Movie>> = Pager(
@@ -73,7 +73,7 @@ class MovieRepository @Inject constructor(
         }
     ).flow
 
-    suspend fun getMovieUpcomingHome(): List<Movie> = remote.getMovieUpcoming()
+    suspend fun getMovieUpcoming(): List<Movie> = remote.getMovieUpcoming()
         .toMovie()
 
     fun getMovieDetail(id: Int): Flow<MovieDetail> = flow {
@@ -94,52 +94,56 @@ class MovieRepository @Inject constructor(
 
     fun getMovieFavorite(): Flow<PagingData<Movie>> = local.getFavorite()
 
-    fun getMovieSimilar(movieId: Int): Flow<List<Movie>> = flow {
-        val result = remote.getMovieSimilar(movieId).toMovie()
-        emit(result)
-    }
+    suspend fun getMovieSimilar(movieId: Int, page: Int = 1): List<Movie> =
+        remote.getMovieSimilar(movieId, page).toMovie()
 
     fun getMovieSimilarPaging(movieId: Int): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieSimilar(movieId = movieId, page = position).toMovie()
+                getMovieSimilar(movieId, position)
             }
         }
     ).flow
 
-    fun getMovieRecommendations(movieId: Int): Flow<List<Movie>> = flow {
-        val result = remote.getMovieRecommendations(movieId).toMovie()
-        emit(result)
-    }
+    suspend fun getMovieRecommendations(movieId: Int, page: Int = 1): List<Movie> =
+        remote.getMovieRecommendations(movieId, page).toMovie()
+
 
     fun getMovieRecommendationsPaging(movieId: Int): Flow<PagingData<Movie>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieRecommendations(movieId, page = position).toMovie()
+                getMovieRecommendations(movieId, position)
             }
         }
     ).flow
 
-    fun getMovieReviews(movieId: Int): Flow<List<Review>> = flow {
-        val result = remote.getMovieReviews(movieId).toReviews()
-        emit(result)
-    }
+    suspend fun getMovieReviews(movieId: Int, page: Int = 1): List<Review> =
+        remote.getMovieReviews(movieId, page).toReviews()
+
 
     fun getMovieReviewsPaging(movieId: Int): Flow<PagingData<Review>> = Pager(
         config = PagingConfig(pageSize = PAGE_SIZE),
         pagingSourceFactory = {
             PagingDataSource { position ->
-                remote.getMovieReviews(movieId = movieId, page = position).toReviews()
+                getMovieReviews(movieId, position)
             }
         }
     ).flow
 
-    fun getMovieCasts(movieId: Int): Flow<List<Cast>> = flow {
-        val result = remote.getMovieCasts(movieId).toCasts()
-        emit(result)
-    }
+    suspend fun getMovieCasts(movieId: Int, page: Int = 1): List<Cast> =
+        remote.getMovieCasts(movieId, page).toCasts()
+
+    fun getMovieCastsPaging(movieId: Int): Flow<PagingData<Cast>> = Pager(
+        config = PagingConfig(pageSize = PAGE_SIZE),
+        pagingSourceFactory = {
+            PagingDataSource { position ->
+                getMovieCasts(movieId, position)
+            }
+        }
+    ).flow
+
 
     fun observeFavoriteState(movieId: Int): Flow<Boolean> = local.observeFavoriteState(movieId)
 

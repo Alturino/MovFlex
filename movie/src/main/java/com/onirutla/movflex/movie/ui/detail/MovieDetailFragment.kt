@@ -10,12 +10,11 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
-import com.onirutla.movflex.core.ui.CastAdapter
-import com.onirutla.movflex.core.ui.ReviewAdapter
+import com.onirutla.movflex.core.ui.cast.CastAdapter
+import com.onirutla.movflex.core.ui.review.ReviewAdapter
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
 import com.onirutla.movflex.movie.databinding.FragmentMovieDetailBinding
 import com.onirutla.movflex.movie.domain.model.MovieType
-import com.onirutla.movflex.movie.ui.MovieFragmentDirections
 import com.onirutla.movflex.movie.ui.adapter.MovieHorizontalAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -32,7 +31,10 @@ class MovieDetailFragment : Fragment() {
 
     private fun navigator(view: View, movieType: MovieType, movieId: Int) {
         view.findNavController().navigate(
-            MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieMoreFragment(movieType, movieId)
+            MovieDetailFragmentDirections.actionMovieDetailFragmentToMovieMoreFragment(
+                movieType,
+                movieId
+            )
         )
     }
 
@@ -68,9 +70,10 @@ class MovieDetailFragment : Fragment() {
 
         binding.apply {
             tvCastsSeeMore.setOnClickListener {
+                navigator(it, MovieType.MOVIE_CASTS, args.movieId)
             }
             tvReviewSeeMore.setOnClickListener {
-
+                navigator(it, MovieType.MOVIE_REVIEWS, args.movieId)
             }
             tvRecommendationsSeeMore.setOnClickListener {
                 navigator(it, MovieType.MOVIE_RECOMMENDATIONS, args.movieId)

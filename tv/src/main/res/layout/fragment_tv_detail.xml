@@ -113,7 +113,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_header_casts"
             tools:itemCount="5"
-            tools:listitem="@layout/item_casts" />
+            tools:listitem="@layout/item_cast_horizontal" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_genre"
@@ -197,7 +197,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recommendation"
             tools:itemCount="5"
-            tools:listitem="@layout/item_content_horizontal" />
+            tools:listitem="@layout/item_tv_horizontal" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_header_similar"
@@ -223,7 +223,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_header_similar"
             tools:itemCount="5"
-            tools:listitem="@layout/item_content_horizontal" />
+            tools:listitem="@layout/item_tv_horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

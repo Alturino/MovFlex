@@ -3,12 +3,12 @@ package com.onirutla.movflex.tv.ui.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.onirutla.movflex.core.databinding.ItemContentVerticalBinding
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.tv.databinding.ItemTvVerticalBinding
 import com.onirutla.movflex.tv.domain.model.Tv
 
 class TvPagingVerticalViewHolder(
-    private val binding: ItemContentVerticalBinding,
+    private val binding: ItemTvVerticalBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(content: Tv, onClickListener: (view: View, movieContent: Tv) -> Unit) {

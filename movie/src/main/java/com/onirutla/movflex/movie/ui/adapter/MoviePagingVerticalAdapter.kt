@@ -3,7 +3,6 @@ package com.onirutla.movflex.movie.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.paging.PagingDataAdapter
 import com.onirutla.movflex.movie.databinding.MovieVerticalBinding
 import com.onirutla.movflex.movie.domain.model.Movie
