@@ -14,12 +14,3 @@ data class SpokenLanguageResponse(
     val name: String,
 )
 
-fun SpokenLanguageResponse.toSpokenLanguage(): SpokenLanguage = SpokenLanguage(
-    englishName = englishName,
-    iso6391 = iso6391,
-    name = name,
-)
-
-fun List<SpokenLanguageResponse>.toSpokenLanguage(): List<SpokenLanguage> = this.map {
-    it.toSpokenLanguage()
-}

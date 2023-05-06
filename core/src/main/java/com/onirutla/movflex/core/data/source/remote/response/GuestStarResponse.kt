@@ -30,18 +30,3 @@ data class GuestStarResponse(
     val profilePath: String? = "",
 )
 
-fun GuestStarResponse.toGuestStar() = GuestStar(
-    adult = adult ?: false,
-    character = character.orEmpty(),
-    creditId = creditId.orEmpty(),
-    gender = gender ?: 0,
-    id = id ?: 0,
-    knownForDepartment = knownForDepartment.orEmpty(),
-    name = name.orEmpty(),
-    order = order ?: 0,
-    originalName = originalName.orEmpty(),
-    popularity = popularity ?: 0.0,
-    profilePath = profilePath.orEmpty()
-)
-
-fun List<GuestStarResponse>.toGuestStars() = map { it.toGuestStar() }

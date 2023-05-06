@@ -1,9 +1,9 @@
 package com.onirutla.movflex.movie.util
 
 import com.onirutla.movflex.core.data.source.local.entities.movie.MovieEntity
-import com.onirutla.movflex.core.data.source.remote.response.toProductionCompany
-import com.onirutla.movflex.core.data.source.remote.response.toProductionCountry
-import com.onirutla.movflex.core.data.source.remote.response.toSpokenLanguage
+import com.onirutla.movflex.core.data.source.remote.response.util.toProductionCompany
+import com.onirutla.movflex.core.data.source.remote.response.util.toProductionCountry
+import com.onirutla.movflex.core.data.source.remote.response.util.toSpokenLanguage
 import com.onirutla.movflex.movie.core.remote.model.MovieDetailResponse
 import com.onirutla.movflex.movie.core.remote.model.MovieResponse
 import com.onirutla.movflex.movie.domain.model.Movie

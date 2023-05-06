@@ -32,20 +32,3 @@ data class LastEpisodeToAirResponse(
     val voteCount: Int? = 0,
 )
 
-fun LastEpisodeToAirResponse.toLastEpisodeToAir(): LastEpisodeToAir = LastEpisodeToAir(
-    airDate = airDate.orEmpty(),
-    episodeNumber = episodeNumber ?: 0,
-    id = id ?: 0,
-    name = name.orEmpty(),
-    overview = overview.orEmpty(),
-    productionCode = productionCode.orEmpty(),
-    runtime = runtime ?: 0,
-    seasonNumber = seasonNumber ?: 0,
-    showId = showId ?: 0,
-    stillPath = stillPath.orEmpty(),
-    voteAverage = voteAverage ?: 0.0,
-    voteCount = voteCount ?: 0,
-)
-
-fun List<LastEpisodeToAirResponse>.toLastEpisodeToAir(): List<LastEpisodeToAir> =
-    this.map { it.toLastEpisodeToAir() }

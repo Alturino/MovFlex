@@ -18,12 +18,3 @@ data class CreatedByResponse(
     val profilePath: String? = "",
 )
 
-fun CreatedByResponse.toCreatedBy(): CreatedBy = CreatedBy(
-    creditId = creditId.orEmpty(),
-    gender = gender ?: 0,
-    id = id ?: 0,
-    name = name.orEmpty(),
-    profilePath = profilePath.orEmpty()
-)
-
-fun List<CreatedByResponse>.toCreatedBy(): List<CreatedBy> = this.map { it.toCreatedBy() }

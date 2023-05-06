@@ -1,6 +1,5 @@
 package com.onirutla.movflex.core.data.source.remote.response
 
-import com.onirutla.movflex.core.domain.model.Season
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -24,15 +23,3 @@ data class SeasonResponse(
     val seasonNumber: Int? = 0,
 )
 
-fun SeasonResponse.toSeason(): Season = Season(
-    airDate = airDate.orEmpty(),
-    episodes = episodes?.toEpisodes().orEmpty(),
-    _id = _id.orEmpty(),
-    id = id ?: 0,
-    name = name.orEmpty(),
-    overview = overview.orEmpty(),
-    posterPath = posterPath.orEmpty(),
-    seasonNumber = seasonNumber ?: 0,
-)
-
-fun List<SeasonResponse>.toSeasons(): List<Season> = this.map { it.toSeason() }

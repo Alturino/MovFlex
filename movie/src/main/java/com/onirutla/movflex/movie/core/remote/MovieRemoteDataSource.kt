@@ -25,35 +25,33 @@ class MovieRemoteDataSource @Inject constructor(
         emptyList()
     }
 
-    suspend fun getMovieNowPlaying(page: Int = 1): List<MovieResponse> =
-        try {
-            val response = movieApiService.getMovieNowPlaying(page)
-            if (response.isSuccessful) {
-                Timber.d("${response.body()}")
-                response.body()!!.results.orEmpty()
-            } else {
-                Timber.d("${response.errorBody()}")
-                emptyList()
-            }
-        } catch (e: Exception) {
-            Timber.d("$e")
+    suspend fun getMovieNowPlaying(page: Int = 1): List<MovieResponse> = try {
+        val response = movieApiService.getMovieNowPlaying(page)
+        if (response.isSuccessful) {
+            Timber.d("${response.body()}")
+            response.body()!!.results.orEmpty()
+        } else {
+            Timber.d("${response.errorBody()}")
             emptyList()
         }
+    } catch (e: Exception) {
+        Timber.d("$e")
+        emptyList()
+    }
 
-    suspend fun getMovieTopRated(page: Int = 1): List<MovieResponse> =
-        try {
-            val response = movieApiService.getMovieTopRated(page)
-            if (response.isSuccessful) {
-                Timber.d("${response.body()}")
-                response.body()!!.results.orEmpty()
-            } else {
-                Timber.d("${response.errorBody()}")
-                emptyList()
-            }
-        } catch (e: Exception) {
-            Timber.d("$e")
+    suspend fun getMovieTopRated(page: Int = 1): List<MovieResponse> = try {
+        val response = movieApiService.getMovieTopRated(page)
+        if (response.isSuccessful) {
+            Timber.d("${response.body()}")
+            response.body()!!.results.orEmpty()
+        } else {
+            Timber.d("${response.errorBody()}")
             emptyList()
         }
+    } catch (e: Exception) {
+        Timber.d("$e")
+        emptyList()
+    }
 
     suspend fun getMovieDetail(id: Int): MovieDetailResponse? = try {
         val response = movieApiService.getMovieDetail(id)
@@ -69,20 +67,19 @@ class MovieRemoteDataSource @Inject constructor(
         null
     }
 
-    suspend fun getMovieUpcoming(page: Int = 1): List<MovieResponse> =
-        try {
-            val response = movieApiService.getMovieUpcoming(page)
-            if (response.isSuccessful) {
-                Timber.d("${response.body()}")
-                response.body()!!.results.orEmpty()
-            } else {
-                Timber.d("${response.errorBody()}")
-                emptyList()
-            }
-        } catch (e: Exception) {
-            Timber.d("$e")
+    suspend fun getMovieUpcoming(page: Int = 1): List<MovieResponse> = try {
+        val response = movieApiService.getMovieUpcoming(page)
+        if (response.isSuccessful) {
+            Timber.d("${response.body()}")
+            response.body()!!.results.orEmpty()
+        } else {
+            Timber.d("${response.errorBody()}")
             emptyList()
         }
+    } catch (e: Exception) {
+        Timber.d("$e")
+        emptyList()
+    }
 
     suspend fun getMovieSimilar(movieId: Int, page: Int = 1): List<MovieResponse> = try {
         val response = movieApiService.getMovieSimilar(movieId, page)
@@ -128,7 +125,6 @@ class MovieRemoteDataSource @Inject constructor(
         Timber.d("$e")
         emptyList()
     }
-
 
     suspend fun getMovieReviews(movieId: Int, page: Int = 1): List<ReviewResponse> = try {
         val response = movieApiService.getMovieReviews(

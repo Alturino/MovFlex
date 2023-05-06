@@ -8,8 +8,8 @@ import com.onirutla.movflex.core.data.source.remote.PagingDataSource
 import com.onirutla.movflex.core.domain.model.Cast
 import com.onirutla.movflex.core.domain.model.Review
 import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
-import com.onirutla.movflex.core.util.toCasts
-import com.onirutla.movflex.core.util.toReviews
+import com.onirutla.movflex.core.data.source.remote.response.util.toCasts
+import com.onirutla.movflex.core.data.source.remote.response.util.toReviews
 import com.onirutla.movflex.movie.core.local.MovieLocalDataSource
 import com.onirutla.movflex.movie.core.remote.MovieRemoteDataSource
 import com.onirutla.movflex.movie.domain.model.Movie

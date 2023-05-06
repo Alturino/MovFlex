@@ -16,13 +16,3 @@ data class ProductionCompanyResponse(
     val originCountry: String? = "",
 )
 
-fun ProductionCompanyResponse.toProductionCompany(): ProductionCompany = ProductionCompany(
-    id = id ?: 0,
-    logoPath = logoPath.orEmpty(),
-    name = name.orEmpty(),
-    originCountry = originCountry.orEmpty(),
-)
-
-fun List<ProductionCompanyResponse>.toProductionCompany(): List<ProductionCompany> = this.map {
-    it.toProductionCompany()
-}

@@ -30,18 +30,3 @@ data class CrewResponse(
     val profilePath: String? = "",
 )
 
-fun CrewResponse.toCrew() = Crew(
-    adult = adult ?: false,
-    creditId = creditId.orEmpty(),
-    department = department.orEmpty(),
-    gender = gender ?: 0,
-    id = id ?: 0,
-    job = job.orEmpty(),
-    knownForDepartment = knownForDepartment.orEmpty(),
-    name = name.orEmpty(),
-    originalName = originalName.orEmpty(),
-    popularity = popularity ?: 0.0,
-    profilePath = profilePath.orEmpty(),
-)
-
-fun List<CrewResponse>.toCrews() = map { it.toCrew() }

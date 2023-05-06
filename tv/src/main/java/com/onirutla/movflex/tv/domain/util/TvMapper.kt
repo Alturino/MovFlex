@@ -1,14 +1,14 @@
 package com.onirutla.movflex.tv.domain.util
 
 import com.onirutla.movflex.core.data.source.local.entities.tv.TvEntity
-import com.onirutla.movflex.core.data.source.remote.response.toCreatedBy
-import com.onirutla.movflex.core.data.source.remote.response.toGenre
-import com.onirutla.movflex.core.data.source.remote.response.toLastEpisodeToAir
-import com.onirutla.movflex.core.data.source.remote.response.toNetwork
-import com.onirutla.movflex.core.data.source.remote.response.toProductionCompany
-import com.onirutla.movflex.core.data.source.remote.response.toProductionCountry
-import com.onirutla.movflex.core.data.source.remote.response.toSeasons
-import com.onirutla.movflex.core.data.source.remote.response.toSpokenLanguage
+import com.onirutla.movflex.core.data.source.remote.response.util.toCreatedBy
+import com.onirutla.movflex.core.data.source.remote.response.util.toGenre
+import com.onirutla.movflex.core.data.source.remote.response.util.toLastEpisodeToAir
+import com.onirutla.movflex.core.data.source.remote.response.util.toNetwork
+import com.onirutla.movflex.core.data.source.remote.response.util.toProductionCompany
+import com.onirutla.movflex.core.data.source.remote.response.util.toProductionCountry
+import com.onirutla.movflex.core.data.source.remote.response.util.toSeasons
+import com.onirutla.movflex.core.data.source.remote.response.util.toSpokenLanguage
 import com.onirutla.movflex.core.domain.model.LastEpisodeToAir
 import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
 import com.onirutla.movflex.tv.core.remote.model.TvResponse

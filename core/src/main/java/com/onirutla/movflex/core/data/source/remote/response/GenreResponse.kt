@@ -12,9 +12,3 @@ data class GenreResponse(
     val name: String? = "",
 )
 
-fun GenreResponse.toGenre(): Genre = Genre(
-    id = id ?: 0,
-    name = name.orEmpty(),
-)
-
-fun List<GenreResponse>.toGenre(): List<Genre> = map { it.toGenre() }

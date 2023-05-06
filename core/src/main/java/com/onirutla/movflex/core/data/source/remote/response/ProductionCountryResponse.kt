@@ -12,11 +12,3 @@ data class ProductionCountryResponse(
     val name: String,
 )
 
-fun ProductionCountryResponse.toProductionCountry(): ProductionCountry = ProductionCountry(
-    iso31661 = iso31661,
-    name = name
-)
-
-fun List<ProductionCountryResponse>.toProductionCountry(): List<ProductionCountry> = this.map {
-    it.toProductionCountry()
-}

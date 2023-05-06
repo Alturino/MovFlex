@@ -16,11 +16,3 @@ data class NetworkResponse(
     val originCountry: String? = "",
 )
 
-fun NetworkResponse.toNetwork(): Network = Network(
-    id = id,
-    logoPath = logoPath.orEmpty(),
-    name = name.orEmpty(),
-    originCountry = originCountry.orEmpty()
-)
-
-fun List<NetworkResponse>.toNetwork(): List<Network> = this.map { it.toNetwork() }

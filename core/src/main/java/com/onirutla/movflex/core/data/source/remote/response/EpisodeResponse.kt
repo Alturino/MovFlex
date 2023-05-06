@@ -1,5 +1,6 @@
 package com.onirutla.movflex.core.data.source.remote.response
 
+import com.onirutla.movflex.core.data.source.remote.response.util.toCrews
 import com.onirutla.movflex.core.domain.model.Episode
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -36,21 +37,3 @@ data class EpisodeResponse(
     val voteCount: Int? = 0,
 )
 
-fun EpisodeResponse.toEpisode() = Episode(
-    airDate = airDate.orEmpty(),
-    crew = crew?.toCrews().orEmpty(),
-    episodeNumber = episodeNumber ?: 0,
-    guestStars = guestStars?.toGuestStars().orEmpty(),
-    id = id ?: 0,
-    name = name.orEmpty(),
-    overview = overview.orEmpty(),
-    productionCode = productionCode.orEmpty(),
-    runtime = runtime ?: 0,
-    seasonNumber = seasonNumber ?: 0,
-    showId = showId ?: 0,
-    stillPath = stillPath.orEmpty(),
-    voteAverage = voteAverage ?: 0.0,
-    voteCount = voteCount ?: 0,
-)
-
-fun List<EpisodeResponse>.toEpisodes() = map { it.toEpisode() }
