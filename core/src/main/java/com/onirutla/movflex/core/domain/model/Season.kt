@@ -1,10 +1,8 @@
 package com.onirutla.movflex.core.domain.model
 
-import com.onirutla.movflex.core.data.source.remote.response.EpisodeResponse
-
 data class Season(
     val airDate: String,
-    val episodes: List<EpisodeResponse>,
+    val episodes: List<Episode>,
     val _id: String,
     val id: Int,
     val name: String,

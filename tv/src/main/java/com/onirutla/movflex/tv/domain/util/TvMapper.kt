@@ -7,28 +7,31 @@ import com.onirutla.movflex.core.data.source.remote.response.toLastEpisodeToAir
 import com.onirutla.movflex.core.data.source.remote.response.toNetwork
 import com.onirutla.movflex.core.data.source.remote.response.toProductionCompany
 import com.onirutla.movflex.core.data.source.remote.response.toProductionCountry
-import com.onirutla.movflex.core.data.source.remote.response.toSeason
+import com.onirutla.movflex.core.data.source.remote.response.toSeasons
 import com.onirutla.movflex.core.data.source.remote.response.toSpokenLanguage
+import com.onirutla.movflex.core.domain.model.LastEpisodeToAir
 import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
 import com.onirutla.movflex.tv.core.remote.model.TvResponse
 import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.domain.model.TvDetail
 
-fun TvResponse.toDomain() = Tv(
+fun TvResponse.toTv() = Tv(
     backdropPath = backdropPath.orEmpty(),
-    firstAirDate = firstAirDate,
-    genreIds = genreIds,
+    firstAirDate = firstAirDate.orEmpty(),
+    genreIds = genreIds.orEmpty(),
     id = id,
-    name = name,
-    originCountry = originCountry,
-    originalLanguage = originalLanguage,
-    originalName = originalName,
-    overview = overview,
-    popularity = popularity,
-    posterPath = posterPath,
-    voteAverage = voteAverage,
-    voteCount = voteCount,
+    name = name.orEmpty(),
+    originCountry = originCountry.orEmpty(),
+    originalLanguage = originalLanguage.orEmpty(),
+    originalName = originalName.orEmpty(),
+    overview = overview.orEmpty(),
+    popularity = popularity ?: 0.0,
+    posterPath = posterPath.orEmpty(),
+    voteAverage = voteAverage ?: 0.0,
+    voteCount = voteCount ?: 0,
 )
+
+fun List<TvResponse>.toTvs() = this.map { it.toTv() }
 
 fun Tv.toEntity() = TvEntity(
     adult = false,
@@ -53,7 +56,7 @@ fun Tv.toEntity() = TvEntity(
     voteCount = voteCount
 )
 
-fun TvEntity.toDomain() = Tv(
+fun TvEntity.toTv() = Tv(
     backdropPath = backdropPath,
     firstAirDate = firstAirDate,
     id = id,
@@ -92,37 +95,37 @@ fun TvDetail.toEntity() = TvEntity(
     voteCount = voteCount
 )
 
-fun TvDetailResponse.toDomain() = TvDetail(
-    adult = adult,
+fun TvDetailResponse.toTvDetail() = TvDetail(
+    adult = adult ?: false,
     backdropPath = backdropPath.orEmpty(),
-    createdBy = createdBy.toCreatedBy(),
-    episodeRunTime = episodeRunTime,
-    firstAirDate = firstAirDate,
-    genres = genres.toGenre(),
-    homepage = homepage,
-    id = id,
-    inProduction = inProduction,
-    languages = languages,
-    lastAirDate = lastAirDate,
-    lastEpisodeToAir = lastEpisodeToAir.toLastEpisodeToAir(),
-    name = name,
-    networks = networks.toNetwork(),
+    createdBy = createdBy?.toCreatedBy().orEmpty(),
+    episodeRunTime = episodeRunTime.orEmpty(),
+    firstAirDate = firstAirDate.orEmpty(),
+    genres = genres?.toGenre()?.joinToString { it.name }.orEmpty(),
+    homepage = homepage.orEmpty(),
+    id = id ?: 0,
+    inProduction = inProduction ?: false,
+    languages = languages.orEmpty(),
+    lastAirDate = lastAirDate.orEmpty(),
+    lastEpisodeToAir = lastEpisodeToAir?.toLastEpisodeToAir() ?: LastEpisodeToAir(),
+    name = name.orEmpty(),
+    networks = networks?.toNetwork().orEmpty(),
     nextEpisodeToAir = nextEpisodeToAir.toString(),
-    numberOfEpisodes = numberOfEpisodes,
-    numberOfSeasons = numberOfSeasons,
-    originCountry = originCountry,
-    originalLanguage = originalLanguage,
-    originalName = originalName,
-    overview = overview,
-    popularity = popularity,
-    posterPath = posterPath,
-    productionCompanies = productionCompanies.toProductionCompany(),
-    productionCountries = productionCountries.toProductionCountry(),
-    seasons = seasons.toSeason(),
-    spokenLanguages = spokenLanguages.toSpokenLanguage(),
-    status = status,
-    tagline = tagline,
-    type = type,
-    voteAverage = voteAverage,
-    voteCount = voteCount
+    numberOfEpisodes = numberOfEpisodes ?: 0,
+    numberOfSeasons = numberOfSeasons ?: 0,
+    originCountry = originCountry.orEmpty(),
+    originalLanguage = originalLanguage.orEmpty(),
+    originalName = originalName.orEmpty(),
+    overview = overview.orEmpty(),
+    popularity = popularity ?: 0.0,
+    posterPath = posterPath.orEmpty(),
+    productionCompanies = productionCompanies?.toProductionCompany().orEmpty(),
+    productionCountries = productionCountries?.toProductionCountry().orEmpty(),
+    seasons = seasons?.toSeasons().orEmpty(),
+    spokenLanguages = spokenLanguages?.toSpokenLanguage().orEmpty(),
+    status = status.orEmpty(),
+    tagline = tagline.orEmpty(),
+    type = type.orEmpty(),
+    voteAverage = voteAverage ?: 0.0,
+    voteCount = voteCount ?: 0,
 )

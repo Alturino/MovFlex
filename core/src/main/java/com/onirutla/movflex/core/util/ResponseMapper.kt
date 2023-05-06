@@ -8,30 +8,30 @@ import com.onirutla.movflex.core.domain.model.Cast
 import com.onirutla.movflex.core.domain.model.Review
 
 fun CastResponse.toCast() = Cast(
-    adult = adult,
-    castId = castId,
-    character = character,
-    creditId = creditId,
-    gender = gender,
-    id = id,
-    knownForDepartment = knownForDepartment,
-    name = name,
-    order = order,
-    originalName = originalName,
-    popularity = popularity,
+    adult = adult ?: false,
+    castId = castId ?: 0,
+    character = character.orEmpty(),
+    creditId = creditId.orEmpty(),
+    gender = gender ?: 0,
+    id = id ?: 0,
+    knownForDepartment = knownForDepartment.orEmpty(),
+    name = name.orEmpty(),
+    order = order ?: 0,
+    originalName = originalName.orEmpty(),
+    popularity = popularity ?: 0.0,
     profilePath = profilePath.orEmpty()
 )
 
 fun List<CastResponse>.toCasts() = this.map { it.toCast() }
 
 fun ReviewResponse.toReview() = Review(
-    author = author,
+    author = author.orEmpty(),
     authorDetail = authorDetailsResponse.toAuthorDetail(),
-    content = content,
-    createdAt = createdAt,
-    id = id,
-    updatedAt = updatedAt,
-    url = url,
+    content = content.orEmpty(),
+    createdAt = createdAt.orEmpty(),
+    id = id.orEmpty(),
+    updatedAt = updatedAt.orEmpty(),
+    url = url.orEmpty(),
 )
 
 fun List<ReviewResponse>.toReviews() = this.map { it.toReview() }

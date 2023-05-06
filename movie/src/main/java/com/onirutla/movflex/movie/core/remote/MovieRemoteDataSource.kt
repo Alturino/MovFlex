@@ -15,7 +15,7 @@ class MovieRemoteDataSource @Inject constructor(
         val response = movieApiService.getMoviePopular(page)
         if (response.isSuccessful) {
             Timber.d("${response.body()}")
-            response.body()!!.results
+            response.body()!!.results.orEmpty()
         } else {
             Timber.d("${response.errorBody()}")
             emptyList()
@@ -30,7 +30,7 @@ class MovieRemoteDataSource @Inject constructor(
             val response = movieApiService.getMovieNowPlaying(page)
             if (response.isSuccessful) {
                 Timber.d("${response.body()}")
-                response.body()!!.results
+                response.body()!!.results.orEmpty()
             } else {
                 Timber.d("${response.errorBody()}")
                 emptyList()
@@ -45,7 +45,7 @@ class MovieRemoteDataSource @Inject constructor(
             val response = movieApiService.getMovieTopRated(page)
             if (response.isSuccessful) {
                 Timber.d("${response.body()}")
-                response.body()!!.results
+                response.body()!!.results.orEmpty()
             } else {
                 Timber.d("${response.errorBody()}")
                 emptyList()
@@ -74,7 +74,7 @@ class MovieRemoteDataSource @Inject constructor(
             val response = movieApiService.getMovieUpcoming(page)
             if (response.isSuccessful) {
                 Timber.d("${response.body()}")
-                response.body()!!.results
+                response.body()!!.results.orEmpty()
             } else {
                 Timber.d("${response.errorBody()}")
                 emptyList()
@@ -88,7 +88,7 @@ class MovieRemoteDataSource @Inject constructor(
         val response = movieApiService.getMovieSimilar(movieId, page)
         if (response.isSuccessful) {
             Timber.d("${response.body()}")
-            response.body()!!.results
+            response.body()!!.results.orEmpty()
         } else {
             Timber.d("${response.errorBody()}")
             emptyList()
@@ -105,7 +105,7 @@ class MovieRemoteDataSource @Inject constructor(
         )
         if (response.isSuccessful) {
             Timber.d("${response.body()}")
-            response.body()!!.results
+            response.body()!!.results.orEmpty()
         } else {
             Timber.d("${response.errorBody()}")
             emptyList()
@@ -119,7 +119,7 @@ class MovieRemoteDataSource @Inject constructor(
         val response = movieApiService.getMovieCasts(movieId, page)
         if (response.isSuccessful) {
             Timber.d("${response.body()}")
-            response.body()!!.cast
+            response.body()!!.cast.orEmpty()
         } else {
             Timber.d("${response.errorBody()}")
             emptyList()

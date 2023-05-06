@@ -3,6 +3,7 @@ package com.onirutla.movflex.movie.core.repository
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
+import androidx.paging.map
 import com.onirutla.movflex.core.data.source.remote.PagingDataSource
 import com.onirutla.movflex.core.domain.model.Cast
 import com.onirutla.movflex.core.domain.model.Review
@@ -20,6 +21,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -93,6 +95,11 @@ class MovieRepository @Inject constructor(
     }
 
     fun getMovieFavorite(): Flow<PagingData<Movie>> = local.getFavorite()
+        .map { pagingData ->
+            pagingData.map {
+                it.toMovie()
+            }
+        }
 
     suspend fun getMovieSimilar(movieId: Int, page: Int = 1): List<Movie> =
         remote.getMovieSimilar(movieId, page).toMovie()

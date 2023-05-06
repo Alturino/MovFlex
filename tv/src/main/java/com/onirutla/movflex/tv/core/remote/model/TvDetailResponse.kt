@@ -14,68 +14,67 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class TvDetailResponse(
     @Json(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean? = false,
     @Json(name = "backdrop_path")
     val backdropPath: String? = "",
     @Json(name = "created_by")
-    val createdBy: List<CreatedByResponse>,
+    val createdBy: List<CreatedByResponse>? = emptyList(),
     @Json(name = "episode_run_time")
-    val episodeRunTime: List<Int>,
+    val episodeRunTime: List<Int>? = emptyList(),
     @Json(name = "first_air_date")
-    val firstAirDate: String,
+    val firstAirDate: String? = "",
     @Json(name = "genres")
-    val genres: List<GenreResponse>,
+    val genres: List<GenreResponse>? = emptyList(),
     @Json(name = "homepage")
-    val homepage: String,
+    val homepage: String? = "",
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "in_production")
-    val inProduction: Boolean,
+    val inProduction: Boolean? = false,
     @Json(name = "languages")
-    val languages: List<String>,
+    val languages: List<String>? = emptyList(),
     @Json(name = "last_air_date")
-    val lastAirDate: String,
+    val lastAirDate: String? = "",
     @Json(name = "last_episode_to_air")
-    val lastEpisodeToAir: LastEpisodeToAirResponse,
+    val lastEpisodeToAir: LastEpisodeToAirResponse? = LastEpisodeToAirResponse(),
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
     @Json(name = "networks")
-    val networks: List<NetworkResponse>,
+    val networks: List<NetworkResponse>? = emptyList(),
     @Json(name = "next_episode_to_air")
-    val nextEpisodeToAir: Any,
+    val nextEpisodeToAir: Any?,
     @Json(name = "number_of_episodes")
-    val numberOfEpisodes: Int,
+    val numberOfEpisodes: Int? = 0,
     @Json(name = "number_of_seasons")
-    val numberOfSeasons: Int,
+    val numberOfSeasons: Int? = 0,
     @Json(name = "origin_country")
-    val originCountry: List<String>,
+    val originCountry: List<String>? = emptyList(),
     @Json(name = "original_language")
-    val originalLanguage: String,
+    val originalLanguage: String? = "",
     @Json(name = "original_name")
-    val originalName: String,
+    val originalName: String? = "",
     @Json(name = "overview")
-    val overview: String,
+    val overview: String? = "",
     @Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double? = 0.0,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String? = "",
     @Json(name = "production_companies")
-    val productionCompanies: List<ProductionCompanyResponse>,
+    val productionCompanies: List<ProductionCompanyResponse>? = emptyList(),
     @Json(name = "production_countries")
-    val productionCountries: List<ProductionCountryResponse>,
+    val productionCountries: List<ProductionCountryResponse>? = emptyList(),
     @Json(name = "seasons")
-    val seasons: List<SeasonResponse>,
+    val seasons: List<SeasonResponse>? = emptyList(),
     @Json(name = "spoken_languages")
-    val spokenLanguages: List<SpokenLanguageResponse>,
+    val spokenLanguages: List<SpokenLanguageResponse>? = emptyList(),
     @Json(name = "status")
-    val status: String,
+    val status: String? = "",
     @Json(name = "tagline")
-    val tagline: String,
+    val tagline: String? = "",
     @Json(name = "type")
-    val type: String,
+    val type: String? = "",
     @Json(name = "vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double? = 0.0,
     @Json(name = "vote_count")
-    val voteCount: Int,
+    val voteCount: Int? = 0,
 )
-

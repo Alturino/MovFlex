@@ -20,7 +20,7 @@ interface MovieDao {
     fun observeFavoriteState(id: Int): Flow<MovieEntity?>
 
     @Query("SELECT * FROM movie WHERE id = :id")
-    fun isFavorite(id: Int): MovieEntity?
+    suspend fun isInDb(id: Int): MovieEntity?
 
     @Query("SELECT * FROM movie")
     fun getFavorite(): PagingSource<Int, MovieEntity>

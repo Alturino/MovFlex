@@ -9,9 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.movie.core.repository.MovieRepository
 import com.onirutla.movflex.movie.domain.model.MovieDetail
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -51,9 +49,7 @@ class MovieDetailViewModel @Inject constructor(
 
     fun setFavorite(movie: MovieDetail) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO) {
-                movieRepository.setFavorite(movie)
-            }
+            movieRepository.setFavorite(movie)
         }
     }
 

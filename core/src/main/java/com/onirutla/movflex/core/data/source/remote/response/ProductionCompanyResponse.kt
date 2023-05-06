@@ -7,7 +7,7 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ProductionCompanyResponse(
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "logo_path")
     val logoPath: String? = "",
     @Json(name = "name")
@@ -17,7 +17,7 @@ data class ProductionCompanyResponse(
 )
 
 fun ProductionCompanyResponse.toProductionCompany(): ProductionCompany = ProductionCompany(
-    id = id,
+    id = id ?: 0,
     logoPath = logoPath.orEmpty(),
     name = name.orEmpty(),
     originCountry = originCountry.orEmpty(),

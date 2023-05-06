@@ -7,22 +7,22 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class CreatedByResponse(
     @Json(name = "credit_id")
-    val creditId: String,
+    val creditId: String? = "",
     @Json(name = "gender")
-    val gender: Int,
+    val gender: Int? = 0,
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
     @Json(name = "profile_path")
     val profilePath: String? = "",
 )
 
 fun CreatedByResponse.toCreatedBy(): CreatedBy = CreatedBy(
-    creditId = creditId,
-    gender = gender,
-    id = id,
-    name = name,
+    creditId = creditId.orEmpty(),
+    gender = gender ?: 0,
+    id = id ?: 0,
+    name = name.orEmpty(),
     profilePath = profilePath.orEmpty()
 )
 

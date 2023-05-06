@@ -7,32 +7,32 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class SeasonResponse(
     @Json(name = "air_date")
-    val airDate: String,
+    val airDate: String? = "",
     @Json(name = "episodes")
-    val episodes: List<EpisodeResponse>,
+    val episodes: List<EpisodeResponse>? = emptyList(),
     @Json(name = "_id")
-    val _id: String,
+    val _id: String? = "",
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
     @Json(name = "overview")
-    val overview: String,
+    val overview: String? = "",
     @Json(name = "poster_path")
     val posterPath: String? = "",
     @Json(name = "season_number")
-    val seasonNumber: Int,
+    val seasonNumber: Int? = 0,
 )
 
 fun SeasonResponse.toSeason(): Season = Season(
-    airDate = airDate,
-    episodes = episodes,
-    _id = _id,
-    id = id,
-    name = name,
-    overview = overview,
+    airDate = airDate.orEmpty(),
+    episodes = episodes?.toEpisodes().orEmpty(),
+    _id = _id.orEmpty(),
+    id = id ?: 0,
+    name = name.orEmpty(),
+    overview = overview.orEmpty(),
     posterPath = posterPath.orEmpty(),
-    seasonNumber = seasonNumber
+    seasonNumber = seasonNumber ?: 0,
 )
 
-fun List<SeasonResponse>.toSeason(): List<Season> = this.map { it.toSeason() }
+fun List<SeasonResponse>.toSeasons(): List<Season> = this.map { it.toSeason() }

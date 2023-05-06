@@ -1,30 +1,47 @@
 package com.onirutla.movflex.core.data.source.remote.response
 
+import com.onirutla.movflex.core.domain.model.Crew
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class CrewResponse(
     @Json(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean? = false,
     @Json(name = "credit_id")
-    val creditId: String,
+    val creditId: String? = "",
     @Json(name = "department")
-    val department: String,
+    val department: String? = "",
     @Json(name = "gender")
-    val gender: Int,
+    val gender: Int? = 0,
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "job")
-    val job: String,
+    val job: String? = "",
     @Json(name = "known_for_department")
-    val knownForDepartment: String,
+    val knownForDepartment: String? = "",
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
     @Json(name = "original_name")
-    val originalName: String,
+    val originalName: String? = "",
     @Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double? = 0.0,
     @Json(name = "profile_path")
     val profilePath: String? = "",
 )
+
+fun CrewResponse.toCrew() = Crew(
+    adult = adult ?: false,
+    creditId = creditId.orEmpty(),
+    department = department.orEmpty(),
+    gender = gender ?: 0,
+    id = id ?: 0,
+    job = job.orEmpty(),
+    knownForDepartment = knownForDepartment.orEmpty(),
+    name = name.orEmpty(),
+    originalName = originalName.orEmpty(),
+    popularity = popularity ?: 0.0,
+    profilePath = profilePath.orEmpty(),
+)
+
+fun List<CrewResponse>.toCrews() = map { it.toCrew() }

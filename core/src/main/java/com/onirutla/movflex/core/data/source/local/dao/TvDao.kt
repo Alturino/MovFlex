@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Query
 import androidx.room.Upsert
 import com.onirutla.movflex.core.data.source.local.entities.tv.TvEntity
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface TvDao {
@@ -16,7 +17,10 @@ interface TvDao {
     suspend fun deleteFavorite(vararg favorites: TvEntity)
 
     @Query("SELECT * FROM tv WHERE id = :id")
-    suspend fun isFavorite(id: Int): TvEntity?
+    suspend fun isInDb(id: Int): TvEntity?
+
+    @Query("SELECT * FROM tv WHERE id= :id")
+    fun observeFavoriteState(id: Int): Flow<TvEntity?>
 
     @Query("SELECT * FROM tv")
     fun getFavorite(): PagingSource<Int, TvEntity>

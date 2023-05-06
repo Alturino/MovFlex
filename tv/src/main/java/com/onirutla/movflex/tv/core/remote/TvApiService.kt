@@ -1,11 +1,12 @@
 package com.onirutla.movflex.tv.core.remote
 
 import com.onirutla.movflex.core.data.source.remote.response.CreditResponse
-import com.onirutla.movflex.core.data.source.remote.response.ReviewResponses
 import com.onirutla.movflex.core.data.source.remote.response.PageResponse
+import com.onirutla.movflex.core.data.source.remote.response.ReviewResponses
+import com.onirutla.movflex.core.data.source.remote.response.SeasonResponse
 import com.onirutla.movflex.core.domain.model.Season
-import com.onirutla.movflex.tv.core.remote.model.TvResponse
 import com.onirutla.movflex.tv.core.remote.model.TvDetailResponse
+import com.onirutla.movflex.tv.core.remote.model.TvResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,13 +30,16 @@ interface TvApiService {
     suspend fun getTvAiringToday(@Query(value = "page") page: Int = 1): Response<PageResponse<TvResponse>>
 
     @GET(value = "tv/{tvId}/aggregate_credits")
-    suspend fun getTvCredits(@Path(value = "tvId") tvId: Int): Response<CreditResponse>
+    suspend fun getTvCast(
+        @Path(value = "tvId") tvId: Int,
+        @Query(value = "page") page: Int = 1,
+    ): Response<CreditResponse>
 
     @GET(value = "tv/{tvId}/reviews")
     suspend fun getTvReviews(
         @Path(value = "tvId") tvId: Int,
         @Query(value = "page") page: Int = 1,
-    ): Response<PageResponse<ReviewResponses>>
+    ): Response<ReviewResponses>
 
     @GET(value = "tv/{tvId}/similar")
     suspend fun getTvSimilar(
@@ -53,5 +57,5 @@ interface TvApiService {
     suspend fun getTvSeason(
         @Path(value = "tvId") tvId: Int,
         @Path(value = "seasonNumber") seasonNumber: Int,
-    ): Response<Season>
+    ): Response<SeasonResponse>
 }

@@ -15,7 +15,7 @@ data class TvDetail(
     val createdBy: List<CreatedBy> = emptyList(),
     val episodeRunTime: List<Int> = emptyList(),
     val firstAirDate: String = "",
-    val genres: List<Genre> = emptyList(),
+    val genres: String = "",
     val homepage: String = "",
     val id: Int = 0,
     val inProduction: Boolean = false,

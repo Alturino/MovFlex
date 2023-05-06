@@ -7,14 +7,14 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class GenreResponse(
     @Json(name = "id")
-    val id: Int,
+    val id: Int? = 0,
     @Json(name = "name")
-    val name: String,
+    val name: String? = "",
 )
 
 fun GenreResponse.toGenre(): Genre = Genre(
-    id = id,
-    name = name
+    id = id ?: 0,
+    name = name.orEmpty(),
 )
 
 fun List<GenreResponse>.toGenre(): List<Genre> = map { it.toGenre() }

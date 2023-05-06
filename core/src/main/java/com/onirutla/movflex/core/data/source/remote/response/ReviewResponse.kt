@@ -6,17 +6,17 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class ReviewResponse(
     @Json(name = "author")
-    val author: String,
+    val author: String? = "",
     @Json(name = "author_details")
     val authorDetailsResponse: AuthorDetailResponse,
     @Json(name = "content")
-    val content: String,
+    val content: String? = "",
     @Json(name = "created_at")
-    val createdAt: String,
+    val createdAt: String? = "",
     @Json(name = "id")
-    val id: String,
+    val id: String? = "",
     @Json(name = "updated_at")
-    val updatedAt: String,
+    val updatedAt: String? = "",
     @Json(name = "url")
-    val url: String,
+    val url: String? = "",
 )
