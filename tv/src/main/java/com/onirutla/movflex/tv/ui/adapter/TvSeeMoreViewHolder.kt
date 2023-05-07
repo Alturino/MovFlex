@@ -20,12 +20,12 @@ class TvSeeMoreViewHolder(
 
     fun bind(item: SeeMore<List<Tv>>) {
         binding.apply {
-            seeAll.setOnClickListener {
+            tvSeeMore.setOnClickListener {
                 seeMoreClickListener(it, item.title)
             }
-            itemGroupingText.text = item.title
+            tvTitle.text = item.title
             itemAdapter.submitList(item.items)
-            movieGroupingList.apply {
+            rvContent.apply {
                 adapter = itemAdapter
                 layoutManager = LinearLayoutManager(
                     context,

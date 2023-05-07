@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.onirutla.movflex.tv.databinding.ItemTvVerticalBinding
+import com.onirutla.movflex.core.databinding.ItemVerticalBinding
 import com.onirutla.movflex.tv.domain.model.Tv
 
 class TvPagingVerticalAdapter(
@@ -22,7 +22,7 @@ class TvPagingVerticalAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): TvPagingVerticalViewHolder {
-        val view = ItemTvVerticalBinding.inflate(
+        val view = ItemVerticalBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false

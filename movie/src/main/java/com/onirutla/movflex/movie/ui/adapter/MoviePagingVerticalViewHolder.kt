@@ -3,13 +3,13 @@ package com.onirutla.movflex.movie.ui.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.onirutla.movflex.core.databinding.ItemVerticalBinding
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
-import com.onirutla.movflex.movie.databinding.MovieVerticalBinding
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.core.R as coreR
 
 class MoviePagingVerticalViewHolder(
-    private val binding: MovieVerticalBinding,
+    private val binding: ItemVerticalBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(

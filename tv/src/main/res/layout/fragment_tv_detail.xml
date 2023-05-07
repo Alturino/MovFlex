@@ -11,6 +11,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:elevation="4dp"
+            android:src="@drawable/ic_arrow_back_24"
+            app:layout_constraintStart_toStartOf="@+id/iv_image"
+            app:layout_constraintTop_toTopOf="@+id/iv_image" />
+
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/iv_image"
             android:layout_width="match_parent"
@@ -18,6 +29,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,6 +43,7 @@
             android:maxLines="4"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@id/iv_image"
@@ -45,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:maxLines="4"
-            android:textAppearance="?attr/textAppearanceHeadline6"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
             android:textColor="?attr/colorOnSurface"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -117,8 +130,9 @@
             android:text="@string/casts"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_overview"
-            app:layout_constraintTop_toBottomOf="@id/rv_reviews" />
+            app:layout_constraintTop_toBottomOf="@id/rv_seasons" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_casts_see_more"
@@ -163,6 +177,7 @@
             android:text="@string/overview"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_genre"
             app:layout_constraintTop_toBottomOf="@id/tv_genre" />
 
@@ -188,6 +203,7 @@
             android:text="@string/reviews"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_header_casts"
             app:layout_constraintTop_toBottomOf="@id/tv_overview" />
 
@@ -223,8 +239,35 @@
             android:text="@string/recommendation"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_header_casts"
             app:layout_constraintTop_toBottomOf="@id/rv_casts" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_season"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/seasons"
+            android:textAppearance="?attr/textAppearanceHeadline5"
+            android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/tv_overview"
+            app:layout_constraintTop_toBottomOf="@id/rv_reviews" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_seasons"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toTopOf="@id/tv_header_casts"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_season"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_season" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_recommendations_see_more"
@@ -249,7 +292,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_recommendation"
             tools:itemCount="5"
-            tools:listitem="@layout/item_tv_horizontal" />
+            tools:listitem="@layout/item_horizontal" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_header_similar"
@@ -259,6 +302,7 @@
             android:text="@string/similar"
             android:textAppearance="?attr/textAppearanceHeadline5"
             android:textColor="?attr/colorOnSurface"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/tv_recommendation"
             app:layout_constraintTop_toBottomOf="@id/rv_recommendation" />
 
@@ -287,7 +331,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_header_similar"
             tools:itemCount="5"
-            tools:listitem="@layout/item_tv_horizontal" />
+            tools:listitem="@layout/item_horizontal" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

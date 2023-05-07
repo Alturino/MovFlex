@@ -16,6 +16,7 @@ import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
 import com.onirutla.movflex.tv.databinding.FragmentTvDetailBinding
 import com.onirutla.movflex.tv.domain.model.TvType
 import com.onirutla.movflex.tv.ui.adapter.TvHorizontalAdapter
+import com.onirutla.movflex.tv.ui.adapter.season.SeasonAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -25,7 +26,7 @@ class TvDetailFragment : Fragment() {
     private var _binding: FragmentTvDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: TvDetailViewModel by viewModels()
+    private val vm: TvDetailViewModel by viewModels()
 
     private val args: TvDetailFragmentArgs by navArgs()
 
@@ -40,7 +41,7 @@ class TvDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getTvDetail(args.tvId)
+        vm.getTvDetail(args.tvId)
     }
 
     override fun onCreateView(
@@ -68,6 +69,8 @@ class TvDetailFragment : Fragment() {
                 .navigate(TvDetailFragmentDirections.actionTvDetailFragmentSelf(tv.id))
         }
 
+        val seasonAdapter = SeasonAdapter { _, _ -> }
+
         binding.apply {
             tvCastsSeeMore.setOnClickListener {
                 navigator(it, TvType.TV_CASTS, args.tvId)
@@ -93,9 +96,12 @@ class TvDetailFragment : Fragment() {
             rvSimilar.apply {
                 adapter = similarAdapter
             }
+            rvSeasons.apply {
+                adapter = seasonAdapter
+            }
         }
 
-        viewModel.tvDetail.observe(viewLifecycleOwner) { tv ->
+        vm.tvDetail.observe(viewLifecycleOwner) { tv ->
             binding.apply {
                 Glide.with(ivImage.context)
                     .load("${BASE_IMAGE_PATH}${tv.backdropPath}")
@@ -114,36 +120,38 @@ class TvDetailFragment : Fragment() {
                 tvOverview.text = tv.overview
                 tvGenre.text = tv.genres
                 fab.setOnClickListener {
-                    viewModel.setFavorite(tv)
+                    vm.setFavorite(tv)
                 }
             }
         }
 
-        viewModel.tvSimilar.observe(viewLifecycleOwner) {
+        vm.tvSimilar.observe(viewLifecycleOwner) {
             Timber.d("Similar: $it")
             similarAdapter.submitList(it)
         }
 
-        viewModel.tvCasts.observe(viewLifecycleOwner) {
+        vm.tvCasts.observe(viewLifecycleOwner) {
             Timber.d("Casts: $it")
             castAdapter.submitList(it)
         }
 
-        viewModel.tvRecommendations.observe(viewLifecycleOwner) {
+        vm.tvRecommendations.observe(viewLifecycleOwner) {
             Timber.d("Recommendations: $it")
             recommendationAdapter.submitList(it)
         }
 
-        viewModel.tvReviews.observe(viewLifecycleOwner) {
+        vm.tvReviews.observe(viewLifecycleOwner) {
             Timber.d("Reviews: $it")
             reviewAdapter.submitList(it)
         }
 
-        viewModel.tvSeason.observe(viewLifecycleOwner) {
+        vm.tvSeason.observe(viewLifecycleOwner) {
             Timber.d("Season: $it")
+            seasonAdapter.submitList(it)
         }
 
-        viewModel.isFavorite.observe(viewLifecycleOwner) {
+
+        vm.isFavorite.observe(viewLifecycleOwner) {
             Timber.d("isFavorite: $it")
             setFabState(it)
         }

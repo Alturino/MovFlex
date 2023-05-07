@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.onirutla.movflex.movie.databinding.MovieVerticalBinding
+import com.onirutla.movflex.core.databinding.ItemVerticalBinding
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.ui.MovieComparator
 
@@ -26,7 +26,7 @@ class MoviePagingVerticalAdapter(
         parent: ViewGroup,
         viewType: Int,
     ): MoviePagingVerticalViewHolder {
-        val view = MovieVerticalBinding.inflate(
+        val view = ItemVerticalBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
