@@ -1,8 +1,9 @@
-object Dependency {
+object Deps {
     object Android {
         const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
         const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val constraintLayout =
+            "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
         const val material = "com.google.android.material:material:${Versions.material}"
     }
@@ -53,7 +54,8 @@ object Dependency {
         private const val base = "com.google.dagger:hilt-android"
         const val android = "$base:${Versions.hilt}"
         const val compiler = "$base-compiler:${Versions.hilt}"
-        const val hiltCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltJetpack}"
+        const val hiltTest = "$base:-testing:${Versions.hilt}"
+        const val androidxCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltJetpack}"
     }
 
     object Paging {
@@ -67,6 +69,22 @@ object Dependency {
         const val androidxJunit = "androidx.test.ext:junit:${Versions.androidxJunit}"
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
         const val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
+    }
+
+    object Compose {
+        const val bom = "androidx.compose:compose-bom:${Versions.composeBom}"
+        const val material3 = "androidx.compose.material3:material3"
+        const val preview = "androidx.compose.ui:ui-tooling-preview"
+        const val tooling = "androidx.compose.ui:ui-tooling"
+        const val uiTestJunit = "androidx.compose.ui:ui-test-junit4"
+        const val manifest = "androidx.compose.ui:ui-test-manifest"
+        const val materialIconsExtended = "androidx.compose.material:material-icons-extended"
+        const val foundation = "androidx.compose.foundation:foundation"
+        const val ui = "androidx.compose.ui:ui"
+        const val windowSize = "androidx.compose.material3:material3-window-size-class"
+        const val activity = "androidx.activity:activity-compose:${Versions.activity}"
+        const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
+        const val liveData = "androidx.compose.runtime:runtime-livedata"
     }
 
     const val sqlcipher = "net.zetetic:android-database-sqlcipher:${Versions.zeteticSqlCipher}"

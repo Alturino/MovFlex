@@ -21,6 +21,7 @@ secrets {
 }
 
 android {
+    namespace = "${AppConfig.appNamespace}.core"
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
@@ -43,6 +44,12 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+        buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.6"
     }
 
     compileOptions {
@@ -53,6 +60,7 @@ android {
     kotlinOptions {
         jvmTarget = AppConfig.kotlinJvmTarget
     }
+
 }
 
 dependencies {
@@ -62,6 +70,6 @@ dependencies {
     applyOkhttp()
     applyMoshi()
 
-    implementation(Dependency.sqlite)
-    implementation(Dependency.sqlcipher)
+    implementation(Deps.sqlite)
+    implementation(Deps.sqlcipher)
 }

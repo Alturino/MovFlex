@@ -1,6 +1,11 @@
+import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 
 private fun DependencyHandler.implementation(dependency: String) {
+    add("implementation", dependency)
+}
+
+private fun DependencyHandler.implementation(dependency: Dependency) {
     add("implementation", dependency)
 }
 
@@ -12,6 +17,10 @@ private fun DependencyHandler.androidTestImplementation(dependency: String) {
     add("androidTestImplementation", dependency)
 }
 
+private fun DependencyHandler.androidTestImplementation(dependency: Dependency) {
+    add("androidTestImplementation", dependency)
+}
+
 private fun DependencyHandler.api(dependency: String) {
     add("api", dependency)
 }
@@ -20,8 +29,13 @@ private fun DependencyHandler.kapt(dependency: String) {
     add("kapt", dependency)
 }
 
+
 private fun DependencyHandler.kaptAndroidTest(dependency: String) {
     add("kaptAndroidTest", dependency)
+}
+
+private fun DependencyHandler.kaptTest(dependency: String) {
+    add("kaptTest", dependency)
 }
 
 private fun DependencyHandler.debugImplementation(dependency: String) {
@@ -29,66 +43,97 @@ private fun DependencyHandler.debugImplementation(dependency: String) {
 }
 
 fun DependencyHandler.applyRoom() {
-    implementation(Dependency.Room.ktx)
-    api(Dependency.Room.runtime)
-    implementation(Dependency.Room.paging)
-    kapt(Dependency.Room.compiler)
-    testImplementation(Dependency.Room.testing)
+    implementation(Deps.Room.ktx)
+    api(Deps.Room.runtime)
+    implementation(Deps.Room.paging)
+    kapt(Deps.Room.compiler)
+    testImplementation(Deps.Room.testing)
 }
 
 fun DependencyHandler.applyHilt() {
-    implementation(Dependency.Hilt.android)
-    kapt(Dependency.Hilt.compiler)
-    kapt(Dependency.Hilt.hiltCompiler)
-    kaptAndroidTest(Dependency.Hilt.hiltCompiler)
+    implementation(Deps.Hilt.android)
+    kapt(Deps.Hilt.compiler)
+
+    androidTestImplementation(Deps.Hilt.hiltTest)
+    kaptAndroidTest(Deps.Hilt.compiler)
+
+    testImplementation(Deps.Hilt.hiltTest)
+    kaptTest(Deps.Hilt.compiler)
+
+    kapt(Deps.Hilt.androidxCompiler)
+    kaptAndroidTest(Deps.Hilt.androidxCompiler)
 }
 
 fun DependencyHandler.applyPaging() {
-    implementation(Dependency.Paging.runtime)
-    testImplementation(Dependency.Paging.common)
+    implementation(Deps.Paging.runtime)
+    testImplementation(Deps.Paging.common)
 }
 
 fun DependencyHandler.applyNavigation() {
-    implementation(Dependency.Navigation.ui)
-    implementation(Dependency.Navigation.fragmentKtx)
-    implementation(Dependency.Navigation.dynamicFeature)
+    implementation(Deps.Navigation.ui)
+    implementation(Deps.Navigation.fragmentKtx)
+    implementation(Deps.Navigation.dynamicFeature)
 }
 
 fun DependencyHandler.applyTest() {
-    testImplementation(Dependency.Test.junit)
-    androidTestImplementation(Dependency.Test.androidxJunit)
-    androidTestImplementation(Dependency.Test.espresso)
-    debugImplementation(Dependency.Test.leakCanary)
+    testImplementation(Deps.Test.junit)
+    androidTestImplementation(Deps.Test.androidxJunit)
+    androidTestImplementation(Deps.Test.espresso)
+    debugImplementation(Deps.Test.leakCanary)
 }
 
 fun DependencyHandler.applyAndroid() {
-    implementation(Dependency.Android.appcompat)
-    implementation(Dependency.Android.coreKtx)
-    implementation(Dependency.Android.constraintLayout)
-    implementation(Dependency.Android.recyclerView)
-    implementation(Dependency.Android.material)
+    implementation(Deps.Android.appcompat)
+    implementation(Deps.Android.coreKtx)
+    implementation(Deps.Android.constraintLayout)
+    implementation(Deps.Android.recyclerView)
+    implementation(Deps.Android.material)
 }
 
 fun DependencyHandler.applyRetrofit() {
-    implementation(Dependency.Retrofit.retrofit)
-    implementation(Dependency.Retrofit.converterMoshi)
+    implementation(Deps.Retrofit.retrofit)
+    implementation(Deps.Retrofit.converterMoshi)
 }
 
 fun DependencyHandler.applyOkhttp() {
-    implementation(Dependency.Okhttp.bom)
-    implementation(Dependency.Okhttp.loggingInterceptor)
+    implementation(Deps.Okhttp.bom)
+    implementation(Deps.Okhttp.loggingInterceptor)
 }
 
 fun DependencyHandler.applyMoshi() {
-    implementation(Dependency.Moshi.moshi)
-    implementation(Dependency.Moshi.kotlin)
-    kapt(Dependency.Moshi.codegen)
+    implementation(Deps.Moshi.moshi)
+    implementation(Deps.Moshi.kotlin)
+    kapt(Deps.Moshi.codegen)
 }
 
 fun DependencyHandler.applyLifecycle() {
-    implementation(Dependency.Lifecycle.livedata)
-    implementation(Dependency.Lifecycle.viewmodel)
-    implementation(Dependency.Lifecycle.runtime)
+    implementation(Deps.Lifecycle.livedata)
+    implementation(Deps.Lifecycle.viewmodel)
+    implementation(Deps.Lifecycle.runtime)
+}
+
+fun DependencyHandler.applyCompose() {
+    val composeBom = platform(Deps.Compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    // UI
+    implementation(Deps.Compose.material3)
+    implementation(Deps.Compose.materialIconsExtended)
+    implementation(Deps.Compose.ui)
+    implementation(Deps.Compose.windowSize)
+
+    // Preview
+    debugImplementation(Deps.Compose.tooling)
+    implementation(Deps.Compose.preview)
+
+    // UI Test
+    androidTestImplementation(Deps.Compose.uiTestJunit)
+    debugImplementation(Deps.Compose.manifest)
+
+    implementation(Deps.Compose.activity)
+    implementation(Deps.Compose.viewModel)
+    implementation(Deps.Compose.liveData)
 }
 
 fun DependencyHandler.applyShared() {
@@ -98,7 +143,9 @@ fun DependencyHandler.applyShared() {
     applyHilt()
     applyLifecycle()
     applyTest()
+    applyCompose()
 
-    implementation(Dependency.coil)
-    implementation(Dependency.timber)
+
+    implementation(Deps.coil)
+    implementation(Deps.timber)
 }
