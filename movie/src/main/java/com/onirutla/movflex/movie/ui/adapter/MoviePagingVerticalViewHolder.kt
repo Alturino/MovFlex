@@ -2,9 +2,8 @@ package com.onirutla.movflex.movie.ui.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.databinding.ItemVerticalBinding
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.core.R as coreR
 
@@ -13,20 +12,16 @@ class MoviePagingVerticalViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(
-        content: Movie,
+        item: Movie,
         itemClickListener: (View, Movie) -> Unit = { _, _ -> },
     ) {
         binding.apply {
             root.setOnClickListener {
-                itemClickListener(it, content)
+                itemClickListener(it, item)
             }
 
-            content.apply {
-                Glide.with(ivImage.context)
-                    .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(ivImage)
-                    .clearOnDetach()
-
+            item.apply {
+                ivImage.loadImage(backdropPath)
                 tvRating.text = root.context
                     .getString(coreR.string.format_rating, (voteAverage.toFloat() / 2f))
 

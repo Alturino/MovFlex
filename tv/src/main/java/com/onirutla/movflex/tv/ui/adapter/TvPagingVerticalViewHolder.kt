@@ -2,9 +2,8 @@ package com.onirutla.movflex.tv.ui.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.databinding.ItemVerticalBinding
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 import com.onirutla.movflex.tv.domain.model.Tv
 
 class TvPagingVerticalViewHolder(
@@ -18,11 +17,7 @@ class TvPagingVerticalViewHolder(
             }
 
             content.apply {
-                Glide.with(ivImage.context)
-                    .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(ivImage)
-                    .clearOnDetach()
-
+                ivImage.loadImage(backdropPath)
 //                Genre.text = genres.first().name
                 tvSynopsis.text = overview
                 tvYearRelease.text = firstAirDate

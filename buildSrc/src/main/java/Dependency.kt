@@ -1,5 +1,3 @@
-import org.gradle.api.artifacts.dsl.DependencyHandler
-
 object Dependency {
     object Android {
         const val appcompat = "androidx.appcompat:appcompat:${Versions.appcompat}"
@@ -73,6 +71,7 @@ object Dependency {
 
     const val sqlcipher = "net.zetetic:android-database-sqlcipher:${Versions.zeteticSqlCipher}"
     const val sqlite = "androidx.sqlite:sqlite-ktx:${Versions.sqlite}"
-    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
+    const val coil = "io.coil-kt:coil:${Versions.coil}"
 }

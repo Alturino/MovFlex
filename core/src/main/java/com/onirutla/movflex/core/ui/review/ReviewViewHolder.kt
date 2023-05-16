@@ -2,11 +2,10 @@ package com.onirutla.movflex.core.ui.review
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.databinding.ItemReviewBinding
 import com.onirutla.movflex.core.domain.model.Review
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 
 class ReviewViewHolder(
     private val binding: ItemReviewBinding,
@@ -20,11 +19,9 @@ class ReviewViewHolder(
                 val imageUrl = if (authorDetail.avatarPath.contains("http", ignoreCase = true)) {
                     authorDetail.avatarPath.removePrefix("/")
                 } else {
-                    "${BASE_IMAGE_PATH}${authorDetail.avatarPath}"
+                    authorDetail.avatarPath
                 }
-                Glide.with(ivAvatar.context)
-                    .load(imageUrl)
-                    .into(ivAvatar)
+                ivAvatar.loadImage(imageUrl)
                 tvContent.text = content
                 tvUsername.text = author
                 tvPostedDate.text = createdAt

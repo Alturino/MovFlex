@@ -2,10 +2,9 @@ package com.onirutla.movflex.movie.ui.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.databinding.ItemHorizontalBinding
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 import com.onirutla.movflex.movie.domain.model.Movie
 
 class MovieHorizontalViewHolder(
@@ -13,17 +12,13 @@ class MovieHorizontalViewHolder(
     private val onClickListener: (view: View, item: Movie) -> Unit,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(content: Movie) {
+    fun bind(item: Movie) {
         binding.apply {
             root.setOnClickListener {
-                onClickListener(it, content)
+                onClickListener(it, item)
             }
-            content.apply {
-                Glide.with(ivImage.context)
-                    .load("$BASE_IMAGE_PATH$backdropPath")
-                    .into(ivImage)
-                    .clearOnDetach()
-
+            item.apply {
+                ivImage.loadImage(backdropPath)
                 tvTitle.text = title
                 tvRating.text = root.context.getString(R.string.format_rating, (voteAverage / 2))
                 tvYearRelease.text = releaseDate

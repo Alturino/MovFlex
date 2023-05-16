@@ -99,6 +99,6 @@ fun DependencyHandler.applyShared() {
     applyLifecycle()
     applyTest()
 
-    implementation(Dependency.glide)
+    implementation(Dependency.coil)
     implementation(Dependency.timber)
 }

@@ -16,7 +16,7 @@ class MoviePagingVerticalAdapter(
         val item = getItem(position)
         if (item != null) {
             holder.bind(
-                content = item,
+                item = item,
                 itemClickListener = onItemClickListener,
             )
         }

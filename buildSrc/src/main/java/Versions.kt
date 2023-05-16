@@ -25,4 +25,5 @@ object Versions {
     const val sqlite = "2.3.0"
     const val zeteticSqlCipher = "4.5.3"
     const val timber = "5.0.1"
+    const val coil = "2.2.0"
 }

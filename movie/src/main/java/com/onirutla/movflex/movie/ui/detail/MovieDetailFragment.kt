@@ -8,11 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.ui.cast.CastAdapter
 import com.onirutla.movflex.core.ui.review.ReviewAdapter
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 import com.onirutla.movflex.movie.databinding.FragmentMovieDetailBinding
 import com.onirutla.movflex.movie.domain.model.MovieType
 import com.onirutla.movflex.movie.ui.adapter.MovieHorizontalAdapter
@@ -97,10 +96,7 @@ class MovieDetailFragment : Fragment() {
 
         viewModel.movieDetail.observe(viewLifecycleOwner) { movie ->
             binding.apply {
-                Glide.with(ivImage.context)
-                    .load("${BASE_IMAGE_PATH}${movie.backdropPath}")
-                    .into(ivImage)
-                    .clearOnDetach()
+                ivImage.loadImage(movie.backdropPath)
                 tvTitle.text = movie.title
                 tvOriginalTitle.text = movie.originalTitle
                 tvRating.text = requireContext().getString(

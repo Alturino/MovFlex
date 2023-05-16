@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.ui.cast.CastAdapter
 import com.onirutla.movflex.core.ui.review.ReviewAdapter
-import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.util.loadImage
 import com.onirutla.movflex.tv.databinding.FragmentTvDetailBinding
 import com.onirutla.movflex.tv.domain.model.TvType
 import com.onirutla.movflex.tv.ui.adapter.TvHorizontalAdapter
@@ -103,10 +103,8 @@ class TvDetailFragment : Fragment() {
 
         vm.tvDetail.observe(viewLifecycleOwner) { tv ->
             binding.apply {
-                Glide.with(ivImage.context)
-                    .load("${BASE_IMAGE_PATH}${tv.backdropPath}")
-                    .into(ivImage)
-                    .clearOnDetach()
+                ivImage.loadImage(tv.backdropPath)
+                ivBack.setOnClickListener { findNavController().navigateUp() }
                 tvTitle.text = tv.name
                 tvOriginalTitle.text = tv.originalName
                 tvRating.text = requireContext().getString(
