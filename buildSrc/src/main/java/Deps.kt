@@ -54,7 +54,7 @@ object Deps {
         private const val base = "com.google.dagger:hilt-android"
         const val android = "$base:${Versions.hilt}"
         const val compiler = "$base-compiler:${Versions.hilt}"
-        const val hiltTest = "$base:-testing:${Versions.hilt}"
+        const val hiltTest = "$base-testing:${Versions.hilt}"
         const val androidxCompiler = "androidx.hilt:hilt-compiler:${Versions.hiltJetpack}"
     }
 
@@ -87,9 +87,14 @@ object Deps {
         const val liveData = "androidx.compose.runtime:runtime-livedata"
     }
 
+    object Coil {
+        private const val base = "io.coil-kt:coil"
+        const val coil = "$base:${Versions.coil}"
+        const val compose = "$base-compose:${Versions.coil}"
+    }
+
     const val sqlcipher = "net.zetetic:android-database-sqlcipher:${Versions.zeteticSqlCipher}"
     const val sqlite = "androidx.sqlite:sqlite-ktx:${Versions.sqlite}"
 
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
-    const val coil = "io.coil-kt:coil:${Versions.coil}"
 }

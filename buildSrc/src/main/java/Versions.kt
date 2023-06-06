@@ -21,7 +21,7 @@ object Versions {
     const val androidxJunit = "1.1.3"
     const val leakCanary = "2.9.1"
     const val glide = "4.13.2"
-    const val hilt = "2.46.1"
+    const val hilt = "2.45"
     const val mapsplaform_secrets = "2.0.1"
     const val sqlite = "2.3.0"
     const val zeteticSqlCipher = "4.5.3"

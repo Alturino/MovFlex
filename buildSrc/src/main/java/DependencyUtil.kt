@@ -136,6 +136,11 @@ fun DependencyHandler.applyCompose() {
     implementation(Deps.Compose.liveData)
 }
 
+fun DependencyHandler.applyCoil() {
+    implementation(Deps.Coil.coil)
+    implementation(Deps.Coil.compose)
+}
+
 fun DependencyHandler.applyShared() {
     applyAndroid()
     applyNavigation()
@@ -144,8 +149,7 @@ fun DependencyHandler.applyShared() {
     applyLifecycle()
     applyTest()
     applyCompose()
+    applyCoil()
 
-
-    implementation(Deps.coil)
     implementation(Deps.timber)
 }
