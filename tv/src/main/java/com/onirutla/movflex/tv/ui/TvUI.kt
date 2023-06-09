@@ -1,4 +1,4 @@
-package com.onirutla.movflex.movie.ui
+package com.onirutla.movflex.tv.ui
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,31 +39,31 @@ import coil.request.ImageRequest
 import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
-import com.onirutla.movflex.movie.R
-import com.onirutla.movflex.movie.domain.model.Movie
+import com.onirutla.movflex.tv.R
+import com.onirutla.movflex.tv.domain.model.Tv
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieItemRow(
-    movie: Movie,
+fun TvItemRow(
+    tv: Tv,
     modifier: Modifier = Modifier,
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onItemClick: (tv: Tv) -> Unit = {},
 ) {
     Card(
         modifier = modifier
             .width(IntrinsicSize.Min)
             .height(IntrinsicSize.Min)
             .padding(8.dp),
-        onClick = { onItemClick(movie) },
+        onClick = { onItemClick(tv) },
     ) {
         AsyncImage(
             modifier = Modifier
                 .width(250.dp)
                 .height(250.dp)
-                .clickable { onImageClick("$BASE_IMAGE_PATH${movie.posterPath}") },
+                .clickable { onImageClick("$BASE_IMAGE_PATH${tv.posterPath}") },
             model = ImageRequest.Builder(LocalContext.current)
-                .data("$BASE_IMAGE_PATH${movie.posterPath}")
+                .data("$BASE_IMAGE_PATH${tv.posterPath}")
                 .build(),
             contentDescription = "Reviewer Avatar",
             placeholder = painterResource(id = R.drawable.ic_launcher_background),
@@ -76,7 +76,7 @@ fun MovieItemRow(
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
             Text(
-                text = movie.title,
+                text = tv.name,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold,
@@ -85,7 +85,7 @@ fun MovieItemRow(
                 textAlign = TextAlign.Justify,
             )
             Text(
-                text = movie.originalTitle,
+                text = tv.originalName,
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.SemiBold,
@@ -94,7 +94,7 @@ fun MovieItemRow(
                 textAlign = TextAlign.Justify,
             )
             Text(
-                text = movie.overview,
+                text = tv.overview,
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 maxLines = 2,
@@ -103,7 +103,7 @@ fun MovieItemRow(
             )
 
             Text(
-                text = movie.releaseDate,
+                text = tv.firstAirDate,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 maxLines = 2,
@@ -111,7 +111,7 @@ fun MovieItemRow(
                 textAlign = TextAlign.Justify,
             )
             Text(
-                text = movie.genres,
+                text = tv.genres,
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 maxLines = 2,
@@ -130,14 +130,14 @@ fun MovieItemRow(
                     tint = Color.Yellow
                 )
                 Text(
-                    text = "${movie.voteAverage}",
+                    text = "${tv.voteAverage}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                     textAlign = TextAlign.Justify,
                 )
-                Text(text = "(${movie.voteCount})")
+                Text(text = "(${tv.voteCount})")
             }
         }
     }
@@ -145,52 +145,52 @@ fun MovieItemRow(
 
 @Composable
 @ComponentPreview
-private fun MovieItemRowPreview(
-    @PreviewParameter(MovieParameterProvider::class) movie: Movie,
+private fun TvItemRowPreview(
+    @PreviewParameter(TvParameterProvider::class) tv: Tv,
 ) {
     MovFlexTheme {
-        MovieItemRow(movie = movie)
+        TvItemRow(tv = tv)
     }
 }
 
 @ComponentPreview
 @Composable
-private fun MovieRowPreview(
-    @PreviewParameter(MovieListParameterProvider::class) movies: List<Movie>,
+private fun TvRowPreview(
+    @PreviewParameter(TvListParameterProvider::class) tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        MovieRow(movies = movies)
+        TvRow(tvList = tvList)
     }
 }
 
 @Composable
-fun MovieRow(
-    movies: List<Movie>,
+fun TvRow(
+    tvList: List<Tv>,
     modifier: Modifier = Modifier,
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onItemClick: (tv: Tv) -> Unit = {},
 ) {
     LazyRow(modifier = modifier) {
-        items(items = movies) {
-            MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+        items(items = tvList) {
+            TvItemRow(tv = it, onImageClick = onImageClick, onItemClick = onItemClick)
         }
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieItemColumn(
-    movie: Movie,
+fun TvItemColumn(
+    tv: Tv,
     modifier: Modifier = Modifier,
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onItemClick: (tv: Tv) -> Unit = {},
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(8.dp),
-        onClick = { onItemClick(movie) }
+        onClick = { onItemClick(tv) }
     ) {
         Row(
             modifier = Modifier.padding(16.dp),
@@ -200,10 +200,10 @@ fun MovieItemColumn(
                 modifier = Modifier
                     .width(125.dp)
                     .height(225.dp)
-                    .clickable { onImageClick("$BASE_IMAGE_PATH${movie.posterPath}") }
+                    .clickable { onImageClick("$BASE_IMAGE_PATH${tv.posterPath}") }
                     .clip(RoundedCornerShape(8.dp)),
                 model = ImageRequest.Builder(LocalContext.current)
-                    .data("$BASE_IMAGE_PATH${movie.posterPath}")
+                    .data("$BASE_IMAGE_PATH${tv.posterPath}")
                     .build(),
                 contentDescription = null,
                 placeholder = painterResource(id = R.drawable.ic_launcher_background),
@@ -211,7 +211,7 @@ fun MovieItemColumn(
             )
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 Text(
-                    text = movie.title,
+                    text = tv.name,
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.Bold,
@@ -219,7 +219,7 @@ fun MovieItemColumn(
                     textAlign = TextAlign.Justify,
                 )
                 Text(
-                    text = movie.originalTitle,
+                    text = tv.originalName,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.SemiBold,
@@ -234,7 +234,7 @@ fun MovieItemColumn(
                         tint = Color.Yellow
                     )
                     Text(
-                        text = "${movie.voteAverage / 2}",
+                        text = "${tv.voteAverage / 2}",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         maxLines = 4,
@@ -242,21 +242,21 @@ fun MovieItemColumn(
                     )
                 }
                 Text(
-                    text = "Movie",
+                    text = "Tv",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     maxLines = 4,
                     textAlign = TextAlign.Justify,
                 )
                 Text(
-                    text = movie.overview,
+                    text = tv.overview,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     maxLines = 4,
                     textAlign = TextAlign.Justify,
                 )
                 Text(
-                    text = movie.genres,
+                    text = tv.genres,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     maxLines = 4,
@@ -269,34 +269,34 @@ fun MovieItemColumn(
 
 @ComponentPreview
 @Composable
-private fun MovieItemColumnPreview(
-    @PreviewParameter(MovieParameterProvider::class) movie: Movie,
+private fun TvItemColumnPreview(
+    @PreviewParameter(TvParameterProvider::class) tv: Tv,
 ) {
     MovFlexTheme {
-        MovieItemColumn(movie = movie)
+        TvItemColumn(tv = tv)
     }
 }
 
 @Composable
-fun MovieColumn(
-    movies: List<Movie>,
+fun TvColumn(
+    tvList: List<Tv>,
     modifier: Modifier = Modifier,
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onItemClick: (tv: Tv) -> Unit = {},
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = movies) {
-            MovieItemColumn(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+        items(items = tvList) {
+            TvItemColumn(tv = it, onImageClick = onImageClick, onItemClick = onItemClick)
         }
     }
 }
 
 @ComponentPreview
 @Composable
-private fun MovieColumnPreview(
-    @PreviewParameter(MovieListParameterProvider::class) movies: List<Movie>,
+private fun TvColumnPreview(
+    @PreviewParameter(TvListParameterProvider::class) tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        MovieColumn(movies = movies)
+        TvColumn(tvList = tvList)
     }
 }

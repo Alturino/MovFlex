@@ -2,6 +2,7 @@ package com.onirutla.movflex.core.ui.review
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -132,20 +133,20 @@ fun ReviewItemColumn(
 fun ReviewItemRow(
     review: Review,
     modifier: Modifier = Modifier,
-    onReviewClick: (Review) -> Unit = {}
+    onReviewClick: (Review) -> Unit = {},
+    onChipClick: () -> Unit = {},
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
+            .width(IntrinsicSize.Max)
             .wrapContentHeight()
             .padding(8.dp),
         onClick = { onReviewClick(review) }
     ) {
         AsyncImage(
             modifier = Modifier
-                .width(50.dp)
-                .height(50.dp)
-                .clip(CircleShape),
+                .fillMaxWidth()
+                .height(200.dp),
             model = ImageRequest.Builder(LocalContext.current)
                 .data("$BASE_IMAGE_PATH${review.authorDetail.avatarPath}")
                 .build(),
@@ -154,7 +155,10 @@ fun ReviewItemRow(
             contentScale = ContentScale.Crop,
         )
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 8.dp, end = 16.dp),
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Column(modifier = Modifier.padding(start = 16.dp)) {
@@ -177,7 +181,7 @@ fun ReviewItemRow(
                 label = {
                     Text(text = "${review.authorDetail.rating}")
                 },
-                onClick = {}
+                onClick = onChipClick
             )
         }
         Text(

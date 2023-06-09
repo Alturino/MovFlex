@@ -3,7 +3,7 @@ package com.onirutla.movflex.movie.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.onirutla.movflex.movie.domain.model.Movie
 
-class MovieProvider(
+class MovieParameterProvider(
     override val values: Sequence<Movie> = sequenceOf(
         Movie(
             id = 1,
@@ -34,7 +34,7 @@ orci in neque euismod a blandit libero vehicula""".trimIndent()
     )
 ) : PreviewParameterProvider<Movie>
 
-class MoviesProvider(
+class MovieListParameterProvider(
     override val values: Sequence<List<Movie>> = sequenceOf(
         listOf(
             Movie(
