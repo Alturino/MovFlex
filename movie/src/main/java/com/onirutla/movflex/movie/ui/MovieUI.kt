@@ -23,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -165,14 +166,47 @@ private fun MovieRowPreview(
 
 @Composable
 fun MovieRow(
-    movies: List<Movie>,
     modifier: Modifier = Modifier,
+    movies: List<Movie>,
+    movieRowTitle: String = "Popular",
+    seeMore: String = "See More",
+    onSeeMoreClick: () -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
     onItemClick: (movie: Movie) -> Unit = {},
 ) {
-    LazyRow(modifier = modifier) {
-        items(items = movies) {
-            MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(vertical = 8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = movieRowTitle,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
+            Text(
+                modifier = Modifier.clickable { onSeeMoreClick() },
+                text = seeMore,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Left,
+            )
+        }
+        LazyRow {
+            items(items = movies) {
+                MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+            }
         }
     }
 }

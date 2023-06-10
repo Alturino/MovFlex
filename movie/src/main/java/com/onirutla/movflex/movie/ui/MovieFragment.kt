@@ -6,9 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,7 +13,6 @@ import com.onirutla.movflex.movie.databinding.FragmentMovieBinding
 import com.onirutla.movflex.movie.domain.model.MovieType
 import com.onirutla.movflex.movie.ui.adapter.MovieSeeMoreAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MovieFragment : Fragment() {
@@ -53,24 +49,31 @@ class MovieFragment : Fragment() {
             },
             seeMoreClickListener = { moreView, category ->
                 when (category) {
-                    MovieType.MOVIE_NOW_PLAYING.value -> navigator(
+                    requireContext().getString(MovieType.MOVIE_NOW_PLAYING.value) -> navigator(
                         moreView,
                         MovieType.MOVIE_NOW_PLAYING
                     )
 
-                    MovieType.MOVIE_POPULAR.value -> navigator(moreView, MovieType.MOVIE_POPULAR)
-                    MovieType.MOVIE_TOP_RATED.value -> navigator(
+                    requireContext().getString(MovieType.MOVIE_POPULAR.value) -> navigator(
+                        moreView,
+                        MovieType.MOVIE_POPULAR
+                    )
+
+                    requireContext().getString(MovieType.MOVIE_TOP_RATED.value) -> navigator(
                         moreView,
                         MovieType.MOVIE_TOP_RATED
                     )
 
-                    MovieType.MOVIE_UPCOMING.value -> navigator(moreView, MovieType.MOVIE_UPCOMING)
+                    requireContext().getString(MovieType.MOVIE_UPCOMING.value) -> navigator(
+                        moreView,
+                        MovieType.MOVIE_UPCOMING
+                    )
                 }
             },
             rvViewPool = RecyclerView.RecycledViewPool()
         )
 
-        viewModel.movie.observe(viewLifecycleOwner){
+        viewModel.movie.observe(viewLifecycleOwner) {
             seeMoreAdapter?.submitList(it)
         }
 

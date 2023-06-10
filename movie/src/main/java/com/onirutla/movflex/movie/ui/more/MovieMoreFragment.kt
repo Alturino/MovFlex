@@ -86,7 +86,7 @@ class MovieMoreFragment : Fragment() {
         }
 
         binding.toolbar.apply {
-            title = args.movieType.value
+            title = requireContext().getString(args.movieType.value)
             setOnClickListener { it.findNavController().navigateUp() }
         }
 
