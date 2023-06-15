@@ -41,6 +41,7 @@ object Deps {
         const val fragmentKtx = "$base-fragment-ktx:${Versions.nav}"
         const val ui = "$base-ui-ktx:${Versions.nav}"
         const val dynamicFeature = "$base-dynamic-features-fragment:${Versions.nav}"
+        const val compose = "$base-compose:${Versions.nav}"
     }
 
     object Lifecycle {
