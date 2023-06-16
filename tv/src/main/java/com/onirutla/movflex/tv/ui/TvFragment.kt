@@ -31,10 +31,25 @@ class TvFragment : Fragment() {
             },
             seeMoreClickListener = { seeMoreView, category ->
                 when (category) {
-                    TvType.TV_POPULAR.value -> navigator(seeMoreView, TvType.TV_POPULAR)
-                    TvType.TV_TOP_RATED.value -> navigator(seeMoreView, TvType.TV_TOP_RATED)
-                    TvType.TV_ON_THE_AIR.value -> navigator(seeMoreView, TvType.TV_ON_THE_AIR)
-                    TvType.TV_AIRING_TODAY.value -> navigator(seeMoreView, TvType.TV_AIRING_TODAY)
+                    requireContext().getString(TvType.TV_POPULAR.value) -> navigator(
+                        seeMoreView,
+                        TvType.TV_POPULAR
+                    )
+
+                    requireContext().getString(TvType.TV_TOP_RATED.value) -> navigator(
+                        seeMoreView,
+                        TvType.TV_TOP_RATED
+                    )
+
+                    requireContext().getString(TvType.TV_ON_THE_AIR.value) -> navigator(
+                        seeMoreView,
+                        TvType.TV_ON_THE_AIR
+                    )
+
+                    requireContext().getString(TvType.TV_AIRING_TODAY.value) -> navigator(
+                        seeMoreView,
+                        TvType.TV_AIRING_TODAY
+                    )
                 }
             },
             rvViewPool = RecyclerView.RecycledViewPool()

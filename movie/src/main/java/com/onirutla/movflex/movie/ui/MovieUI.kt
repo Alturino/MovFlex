@@ -46,8 +46,8 @@ import com.onirutla.movflex.movie.domain.model.Movie
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieItemRow(
-    movie: Movie,
     modifier: Modifier = Modifier,
+    movie: Movie,
     onImageClick: (url: String) -> Unit = {},
     onItemClick: (movie: Movie) -> Unit = {},
 ) {
@@ -83,7 +83,7 @@ fun MovieItemRow(
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Justify,
+                textAlign = TextAlign.Left,
             )
             Text(
                 text = movie.originalTitle,
@@ -92,7 +92,7 @@ fun MovieItemRow(
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Justify,
+                textAlign = TextAlign.Left,
             )
             Text(
                 text = movie.overview,
@@ -214,8 +214,8 @@ fun MovieRow(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieItemColumn(
-    movie: Movie,
     modifier: Modifier = Modifier,
+    movie: Movie,
     onImageClick: (url: String) -> Unit = {},
     onItemClick: (movie: Movie) -> Unit = {},
 ) {
@@ -249,16 +249,16 @@ fun MovieItemColumn(
                     style = MaterialTheme.typography.titleLarge,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.Bold,
-                    maxLines = 4,
-                    textAlign = TextAlign.Justify,
+                    maxLines = 2,
+                    textAlign = TextAlign.Left,
                 )
                 Text(
                     text = movie.originalTitle,
                     style = MaterialTheme.typography.titleMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     fontWeight = FontWeight.SemiBold,
-                    maxLines = 4,
-                    textAlign = TextAlign.Justify,
+                    maxLines = 2,
+                    textAlign = TextAlign.Left,
                 )
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(
@@ -272,7 +272,7 @@ fun MovieItemColumn(
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onPrimaryContainer,
                         maxLines = 4,
-                        textAlign = TextAlign.Justify,
+                        textAlign = TextAlign.Left,
                     )
                 }
                 Text(
@@ -313,14 +313,14 @@ private fun MovieItemColumnPreview(
 
 @Composable
 fun MovieColumn(
-    movies: List<Movie>,
     modifier: Modifier = Modifier,
+    movies: List<Movie>,
+    onMovieClick: (movie: Movie) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
 ) {
     LazyColumn(modifier = modifier) {
         items(items = movies) {
-            MovieItemColumn(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+            MovieItemColumn(movie = it, onImageClick = onImageClick, onItemClick = onMovieClick)
         }
     }
 }

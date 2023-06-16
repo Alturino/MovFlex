@@ -86,6 +86,7 @@ object Deps {
         const val activity = "androidx.activity:activity-compose:${Versions.activity}"
         const val viewModel = "androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycle}"
         const val liveData = "androidx.compose.runtime:runtime-livedata"
+        const val hilt = "androidx.hilt:hilt-navigation-compose:${Versions.hiltJetpack}"
     }
 
     object Coil {

@@ -120,6 +120,7 @@ fun DependencyHandler.applyCompose() {
     // UI
     implementation(Deps.Compose.material3)
     implementation(Deps.Compose.materialIconsExtended)
+    implementation(Deps.Compose.foundation)
     implementation(Deps.Compose.ui)
     implementation(Deps.Compose.windowSize)
 
@@ -134,6 +135,7 @@ fun DependencyHandler.applyCompose() {
     implementation(Deps.Compose.activity)
     implementation(Deps.Compose.viewModel)
     implementation(Deps.Compose.liveData)
+    implementation(Deps.Compose.hilt)
 }
 
 fun DependencyHandler.applyCoil() {

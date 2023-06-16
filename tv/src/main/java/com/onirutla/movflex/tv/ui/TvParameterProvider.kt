@@ -3,92 +3,58 @@ package com.onirutla.movflex.tv.ui
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.onirutla.movflex.tv.domain.model.Tv
 
-class TvParameterProvider(
-    override val values: Sequence<Tv> = sequenceOf(
-        Tv(
-            id = 1,
-            name = "Kimetsu no Yaiba",
-            originalName = "Kimetsu no Yaiba",
-            firstAirDate = "28-05-2023",
-            voteAverage = 7.0,
-            genres = "Action, Thriller, Horror",
-            overview = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales
-laoreet commodo. Phasellus a purus eu risus elementum consequat. Aenean eu
-elit ut nunc convallis laoreet non ut libero. Suspendisse interdum placerat
-risus vel ornare. Donec vehicula, turpis sed consectetur ullamcorper, ante
-nunc egestas quam, ultricies adipiscing velit enim at nunc. Aenean id diam
-neque. Praesent ut lacus sed justo viverra fermentum et ut sem. Fusce
-convallis gravida lacinia. Integer semper dolor ut elit sagittis lacinia.
-Praesent sodales scelerisque eros at rhoncus. Duis posuere sapien vel ipsum
-ornare interdum at eu quam. Vestibulum vel massa erat. Aenean quis sagittis
-purus. Phasellus arcu purus, rutrum id consectetur non, bibendum at nibh.
+private val tvList = listOf(
+    Tv(
+        backdropPath = "backdrop2.jpg",
+        firstAirDate = "2022-03-20",
+        genres = "Comedy",
+        id = 54321,
+        name = "Laugh Out Loud",
+        originCountry = listOf("US", "UK"),
+        originalLanguage = "English",
+        originalName = "Laugh Out Loud",
+        overview = "A hilarious comedy series that will make you burst into laughter.",
+        popularity = 7.9,
+        posterPath = "poster2.jpg",
+        voteAverage = 7.5,
+        voteCount = 800
+    ),
+    Tv(
+        backdropPath = "backdrop2.jpg",
+        firstAirDate = "2020-05-10",
+        genres = "Action, Crime, Drama",
+        id = 98765,
+        name = "Crime Files",
+        originCountry = listOf("US"),
+        originalLanguage = "English",
+        originalName = "Crime Files",
+        overview = "An intense crime drama that will keep you on the edge of your seat.",
+        popularity = 9.1,
+        posterPath = "poster3.jpg",
+        voteAverage = 9.0,
+        voteCount = 1500
+    ),
+    Tv(
+        backdropPath = "backdrop3.jpg",
+        firstAirDate = "2023-02-05",
+        genres = "Sci-Fi, Mystery",
+        id = 24680,
+        name = "The Unknown",
+        originCountry = listOf("UK"),
+        originalLanguage = "English",
+        originalName = "The Unknown",
+        overview = "A mind-bending sci-fi series with mysterious twists.",
+        popularity = 8.7,
+        posterPath = "poster4.jpg",
+        voteAverage = 8.4,
+        voteCount = 1200
+    ),
+)
 
-Duis nec erat dolor. Nulla vitae consectetur ligula. Quisque nec mi est. Ut
-quam ante, rutrum at pellentesque gravida, pretium in dui. Cras eget sapien
-velit. Suspendisse ut sem nec tellus vehicula eleifend sit amet quis velit.
-Phasellus quis suscipit nisi. Nam elementum malesuada tincidunt. Curabitur
-iaculis pretium eros, malesuada faucibus leo eleifend a. Curabitur congue
-orci in neque euismod a blandit libero vehicula""".trimIndent()
-        ),
-    )
+class TvParameterProvider(
+    override val values: Sequence<Tv> = tvList.asSequence()
 ) : PreviewParameterProvider<Tv>
 
 class TvListParameterProvider(
-    override val values: Sequence<List<Tv>> = sequenceOf(
-        listOf(
-            Tv(
-                id = 1,
-                name = "Kimetsu no Yaiba",
-                originalName = "Kimetsu no Yaiba",
-                firstAirDate = "28-05-2023",
-                voteAverage = 7.0,
-                genres = "Action, Thriller, Horror",
-                overview = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales
-laoreet commodo. Phasellus a purus eu risus elementum consequat. Aenean eu
-elit ut nunc convallis laoreet non ut libero. Suspendisse interdum placerat
-risus vel ornare. Donec vehicula, turpis sed consectetur ullamcorper, ante
-nunc egestas quam, ultricies adipiscing velit enim at nunc. Aenean id diam
-neque. Praesent ut lacus sed justo viverra fermentum et ut sem. Fusce
-convallis gravida lacinia. Integer semper dolor ut elit sagittis lacinia.
-Praesent sodales scelerisque eros at rhoncus. Duis posuere sapien vel ipsum
-ornare interdum at eu quam. Vestibulum vel massa erat. Aenean quis sagittis
-purus. Phasellus arcu purus, rutrum id consectetur non, bibendum at nibh.
-
-Duis nec erat dolor. Nulla vitae consectetur ligula. Quisque nec mi est. Ut
-quam ante, rutrum at pellentesque gravida, pretium in dui. Cras eget sapien
-velit. Suspendisse ut sem nec tellus vehicula eleifend sit amet quis velit.
-Phasellus quis suscipit nisi. Nam elementum malesuada tincidunt. Curabitur
-iaculis pretium eros, malesuada faucibus leo eleifend a. Curabitur congue
-orci in neque euismod a blandit libero vehicula""".trimIndent()
-            ),
-            Tv(
-                id = 2,
-                name = "Kimetsu no Yaiba",
-                originalName = "Kimetsu no Yaiba",
-                firstAirDate = "28-05-2023",
-                voteAverage = 7.0,
-                genres = "Action, Thriller, Horror",
-                overview = """
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sodales
-laoreet commodo. Phasellus a purus eu risus elementum consequat. Aenean eu
-elit ut nunc convallis laoreet non ut libero. Suspendisse interdum placerat
-risus vel ornare. Donec vehicula, turpis sed consectetur ullamcorper, ante
-nunc egestas quam, ultricies adipiscing velit enim at nunc. Aenean id diam
-neque. Praesent ut lacus sed justo viverra fermentum et ut sem. Fusce
-convallis gravida lacinia. Integer semper dolor ut elit sagittis lacinia.
-Praesent sodales scelerisque eros at rhoncus. Duis posuere sapien vel ipsum
-ornare interdum at eu quam. Vestibulum vel massa erat. Aenean quis sagittis
-purus. Phasellus arcu purus, rutrum id consectetur non, bibendum at nibh.
-
-Duis nec erat dolor. Nulla vitae consectetur ligula. Quisque nec mi est. Ut
-quam ante, rutrum at pellentesque gravida, pretium in dui. Cras eget sapien
-velit. Suspendisse ut sem nec tellus vehicula eleifend sit amet quis velit.
-Phasellus quis suscipit nisi. Nam elementum malesuada tincidunt. Curabitur
-iaculis pretium eros, malesuada faucibus leo eleifend a. Curabitur congue
-orci in neque euismod a blandit libero vehicula""".trimIndent()
-            ),
-        )
-    )
+    override val values: Sequence<List<Tv>> = sequenceOf(tvList)
 ) : PreviewParameterProvider<List<Tv>>

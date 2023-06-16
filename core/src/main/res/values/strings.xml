@@ -16,4 +16,6 @@
     <string name="now_playing">Now Playing</string>
     <string name="popular">Popular</string>
     <string name="recommendations">Recommendations</string>
+    <string name="tv">Tv</string>
+    <string name="movie">Movie</string>
 </resources>

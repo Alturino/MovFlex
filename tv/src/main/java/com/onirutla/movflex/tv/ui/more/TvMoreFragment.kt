@@ -80,7 +80,7 @@ class TvMoreFragment : Fragment() {
                 layoutManager = LinearLayoutManager(requireContext())
             }
             toolbar.apply {
-                title = args.tvType.value
+                title = requireContext().getString(args.tvType.value)
                 setNavigationOnClickListener { it.findNavController().navigateUp() }
             }
         }
