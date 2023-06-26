@@ -1,6 +1,7 @@
 package com.onirutla.movflex.tv.ui
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.tv.domain.model.Tv
 
 private val tvList = listOf(
@@ -58,3 +59,30 @@ class TvParameterProvider(
 class TvListParameterProvider(
     override val values: Sequence<List<Tv>> = sequenceOf(tvList)
 ) : PreviewParameterProvider<List<Tv>>
+
+class TvScreenParameterProvider(
+    override val values: Sequence<List<SeeMore<List<Tv>>>> = sequenceOf(
+        listOf(
+            SeeMore(
+                "Popular",
+                tvList
+            ),
+            SeeMore(
+                "Recommendations",
+                tvList
+            ),
+            SeeMore(
+                "Top Rated",
+                tvList
+            ),
+            SeeMore(
+                "Now Playing",
+                tvList
+            ),
+            SeeMore(
+                "Similar",
+                tvList
+            ),
+        )
+    )
+) : PreviewParameterProvider<List<SeeMore<List<Tv>>>>

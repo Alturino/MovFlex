@@ -1,6 +1,7 @@
 package com.onirutla.movflex.movie.ui
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
+import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.movie.domain.model.Movie
 
 
@@ -46,3 +47,30 @@ class MovieParameterProvider(
 class MovieListParameterProvider(
     override val values: Sequence<List<Movie>> = sequenceOf(movies)
 ) : PreviewParameterProvider<List<Movie>>
+
+class MovieScreenParameterProvider(
+    override val values: Sequence<List<SeeMore<List<Movie>>>> = sequenceOf(
+        listOf(
+            SeeMore(
+                "Popular",
+                movies
+            ),
+            SeeMore(
+                "Now Playing",
+                movies
+            ),
+            SeeMore(
+                "Recommended",
+                movies
+            ),
+            SeeMore(
+                "Top Rated",
+                movies
+            ),
+            SeeMore(
+                "Similar",
+                movies
+            ),
+        )
+    )
+) : PreviewParameterProvider<List<SeeMore<List<Movie>>>>
