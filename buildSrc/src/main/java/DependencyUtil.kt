@@ -66,6 +66,7 @@ fun DependencyHandler.applyHilt() {
 
 fun DependencyHandler.applyPaging() {
     implementation(Deps.Paging.runtime)
+    implementation(Deps.Paging.compose)
     testImplementation(Deps.Paging.common)
 }
 

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
+import androidx.paging.compose.LazyPagingItems
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.ui.MovieColumn
@@ -28,12 +29,15 @@ fun FavoriteScreen(
     selectedTab: Int = 0,
     onTabClick: (index: Int) -> Unit = {},
 ) {
-    Scaffold {
-        Column(modifier = modifier.padding(it)) {
+    Scaffold(
+        topBar = {
             FavoriteTabRow(
                 selectedTab = selectedTab,
                 onTabClick = onTabClick
             )
+        }
+    ) {
+        Column(modifier = modifier.padding(it)) {
             when (selectedTab) {
                 0 -> {
                     MovieColumn(
@@ -46,6 +50,49 @@ fun FavoriteScreen(
                 1 -> {
                     TvColumn(
                         tvList = tvList,
+                        onImageClick = onImageClick,
+                        onItemClick = onTvClick,
+                    )
+                }
+            }
+        }
+    }
+}
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun FavoriteScreen(
+    modifier: Modifier = Modifier,
+    moviePaging: LazyPagingItems<Movie>,
+    onMovieClick: (movie: Movie) -> Unit = {},
+    tvPaging: LazyPagingItems<Tv>,
+    onTvClick: (tv: Tv) -> Unit = {},
+    onImageClick: (url: String) -> Unit = {},
+    selectedTab: Int = 0,
+    onTabClick: (index: Int) -> Unit = {},
+) {
+    Scaffold(
+        topBar = {
+            FavoriteTabRow(
+                selectedTab = selectedTab,
+                onTabClick = onTabClick
+            )
+        }
+    ) {
+        Column(modifier = modifier.padding(it)) {
+            when (selectedTab) {
+                0 -> {
+                    MovieColumn(
+                        movies = moviePaging,
+                        onImageClick = onImageClick,
+                        onMovieClick = onMovieClick,
+                    )
+                }
+
+                1 -> {
+                    TvColumn(
+                        tvList = tvPaging,
                         onImageClick = onImageClick,
                         onItemClick = onTvClick,
                     )

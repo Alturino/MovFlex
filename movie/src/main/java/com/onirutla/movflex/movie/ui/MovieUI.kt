@@ -35,6 +35,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.onirutla.movflex.core.ui.ComponentPreview
@@ -211,6 +213,60 @@ fun MovieRow(
     }
 }
 
+
+@Composable
+fun MovieRow(
+    modifier: Modifier = Modifier,
+    movies: LazyPagingItems<Movie>,
+    movieRowTitle: String = "Popular",
+    seeMore: String = "See More",
+    onSeeMoreClick: () -> Unit = {},
+    onImageClick: (url: String) -> Unit = {},
+    onItemClick: (movie: Movie) -> Unit = {},
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(vertical = 8.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
+                .padding(horizontal = 12.dp),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = movieRowTitle,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
+            Text(
+                modifier = Modifier.clickable { onSeeMoreClick() },
+                text = seeMore,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                textAlign = TextAlign.Left,
+            )
+        }
+        LazyRow {
+            items(items = movies) {
+                if (it != null) {
+                    MovieItemRow(
+                        movie = it,
+                        onImageClick = onImageClick,
+                        onItemClick = onItemClick
+                    )
+                }
+            }
+        }
+    }
+}
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieItemColumn(
@@ -314,13 +370,37 @@ private fun MovieItemColumnPreview(
 @Composable
 fun MovieColumn(
     modifier: Modifier = Modifier,
+    movies: LazyPagingItems<Movie>,
+    onMovieClick: (movie: Movie) -> Unit = {},
+    onImageClick: (url: String) -> Unit = {},
+) {
+    LazyColumn(modifier = modifier) {
+        items(movies) {
+            if (it != null) {
+                MovieItemColumn(
+                    movie = it,
+                    onImageClick = onImageClick,
+                    onItemClick = onMovieClick
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun MovieColumn(
+    modifier: Modifier = Modifier,
     movies: List<Movie>,
     onMovieClick: (movie: Movie) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = movies) {
-            MovieItemColumn(movie = it, onImageClick = onImageClick, onItemClick = onMovieClick)
+        items(movies) {
+            MovieItemColumn(
+                movie = it,
+                onImageClick = onImageClick,
+                onItemClick = onMovieClick
+            )
         }
     }
 }

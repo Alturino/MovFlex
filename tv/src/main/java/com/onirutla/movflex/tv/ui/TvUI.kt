@@ -35,6 +35,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.onirutla.movflex.core.ui.ComponentPreview
@@ -321,6 +323,27 @@ fun TvColumn(
     LazyColumn(modifier = modifier) {
         items(items = tvList) {
             TvItemColumn(tv = it, onImageClick = onImageClick, onItemClick = onItemClick)
+        }
+    }
+}
+
+
+@Composable
+fun TvColumn(
+    tvList: LazyPagingItems<Tv>,
+    modifier: Modifier = Modifier,
+    onImageClick: (url: String) -> Unit = {},
+    onItemClick: (tv: Tv) -> Unit = {},
+) {
+    LazyColumn(modifier = modifier) {
+        items(items = tvList) {
+            if (it != null) {
+                TvItemColumn(
+                    tv = it,
+                    onImageClick = onImageClick,
+                    onItemClick = onItemClick
+                )
+            }
         }
     }
 }

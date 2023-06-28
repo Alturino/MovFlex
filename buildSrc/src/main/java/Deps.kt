@@ -63,6 +63,7 @@ object Deps {
         private const val base = "androidx.paging:paging"
         const val runtime = "$base-runtime:${Versions.paging}"
         const val common = "$base-common:${Versions.paging}"
+        const val compose = "$base-compose:${Versions.pagingCompose}"
     }
 
     object Test {
