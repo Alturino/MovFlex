@@ -39,9 +39,9 @@ class FavoriteTvFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        vm.tvFavorite.observe(viewLifecycleOwner) {
-            itemContentVerticalAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-        }
+//        vm.tvFavorite.observe(viewLifecycleOwner) {
+//            itemContentVerticalAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+//        }
 
         binding.favoriteTvPaging.apply {
             adapter = itemContentVerticalAdapter

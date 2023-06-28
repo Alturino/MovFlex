@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Movie
 import androidx.compose.material.icons.filled.Tv
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -26,9 +27,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.favorite.FavoriteScreen
+import com.onirutla.movflex.favorite.FavoriteTabItem
 import com.onirutla.movflex.favorite.movie.FavoriteMovieViewModel
 import com.onirutla.movflex.favorite.tv.FavoriteTvViewModel
 import com.onirutla.movflex.movie.domain.model.Movie
@@ -43,8 +46,11 @@ import com.onirutla.movflex.core.R as coreR
 fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
-            val movieVm: MovieViewModel by hiltViewModel()
-            val tvVm: TvViewModel by hiltViewModel()
+            val movieVm: MovieViewModel = hiltViewModel()
+            val tvVm: TvViewModel = hiltViewModel()
+
+            val favoriteTvVm: FavoriteTvViewModel = hiltViewModel()
+            val favoriteMovieVm: FavoriteMovieViewModel = hiltViewModel()
 
             val movieState by movieVm.movie.observeAsState(initial = listOf())
             val tvState by tvVm.tvHome.observeAsState(initial = listOf())
@@ -57,6 +63,10 @@ fun Navigation(navController: NavHostController) {
                 NavigationItem(
                     title = stringResource(id = coreR.string.tv),
                     icon = Icons.Default.Tv
+                ),
+                NavigationItem(
+                    title = stringResource(id = coreR.string.favorite),
+                    icon = Icons.Default.Favorite
                 ),
             )
             var navigationItemState by rememberSaveable { mutableStateOf(0) }
@@ -75,9 +85,20 @@ fun Navigation(navController: NavHostController) {
 
         composable(route = Screen.FavoriteScreen.route) {
             var tabState by rememberSaveable { mutableStateOf(0) }
+            val tabItems = listOf(
+                FavoriteTabItem(
+                    title = "Movie",
+                    icon = Icons.Default.Movie
+                ),
+                FavoriteTabItem(
+                    title = "Tv",
+                    icon = Icons.Default.Tv
+                )
+            )
 
-            val movieVm: FavoriteMovieViewModel by hiltViewModel()
-            val tvVm: FavoriteTvViewModel by hiltViewModel()
+
+            val movieVm: FavoriteMovieViewModel = hiltViewModel()
+            val tvVm: FavoriteTvViewModel = hiltViewModel()
 
             val movieState = movieVm.movieFavorite.collectAsLazyPagingItems()
             val tvState = tvVm.tvFavorite.collectAsLazyPagingItems()
@@ -87,8 +108,9 @@ fun Navigation(navController: NavHostController) {
                 onMovieClick = {},
                 tvPaging = tvState,
                 onTvClick = {},
+                tabItems = tabItems,
                 selectedTab = tabState,
-                onTabClick = { tab: Int -> tabState = tab },
+                onTabClick = { tabState = it },
             )
         }
     }
@@ -107,10 +129,12 @@ fun HomeScreen(
     navigationItemSelected: Int = 0,
     onNavigationItemClick: (Int) -> Unit = {},
     movieContent: List<SeeMore<List<Movie>>>,
+    movieFavoriteContent: LazyPagingItems<Movie>,
     onMovieItemClick: (Movie) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
     onMovieSeeMoreClick: () -> Unit = {},
     tvContent: List<SeeMore<List<Tv>>>,
+    tvFavoriteContent: LazyPagingItems<Tv>,
     onTvItemClick: (Tv) -> Unit = {},
     onTvSeeMoreClick: () -> Unit = {},
 ) {
@@ -118,8 +142,8 @@ fun HomeScreen(
         modifier = modifier,
         topBar = {},
         bottomBar = {
-            navigationItems.forEachIndexed { index, item ->
-                NavigationBar {
+            NavigationBar {
+                navigationItems.forEachIndexed { index, item ->
                     NavigationBarItem(
                         icon = { Icon(imageVector = item.icon, contentDescription = null) },
                         selected = index == navigationItemSelected,

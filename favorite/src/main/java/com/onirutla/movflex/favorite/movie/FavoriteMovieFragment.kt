@@ -42,9 +42,9 @@ class FavoriteMovieFragment : Fragment() {
             },
         )
 
-        vm.movieFavorite.observe(viewLifecycleOwner) {
-            moviePagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
-        }
+//        vm.movieFavorite.observe(viewLifecycleOwner) {
+//            moviePagingAdapter.submitData(viewLifecycleOwner.lifecycle, it)
+//        }
 
         binding.favoriteMoviePaging.apply {
             adapter = moviePagingAdapter

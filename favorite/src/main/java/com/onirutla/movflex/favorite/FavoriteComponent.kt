@@ -11,9 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
-import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.ui.MovFlexTheme
 
 @Composable
@@ -37,25 +36,27 @@ fun FavoriteTab(
     )
 }
 
+data class FavoriteTabItem(
+    val title: String,
+    val icon: ImageVector,
+)
+
 @Composable
 fun FavoriteTabRow(
     modifier: Modifier = Modifier,
+    tabItems: List<FavoriteTabItem>,
     selectedTab: Int,
-    onTabClick: (selectedIndex: Int) -> Unit,
+    onTabClick: (selectedTab: Int) -> Unit,
 ) {
     TabRow(modifier = modifier, selectedTabIndex = selectedTab) {
-        FavoriteTab(
-            selected = selectedTab == 0,
-            onClick = { onTabClick(0) },
-            title = stringResource(id = R.string.movie),
-            icon = { Icon(imageVector = Icons.Default.Movie, contentDescription = null) }
-        )
-        FavoriteTab(
-            selected = selectedTab == 1,
-            onClick = { onTabClick(1) },
-            title = stringResource(id = R.string.tv),
-            icon = { Icon(imageVector = Icons.Default.Tv, contentDescription = null) }
-        )
+        tabItems.forEachIndexed { index, item ->
+            FavoriteTab(
+                selected = selectedTab == index,
+                onClick = { onTabClick(index) },
+                title = item.title,
+                icon = { Icon(imageVector = item.icon, contentDescription = null) }
+            )
+        }
     }
 }
 
@@ -80,6 +81,13 @@ fun FavoriteTabRowPreview(
     selectedTabIndex: Int = 0,
 ) {
     MovFlexTheme {
-        FavoriteTabRow(selectedTab = selectedTabIndex, onTabClick = {})
+        FavoriteTabRow(
+            selectedTab = selectedTabIndex,
+            tabItems = listOf(
+                FavoriteTabItem("Movie", icon = Icons.Default.Movie),
+                FavoriteTabItem("Tv", icon = Icons.Default.Tv),
+            ),
+            onTabClick = {}
+        )
     }
 }

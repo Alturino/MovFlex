@@ -26,6 +26,7 @@ fun FavoriteScreen(
     tvList: List<Tv>,
     onTvClick: (tv: Tv) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
+    tabItems: List<FavoriteTabItem>,
     selectedTab: Int = 0,
     onTabClick: (index: Int) -> Unit = {},
 ) {
@@ -33,7 +34,8 @@ fun FavoriteScreen(
         topBar = {
             FavoriteTabRow(
                 selectedTab = selectedTab,
-                onTabClick = onTabClick
+                tabItems = tabItems,
+                onTabClick = onTabClick,
             )
         }
     ) {
@@ -69,6 +71,7 @@ fun FavoriteScreen(
     tvPaging: LazyPagingItems<Tv>,
     onTvClick: (tv: Tv) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
+    tabItems: List<FavoriteTabItem>,
     selectedTab: Int = 0,
     onTabClick: (index: Int) -> Unit = {},
 ) {
@@ -76,6 +79,7 @@ fun FavoriteScreen(
         topBar = {
             FavoriteTabRow(
                 selectedTab = selectedTab,
+                tabItems = tabItems,
                 onTabClick = onTabClick
             )
         }
@@ -109,7 +113,7 @@ fun FavoriteScreenMoviePreview(
     movies: List<Movie>,
 ) {
     MovFlexTheme {
-        FavoriteScreen(movies = movies, tvList = emptyList())
+        FavoriteScreen(movies = movies, tabItems = listOf(), tvList = emptyList())
     }
 }
 
@@ -120,6 +124,6 @@ fun FavoriteScreenTvPreview(
     tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        FavoriteScreen(movies = emptyList(), tvList = tvList, selectedTab = 1)
+        FavoriteScreen(movies = emptyList(), tabItems = listOf(), tvList = tvList, selectedTab = 1)
     }
 }
