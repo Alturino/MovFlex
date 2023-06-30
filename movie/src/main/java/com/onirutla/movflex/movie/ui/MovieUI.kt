@@ -220,9 +220,9 @@ fun MovieRow(
     movies: LazyPagingItems<Movie>,
     movieRowTitle: String = "Popular",
     seeMore: String = "See More",
-    onSeeMoreClick: () -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onSeeMoreClick: () -> Unit,
+    onImageClick: (url: String) -> Unit,
+    onItemClick: (movie: Movie) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -272,8 +272,8 @@ fun MovieRow(
 fun MovieItemColumn(
     modifier: Modifier = Modifier,
     movie: Movie,
-    onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onImageClick: (url: String) -> Unit,
+    onItemClick: (movie: Movie) -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -363,7 +363,7 @@ private fun MovieItemColumnPreview(
     @PreviewParameter(MovieParameterProvider::class) movie: Movie,
 ) {
     MovFlexTheme {
-        MovieItemColumn(movie = movie)
+        MovieItemColumn(movie = movie, onItemClick = {}, onImageClick = {})
     }
 }
 

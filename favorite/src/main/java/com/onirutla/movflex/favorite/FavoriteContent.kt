@@ -67,13 +67,13 @@ fun FavoriteContent(
 fun FavoriteContent(
     modifier: Modifier = Modifier,
     moviePaging: LazyPagingItems<Movie>,
-    onMovieClick: (movie: Movie) -> Unit = {},
+    onMovieClick: (movie: Movie) -> Unit,
     tvPaging: LazyPagingItems<Tv>,
-    onTvClick: (tv: Tv) -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
+    onTvClick: (tv: Tv) -> Unit,
+    onImageClick: (url: String) -> Unit,
     tabItems: List<FavoriteTabItem>,
     selectedTab: Int = 0,
-    onTabClick: (index: Int) -> Unit = {},
+    onTabClick: (index: Int) -> Unit,
 ) {
     Scaffold(
         topBar = {
