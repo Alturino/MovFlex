@@ -30,7 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.onirutla.movflex.core.domain.model.SeeMore
-import com.onirutla.movflex.favorite.FavoriteScreen
+import com.onirutla.movflex.favorite.FavoriteContent
 import com.onirutla.movflex.favorite.FavoriteTabItem
 import com.onirutla.movflex.favorite.movie.FavoriteMovieViewModel
 import com.onirutla.movflex.favorite.tv.FavoriteTvViewModel
@@ -38,7 +38,7 @@ import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.ui.MovieContent
 import com.onirutla.movflex.movie.ui.MovieViewModel
 import com.onirutla.movflex.tv.domain.model.Tv
-import com.onirutla.movflex.tv.ui.TvScreen
+import com.onirutla.movflex.tv.ui.TvContent
 import com.onirutla.movflex.tv.ui.TvViewModel
 import com.onirutla.movflex.core.R as coreR
 
@@ -47,29 +47,31 @@ fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = Screen.HomeScreen.route) {
         composable(route = Screen.HomeScreen.route) {
             val movieVm: MovieViewModel = hiltViewModel()
-            val tvVm: TvViewModel = hiltViewModel()
-
-            val favoriteTvVm: FavoriteTvViewModel = hiltViewModel()
-            val favoriteMovieVm: FavoriteMovieViewModel = hiltViewModel()
-
             val movieState by movieVm.movie.observeAsState(initial = listOf())
+
+            val tvVm: TvViewModel = hiltViewModel()
             val tvState by tvVm.tvHome.observeAsState(initial = listOf())
 
             val navigationItems = listOf(
                 NavigationItem(
-                    title = stringResource(id = coreR.string.movie),
-                    icon = Icons.Default.Movie
+                    title = stringResource(id = coreR.string.movie), icon = Icons.Default.Movie
                 ),
                 NavigationItem(
-                    title = stringResource(id = coreR.string.tv),
-                    icon = Icons.Default.Tv
+                    title = stringResource(id = coreR.string.tv), icon = Icons.Default.Tv
                 ),
                 NavigationItem(
                     title = stringResource(id = coreR.string.favorite),
                     icon = Icons.Default.Favorite
                 ),
             )
+
             var navigationItemState by rememberSaveable { mutableStateOf(0) }
+
+            val favoriteTvVm: FavoriteTvViewModel = hiltViewModel()
+            val favoriteTvState = favoriteTvVm.tvFavorite.collectAsLazyPagingItems()
+
+            val favoriteMovieVm: FavoriteMovieViewModel = hiltViewModel()
+            val favoriteMovieState = favoriteMovieVm.movieFavorite.collectAsLazyPagingItems()
 
             HomeScreen(
                 navigationItems = navigationItems,
@@ -80,6 +82,8 @@ fun Navigation(navController: NavHostController) {
                 onImageClick = {},
                 tvContent = tvState,
                 onTvItemClick = {},
+                movieFavoriteContent = favoriteMovieState,
+                tvFavoriteContent = favoriteTvState,
             )
         }
 
@@ -87,12 +91,9 @@ fun Navigation(navController: NavHostController) {
             var tabState by rememberSaveable { mutableStateOf(0) }
             val tabItems = listOf(
                 FavoriteTabItem(
-                    title = "Movie",
-                    icon = Icons.Default.Movie
-                ),
-                FavoriteTabItem(
-                    title = "Tv",
-                    icon = Icons.Default.Tv
+                    title = "Movie", icon = Icons.Default.Movie
+                ), FavoriteTabItem(
+                    title = "Tv", icon = Icons.Default.Tv
                 )
             )
 
@@ -103,7 +104,7 @@ fun Navigation(navController: NavHostController) {
             val movieState = movieVm.movieFavorite.collectAsLazyPagingItems()
             val tvState = tvVm.tvFavorite.collectAsLazyPagingItems()
 
-            FavoriteScreen(
+            FavoriteContent(
                 moviePaging = movieState,
                 onMovieClick = {},
                 tvPaging = tvState,
@@ -117,8 +118,7 @@ fun Navigation(navController: NavHostController) {
 }
 
 data class NavigationItem(
-    val title: String,
-    val icon: ImageVector
+    val title: String, val icon: ImageVector
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -138,24 +138,21 @@ fun HomeScreen(
     onTvItemClick: (Tv) -> Unit = {},
     onTvSeeMoreClick: () -> Unit = {},
 ) {
-    Scaffold(
-        modifier = modifier,
-        topBar = {},
-        bottomBar = {
-            NavigationBar {
-                navigationItems.forEachIndexed { index, item ->
-                    NavigationBarItem(
-                        icon = { Icon(imageVector = item.icon, contentDescription = null) },
-                        selected = index == navigationItemSelected,
-                        onClick = { onNavigationItemClick(index) },
-                        label = { Text(text = item.title) }
+    Scaffold(modifier = modifier, topBar = {}, bottomBar = {
+        NavigationBar {
+            navigationItems.forEachIndexed { index, item ->
+                NavigationBarItem(icon = {
+                    Icon(
+                        imageVector = item.icon,
+                        contentDescription = null
                     )
-                }
+                },
+                    selected = index == navigationItemSelected,
+                    onClick = { onNavigationItemClick(index) },
+                    label = { Text(text = item.title) })
             }
-        },
-        snackbarHost = {},
-        floatingActionButton = {}
-    ) {
+        }
+    }, snackbarHost = {}, floatingActionButton = {}) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -170,11 +167,20 @@ fun HomeScreen(
                     onSeeMoreClick = onMovieSeeMoreClick,
                 )
 
-                1 -> TvScreen(
+                1 -> TvContent(
                     content = tvContent,
                     onItemClick = onTvItemClick,
                     onImageClick = onImageClick,
                     onSeeMoreClick = onTvSeeMoreClick,
+                )
+
+                2 -> FavoriteContent(
+                    moviePaging = movieFavoriteContent,
+                    tvPaging = tvFavoriteContent,
+                    tabItems = listOf(
+                        FavoriteTabItem(title = "Movie", icon = Icons.Default.Movie),
+                        FavoriteTabItem(title = "Tv", icon = Icons.Default.Tv)
+                    )
                 )
             }
         }

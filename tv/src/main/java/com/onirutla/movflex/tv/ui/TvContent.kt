@@ -21,7 +21,7 @@ import com.onirutla.movflex.tv.domain.model.Tv
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TvScreen(
+fun TvContent(
     modifier: Modifier = Modifier,
     content: List<SeeMore<List<Tv>>>,
     onItemClick: (Tv) -> Unit = {},
@@ -64,6 +64,6 @@ private fun TvScreenPreview(
     @PreviewParameter(TvScreenParameterProvider::class) content: List<SeeMore<List<Tv>>>
 ) {
     MovFlexTheme {
-        TvScreen(content = content)
+        TvContent(content = content)
     }
 }

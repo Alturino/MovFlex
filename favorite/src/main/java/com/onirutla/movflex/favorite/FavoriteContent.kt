@@ -19,7 +19,7 @@ import com.onirutla.movflex.tv.ui.TvListParameterProvider
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteScreen(
+fun FavoriteContent(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
     onMovieClick: (movie: Movie) -> Unit = {},
@@ -64,7 +64,7 @@ fun FavoriteScreen(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun FavoriteScreen(
+fun FavoriteContent(
     modifier: Modifier = Modifier,
     moviePaging: LazyPagingItems<Movie>,
     onMovieClick: (movie: Movie) -> Unit = {},
@@ -113,7 +113,7 @@ fun FavoriteScreenMoviePreview(
     movies: List<Movie>,
 ) {
     MovFlexTheme {
-        FavoriteScreen(movies = movies, tabItems = listOf(), tvList = emptyList())
+        FavoriteContent(movies = movies, tabItems = listOf(), tvList = emptyList())
     }
 }
 
@@ -124,6 +124,6 @@ fun FavoriteScreenTvPreview(
     tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        FavoriteScreen(movies = emptyList(), tabItems = listOf(), tvList = tvList, selectedTab = 1)
+        FavoriteContent(movies = emptyList(), tabItems = listOf(), tvList = tvList, selectedTab = 1)
     }
 }
