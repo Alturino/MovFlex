@@ -35,16 +35,16 @@ fun Navigation(navController: NavHostController) {
             val tvState by tvVm.tvHome.observeAsState(initial = listOf())
 
             var navigationItemState by rememberSaveable { mutableStateOf(0) }
-            val navigationItems = listOf(
-                NavigationItem(
+            val bottomNavigationItems = listOf(
+                BottomNavigationItem(
                     title = stringResource(id = coreR.string.movie),
                     icon = Icons.Default.Movie
                 ),
-                NavigationItem(
+                BottomNavigationItem(
                     title = stringResource(id = coreR.string.tv),
                     icon = Icons.Default.Tv
                 ),
-                NavigationItem(
+                BottomNavigationItem(
                     title = stringResource(id = coreR.string.favorite),
                     icon = Icons.Default.Favorite
                 ),
@@ -69,7 +69,7 @@ fun Navigation(navController: NavHostController) {
             )
 
             HomeScreen(
-                navigationItems = navigationItems,
+                bottomNavigationItems = bottomNavigationItems,
                 navigationItemSelected = navigationItemState,
                 onNavigationItemClick = { navigationItemState = it },
                 movieContent = movieState,
@@ -86,9 +86,14 @@ fun Navigation(navController: NavHostController) {
                 selectedTab = tabState,
             )
         }
+
+        composable(route = Screen.MovieDetailScreen.route) {
+
+        }
+
     }
 }
 
-data class NavigationItem(
+data class BottomNavigationItem(
     val title: String, val icon: ImageVector
 )

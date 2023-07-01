@@ -25,7 +25,7 @@ import com.onirutla.movflex.tv.ui.TvContent
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    navigationItems: List<NavigationItem>,
+    bottomNavigationItems: List<BottomNavigationItem>,
     navigationItemSelected: Int,
     onNavigationItemClick: (Int) -> Unit,
     movieContent: List<SeeMore<List<Movie>>>,
@@ -46,7 +46,7 @@ fun HomeScreen(
         topBar = {},
         bottomBar = {
             NavigationBar {
-                navigationItems.forEachIndexed { index, item ->
+                bottomNavigationItems.forEachIndexed { index, item ->
                     NavigationBarItem(
                         icon = {
                             Icon(
@@ -73,7 +73,7 @@ fun HomeScreen(
             when (navigationItemSelected) {
                 0 -> MovieContent(
                     content = movieContent,
-                    onItemClick = onMovieClick,
+                    onMovieClick = onMovieClick,
                     onImageClick = onImageClick,
                     onSeeMoreClick = onMovieSeeMoreClick,
                 )

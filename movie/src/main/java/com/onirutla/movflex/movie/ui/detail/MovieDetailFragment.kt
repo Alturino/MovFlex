@@ -108,7 +108,7 @@ class MovieDetailFragment : Fragment() {
                     movie.voteCount,
                 )
                 tvOverview.text = movie.overview
-                tvGenre.text = movie.genre
+                tvGenre.text = movie.genres
                 fab.setOnClickListener {
                     viewModel.setFavorite(movie)
                 }

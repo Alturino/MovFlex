@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -29,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,6 +44,7 @@ import com.onirutla.movflex.core.domain.model.Review
 import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.R as coreR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -207,10 +210,34 @@ fun ReviewColumn(modifier: Modifier = Modifier, reviews: List<Review>) {
 }
 
 @Composable
-fun ReviewRow(modifier: Modifier = Modifier, reviews: List<Review>) {
-    LazyRow(modifier = modifier) {
-        items(items = reviews) {
-            ReviewItemColumn(review = it)
+fun ReviewRow(
+    modifier: Modifier = Modifier,
+    title: String,
+    reviews: List<Review>,
+    onReviewClick: (Review) -> Unit,
+) {
+    Column(modifier = modifier.padding(vertical = 8.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
+        }
+        LazyRow(
+            modifier = modifier
+                .wrapContentWidth()
+                .wrapContentHeight(),
+        ) {
+            items(items = reviews) {
+                ReviewItemRow(review = it, onReviewClick = onReviewClick)
+            }
         }
     }
 }
@@ -256,6 +283,10 @@ fun ReviewRowPreview(
     reviews: List<Review>,
 ) {
     MovFlexTheme {
-        ReviewRow(reviews = reviews)
+        ReviewRow(
+            title = stringResource(id = coreR.string.reviews),
+            reviews = reviews,
+            onReviewClick = {}
+        )
     }
 }

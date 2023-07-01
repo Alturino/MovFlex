@@ -161,17 +161,32 @@ fun CastItemRow(
 @Composable
 fun CastRow(
     modifier: Modifier = Modifier,
-    contentPadding: PaddingValues = PaddingValues(start = 8.dp, end = 8.dp),
-    casts: List<Cast>
+    title: String,
+    casts: List<Cast>,
+    onCastClick: (Cast) -> Unit,
 ) {
-    LazyRow(
-        modifier = modifier
-            .wrapContentWidth()
-            .wrapContentHeight(),
-        contentPadding = contentPadding
-    ) {
-        items(items = casts) {
-            CastItemRow(cast = it)
+    Column(modifier = modifier.padding(vertical = 8.dp)) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Text(
+                text = title,
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
+        }
+        LazyRow(
+            modifier = modifier
+                .wrapContentWidth()
+                .wrapContentHeight(),
+        ) {
+            items(items = casts) {
+                CastItemRow(cast = it, onClick = onCastClick)
+            }
         }
     }
 }
@@ -234,6 +249,6 @@ fun CastRowPreview(
     casts: List<Cast>
 ) {
     MovFlexTheme {
-        CastRow(casts = casts)
+        CastRow(title = "Cast", casts = casts, onCastClick = {})
     }
 }

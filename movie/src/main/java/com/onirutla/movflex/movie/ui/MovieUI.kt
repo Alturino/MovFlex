@@ -170,11 +170,11 @@ private fun MovieRowPreview(
 fun MovieRow(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
-    movieRowTitle: String = "Popular",
+    title: String = "Popular",
     seeMore: String = "See More",
     onSeeMoreClick: () -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (movie: Movie) -> Unit = {},
+    onMovieClick: (movie: Movie) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -185,13 +185,12 @@ fun MovieRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(IntrinsicSize.Min)
-                .padding(horizontal = 12.dp),
+                .height(IntrinsicSize.Min),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = movieRowTitle,
+                text = title,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
@@ -207,7 +206,7 @@ fun MovieRow(
         }
         LazyRow {
             items(items = movies) {
-                MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onItemClick)
+                MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onMovieClick)
             }
         }
     }

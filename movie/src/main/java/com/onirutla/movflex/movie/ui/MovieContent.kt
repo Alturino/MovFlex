@@ -7,7 +7,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -21,7 +20,7 @@ import com.onirutla.movflex.movie.domain.model.Movie
 fun MovieContent(
     modifier: Modifier = Modifier,
     content: List<SeeMore<List<Movie>>>,
-    onItemClick: (movie: Movie) -> Unit = {},
+    onMovieClick: (movie: Movie) -> Unit = {},
     onImageClick: (url: String) -> Unit = {},
     onSeeMoreClick: () -> Unit = {},
     scrollState: LazyListState = rememberLazyListState()
@@ -36,8 +35,8 @@ fun MovieContent(
             items(content) { item ->
                 MovieRow(
                     movies = item.items,
-                    movieRowTitle = item.title,
-                    onItemClick = onItemClick,
+                    title = item.title,
+                    onMovieClick = onMovieClick,
                     onImageClick = onImageClick,
                     onSeeMoreClick = onSeeMoreClick
                 )
