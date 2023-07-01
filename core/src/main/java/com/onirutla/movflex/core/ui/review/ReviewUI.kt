@@ -32,6 +32,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -51,32 +52,32 @@ fun ReviewItemColumn(
 ) {
     Card(
         modifier = modifier
-            .fillMaxWidth()
+            .width(IntrinsicSize.Max)
             .wrapContentHeight()
             .padding(8.dp),
         onClick = { onReviewClick(review) }
     ) {
         Row(
             modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
                 .padding(16.dp),
             verticalAlignment = Alignment.Top,
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            AsyncImage(
-                modifier = Modifier
-                    .width(50.dp)
-                    .height(50.dp)
-                    .clip(CircleShape),
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data("$BASE_IMAGE_PATH${review.authorDetail.avatarPath}")
-                    .build(),
-                contentDescription = "Reviewer Avatar",
-                placeholder = painterResource(id = R.drawable.ic_launcher_background),
-                contentScale = ContentScale.Crop,
-            )
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-            ) {
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                AsyncImage(
+                    modifier = Modifier
+                        .width(50.dp)
+                        .height(50.dp)
+                        .clip(CircleShape),
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data("$BASE_IMAGE_PATH${review.authorDetail.avatarPath}")
+                        .build(),
+                    contentDescription = "Reviewer Avatar",
+                    placeholder = painterResource(id = R.drawable.ic_launcher_background),
+                    contentScale = ContentScale.Crop,
+                )
                 Column(
                     modifier = Modifier.padding(start = 8.dp),
                     verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -100,21 +101,21 @@ fun ReviewItemColumn(
                         textAlign = TextAlign.Justify,
                     )
                 }
-                AssistChip(
-                    modifier = Modifier,
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Star,
-                            contentDescription = null,
-                            tint = Color.Yellow
-                        )
-                    },
-                    label = {
-                        Text(text = "${review.authorDetail.rating}")
-                    },
-                    onClick = {}
-                )
             }
+            AssistChip(
+                modifier = Modifier,
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Star,
+                        contentDescription = null,
+                        tint = Color.Yellow
+                    )
+                },
+                label = {
+                    Text(text = "${review.authorDetail.rating}")
+                },
+                onClick = {}
+            )
         }
         Text(
             modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
@@ -248,6 +249,7 @@ fun ReviewColumnPreview(
 }
 
 @ComponentPreview
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun ReviewRowPreview(
     @PreviewParameter(ReviewsProvider::class)

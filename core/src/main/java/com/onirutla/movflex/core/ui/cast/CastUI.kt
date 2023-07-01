@@ -34,7 +34,7 @@ import coil.request.ImageRequest
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.domain.model.Cast
 import com.onirutla.movflex.core.ui.CastProvider
-import com.onirutla.movflex.core.ui.CastsPreviewProvider
+import com.onirutla.movflex.core.ui.CastsProvider
 import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
@@ -219,7 +219,7 @@ fun CastItemColumnPreview(
 @ComponentPreview
 @Composable
 fun CastColumnPreview(
-    @PreviewParameter(CastsPreviewProvider::class)
+    @PreviewParameter(CastsProvider::class)
     casts: List<Cast>
 ) {
     MovFlexTheme {
@@ -230,7 +230,7 @@ fun CastColumnPreview(
 @ComponentPreview
 @Composable
 fun CastRowPreview(
-    @PreviewParameter(CastsPreviewProvider::class)
+    @PreviewParameter(CastsProvider::class)
     casts: List<Cast>
 ) {
     MovFlexTheme {

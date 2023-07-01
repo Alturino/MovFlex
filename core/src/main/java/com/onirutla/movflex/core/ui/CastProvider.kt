@@ -14,7 +14,7 @@ class CastProvider(
     )
 ) : PreviewParameterProvider<Cast>
 
-class CastsPreviewProvider(
+class CastsProvider(
     override val values: Sequence<List<Cast>> = sequenceOf(
         listOf(
             Cast(
