@@ -74,22 +74,12 @@ fun MovieDetailScreen(
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            if (fabState) {
-                FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
-                    Icon(
-                        imageVector = Icons.Filled.Favorite,
-                        tint = Color.Red,
-                        contentDescription = "Favorite Button"
-                    )
-                }
-            } else {
-                FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
-                    Icon(
-                        imageVector = Icons.Default.FavoriteBorder,
-                        tint = Color.Red,
-                        contentDescription = "Favorite Button"
-                    )
-                }
+            FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
+                Icon(
+                    imageVector = if (fabState) Icons.Filled.Favorite else Icons.Default.FavoriteBorder,
+                    tint = Color.Red,
+                    contentDescription = "Favorite Button"
+                )
             }
         }
     ) { contentPadding ->
