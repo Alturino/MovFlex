@@ -104,7 +104,6 @@ fun MovieItemRow(
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Justify,
             )
-
             Text(
                 text = movie.releaseDate,
                 style = MaterialTheme.typography.bodySmall,
@@ -335,7 +334,7 @@ fun MovieItemColumn(
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer,
                     maxLines = 4,
-                    textAlign = TextAlign.Justify,
+                    textAlign = TextAlign.Left,
                 )
                 Text(
                     text = movie.overview,

@@ -85,7 +85,7 @@ fun TvItemRow(
                 fontWeight = FontWeight.Bold,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Justify,
+                textAlign = TextAlign.Left,
             )
             Text(
                 text = tv.originalName,
@@ -94,7 +94,7 @@ fun TvItemRow(
                 fontWeight = FontWeight.SemiBold,
                 maxLines = 2,
                 overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Justify,
+                textAlign = TextAlign.Left,
             )
             Text(
                 text = tv.overview,

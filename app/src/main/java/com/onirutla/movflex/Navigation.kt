@@ -14,13 +14,18 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.onirutla.movflex.favorite.FavoriteTabItem
 import com.onirutla.movflex.favorite.movie.FavoriteMovieViewModel
 import com.onirutla.movflex.favorite.tv.FavoriteTvViewModel
+import com.onirutla.movflex.movie.domain.model.MovieDetail
+import com.onirutla.movflex.movie.ui.MovieDetailScreen
 import com.onirutla.movflex.movie.ui.MovieViewModel
+import com.onirutla.movflex.movie.ui.detail.MovieDetailViewModel
 import com.onirutla.movflex.tv.ui.TvViewModel
 import com.onirutla.movflex.core.R as coreR
 
@@ -73,7 +78,7 @@ fun Navigation(navController: NavHostController) {
                 navigationItemSelected = navigationItemState,
                 onNavigationItemClick = { navigationItemState = it },
                 movieContent = movieState,
-                onMovieClick = {},
+                onMovieClick = { navController.navigate(route = "${Screen.MovieDetailScreen.route}/${it.id}") },
                 onImageClick = {},
                 tvContent = tvState,
                 onTvClick = {},
@@ -87,8 +92,39 @@ fun Navigation(navController: NavHostController) {
             )
         }
 
-        composable(route = Screen.MovieDetailScreen.route) {
+        composable(
+            route = "${Screen.MovieDetailScreen.route}/{${MovFlexArg.MovieId.arg}}",
+            arguments = listOf(
+                navArgument(name = "movie_id") {
+                    type = NavType.IntType
+                    defaultValue = 0
+                }
+            )
+        ) { navBackStackEntry ->
 
+            val vm: MovieDetailViewModel = hiltViewModel()
+            val movieId =
+                navBackStackEntry.arguments?.getInt(MovFlexArg.MovieId.arg) ?: return@composable
+            vm.getMovieDetail(movieId)
+
+            val movieDetail by vm.movieDetail.observeAsState(initial = MovieDetail())
+            val reviews by vm.movieReviews.observeAsState(initial = listOf())
+            val casts by vm.movieCasts.observeAsState(initial = listOf())
+            val movieSimilar by vm.movieSimilar.observeAsState(initial = listOf())
+            val movieRecommendations by vm.movieRecommendations.observeAsState(initial = listOf())
+
+            MovieDetailScreen(
+                movieDetail = movieDetail,
+                reviews = reviews,
+                onReviewClick = {},
+                casts = casts,
+                onCastClick = {},
+                movieSimilar = movieSimilar,
+                movieRecommendations = movieRecommendations,
+                onMovieClick = { navController.navigate("${Screen.MovieDetailScreen.route}/${it.id}") },
+                onMovieSeeMoreClick = {},
+                onNavigateUp = { navController.navigateUp() },
+            )
         }
 
     }
@@ -97,3 +133,7 @@ fun Navigation(navController: NavHostController) {
 data class BottomNavigationItem(
     val title: String, val icon: ImageVector
 )
+
+sealed class MovFlexArg(val arg: String) {
+    object MovieId : MovFlexArg(arg = "movie_id")
+}

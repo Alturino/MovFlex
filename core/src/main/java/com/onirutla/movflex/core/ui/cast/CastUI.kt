@@ -2,6 +2,7 @@ package com.onirutla.movflex.core.ui.cast
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,6 +25,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -38,6 +40,7 @@ import com.onirutla.movflex.core.ui.CastsProvider
 import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
+import com.onirutla.movflex.core.R as coreR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -140,9 +143,9 @@ fun CastItemRow(
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                 fontWeight = FontWeight.Bold,
-                maxLines = 2,
+                maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
-                textAlign = TextAlign.Justify,
+                textAlign = TextAlign.Left,
             )
             Text(
                 text = "(${cast.character})",
@@ -162,6 +165,7 @@ fun CastItemRow(
 fun CastRow(
     modifier: Modifier = Modifier,
     title: String,
+    seeMore: String,
     casts: List<Cast>,
     onCastClick: (Cast) -> Unit,
 ) {
@@ -169,13 +173,20 @@ fun CastRow(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
+                .height(IntrinsicSize.Min),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
                 text = title,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
+            Text(
+                text = seeMore,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Left,
             )
         }
@@ -249,6 +260,11 @@ fun CastRowPreview(
     casts: List<Cast>
 ) {
     MovFlexTheme {
-        CastRow(title = "Cast", casts = casts, onCastClick = {})
+        CastRow(
+            title = stringResource(id = coreR.string.casts),
+            seeMore = "See More",
+            casts = casts,
+            onCastClick = {}
+        )
     }
 }

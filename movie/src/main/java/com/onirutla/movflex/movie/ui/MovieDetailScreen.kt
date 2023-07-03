@@ -1,20 +1,28 @@
 package com.onirutla.movflex.movie.ui
 
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Star
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -45,29 +53,48 @@ import com.onirutla.movflex.core.R as coreR
 fun MovieDetailScreen(
     modifier: Modifier = Modifier,
     movieDetail: MovieDetail,
-    reviews: List<Review> = listOf(),
-    casts: List<Cast> = listOf(),
-    movieRecommendations: List<Movie> = listOf(),
-    movieSimilar: List<Movie> = listOf(),
+    reviews: List<Review>,
+    onReviewClick: (Review) -> Unit,
+    casts: List<Cast>,
+    onCastClick: (Cast) -> Unit,
+    movieRecommendations: List<Movie>,
+    movieSimilar: List<Movie>,
+    onMovieClick: (Movie) -> Unit,
+    onMovieSeeMoreClick: () -> Unit,
+    onNavigateUp: () -> Unit,
+    verticalScrollState: ScrollState = rememberScrollState(),
 ) {
     Surface(modifier = modifier) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .fillMaxHeight(),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
+                .fillMaxHeight()
+                .verticalScroll(verticalScrollState),
+            verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
-            AsyncImage(
+            Box(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(400.dp),
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data("$BASE_IMAGE_PATH${movieDetail.posterPath}")
-                    .build(),
-                contentDescription = "Movie Poster",
-                placeholder = painterResource(id = coreR.drawable.ic_launcher_background),
-                contentScale = ContentScale.Crop,
-            )
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+            ) {
+                AsyncImage(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(400.dp),
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data("$BASE_IMAGE_PATH${movieDetail.posterPath}")
+                        .build(),
+                    contentDescription = "Movie Poster",
+                    placeholder = painterResource(id = coreR.drawable.ic_launcher_background),
+                    contentScale = ContentScale.Crop,
+                )
+                IconButton(
+                    modifier = Modifier.align(Alignment.TopStart),
+                    onClick = { onNavigateUp() }
+                ) {
+                    Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back Button")
+                }
+            }
             Column(
                 modifier = Modifier.padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -115,24 +142,24 @@ fun MovieDetailScreen(
                 ReviewRow(
                     title = stringResource(id = coreR.string.reviews),
                     reviews = reviews,
-                    onReviewClick = {},
+                    onReviewClick = onReviewClick,
                 )
                 CastRow(
                     title = stringResource(id = coreR.string.casts),
                     casts = casts,
-                    onCastClick = {}
+                    onCastClick = onCastClick
                 )
                 MovieRow(
                     title = stringResource(id = coreR.string.recommendation),
                     movies = movieRecommendations,
-                    onMovieClick = {},
-                    onSeeMoreClick = {},
+                    onMovieClick = onMovieClick,
+                    onSeeMoreClick = onMovieSeeMoreClick,
                 )
                 MovieRow(
                     title = stringResource(id = coreR.string.similar),
                     movies = movieSimilar,
-                    onMovieClick = {},
-                    onSeeMoreClick = {},
+                    onMovieClick = onMovieClick,
+                    onSeeMoreClick = onMovieSeeMoreClick,
                 )
             }
         }
@@ -195,6 +222,15 @@ fun MovieDetailScreenPreview() {
                 voteCount = 19258,
                 isFavorite = true
             ),
+            reviews = listOf(),
+            onReviewClick = {},
+            movieRecommendations = listOf(),
+            movieSimilar = listOf(),
+            onMovieClick = {},
+            casts = listOf(),
+            onCastClick = {},
+            onMovieSeeMoreClick = {},
+            onNavigateUp = {},
         )
     }
 }

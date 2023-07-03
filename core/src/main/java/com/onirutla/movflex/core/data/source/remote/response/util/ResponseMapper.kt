@@ -28,6 +28,9 @@ import com.onirutla.movflex.core.domain.model.ProductionCountry
 import com.onirutla.movflex.core.domain.model.Review
 import com.onirutla.movflex.core.domain.model.Season
 import com.onirutla.movflex.core.domain.model.SpokenLanguage
+import kotlinx.datetime.TimeZone
+import kotlinx.datetime.toInstant
+import kotlinx.datetime.toLocalDateTime
 
 fun CastResponse.toCast() = Cast(
     adult = adult ?: false,
@@ -50,7 +53,7 @@ fun ReviewResponse.toReview() = Review(
     author = author.orEmpty(),
     authorDetail = authorDetailsResponse.toAuthorDetail(),
     content = content.orEmpty(),
-    createdAt = createdAt.orEmpty(),
+    createdAt = "${createdAt?.toInstant()?.toLocalDateTime(TimeZone.UTC)?.date}",
     id = id.orEmpty(),
     updatedAt = updatedAt.orEmpty(),
     url = url.orEmpty(),

@@ -1,5 +1,6 @@
 package com.onirutla.movflex.core.ui.review
 
+import android.os.Build
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -7,6 +8,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
@@ -49,13 +51,14 @@ import com.onirutla.movflex.core.R as coreR
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ReviewItemColumn(
-    review: Review,
     modifier: Modifier = Modifier,
-    onReviewClick: (Review) -> Unit = {}
+    review: Review,
+    onReviewClick: (Review) -> Unit,
 ) {
     Card(
         modifier = modifier
             .width(IntrinsicSize.Max)
+            .requiredWidth(width = 350.dp)
             .wrapContentHeight()
             .padding(8.dp),
         onClick = { onReviewClick(review) }
@@ -121,13 +124,17 @@ fun ReviewItemColumn(
             )
         }
         Text(
-            modifier = Modifier.padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .padding(top = 8.dp, start = 16.dp, end = 16.dp, bottom = 16.dp),
             text = review.content,
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onPrimaryContainer,
             fontWeight = FontWeight.Normal,
             maxLines = 4,
             textAlign = TextAlign.Justify,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }
@@ -201,25 +208,16 @@ fun ReviewItemRow(
 }
 
 @Composable
-fun ReviewColumn(modifier: Modifier = Modifier, reviews: List<Review>) {
-    LazyColumn(modifier = modifier) {
-        items(items = reviews) {
-            ReviewItemColumn(review = it)
-        }
-    }
-}
-
-@Composable
 fun ReviewRow(
     modifier: Modifier = Modifier,
     title: String,
     reviews: List<Review>,
     onReviewClick: (Review) -> Unit,
 ) {
-    Column(modifier = modifier.padding(vertical = 8.dp)) {
+    Column(modifier = modifier) {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
+                .wrapContentWidth()
                 .wrapContentHeight()
         ) {
             Text(
@@ -230,14 +228,44 @@ fun ReviewRow(
                 textAlign = TextAlign.Left,
             )
         }
-        LazyRow(
-            modifier = modifier
-                .wrapContentWidth()
-                .wrapContentHeight(),
-        ) {
+        LazyRow {
             items(items = reviews) {
-                ReviewItemRow(review = it, onReviewClick = onReviewClick)
+                ReviewItemColumn(review = it, onReviewClick = onReviewClick)
             }
+        }
+    }
+}
+
+@Composable
+fun ReviewColumn(
+    modifier: Modifier = Modifier,
+    title: String,
+    reviews: List<Review>,
+    onReviewClick: (Review) -> Unit,
+) {
+    LazyColumn(
+        modifier = modifier
+            .wrapContentWidth()
+            .wrapContentHeight(),
+    ) {
+        item {
+            Row(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .wrapContentHeight()
+                    .padding(horizontal = 8.dp)
+            ) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onSurface,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Left,
+                )
+            }
+        }
+        items(items = reviews) {
+            ReviewItemRow(review = it, onReviewClick = onReviewClick)
         }
     }
 }
@@ -260,30 +288,36 @@ fun ReviewItemColumnPreview(
     review: Review,
 ) {
     MovFlexTheme {
-        ReviewItemColumn(review = review)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            ReviewItemColumn(review = review, onReviewClick = {})
+        }
     }
 }
 
 @ComponentPreview
 @Composable
-fun ReviewColumnPreview(
+private fun ReviewRowPreview(
     @PreviewParameter(ReviewsProvider::class)
     reviews: List<Review>,
 ) {
     MovFlexTheme {
-        ReviewColumn(reviews = reviews)
+        ReviewRow(
+            title = stringResource(id = coreR.string.reviews),
+            reviews = reviews,
+            onReviewClick = {},
+        )
     }
 }
 
 @ComponentPreview
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
-fun ReviewRowPreview(
+fun ReviewColumnPreview(
     @PreviewParameter(ReviewsProvider::class)
     reviews: List<Review>,
 ) {
     MovFlexTheme {
-        ReviewRow(
+        ReviewColumn(
             title = stringResource(id = coreR.string.reviews),
             reviews = reviews,
             onReviewClick = {}
