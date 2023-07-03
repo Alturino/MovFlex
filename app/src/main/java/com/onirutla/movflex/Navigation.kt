@@ -108,6 +108,7 @@ fun Navigation(navController: NavHostController) {
             vm.getMovieDetail(movieId)
 
             val movieDetail by vm.movieDetail.observeAsState(initial = MovieDetail())
+            val isMovieFavorited by vm.isMovieFavorited.observeAsState(initial = false)
             val reviews by vm.movieReviews.observeAsState(initial = listOf())
             val casts by vm.movieCasts.observeAsState(initial = listOf())
             val movieSimilar by vm.movieSimilar.observeAsState(initial = listOf())
@@ -124,6 +125,10 @@ fun Navigation(navController: NavHostController) {
                 onMovieClick = { navController.navigate("${Screen.MovieDetailScreen.route}/${it.id}") },
                 onMovieSeeMoreClick = {},
                 onNavigateUp = { navController.navigateUp() },
+                fabState = isMovieFavorited,
+                onFabClick = { movie ->
+                    vm.setFavorite(movie)
+                },
             )
         }
 

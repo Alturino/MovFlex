@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
+import androidx.lifecycle.map
 import androidx.lifecycle.switchMap
 import androidx.lifecycle.viewModelScope
 import com.onirutla.movflex.core.domain.model.Cast
@@ -26,6 +27,8 @@ class MovieDetailViewModel @Inject constructor(
     val movieDetail = _movieId.switchMap {
         movieRepository.getMovieDetail(it).asLiveData(viewModelScope.coroutineContext)
     }
+
+    val isMovieFavorited: LiveData<Boolean> = movieDetail.map { it.isFavorite }
 
     val movieRecommendations: LiveData<List<Movie>> = _movieId.switchMap {
         liveData { emit(movieRepository.getMovieRecommendations(it)) }

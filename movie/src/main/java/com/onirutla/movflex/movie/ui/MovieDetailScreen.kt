@@ -15,11 +15,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -49,6 +53,7 @@ import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieDetail
 import com.onirutla.movflex.core.R as coreR
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MovieDetailScreen(
     modifier: Modifier = Modifier,
@@ -57,6 +62,8 @@ fun MovieDetailScreen(
     onReviewClick: (Review) -> Unit,
     casts: List<Cast>,
     onCastClick: (Cast) -> Unit,
+    fabState: Boolean = false,
+    onFabClick: (MovieDetail) -> Unit,
     movieRecommendations: List<Movie>,
     movieSimilar: List<Movie>,
     onMovieClick: (Movie) -> Unit,
@@ -64,11 +71,33 @@ fun MovieDetailScreen(
     onNavigateUp: () -> Unit,
     verticalScrollState: ScrollState = rememberScrollState(),
 ) {
-    Surface(modifier = modifier) {
+    Scaffold(
+        modifier = modifier,
+        floatingActionButton = {
+            if (fabState) {
+                FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
+                    Icon(
+                        imageVector = Icons.Filled.Favorite,
+                        tint = Color.Red,
+                        contentDescription = "Favorite Button"
+                    )
+                }
+            } else {
+                FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
+                    Icon(
+                        imageVector = Icons.Default.FavoriteBorder,
+                        tint = Color.Red,
+                        contentDescription = "Favorite Button"
+                    )
+                }
+            }
+        }
+    ) { contentPadding ->
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .fillMaxHeight()
+                .padding(contentPadding)
                 .verticalScroll(verticalScrollState),
             verticalArrangement = Arrangement.spacedBy(8.dp),
         ) {
@@ -147,7 +176,8 @@ fun MovieDetailScreen(
                 CastRow(
                     title = stringResource(id = coreR.string.casts),
                     casts = casts,
-                    onCastClick = onCastClick
+                    onCastClick = onCastClick,
+                    seeMore = stringResource(id = coreR.string.see_more)
                 )
                 MovieRow(
                     title = stringResource(id = coreR.string.recommendation),
@@ -231,6 +261,7 @@ fun MovieDetailScreenPreview() {
             onCastClick = {},
             onMovieSeeMoreClick = {},
             onNavigateUp = {},
+            onFabClick = {},
         )
     }
 }
