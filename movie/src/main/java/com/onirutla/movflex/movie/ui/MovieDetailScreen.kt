@@ -67,7 +67,7 @@ fun MovieDetailScreen(
     movieRecommendations: List<Movie>,
     movieSimilar: List<Movie>,
     onMovieClick: (Movie) -> Unit,
-    onMovieSeeMoreClick: () -> Unit,
+    onMovieSeeMoreClick: (String) -> Unit,
     onNavigateUp: () -> Unit,
     verticalScrollState: ScrollState = rememberScrollState(),
 ) {
@@ -170,13 +170,13 @@ fun MovieDetailScreen(
                     seeMore = stringResource(id = coreR.string.see_more)
                 )
                 MovieRow(
-                    title = stringResource(id = coreR.string.recommendation),
+                    movieRowTitle = stringResource(id = coreR.string.recommendation),
                     movies = movieRecommendations,
                     onMovieClick = onMovieClick,
                     onSeeMoreClick = onMovieSeeMoreClick,
                 )
                 MovieRow(
-                    title = stringResource(id = coreR.string.similar),
+                    movieRowTitle = stringResource(id = coreR.string.similar),
                     movies = movieSimilar,
                     onMovieClick = onMovieClick,
                     onSeeMoreClick = onMovieSeeMoreClick,

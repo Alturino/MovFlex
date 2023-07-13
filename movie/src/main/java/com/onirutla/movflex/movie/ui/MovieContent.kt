@@ -20,9 +20,9 @@ import com.onirutla.movflex.movie.domain.model.Movie
 fun MovieContent(
     modifier: Modifier = Modifier,
     content: List<SeeMore<List<Movie>>>,
-    onMovieClick: (movie: Movie) -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
-    onSeeMoreClick: () -> Unit = {},
+    onMovieClick: (Movie) -> Unit = {},
+    onImageClick: (String) -> Unit = {},
+    onSeeMoreClick: (String) -> Unit = {},
     scrollState: LazyListState = rememberLazyListState()
 ) {
     Surface(modifier = modifier) {
@@ -35,10 +35,10 @@ fun MovieContent(
             items(content) { item ->
                 MovieRow(
                     movies = item.items,
-                    title = item.title,
+                    movieRowTitle = item.title,
                     onMovieClick = onMovieClick,
                     onImageClick = onImageClick,
-                    onSeeMoreClick = onSeeMoreClick
+                    onSeeMoreClick = onSeeMoreClick,
                 )
             }
         }

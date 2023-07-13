@@ -49,22 +49,22 @@ class MovieFragment : Fragment() {
             },
             seeMoreClickListener = { moreView, category ->
                 when (category) {
-                    requireContext().getString(MovieType.MOVIE_NOW_PLAYING.value) -> navigator(
+                    MovieType.MOVIE_NOW_PLAYING.value -> navigator(
                         moreView,
                         MovieType.MOVIE_NOW_PLAYING
                     )
 
-                    requireContext().getString(MovieType.MOVIE_POPULAR.value) -> navigator(
+                    MovieType.MOVIE_POPULAR.value -> navigator(
                         moreView,
                         MovieType.MOVIE_POPULAR
                     )
 
-                    requireContext().getString(MovieType.MOVIE_TOP_RATED.value) -> navigator(
+                    MovieType.MOVIE_TOP_RATED.value -> navigator(
                         moreView,
                         MovieType.MOVIE_TOP_RATED
                     )
 
-                    requireContext().getString(MovieType.MOVIE_UPCOMING.value) -> navigator(
+                    MovieType.MOVIE_UPCOMING.value -> navigator(
                         moreView,
                         MovieType.MOVIE_UPCOMING
                     )

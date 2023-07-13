@@ -68,12 +68,6 @@ class MovieDetailFragment : Fragment() {
         }
 
         binding.apply {
-            tvCastsSeeMore.setOnClickListener {
-                navigator(it, MovieType.MOVIE_CASTS, args.movieId)
-            }
-            tvReviewSeeMore.setOnClickListener {
-                navigator(it, MovieType.MOVIE_REVIEWS, args.movieId)
-            }
             tvRecommendationsSeeMore.setOnClickListener {
                 navigator(it, MovieType.MOVIE_RECOMMENDATIONS, args.movieId)
             }

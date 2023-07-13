@@ -169,11 +169,11 @@ private fun MovieRowPreview(
 fun MovieRow(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
-    title: String = "Popular",
+    movieRowTitle: String = "Popular",
     seeMore: String = "See More",
-    onSeeMoreClick: () -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
-    onMovieClick: (movie: Movie) -> Unit = {},
+    onSeeMoreClick: (String) -> Unit = {},
+    onImageClick: (String) -> Unit = {},
+    onMovieClick: (Movie) -> Unit = {},
 ) {
     Column(
         modifier = modifier
@@ -189,14 +189,14 @@ fun MovieRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = title,
+                text = movieRowTitle,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Left,
             )
             Text(
-                modifier = Modifier.clickable { onSeeMoreClick() },
+                modifier = Modifier.clickable { onSeeMoreClick(movieRowTitle) },
                 text = seeMore,
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -205,7 +205,11 @@ fun MovieRow(
         }
         LazyRow {
             items(items = movies) {
-                MovieItemRow(movie = it, onImageClick = onImageClick, onItemClick = onMovieClick)
+                MovieItemRow(
+                    movie = it,
+                    onImageClick = onImageClick,
+                    onItemClick = onMovieClick
+                )
             }
         }
     }

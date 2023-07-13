@@ -1,33 +1,37 @@
 package com.onirutla.movflex.movie.ui.more
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
-import androidx.lifecycle.switchMap
-import androidx.lifecycle.viewModelScope
-import androidx.paging.cachedIn
+import androidx.paging.PagingData
 import com.onirutla.movflex.movie.core.usecase.MovieMoreUseCase
+import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieType
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapLatest
 import javax.inject.Inject
 
+@OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
 class MovieMoreViewModel @Inject constructor(
-    private val movieMoreUseCase: MovieMoreUseCase,
+    private val useCase: MovieMoreUseCase,
 ) : ViewModel() {
 
-    private val _movieType = MutableLiveData<MovieType>()
+    private val _movieType = MutableStateFlow<MovieType?>(null)
 
     var movieId = 0
 
-    val movieMore = _movieType.switchMap {
-        movieMoreUseCase(it, movieId)
-            .cachedIn(viewModelScope)
-            .asLiveData(viewModelScope.coroutineContext)
+    val movieMore: Flow<PagingData<Movie>> = _movieType.flatMapLatest { movieType ->
+        useCase(movieType ?: MovieType.MOVIE_UPCOMING)
     }
 
     fun getMovieByCategory(movieType: MovieType) {
         _movieType.value = movieType
     }
 
+    fun getMovieByCategory(movieType: String) {
+        val enum = MovieType.values().first { it.value == movieType }
+        _movieType.value = enum
+    }
 }

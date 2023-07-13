@@ -1,45 +1,41 @@
 package com.onirutla.movflex.movie.core.usecase
 
-import android.content.Context
 import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.movie.core.repository.MovieRepository
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieType
-import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.supervisorScope
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class MovieUseCase @Inject constructor(
-    @ApplicationContext
-    context: Context,
     repository: MovieRepository,
 ) {
 
     val movies: Flow<List<SeeMore<List<Movie>>>> = flow {
         val result = supervisorScope {
-            val popular = async { repository.getMoviePopular() }
-            val upcoming = async { repository.getMovieUpcoming() }
-            val topRated = async { repository.getMovieTopRated() }
-            val nowPlaying = async { repository.getMovieNowPlaying() }
+            val popular = withContext(coroutineContext) { repository.getMoviePopular() }
+            val upcoming = withContext(coroutineContext) { repository.getMovieUpcoming() }
+            val topRated = withContext(coroutineContext) { repository.getMovieTopRated() }
+            val nowPlaying = withContext(coroutineContext) { repository.getMovieNowPlaying() }
 
             val popularSeeMore = SeeMore(
-                title = context.getString(MovieType.MOVIE_POPULAR.value),
-                items = popular.await()
+                title = MovieType.MOVIE_POPULAR.value,
+                items = popular
             )
             val upcomingSeeMore = SeeMore(
-                title = context.getString(MovieType.MOVIE_UPCOMING.value),
-                items = upcoming.await()
+                title = MovieType.MOVIE_UPCOMING.value,
+                items = upcoming
             )
             val topRatedSeeMore = SeeMore(
-                title = context.getString(MovieType.MOVIE_TOP_RATED.value),
-                items = topRated.await()
+                title = MovieType.MOVIE_TOP_RATED.value,
+                items = topRated
             )
             val nowPlayingSeeMore = SeeMore(
-                title = context.getString(MovieType.MOVIE_NOW_PLAYING.value),
-                items = nowPlaying.await()
+                title = MovieType.MOVIE_NOW_PLAYING.value,
+                items = nowPlaying
             )
 
             listOf(

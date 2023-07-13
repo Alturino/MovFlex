@@ -32,7 +32,7 @@ fun HomeScreen(
     movieFavoriteContent: LazyPagingItems<Movie>,
     onMovieClick: (Movie) -> Unit,
     onImageClick: (String) -> Unit,
-    onMovieSeeMoreClick: () -> Unit,
+    onMovieSeeMoreClick: (String) -> Unit,
     tvContent: List<SeeMore<List<Tv>>>,
     tvFavoriteContent: LazyPagingItems<Tv>,
     onTvClick: (Tv) -> Unit,
