@@ -210,25 +210,36 @@ fun ReviewItemRow(
 @Composable
 fun ReviewRow(
     modifier: Modifier = Modifier,
-    title: String,
     reviews: List<Review>,
     onReviewClick: (Review) -> Unit,
 ) {
-    Column(modifier = modifier) {
+    Column(modifier = modifier.padding(vertical = 8.dp)) {
         Row(
             modifier = Modifier
-                .wrapContentWidth()
-                .wrapContentHeight()
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min),
+            horizontalArrangement = Arrangement.SpaceBetween,
         ) {
             Text(
-                text = title,
+                text = stringResource(id = coreR.string.reviews),
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Left,
             )
+            Text(
+                text = stringResource(id = coreR.string.see_more),
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.Left,
+            )
         }
-        LazyRow {
+        LazyRow(
+            modifier = Modifier
+                .wrapContentWidth()
+                .wrapContentHeight(),
+        ) {
             items(items = reviews) {
                 ReviewItemColumn(review = it, onReviewClick = onReviewClick)
             }
@@ -302,7 +313,6 @@ private fun ReviewRowPreview(
 ) {
     MovFlexTheme {
         ReviewRow(
-            title = stringResource(id = coreR.string.reviews),
             reviews = reviews,
             onReviewClick = {},
         )

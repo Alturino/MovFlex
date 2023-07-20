@@ -24,9 +24,9 @@ import com.onirutla.movflex.tv.domain.model.Tv
 fun TvContent(
     modifier: Modifier = Modifier,
     content: List<SeeMore<List<Tv>>>,
-    onItemClick: (Tv) -> Unit = {},
+    onTvClick: (Tv) -> Unit = {},
     onImageClick: (String) -> Unit = {},
-    onSeeMoreClick: () -> Unit = {},
+    onSeeMoreClick: (String) -> Unit = {},
     scrollState: LazyListState = rememberLazyListState(),
 ) {
     Scaffold(
@@ -47,8 +47,8 @@ fun TvContent(
             items(content) {
                 TvRow(
                     tvList = it.items,
-                    tvRowTitle = it.title,
-                    onItemClick = onItemClick,
+                    title = it.title,
+                    onTvClick = onTvClick,
                     onImageClick = onImageClick,
                     onSeeMoreClick = onSeeMoreClick,
                 )

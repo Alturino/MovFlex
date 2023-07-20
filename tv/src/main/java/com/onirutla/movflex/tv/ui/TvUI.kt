@@ -162,7 +162,7 @@ private fun TvRowPreview(
     @PreviewParameter(TvListParameterProvider::class) tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        TvRow(tvList = tvList)
+        TvRow(tvList = tvList, onTvClick = {}, onSeeMoreClick = {}, onImageClick = {})
     }
 }
 
@@ -170,11 +170,11 @@ private fun TvRowPreview(
 fun TvRow(
     modifier: Modifier = Modifier,
     tvList: List<Tv>,
-    tvRowTitle: String = "Popular",
+    title: String = "Popular",
     seeMore: String = "See More",
-    onSeeMoreClick: () -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
-    onItemClick: (tv: Tv) -> Unit = {},
+    onSeeMoreClick: (String) -> Unit,
+    onImageClick: (url: String) -> Unit,
+    onTvClick: (tv: Tv) -> Unit,
 ) {
     Column(
         modifier = modifier
@@ -191,14 +191,14 @@ fun TvRow(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = tvRowTitle,
+                text = title,
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Left,
             )
             Text(
-                modifier = Modifier.clickable { onSeeMoreClick() },
+                modifier = Modifier.clickable { onSeeMoreClick(title) },
                 text = seeMore,
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onSurface,
@@ -207,7 +207,7 @@ fun TvRow(
         }
         LazyRow {
             items(items = tvList) {
-                TvItemRow(tv = it, onImageClick = onImageClick, onItemClick = onItemClick)
+                TvItemRow(tv = it, onImageClick = onImageClick, onItemClick = onTvClick)
             }
         }
     }

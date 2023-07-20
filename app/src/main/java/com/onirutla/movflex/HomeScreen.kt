@@ -36,7 +36,7 @@ fun HomeScreen(
     tvContent: List<SeeMore<List<Tv>>>,
     tvFavoriteContent: LazyPagingItems<Tv>,
     onTvClick: (Tv) -> Unit,
-    onTvSeeMoreClick: () -> Unit,
+    onTvSeeMoreClick: (String) -> Unit,
     tabItems: List<FavoriteTabItem>,
     selectedTab: Int = 0,
     onTabClick: (Int) -> Unit,
@@ -80,7 +80,7 @@ fun HomeScreen(
 
                 1 -> TvContent(
                     content = tvContent,
-                    onItemClick = onTvClick,
+                    onTvClick = onTvClick,
                     onImageClick = onImageClick,
                     onSeeMoreClick = onTvSeeMoreClick,
                 )

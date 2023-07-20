@@ -1,4 +1,4 @@
-package com.onirutla.movflex.movie.ui
+package com.onirutla.movflex.tv.ui
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -36,45 +36,41 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.onirutla.movflex.core.domain.model.Cast
-import com.onirutla.movflex.core.domain.model.ProductionCompany
-import com.onirutla.movflex.core.domain.model.ProductionCountry
 import com.onirutla.movflex.core.domain.model.Review
-import com.onirutla.movflex.core.domain.model.SpokenLanguage
-import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.ui.cast.CastRow
 import com.onirutla.movflex.core.ui.review.ReviewRow
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
-import com.onirutla.movflex.movie.domain.model.Movie
-import com.onirutla.movflex.movie.domain.model.MovieDetail
+import com.onirutla.movflex.tv.domain.model.Tv
+import com.onirutla.movflex.tv.domain.model.TvDetail
 import com.onirutla.movflex.core.R as coreR
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MovieDetailScreen(
+fun TvDetailScreen(
     modifier: Modifier = Modifier,
-    movieDetail: MovieDetail,
+    tvDetail: TvDetail,
     reviews: List<Review>,
     onReviewClick: (Review) -> Unit,
     casts: List<Cast>,
     onCastClick: (Cast) -> Unit,
     fabState: Boolean = false,
-    onFabClick: (MovieDetail) -> Unit,
-    movieRecommendations: List<Movie>,
-    movieSimilar: List<Movie>,
-    onMovieClick: (Movie) -> Unit,
-    onMovieSeeMoreClick: (String) -> Unit,
+    onFabClick: (TvDetail) -> Unit,
+    tvRecommendations: List<Tv>,
+    tvSimilar: List<Tv>,
+    onTvClick: (Tv) -> Unit,
+    onTvSeeMoreClick: (String) -> Unit,
+    onImageClick: (String) -> Unit,
     onNavigateUp: () -> Unit,
     verticalScrollState: ScrollState = rememberScrollState(),
 ) {
     Scaffold(
         modifier = modifier,
         floatingActionButton = {
-            FloatingActionButton(onClick = { onFabClick(movieDetail) }) {
+            FloatingActionButton(onClick = { onFabClick(tvDetail) }) {
                 Icon(
                     imageVector = if (fabState) Icons.Filled.Favorite else Icons.Default.FavoriteBorder,
                     tint = Color.Red,
@@ -101,7 +97,7 @@ fun MovieDetailScreen(
                         .fillMaxWidth()
                         .height(400.dp),
                     model = ImageRequest.Builder(LocalContext.current)
-                        .data("$BASE_IMAGE_PATH${movieDetail.posterPath}")
+                        .data("$BASE_IMAGE_PATH${tvDetail.posterPath}")
                         .build(),
                     contentDescription = "Movie Poster",
                     placeholder = painterResource(id = coreR.drawable.ic_launcher_background),
@@ -119,23 +115,23 @@ fun MovieDetailScreen(
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 Text(
-                    text = movieDetail.title,
+                    text = tvDetail.name,
                     style = MaterialTheme.typography.headlineMedium,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorScheme.onSurface,
                 )
-                Text(text = movieDetail.originalTitle)
+                Text(text = tvDetail.originalName)
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Icon(
                         imageVector = Icons.Default.Star,
                         contentDescription = "Star Icon",
                         tint = Color.Yellow
                     )
-                    Text(text = "${movieDetail.voteAverage / 2}")
-                    Text(text = "(${movieDetail.voteCount})")
+                    Text(text = "${tvDetail.voteAverage / 2}")
+                    Text(text = "(${tvDetail.voteCount})")
                 }
                 Text(
-                    text = movieDetail.genres,
+                    text = tvDetail.genres,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.bodySmall,
@@ -150,7 +146,7 @@ fun MovieDetailScreen(
                     textAlign = TextAlign.Left,
                 )
                 Text(
-                    text = movieDetail.overview,
+                    text = tvDetail.overview,
                     color = MaterialTheme.colorScheme.onSurface,
                     fontWeight = FontWeight.Normal,
                     style = MaterialTheme.typography.bodyLarge,
@@ -167,89 +163,21 @@ fun MovieDetailScreen(
                     onCastClick = onCastClick,
                     seeMore = stringResource(id = coreR.string.see_more)
                 )
-                MovieRow(
-                    movieRowTitle = stringResource(id = coreR.string.recommendation),
-                    movies = movieRecommendations,
-                    onMovieClick = onMovieClick,
-                    onSeeMoreClick = onMovieSeeMoreClick,
+                TvRow(
+                    title = stringResource(id = coreR.string.recommendation),
+                    tvList = tvRecommendations,
+                    onTvClick = onTvClick,
+                    onSeeMoreClick = onTvSeeMoreClick,
+                    onImageClick = onImageClick,
                 )
-                MovieRow(
-                    movieRowTitle = stringResource(id = coreR.string.similar),
-                    movies = movieSimilar,
-                    onMovieClick = onMovieClick,
-                    onSeeMoreClick = onMovieSeeMoreClick,
+                TvRow(
+                    title = stringResource(id = coreR.string.similar),
+                    tvList = tvSimilar,
+                    onTvClick = onTvClick,
+                    onSeeMoreClick = onTvSeeMoreClick,
+                    onImageClick = onImageClick,
                 )
             }
         }
-    }
-}
-
-@Preview
-@Composable
-fun MovieDetailScreenPreview() {
-    MovFlexTheme {
-        MovieDetailScreen(
-            movieDetail = MovieDetail(
-                adult = false,
-                backdropPath = "/xBKGJQsAIeweesB79KC89FpBrVr.jpg",
-                budget = 25000000,
-                genres = "Drama",
-                homepage = "http://www.theshawshankredemption.com/",
-                id = 1,
-                imdbId = "tt0111161",
-                originalLanguage = "en",
-                originalTitle = "The Shawshank Redemption",
-                overview = "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
-                popularity = 42.33,
-                posterPath = "/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
-                productionCompanies = listOf(
-                    ProductionCompany(
-                        id = 1,
-                        logoPath = "Castle Rock Entertainment",
-                        name = "",
-                        originCountry = ""
-                    ),
-                    ProductionCompany(
-                        id = 2,
-                        logoPath = "Castle Rock Entertainment",
-                        name = "",
-                        originCountry = ""
-                    ),
-                    ProductionCompany(
-                        id = 3,
-                        logoPath = "Castle Rock Entertainment",
-                        name = "",
-                        originCountry = ""
-                    )
-                ),
-                productionCountries = listOf(
-                    ProductionCountry(iso31661 = "en-us", name = "United States of America"),
-                    ProductionCountry(iso31661 = "en-uk", name = "United Kingdom")
-                ),
-                releaseDate = "1994-09-23",
-                revenue = 28341469,
-                runtime = 142,
-                spokenLanguages = listOf(
-                    SpokenLanguage(englishName = "english", iso6391 = "en-us", name = "English")
-                ),
-                status = "Released",
-                tagline = "Fear can hold you prisoner. Hope can set you free.",
-                title = "The Shawshank Redemption",
-                video = false,
-                voteAverage = 8.7,
-                voteCount = 19258,
-                isFavorite = true
-            ),
-            reviews = listOf(),
-            onReviewClick = {},
-            movieRecommendations = listOf(),
-            movieSimilar = listOf(),
-            onMovieClick = {},
-            casts = listOf(),
-            onCastClick = {},
-            onMovieSeeMoreClick = {},
-            onNavigateUp = {},
-            onFabClick = {},
-        )
     }
 }
