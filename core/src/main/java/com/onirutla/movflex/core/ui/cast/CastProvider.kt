@@ -1,4 +1,4 @@
-package com.onirutla.movflex.core.ui
+package com.onirutla.movflex.core.ui.cast
 
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.onirutla.movflex.core.domain.model.Cast

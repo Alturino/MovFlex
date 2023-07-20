@@ -35,8 +35,6 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.onirutla.movflex.core.R
 import com.onirutla.movflex.core.domain.model.Cast
-import com.onirutla.movflex.core.ui.CastProvider
-import com.onirutla.movflex.core.ui.CastsProvider
 import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
