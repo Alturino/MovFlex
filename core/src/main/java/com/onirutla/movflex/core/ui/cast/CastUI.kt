@@ -110,7 +110,7 @@ fun CastItemColumn(
 fun CastItemRow(
     modifier: Modifier = Modifier,
     cast: Cast,
-    onClick: (Cast) -> Unit = {}
+    onClick: (Cast) -> Unit,
 ) {
     Card(
         modifier = modifier
@@ -227,7 +227,7 @@ fun CastItemRowPreview(
     cast: Cast
 ) {
     MovFlexTheme {
-        CastItemRow(cast = cast)
+        CastItemRow(cast = cast, onClick = {})
     }
 }
 
