@@ -96,9 +96,9 @@ fun FavoriteContent(
 
                 1 -> {
                     TvColumn(
-                        tvList = tvPaging,
+                        tvPaging = tvPaging,
                         onImageClick = onImageClick,
-                        onItemClick = onTvClick,
+                        onTvClick = onTvClick,
                     )
                 }
             }

@@ -330,18 +330,18 @@ fun TvColumn(
 
 @Composable
 fun TvColumn(
-    tvList: LazyPagingItems<Tv>,
+    tvPaging: LazyPagingItems<Tv>,
     modifier: Modifier = Modifier,
     onImageClick: (url: String) -> Unit = {},
-    onItemClick: (tv: Tv) -> Unit = {},
+    onTvClick: (tv: Tv) -> Unit = {},
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = tvList) {
+        items(items = tvPaging) {
             if (it != null) {
                 TvItemColumn(
                     tv = it,
                     onImageClick = onImageClick,
-                    onItemClick = onItemClick
+                    onItemClick = onTvClick
                 )
             }
         }

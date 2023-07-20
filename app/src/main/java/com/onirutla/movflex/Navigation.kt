@@ -33,10 +33,13 @@ import com.onirutla.movflex.movie.ui.MovieSeeMoreScreen
 import com.onirutla.movflex.movie.ui.MovieViewModel
 import com.onirutla.movflex.movie.ui.detail.MovieDetailViewModel
 import com.onirutla.movflex.movie.ui.more.MovieMoreViewModel
+import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.domain.model.TvDetail
 import com.onirutla.movflex.tv.ui.TvDetailScreen
+import com.onirutla.movflex.tv.ui.TvSeeMoreScreen
 import com.onirutla.movflex.tv.ui.TvViewModel
 import com.onirutla.movflex.tv.ui.detail.TvDetailViewModel
+import com.onirutla.movflex.tv.ui.more.TvMoreViewModel
 import com.onirutla.movflex.core.R as coreR
 
 fun NavGraphBuilder.movieNav(navController: NavHostController): NavGraphBuilder = apply {
@@ -140,6 +143,34 @@ fun NavGraphBuilder.tvNav(navController: NavHostController): NavGraphBuilder = a
             fabState = isTvFavorited,
             onFabClick = { tv -> vm.setFavorite(tv) },
             onImageClick = {}
+        )
+    }
+    composable(
+        route = "${Screen.TvSeeMore.route}/{${MovFlexArg.TvSeeMoreTitle.arg}}",
+        arguments = listOf(
+            navArgument(name = MovFlexArg.TvSeeMoreTitle.arg) {
+                type = NavType.StringType
+                defaultValue = ""
+            }
+        )
+    ) { backStackEntry ->
+        val tvMoreVm: TvMoreViewModel = hiltViewModel()
+        val title = backStackEntry.arguments
+            ?.getString(MovFlexArg.TvSeeMoreTitle.arg) ?: ""
+
+        val tvId = backStackEntry.arguments
+            ?.getInt(MovFlexArg.MovieId.arg) ?: 0
+
+        tvMoreVm.tvId = tvId
+        tvMoreVm.getTvByCategory(title)
+
+        val tv: LazyPagingItems<Tv> = tvMoreVm.tvMore.collectAsLazyPagingItems()
+        TvSeeMoreScreen(
+            title = title,
+            tvPaging = tv,
+            onNavigateUp = { navController.navigateUp() },
+            onImageClick = {},
+            onTvClick = { navController.navigate(route = "${Screen.TvDetailScreen.route}/${it.id}") },
         )
     }
 }
