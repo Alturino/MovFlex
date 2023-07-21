@@ -1,4 +1,4 @@
-package com.onirutla.movflex.movie.ui
+package com.onirutla.movflex.movie.ui.screen.detail
 
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +51,7 @@ import com.onirutla.movflex.core.ui.review.ReviewRow
 import com.onirutla.movflex.core.util.Constants.BASE_IMAGE_PATH
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieDetail
+import com.onirutla.movflex.movie.ui.component.MovieRow
 import com.onirutla.movflex.core.R as coreR
 
 @OptIn(ExperimentalMaterial3Api::class)

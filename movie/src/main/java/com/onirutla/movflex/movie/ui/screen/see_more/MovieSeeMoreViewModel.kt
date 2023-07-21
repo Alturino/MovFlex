@@ -1,8 +1,8 @@
-package com.onirutla.movflex.movie.ui.more
+package com.onirutla.movflex.movie.ui.screen.see_more
 
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
-import com.onirutla.movflex.movie.core.usecase.MovieMoreUseCase
+import com.onirutla.movflex.movie.core.usecase.MovieSeeMoreUseCase
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalCoroutinesApi::class)
 @HiltViewModel
-class MovieMoreViewModel @Inject constructor(
-    private val useCase: MovieMoreUseCase,
+class MovieSeeMoreViewModel @Inject constructor(
+    private val useCase: MovieSeeMoreUseCase,
 ) : ViewModel() {
 
     private val _movieType = MutableStateFlow<MovieType?>(null)

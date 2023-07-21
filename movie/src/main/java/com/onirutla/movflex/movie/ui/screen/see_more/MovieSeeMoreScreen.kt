@@ -1,4 +1,4 @@
-package com.onirutla.movflex.movie.ui
+package com.onirutla.movflex.movie.ui.screen.see_more
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,6 +20,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.paging.compose.LazyPagingItems
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.movie.domain.model.Movie
+import com.onirutla.movflex.movie.ui.MovieListParameterProvider
+import com.onirutla.movflex.movie.ui.component.MovieColumn
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

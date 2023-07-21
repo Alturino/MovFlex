@@ -1,4 +1,4 @@
-package com.onirutla.movflex.movie.ui.detail
+package com.onirutla.movflex.movie.ui.screen.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

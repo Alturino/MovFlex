@@ -11,8 +11,8 @@ import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.paging.compose.LazyPagingItems
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.movie.domain.model.Movie
-import com.onirutla.movflex.movie.ui.MovieColumn
 import com.onirutla.movflex.movie.ui.MovieListParameterProvider
+import com.onirutla.movflex.movie.ui.component.MovieColumn
 import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.ui.TvColumn
 import com.onirutla.movflex.tv.ui.TvListParameterProvider
@@ -22,13 +22,13 @@ import com.onirutla.movflex.tv.ui.TvListParameterProvider
 fun FavoriteContent(
     modifier: Modifier = Modifier,
     movies: List<Movie>,
-    onMovieClick: (movie: Movie) -> Unit = {},
+    onMovieClick: (movie: Movie) -> Unit,
     tvList: List<Tv>,
-    onTvClick: (tv: Tv) -> Unit = {},
-    onImageClick: (url: String) -> Unit = {},
+    onTvClick: (tv: Tv) -> Unit,
+    onImageClick: (url: String) -> Unit,
     tabItems: List<FavoriteTabItem>,
     selectedTab: Int = 0,
-    onTabClick: (index: Int) -> Unit = {},
+    onTabClick: (index: Int) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -113,7 +113,15 @@ fun FavoriteScreenMoviePreview(
     movies: List<Movie>,
 ) {
     MovFlexTheme {
-        FavoriteContent(movies = movies, tabItems = listOf(), tvList = emptyList())
+        FavoriteContent(
+            movies = movies,
+            tabItems = listOf(),
+            tvList = emptyList(),
+            onImageClick = {},
+            onTvClick = {},
+            onMovieClick = {},
+            onTabClick = {}
+        )
     }
 }
 
@@ -124,6 +132,14 @@ fun FavoriteScreenTvPreview(
     tvList: List<Tv>,
 ) {
     MovFlexTheme {
-        FavoriteContent(movies = emptyList(), tabItems = listOf(), tvList = tvList, selectedTab = 1)
+        FavoriteContent(
+            movies = listOf(),
+            tabItems = listOf(),
+            tvList = tvList,
+            onImageClick = {},
+            onTvClick = {},
+            onMovieClick = {},
+            onTabClick = {}
+        )
     }
 }

@@ -15,8 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
-//    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -24,24 +22,6 @@ class MainActivity : ComponentActivity() {
                 MovFlexContent()
             }
         }
-//        setContentView(binding.root)
-
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
-//        val navController = navHostFragment.navController
-//
-//        binding.bottomNav.setupWithNavController(navController)
-//
-//        navController.addOnDestinationChangedListener { _, destination, _ ->
-//            when (destination.id) {
-//                movieR.id.movieDetailFragment -> hideBottomAppbar()
-//                tvR.id.tvDetailFragment -> hideBottomAppbar()
-//                movieR.id.movieMoreFragment -> hideBottomAppbar()
-//                tvR.id.tvMoreFragment -> hideBottomAppbar()
-//                else -> showBottomAppbar()
-//            }
-//        }
-
     }
 
     @Composable
@@ -62,19 +42,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun MovFlexContent() {
         val navController = rememberNavController()
-
         Navigation(navController = navController)
     }
-
-//    private fun showBottomAppbar() {
-//        binding.run {
-//            bottomNav.visibility = View.VISIBLE
-//        }
-//    }
-
-//    private fun hideBottomAppbar() {
-//        binding.run {
-//            bottomNav.visibility = View.GONE
-//        }
-//    }
 }

@@ -1,6 +1,5 @@
-package com.onirutla.movflex.movie.ui
+package com.onirutla.movflex.movie.ui.screen.home
 
-import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -10,14 +9,16 @@ import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import com.onirutla.movflex.core.domain.model.SeeMore
+import com.onirutla.movflex.core.ui.ComponentPreview
 import com.onirutla.movflex.core.ui.MovFlexTheme
 import com.onirutla.movflex.movie.domain.model.Movie
+import com.onirutla.movflex.movie.ui.MovieScreenParameterProvider
+import com.onirutla.movflex.movie.ui.component.MovieRow
 
 @Composable
-fun MovieContent(
+fun MovieHomeScreen(
     modifier: Modifier = Modifier,
     content: List<SeeMore<List<Movie>>>,
     onMovieClick: (Movie) -> Unit = {},
@@ -45,13 +46,12 @@ fun MovieContent(
     }
 }
 
-@Preview(showSystemUi = true, showBackground = true)
-@Preview(showSystemUi = true, showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@ComponentPreview
 @Composable
-private fun MovieScreenPreview(
+private fun MovieContentPreview(
     @PreviewParameter(MovieScreenParameterProvider::class) content: List<SeeMore<List<Movie>>>
 ) {
     MovFlexTheme {
-        MovieContent(content = content)
+        MovieHomeScreen(content = content)
     }
 }

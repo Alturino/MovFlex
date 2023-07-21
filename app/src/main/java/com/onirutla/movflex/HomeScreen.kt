@@ -17,7 +17,7 @@ import com.onirutla.movflex.core.domain.model.SeeMore
 import com.onirutla.movflex.favorite.FavoriteContent
 import com.onirutla.movflex.favorite.FavoriteTabItem
 import com.onirutla.movflex.movie.domain.model.Movie
-import com.onirutla.movflex.movie.ui.MovieContent
+import com.onirutla.movflex.movie.ui.screen.home.MovieHomeScreen
 import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.ui.TvContent
 
@@ -71,7 +71,7 @@ fun HomeScreen(
                 .padding(it)
         ) {
             when (navigationItemSelected) {
-                0 -> MovieContent(
+                0 -> MovieHomeScreen(
                     content = movieContent,
                     onMovieClick = onMovieClick,
                     onImageClick = onImageClick,

@@ -28,11 +28,11 @@ import com.onirutla.movflex.favorite.movie.FavoriteMovieViewModel
 import com.onirutla.movflex.favorite.tv.FavoriteTvViewModel
 import com.onirutla.movflex.movie.domain.model.Movie
 import com.onirutla.movflex.movie.domain.model.MovieDetail
-import com.onirutla.movflex.movie.ui.MovieDetailScreen
-import com.onirutla.movflex.movie.ui.MovieSeeMoreScreen
-import com.onirutla.movflex.movie.ui.MovieViewModel
-import com.onirutla.movflex.movie.ui.detail.MovieDetailViewModel
-import com.onirutla.movflex.movie.ui.more.MovieMoreViewModel
+import com.onirutla.movflex.movie.ui.screen.detail.MovieDetailScreen
+import com.onirutla.movflex.movie.ui.screen.detail.MovieDetailViewModel
+import com.onirutla.movflex.movie.ui.screen.home.MovieHomeScreenViewModel
+import com.onirutla.movflex.movie.ui.screen.see_more.MovieSeeMoreScreen
+import com.onirutla.movflex.movie.ui.screen.see_more.MovieSeeMoreViewModel
 import com.onirutla.movflex.tv.domain.model.Tv
 import com.onirutla.movflex.tv.domain.model.TvDetail
 import com.onirutla.movflex.tv.ui.TvDetailScreen
@@ -87,7 +87,7 @@ fun NavGraphBuilder.movieNav(navController: NavHostController): NavGraphBuilder 
             }
         )
     ) { backStackEntry ->
-        val movieSeeMoreVm: MovieMoreViewModel = hiltViewModel()
+        val movieSeeMoreVm: MovieSeeMoreViewModel = hiltViewModel()
         val title = backStackEntry.arguments
             ?.getString(MovFlexArg.MovieSeeMoreTitle.arg) ?: ""
 
@@ -185,7 +185,7 @@ fun Navigation(navController: NavHostController) {
             route = Screen.HomeScreen.route,
             arguments = listOf()
         ) {
-            val movieVm: MovieViewModel = hiltViewModel()
+            val movieVm: MovieHomeScreenViewModel = hiltViewModel()
             val movieState by movieVm.movie.observeAsState(initial = listOf())
 
             val tvVm: TvViewModel = hiltViewModel()

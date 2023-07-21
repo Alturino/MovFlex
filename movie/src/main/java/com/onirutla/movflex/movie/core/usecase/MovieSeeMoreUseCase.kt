@@ -13,7 +13,7 @@ import com.onirutla.movflex.movie.domain.model.MovieType.MOVIE_UPCOMING
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class MovieMoreUseCase @Inject constructor(
+class MovieSeeMoreUseCase @Inject constructor(
     private val movieRepository: MovieRepository,
 ) {
 
