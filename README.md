@@ -70,6 +70,7 @@ Follow these steps to get the app up and running on your Android device or emula
 - Architecture
     - MVVM Architecture
     - Repository pattern
+    - Multi Module
 - Retrofit2 & OkHttp3 - construct the REST APIs.
 - Moshi - A modern JSON library for Kotlin and Java.
 - Coil - Image Loading Library.
