@@ -8,14 +8,13 @@ and how you can contribute to the project.
 
 ## Table of Contents
 
-- [App Preview](#App Preview)
+- [App Preview](#App-Preview)
 - [Features](#Features)
-- [Getting Started](#Getting Started)
+- [Getting Started](#Getting-Started)
     - [Prerequisites](#Prerequisites)
     - [Installation](#Installation)
-- [Usage](#Usage)
 - [Contributing](#Contributing)
-- [Bug Reporting](#Bug Reporting)
+- [Bug Reporting](#Bug-Reporting)
 - [Contact](#Contact)
 - [License](#License)
 
@@ -70,6 +69,7 @@ Follow these steps to get the app up and running on your Android device or emula
 - Architecture
     - MVVM Architecture
     - Repository pattern
+    - Multi Module
 - Retrofit2 & OkHttp3 - construct the REST APIs.
 - Moshi - A modern JSON library for Kotlin and Java.
 - Coil - Image Loading Library.
