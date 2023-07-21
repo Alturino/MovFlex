@@ -8,14 +8,13 @@ and how you can contribute to the project.
 
 ## Table of Contents
 
-- [App Preview](#App Preview)
+- [App Preview](#App-Preview)
 - [Features](#Features)
-- [Getting Started](#Getting Started)
+- [Getting Started](#Getting-Started)
     - [Prerequisites](#Prerequisites)
     - [Installation](#Installation)
-- [Usage](#Usage)
 - [Contributing](#Contributing)
-- [Bug Reporting](#Bug Reporting)
+- [Bug Reporting](#Bug-Reporting)
 - [Contact](#Contact)
 - [License](#License)
 
