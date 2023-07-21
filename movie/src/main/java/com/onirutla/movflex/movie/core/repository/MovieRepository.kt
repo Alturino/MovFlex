@@ -5,11 +5,11 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
 import com.onirutla.movflex.core.data.source.remote.PagingDataSource
+import com.onirutla.movflex.core.data.source.remote.response.util.toCasts
+import com.onirutla.movflex.core.data.source.remote.response.util.toReviews
 import com.onirutla.movflex.core.domain.model.Cast
 import com.onirutla.movflex.core.domain.model.Review
 import com.onirutla.movflex.core.util.Constants.PAGE_SIZE
-import com.onirutla.movflex.core.data.source.remote.response.util.toCasts
-import com.onirutla.movflex.core.data.source.remote.response.util.toReviews
 import com.onirutla.movflex.movie.core.local.MovieLocalDataSource
 import com.onirutla.movflex.movie.core.remote.MovieRemoteDataSource
 import com.onirutla.movflex.movie.domain.model.Movie
@@ -88,10 +88,12 @@ class MovieRepository @Inject constructor(
 
     suspend fun setFavorite(movie: MovieDetail) {
         val isFavorite = local.isInDb(movie.id)
-        if (isFavorite == null)
+        Timber.d("isFavorite : $isFavorite")
+        if (isFavorite == null) {
             local.addToFavorite(movie.toEntity())
-        else
+        } else {
             local.deleteFavorite(isFavorite)
+        }
     }
 
     fun getMovieFavorite(): Flow<PagingData<Movie>> = local.getFavorite()

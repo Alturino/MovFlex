@@ -11,4 +11,11 @@
     <string name="recommendation">Recommendation</string>
     <string name="similar">Similar</string>
     <string name="format_vote_count">(%1d)</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="now_playing">Now Playing</string>
+    <string name="popular">Popular</string>
+    <string name="recommendations">Recommendations</string>
+    <string name="tv">Tv</string>
+    <string name="movie">Movie</string>
 </resources>

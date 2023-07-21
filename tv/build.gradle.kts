@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.onirutla.movflex.tv"
+    namespace = "${AppConfig.appNamespace}.tv"
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
@@ -27,16 +27,26 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = AppConfig.sourceCompatibility
         targetCompatibility = AppConfig.targetCompatibility
     }
+
     kotlinOptions {
         jvmTarget = AppConfig.kotlinJvmTarget
     }
+
     buildFeatures {
         viewBinding = true
+        compose = true
+        buildConfig = true
     }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.6"
+    }
+
 }
 
 dependencies {

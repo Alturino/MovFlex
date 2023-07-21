@@ -27,10 +27,11 @@ secrets {
 }
 
 android {
+    namespace = AppConfig.appNamespace
     compileSdk = AppConfig.compileSdk
 
     defaultConfig {
-        applicationId = AppConfig.applicationId
+        applicationId = AppConfig.appNamespace
         minSdk = AppConfig.minSdk
         targetSdk = AppConfig.targetSdk
         versionCode = AppConfig.versionCode
@@ -51,6 +52,12 @@ android {
 
     buildFeatures {
         viewBinding = true
+        compose = true
+        buildConfig = true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.4.6"
     }
 
     compileOptions {

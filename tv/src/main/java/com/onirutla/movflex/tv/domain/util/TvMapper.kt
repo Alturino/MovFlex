@@ -18,7 +18,7 @@ import com.onirutla.movflex.tv.domain.model.TvDetail
 fun TvResponse.toTv() = Tv(
     backdropPath = backdropPath.orEmpty(),
     firstAirDate = firstAirDate.orEmpty(),
-    genreIds = genreIds.orEmpty(),
+    genres = "",
     id = id,
     name = name.orEmpty(),
     originCountry = originCountry.orEmpty(),
@@ -61,7 +61,7 @@ fun TvEntity.toTv() = Tv(
     firstAirDate = firstAirDate,
     id = id,
     originCountry = emptyList(),
-    genreIds = emptyList(),
+    genres = "",
     name = name,
     originalLanguage = originalLanguage,
     originalName = originalName,
