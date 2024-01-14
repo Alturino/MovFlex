@@ -1,10 +1,6 @@
 # MovFlex
 
-Welcome to the MovFlex! This repository showcases my Android app, MovFlex, which
-aims to showcase my skill and applying what I've learned in Android Development. Whether you're an
-app enthusiast
-or a fellow developer, this README will guide you through setup instructions,
-and how you can contribute to the project.
+MovFlex is an application that shows you an information about a movie from the [TMDb API](https://developer.themoviedb.org/reference/search-movie)
 
 ## Table of Contents
 
